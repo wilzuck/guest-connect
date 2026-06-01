@@ -1,0 +1,152 @@
+"use client";
+
+import { useMemo, useRef, useState } from "react";
+import { Card } from "@/components/ui/Card";
+import { Button } from "@/components/ui/Button";
+import { cn } from "@/lib/utils/cn";
+
+type Testimonial = {
+  name: string;
+  role: string;
+  quote: string;
+};
+
+type TestimonialsCarouselProps = {
+  items: Testimonial[];
+};
+
+export function TestimonialsCarousel({ items }: TestimonialsCarouselProps) {
+  const scrollerRef = useRef<HTMLDivElement | null>(null);
+  const [active, setActive] = useState(0);
+
+  const pages = useMemo(() => Math.max(1, items.length), [items.length]);
+
+  function scrollToIndex(index: number) {
+    const el = scrollerRef.current;
+    if (!el) return;
+    const child = el.children.item(index) as HTMLElement | null;
+    if (!child) return;
+    child.scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
+  }
+
+  function onScroll() {
+    const el = scrollerRef.current;
+    if (!el) return;
+
+    // repère l'élément le plus proche du bord gauche (snap)
+    let bestIndex = 0;
+    let bestDist = Number.POSITIVE_INFINITY;
+    for (let i = 0; i < el.children.length; i++) {
+      const child = el.children.item(i) as HTMLElement | null;
+      if (!child) continue;
+      const dist = Math.abs(child.getBoundingClientRect().left - el.getBoundingClientRect().left);
+      if (dist < bestDist) {
+        bestDist = dist;
+        bestIndex = i;
+      }
+    }
+    setActive(bestIndex);
+  }
+
+  return (
+    <div className="relative">
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-zinc-50 to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-zinc-50 to-transparent" />
+
+      <div className="flex items-center justify-between gap-3">
+        <div className="hidden sm:flex items-center gap-2">
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            className="rounded-full"
+            onClick={() => scrollToIndex(Math.max(0, active - 1))}
+            aria-label="Avis précédent"
+          >
+            <ArrowLeft className="h-4 w-4" />
+          </Button>
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            className="rounded-full"
+            onClick={() => scrollToIndex(Math.min(pages - 1, active + 1))}
+            aria-label="Avis suivant"
+          >
+            <ArrowRight className="h-4 w-4" />
+          </Button>
+        </div>
+
+        <div className="ml-auto flex items-center gap-1">
+          {items.map((_, idx) => (
+            <button
+              key={idx}
+              type="button"
+              onClick={() => scrollToIndex(idx)}
+              className={cn(
+                "h-2 w-2 rounded-full transition",
+                idx === active ? "bg-black" : "bg-black/20 hover:bg-black/35",
+              )}
+              aria-label={`Aller à l’avis ${idx + 1}`}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div
+        ref={scrollerRef}
+        onScroll={onScroll}
+        className="mt-6 flex gap-4 overflow-x-auto scroll-smooth pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        style={{ scrollSnapType: "x mandatory" }}
+      >
+        {items.map((t) => (
+          <Card
+            key={`${t.name}-${t.role}-${t.quote.slice(0, 8)}`}
+            className="min-w-[86%] p-6 transition hover:-translate-y-0.5 hover:shadow-md hover:shadow-black/10 sm:min-w-[420px]"
+            style={{ scrollSnapAlign: "start" }}
+          >
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-black text-white">
+                <span className="text-sm font-semibold">{t.name.slice(0, 1)}</span>
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-black">{t.name}</p>
+                <p className="text-xs text-zinc-500">{t.role}</p>
+              </div>
+            </div>
+            <p className="mt-4 text-sm leading-6 text-zinc-600">“{t.quote}”</p>
+          </Card>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ArrowLeft({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M15 18 9 12l6-6"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function ArrowRight({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="m9 18 6-6-6-6"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+

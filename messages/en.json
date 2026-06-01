@@ -1,0 +1,51 @@
+{
+  "nav": {
+    "accommodations": "Stays",
+    "destinations": "Destinations",
+    "experiences": "Experiences",
+    "becomeHost": "Become a host",
+    "search": "Search"
+  },
+  "userMenu": {
+    "account": "Account",
+    "space": "Space",
+    "login": "Log in",
+    "signup": "Sign up",
+    "profile": "Profile",
+    "reservations": "Reservations",
+    "favorites": "Favorites"
+  },
+  "hero": {
+    "badge": "Verified stays · Trusted hosts · Secure payments",
+    "title": "Find and book the perfect guest house, anywhere",
+    "subtitle": "GuestConnect helps travelers discover authentic guest houses with a premium experience inspired by Airbnb and Booking.",
+    "note": "No hidden fees. Transparent reviews. Instant confirmations.",
+    "ctaSearch": "Search",
+    "ctaHost": "Become a host"
+  },
+  "footer": {
+    "about": "About",
+    "company": "Company",
+    "careers": "Careers",
+    "press": "Press",
+    "support": "Support",
+    "helpCenter": "Help Center",
+    "contact": "Contact",
+    "safety": "Safety",
+    "legal": "Legal",
+    "terms": "Terms",
+    "privacy": "Privacy",
+    "cookies": "Cookies",
+    "tagline": "GuestConnect is a premium marketplace for guest houses—built for trust, clarity, and conversion.",
+    "copyright": "All rights reserved.",
+    "madeFor": "Made for modern travel marketplaces."
+  }
+  ,
+  "searchBar": {
+    "placeholderDestination": "Where are you going?",
+    "arrival": "Check-in",
+    "departure": "Check-out",
+    "guests": "Guests",
+    "search": "Search"
+  }
+}

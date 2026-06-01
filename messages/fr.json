@@ -1,0 +1,51 @@
+{
+  "nav": {
+    "accommodations": "Hébergements",
+    "destinations": "Destinations",
+    "experiences": "Expériences",
+    "becomeHost": "Devenir hôte",
+    "search": "Recherche"
+  },
+  "userMenu": {
+    "account": "Compte",
+    "space": "Espace",
+    "login": "Connexion",
+    "signup": "Inscription",
+    "profile": "Profil",
+    "reservations": "Réservations",
+    "favorites": "Favoris"
+  },
+  "hero": {
+    "badge": "Séjours vérifiés · Hôtes de confiance · Paiements sécurisés",
+    "title": "Trouvez et réservez la maison d’hôtes idéale, partout",
+    "subtitle": "GuestConnect aide les voyageurs à découvrir des maisons d’hôtes authentiques avec une expérience premium, inspirée d’Airbnb et Booking.",
+    "note": "Pas de frais cachés. Avis transparents. Confirmation instantanée.",
+    "ctaSearch": "Rechercher",
+    "ctaHost": "Devenir hôte"
+  },
+  "footer": {
+    "about": "À propos",
+    "company": "Entreprise",
+    "careers": "Carrières",
+    "press": "Presse",
+    "support": "Support",
+    "helpCenter": "Centre d’aide",
+    "contact": "Contact",
+    "safety": "Sécurité",
+    "legal": "Légal",
+    "terms": "Conditions",
+    "privacy": "Confidentialité",
+    "cookies": "Cookies",
+    "tagline": "GuestConnect est une marketplace premium de maisons d’hôtes — pensée pour la confiance, la clarté et la conversion.",
+    "copyright": "Tous droits réservés.",
+    "madeFor": "Conçu pour les marketplaces de voyage modernes."
+  }
+  ,
+  "searchBar": {
+    "placeholderDestination": "Où allez-vous ?",
+    "arrival": "Arrivée",
+    "departure": "Départ",
+    "guests": "Voyageurs",
+    "search": "Rechercher"
+  }
+}
