@@ -21,6 +21,7 @@ export function ListingLightbox({
   const [index, setIndex] = useState(0);
 
   const slides = useMemo(() => images.map((src) => ({ src, alt: title })), [images, title]);
+  const remaining = Math.max(0, images.length - 3);
 
   function openAt(i: number) {
     setIndex(i);
@@ -64,6 +65,16 @@ export function ListingLightbox({
                 className="object-cover transition duration-500 group-hover:scale-[1.02]"
                 sizes="(max-width: 1024px) 50vw, 33vw"
               />
+              {/* Sur la 3e photo (index 1 de la colonne), affiche +N si on a plus d'images */}
+              {idx === 1 && remaining > 0 ? (
+                <div className="absolute inset-0 grid place-items-center">
+                  <div className="absolute inset-0 bg-black/25" />
+                  <div className="relative inline-flex items-center gap-2 rounded-full bg-black/10 px-4 py-2 text-white backdrop-blur-[2px]">
+                    <span className="text-base font-semibold">+{remaining}</span>
+                    <ImageIcon className="h-5 w-5" />
+                  </div>
+                </div>
+              ) : null}
             </button>
           ))}
         </div>
@@ -81,5 +92,28 @@ export function ListingLightbox({
         styles={{ container: { backgroundColor: "rgba(0,0,0,0.92)" } }}
       />
     </>
+  );
+}
+
+function ImageIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v11A2.5 2.5 0 0 1 17.5 20h-11A2.5 2.5 0 0 1 4 17.5v-11Z"
+        stroke="currentColor"
+        strokeWidth="1.8"
+      />
+      <path
+        d="M9 10.2a1.2 1.2 0 1 0 0-2.4 1.2 1.2 0 0 0 0 2.4Z"
+        fill="currentColor"
+      />
+      <path
+        d="M20 15.5l-4.8-4.8a1.2 1.2 0 0 0-1.7 0L6 18"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 }
