@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Card } from "@/components/ui/Card";
 import type { Listing } from "@/types/listing";
 import { cn } from "@/lib/utils/cn";
@@ -16,7 +16,6 @@ type TopListingsMiniCarouselProps = {
 export function TopListingsMiniCarousel({ locale, items, title }: TopListingsMiniCarouselProps) {
   const scrollerRef = useRef<HTMLDivElement | null>(null);
   const [active, setActive] = useState(0);
-  const pages = useMemo(() => Math.max(1, items.length), [items.length]);
 
   function scrollToIndex(index: number) {
     const el = scrollerRef.current;
@@ -44,7 +43,11 @@ export function TopListingsMiniCarousel({ locale, items, title }: TopListingsMin
   }
 
   return (
-    <div className="mt-6">
+    <div className="relative mt-6">
+      {/* Masque de bord (comme les commentaires homepage) */}
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-white to-transparent dark:from-zinc-950" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-white to-transparent dark:from-zinc-950" />
+
       <div className="flex items-end justify-between gap-4">
         <p className="text-sm font-semibold text-black dark:text-white">{title}</p>
         <div className="flex items-center gap-1">
@@ -67,16 +70,16 @@ export function TopListingsMiniCarousel({ locale, items, title }: TopListingsMin
         ref={scrollerRef}
         onScroll={onScroll}
         className="mt-3 flex gap-3 overflow-x-auto scroll-smooth pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-        style={{ scrollSnapType: "x mandatory" }}
+        style={{ scrollSnapType: "x mandatory", touchAction: "pan-x" }}
       >
         {items.map((l) => (
           <Card
             key={l.id}
-            className="group min-w-[240px] overflow-hidden border border-black/10 bg-white shadow-sm shadow-black/5 transition hover:-translate-y-0.5 hover:shadow-md hover:shadow-black/10 dark:border-white/10 dark:bg-zinc-950"
+            className="group min-w-[200px] overflow-hidden border border-black/10 bg-white shadow-sm shadow-black/5 transition hover:-translate-y-0.5 hover:shadow-md hover:shadow-black/10 dark:border-white/10 dark:bg-zinc-950 sm:min-w-[240px]"
             style={{ scrollSnapAlign: "start" }}
           >
             <Link href={`/${locale}/listings/${l.id}`} className="block">
-              <div className="relative h-28 w-full overflow-hidden bg-zinc-100 dark:bg-zinc-900">
+              <div className="relative h-20 w-full overflow-hidden bg-zinc-100 dark:bg-zinc-900">
                 <Image
                   src={l.imageUrl}
                   alt={l.title}
@@ -85,7 +88,7 @@ export function TopListingsMiniCarousel({ locale, items, title }: TopListingsMin
                   sizes="240px"
                 />
               </div>
-              <div className="p-3">
+              <div className="p-2">
                 <p className="truncate text-sm font-semibold text-black dark:text-white">{l.title}</p>
                 <p className="mt-1 truncate text-xs text-zinc-600 dark:text-zinc-400">{l.location}</p>
               </div>
@@ -96,4 +99,3 @@ export function TopListingsMiniCarousel({ locale, items, title }: TopListingsMin
     </div>
   );
 }
-

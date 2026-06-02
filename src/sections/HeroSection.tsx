@@ -5,15 +5,25 @@ import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { africaListings } from "@/lib/mock/africa-listings";
 import { getLocale } from "next-intl/server";
-import { TopListingsMiniCarousel } from "@/components/listings/TopListingsMiniCarousel";
+import { TopSearchCarousel } from "@/components/listings/TopSearchCarousel";
 
-function HeroIllustration() {
+function HeroIllustration({
+  title,
+  subtitle,
+  liveLabel,
+  alt,
+}: {
+  title: string;
+  subtitle: string;
+  liveLabel: string;
+  alt: string;
+}) {
   return (
     <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-black/10 bg-zinc-100 shadow-sm shadow-black/5">
       <div className="absolute inset-0">
         <Image
           src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=2000&q=80"
-          alt="Maison d’hôtes premium — GuestConnect"
+          alt={alt}
           fill
           priority
           sizes="(max-width: 1024px) 100vw, 50vw"
@@ -25,11 +35,11 @@ function HeroIllustration() {
       <div className="absolute bottom-5 left-5 right-5 rounded-2xl border border-black/10 bg-white/80 p-4 backdrop-blur">
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-sm font-semibold text-black">Maisons d’hôtes premium</p>
-            <p className="text-xs text-zinc-600">Sélectionnées · Vérifiées · Fiables</p>
+            <p className="text-sm font-semibold text-black">{title}</p>
+            <p className="text-xs text-zinc-600">{subtitle}</p>
           </div>
           <span className="inline-flex items-center rounded-full bg-black px-3 py-1 text-xs font-medium text-white">
-            Live
+            {liveLabel}
           </span>
         </div>
       </div>
@@ -64,21 +74,23 @@ export async function HeroSection() {
           </div>
 
           <div className="lg:col-span-6">
-            <HeroIllustration />
+            <HeroIllustration
+              title={t("illustration.title")}
+              subtitle={t("illustration.subtitle")}
+              liveLabel={t("illustration.live")}
+              alt={t("illustration.alt")}
+            />
           </div>
         </div>
 
         {/* Ligne 2 : recherche full width (style marketplace) */}
         <div className="mt-10">
-          <div className="mx-auto max-w-5xl">
-            <SearchBar />
-          </div>
+          <SearchBar />
 
-          <TopListingsMiniCarousel
-            locale={locale}
-            title={locale === "en" ? "Top stays right now" : "Top logements recherchés"}
-            items={africaListings.slice(0, 6)}
-          />
+          {/* Section indépendante pour que le scroll horizontal ne perturbe pas le reste */}
+          <div className="mt-6 overflow-hidden" style={{ contain: "layout paint" }}>
+            <TopSearchCarousel locale={locale} items={africaListings.slice(0, 6)} />
+          </div>
         </div>
       </Container>
     </section>

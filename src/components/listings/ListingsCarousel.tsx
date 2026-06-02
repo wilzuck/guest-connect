@@ -9,6 +9,7 @@ import type { Listing } from "@/types/listing";
 import { cn } from "@/lib/utils/cn";
 
 type ListingsCarouselProps = {
+  id?: string;
   title: string;
   description?: string;
   locale: string;
@@ -17,6 +18,7 @@ type ListingsCarouselProps = {
 };
 
 export function ListingsCarousel({
+  id,
   title,
   description,
   locale,
@@ -25,6 +27,11 @@ export function ListingsCarousel({
 }: ListingsCarouselProps) {
   const scrollerRef = useRef<HTMLDivElement | null>(null);
   const [active, setActive] = useState(0);
+  const dragRef = useRef<{ active: boolean; startX: number; startScrollLeft: number }>({
+    active: false,
+    startX: 0,
+    startScrollLeft: 0,
+  });
   const pages = useMemo(() => Math.max(1, items.length), [items.length]);
 
   function scrollToIndex(index: number) {
@@ -54,7 +61,7 @@ export function ListingsCarousel({
   }
 
   return (
-    <section>
+    <section id={id}>
       <div className="flex items-end justify-between gap-4">
         <div>
           <h3 className="text-balance text-2xl font-semibold tracking-tight text-black">{title}</h3>
@@ -67,90 +74,118 @@ export function ListingsCarousel({
         ) : null}
       </div>
 
-      <div className="mt-6 flex items-center justify-between gap-3">
-        <div className="hidden sm:flex items-center gap-2">
-          <Button
-            type="button"
-            variant="outline"
-            size="sm"
-            className="rounded-full"
-            onClick={() => scrollToIndex(Math.max(0, active - 1))}
-            aria-label="Précédent"
-          >
-            <ArrowLeft className="h-4 w-4" />
-          </Button>
-          <Button
-            type="button"
-            variant="outline"
-            size="sm"
-            className="rounded-full"
-            onClick={() => scrollToIndex(Math.min(pages - 1, active + 1))}
-            aria-label="Suivant"
-          >
-            <ArrowRight className="h-4 w-4" />
-          </Button>
+      <div className="relative">
+        {/* Masque de bord (comme les commentaires homepage) */}
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-white to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-white to-transparent" />
+
+        <div className="mt-6 flex items-center justify-between gap-3">
+          <div className="hidden sm:flex items-center gap-2">
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              className="rounded-full"
+              onClick={() => scrollToIndex(Math.max(0, active - 1))}
+              aria-label="Précédent"
+            >
+              <ArrowLeft className="h-4 w-4" />
+            </Button>
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              className="rounded-full"
+              onClick={() => scrollToIndex(Math.min(pages - 1, active + 1))}
+              aria-label="Suivant"
+            >
+              <ArrowRight className="h-4 w-4" />
+            </Button>
+          </div>
+
+          <div className="ml-auto flex items-center gap-1">
+            {items.map((_, idx) => (
+              <button
+                key={idx}
+                type="button"
+                onClick={() => scrollToIndex(idx)}
+                className={cn(
+                  "h-2 w-2 rounded-full transition",
+                  idx === active ? "bg-black" : "bg-black/20 hover:bg-black/35",
+                )}
+                aria-label={`Aller à la carte ${idx + 1}`}
+              />
+            ))}
+          </div>
         </div>
 
-        <div className="ml-auto flex items-center gap-1">
-          {items.map((_, idx) => (
-            <button
-              key={idx}
-              type="button"
-              onClick={() => scrollToIndex(idx)}
-              className={cn(
-                "h-2 w-2 rounded-full transition",
-                idx === active ? "bg-black" : "bg-black/20 hover:bg-black/35",
-              )}
-              aria-label={`Aller à la carte ${idx + 1}`}
-            />
+        <div
+          ref={scrollerRef}
+          onScroll={onScroll}
+          onPointerDown={(e) => {
+            const el = scrollerRef.current;
+            if (!el) return;
+            if (e.pointerType !== "mouse") return;
+            dragRef.current.active = true;
+            dragRef.current.startX = e.clientX;
+            dragRef.current.startScrollLeft = el.scrollLeft;
+            (e.currentTarget as HTMLDivElement).setPointerCapture(e.pointerId);
+          }}
+          onPointerMove={(e) => {
+            const el = scrollerRef.current;
+            if (!el) return;
+            if (!dragRef.current.active) return;
+            const dx = e.clientX - dragRef.current.startX;
+            el.scrollLeft = dragRef.current.startScrollLeft - dx;
+          }}
+          onPointerUp={() => {
+            dragRef.current.active = false;
+          }}
+          onPointerCancel={() => {
+            dragRef.current.active = false;
+          }}
+          className="mt-5 flex gap-4 overflow-x-auto scroll-smooth pb-2 overscroll-x-contain select-none md:cursor-grab md:active:cursor-grabbing [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          style={{ scrollSnapType: "x mandatory", touchAction: "pan-x" }}
+        >
+          {items.map((l) => (
+            <Card
+              key={l.id}
+              className="group min-w-[74%] overflow-hidden transition hover:-translate-y-0.5 hover:shadow-md hover:shadow-black/10 sm:min-w-[300px]"
+              style={{ scrollSnapAlign: "start" }}
+            >
+              <Link href={`/${locale}/listings/${l.id}`} className="block">
+                <div className="relative aspect-[4/3] overflow-hidden bg-zinc-100">
+                  <Image
+                    src={l.imageUrl}
+                    alt={l.title}
+                    fill
+                    className="object-cover transition duration-500 group-hover:scale-[1.03]"
+                    sizes="(max-width: 1024px) 100vw, 360px"
+                  />
+                </div>
+                <div className="p-4">
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <p className="text-base font-semibold tracking-tight text-black">{l.title}</p>
+                      <p className="mt-1 text-sm text-zinc-600">{l.location}</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-sm font-semibold text-black">
+                        {l.pricePerNight} {l.currency}
+                      </p>
+                      <p className="text-xs text-zinc-500">/ nuit</p>
+                    </div>
+                  </div>
+                  <div className="mt-4 flex items-center gap-2 text-sm text-zinc-700">
+                    <Star className="h-4 w-4 text-black" />
+                    <span className="font-medium text-black">{l.rating.toFixed(2)}</span>
+                    <span className="text-zinc-500">({l.reviewCount})</span>
+                  </div>
+                </div>
+              </Link>
+            </Card>
           ))}
         </div>
-      </div>
-
-      <div
-        ref={scrollerRef}
-        onScroll={onScroll}
-        className="mt-5 flex gap-4 overflow-x-auto scroll-smooth pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-        style={{ scrollSnapType: "x mandatory" }}
-      >
-        {items.map((l) => (
-          <Card
-            key={l.id}
-            className="group min-w-[86%] overflow-hidden transition hover:-translate-y-0.5 hover:shadow-md hover:shadow-black/10 sm:min-w-[360px]"
-            style={{ scrollSnapAlign: "start" }}
-          >
-            <Link href={`/${locale}/listings/${l.id}`} className="block">
-              <div className="relative aspect-[4/3] overflow-hidden bg-zinc-100">
-                <Image
-                  src={l.imageUrl}
-                  alt={l.title}
-                  fill
-                  className="object-cover transition duration-500 group-hover:scale-[1.03]"
-                  sizes="(max-width: 1024px) 100vw, 360px"
-                />
-              </div>
-              <div className="p-5">
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <p className="text-base font-semibold tracking-tight text-black">{l.title}</p>
-                    <p className="mt-1 text-sm text-zinc-600">{l.location}</p>
-                  </div>
-                  <div className="text-right">
-                    <p className="text-sm font-semibold text-black">
-                      {l.pricePerNight} {l.currency}
-                    </p>
-                    <p className="text-xs text-zinc-500">/ nuit</p>
-                  </div>
-                </div>
-                <div className="mt-4 flex items-center gap-2 text-sm text-zinc-700">
-                  <Star className="h-4 w-4 text-black" />
-                  <span className="font-medium text-black">{l.rating.toFixed(2)}</span>
-                  <span className="text-zinc-500">({l.reviewCount})</span>
-                </div>
-              </div>
-            </Link>
-          </Card>
-        ))}
       </div>
     </section>
   );
@@ -191,4 +226,3 @@ function Star({ className }: { className?: string }) {
     </svg>
   );
 }
-

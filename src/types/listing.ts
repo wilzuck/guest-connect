@@ -8,5 +8,8 @@ export type Listing = {
   rating: number; // 0..5
   reviewCount: number;
   imageUrl: string;
+  images?: string[];
+  propertyType?: "Guest house" | "Hotel" | "Apartment" | "Villa" | "Lodge" | string;
+  shortDescription?: string;
+  badges?: Array<"Nouveau" | "Populaire" | "Recommandé" | string>;
 };
-

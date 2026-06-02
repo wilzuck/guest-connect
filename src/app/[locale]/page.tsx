@@ -26,13 +26,12 @@ export default async function Home() {
     <>
       <HeroSection />
       <SocialProofSection />
-      <FeaturesSection />
-      <ListingsPreviewSection listings={listings} />
       <HowItWorksSection />
+      <ListingsPreviewSection listings={listings} />
+      <FeaturesSection />
       <BecomeHostSection />
       <TestimonialsSection />
       <PricingSection />
     </>
   );
 }
-
