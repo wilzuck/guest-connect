@@ -45,7 +45,7 @@ export function Navbar() {
 
   const links = [
     { label: t("accommodations"), href: `/${locale}/explore` },
-    { label: t("destinations"), href: `/${locale}/search` },
+    { label: t("destinations"), href: `/${locale}/destinations` },
     { label: t("experiences"), href: `/${locale}/experiences` },
   ];
 

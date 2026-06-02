@@ -287,6 +287,22 @@
     "goToCard": "Aller à la carte {index}",
     "perNight": "/ nuit"
   },
+  "destinationsPage": {
+    "eyebrow": "Destinations",
+    "title": "Où partez-vous ?",
+    "description": "Explorez des villes populaires et lancez votre recherche en un clic.",
+    "popularTitle": "Destinations populaires",
+    "popularHint": "Inspiration rapide (style Booking/Airbnb).",
+    "stays": "{count} logement(s)"
+  },
+  "experiencesPage": {
+    "eyebrow": "Expériences",
+    "title": "Des moments à vivre (pas juste un séjour)",
+    "description": "Activités premium, guides locaux et expériences uniques — inspiré Airbnb, version SaaS plus moderne.",
+    "chips": ["Culture", "Food", "Nature", "Nightlife", "Business"],
+    "results": "{count} expérience(s)",
+    "browseStays": "Voir les logements"
+  },
   "hostPage": {
     "eyebrow": "Devenir hôte",
     "title": "Mettez votre logement en ligne sur GuestConnect",

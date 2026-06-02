@@ -287,6 +287,22 @@
     "goToCard": "Go to card {index}",
     "perNight": "/ night"
   },
+  "destinationsPage": {
+    "eyebrow": "Destinations",
+    "title": "Where are you going?",
+    "description": "Browse popular cities and start your search in one click.",
+    "popularTitle": "Popular destinations",
+    "popularHint": "Quick inspiration (Booking/Airbnb-style).",
+    "stays": "{count} stay(s)"
+  },
+  "experiencesPage": {
+    "eyebrow": "Experiences",
+    "title": "Moments to live (not just a stay)",
+    "description": "Premium activities, local guides and unique experiences — Airbnb-inspired with a modern SaaS finish.",
+    "chips": ["Culture", "Food", "Nature", "Nightlife", "Business"],
+    "results": "{count} experience(s)",
+    "browseStays": "Browse stays"
+  },
   "hostPage": {
     "eyebrow": "Become a host",
     "title": "List your place on GuestConnect",
