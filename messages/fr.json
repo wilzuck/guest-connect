@@ -280,6 +280,13 @@
     "openPhotos": "Ouvrir les photos",
     "openPhoto": "Ouvrir la photo {index}"
   },
+  "listingsCarousel": {
+    "viewAll": "Voir tout →",
+    "prev": "Précédent",
+    "next": "Suivant",
+    "goToCard": "Aller à la carte {index}",
+    "perNight": "/ nuit"
+  },
   "hostPage": {
     "eyebrow": "Devenir hôte",
     "title": "Mettez votre logement en ligne sur GuestConnect",

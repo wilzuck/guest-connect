@@ -6,6 +6,7 @@ import { Container } from "@/components/ui/Container";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
 import { LocaleSwitcher } from "@/components/i18n/LocaleSwitcher";
+import { CurrencySwitcher } from "@/components/currency/CurrencySwitcher";
 import type { ReactNode } from "react";
 
 export function Footer() {
@@ -91,6 +92,7 @@ export function Footer() {
             © {new Date().getFullYear()} GuestConnect. {t("copyright")}
           </p>
           <div className="flex items-center gap-3">
+            <CurrencySwitcher />
             <LocaleSwitcher />
             <p className="hidden sm:block">{t("madeFor")}</p>
           </div>

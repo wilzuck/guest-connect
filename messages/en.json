@@ -280,6 +280,13 @@
     "openPhotos": "Open photos",
     "openPhoto": "Open photo {index}"
   },
+  "listingsCarousel": {
+    "viewAll": "View all →",
+    "prev": "Previous",
+    "next": "Next",
+    "goToCard": "Go to card {index}",
+    "perNight": "/ night"
+  },
   "hostPage": {
     "eyebrow": "Become a host",
     "title": "List your place on GuestConnect",

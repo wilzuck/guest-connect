@@ -7,6 +7,8 @@ import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import type { Listing } from "@/types/listing";
 import { cn } from "@/lib/utils/cn";
+import { useTranslations } from "next-intl";
+import { useCurrency } from "@/components/currency/CurrencyProvider";
 
 type ListingsCarouselProps = {
   id?: string;
@@ -25,6 +27,8 @@ export function ListingsCarousel({
   items,
   viewAllHref,
 }: ListingsCarouselProps) {
+  const t = useTranslations("listingsCarousel");
+  const { formatFrom } = useCurrency();
   const scrollerRef = useRef<HTMLDivElement | null>(null);
   const [active, setActive] = useState(0);
   const dragRef = useRef<{ active: boolean; startX: number; startScrollLeft: number }>({
@@ -69,7 +73,7 @@ export function ListingsCarousel({
         </div>
         {viewAllHref ? (
           <Link href={viewAllHref} className="text-sm font-medium text-zinc-600 hover:text-black">
-            Voir tout →
+            {t("viewAll")}
           </Link>
         ) : null}
       </div>
@@ -87,7 +91,7 @@ export function ListingsCarousel({
               size="sm"
               className="rounded-full"
               onClick={() => scrollToIndex(Math.max(0, active - 1))}
-              aria-label="Précédent"
+              aria-label={t("prev")}
             >
               <ArrowLeft className="h-4 w-4" />
             </Button>
@@ -97,7 +101,7 @@ export function ListingsCarousel({
               size="sm"
               className="rounded-full"
               onClick={() => scrollToIndex(Math.min(pages - 1, active + 1))}
-              aria-label="Suivant"
+              aria-label={t("next")}
             >
               <ArrowRight className="h-4 w-4" />
             </Button>
@@ -113,7 +117,7 @@ export function ListingsCarousel({
                   "h-2 w-2 rounded-full transition",
                   idx === active ? "bg-black" : "bg-black/20 hover:bg-black/35",
                 )}
-                aria-label={`Aller à la carte ${idx + 1}`}
+                aria-label={t("goToCard", { index: idx + 1 })}
               />
             ))}
           </div>
@@ -166,14 +170,18 @@ export function ListingsCarousel({
                 <div className="p-4">
                   <div className="flex items-start justify-between gap-4">
                     <div>
-                      <p className="text-base font-semibold tracking-tight text-black">{l.title}</p>
-                      <p className="mt-1 text-sm text-zinc-600">{l.location}</p>
+                      <p className="truncate text-base font-semibold tracking-tight text-black" title={l.title}>
+                        {l.title}
+                      </p>
+                      <p className="mt-1 truncate text-sm text-zinc-600" title={l.location}>
+                        {l.location}
+                      </p>
                     </div>
                     <div className="text-right">
-                      <p className="text-sm font-semibold text-black">
-                        {l.pricePerNight} {l.currency}
+                      <p className="text-sm font-semibold text-black whitespace-nowrap">
+                        {formatFrom(l.pricePerNight, l.currency)}
                       </p>
-                      <p className="text-xs text-zinc-500">/ nuit</p>
+                      <p className="text-xs text-zinc-500">{t("perNight")}</p>
                     </div>
                   </div>
                   <div className="mt-4 flex items-center gap-2 text-sm text-zinc-700">
