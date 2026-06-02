@@ -6,17 +6,20 @@ import { getTranslations } from "next-intl/server";
 import { africaListings } from "@/lib/mock/africa-listings";
 import { getLocale } from "next-intl/server";
 import { TopSearchCarousel } from "@/components/listings/TopSearchCarousel";
+import type { ReactNode } from "react";
 
 function HeroIllustration({
   title,
   subtitle,
   liveLabel,
   alt,
+  children,
 }: {
   title: string;
   subtitle: string;
   liveLabel: string;
   alt: string;
+  children?: ReactNode;
 }) {
   return (
     <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-black/10 bg-zinc-100 shadow-sm shadow-black/5">
@@ -31,6 +34,8 @@ function HeroIllustration({
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-black/0 to-black/0" />
       </div>
+
+      {children ? <div className="absolute left-5 top-5 w-full max-w-sm">{children}</div> : null}
 
       <div className="absolute bottom-5 left-5 right-5 rounded-2xl border border-black/10 bg-white/80 p-4 backdrop-blur">
         <div className="flex items-center justify-between">
@@ -58,14 +63,20 @@ export async function HeroSection() {
       </div>
 
       <Container className="py-14 sm:py-20">
+        {/* Mobile: la recherche vient en premier */}
+        <div className="md:hidden">
+          <SearchBar variant="mobile" />
+        </div>
+
         {/* Ligne 1 : headline + illustration */}
-        <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
-          <div className="lg:col-span-6">
+        <div className="grid gap-12 md:grid-cols-12 md:items-center">
+          <div className="md:col-span-7 lg:col-span-6">
             <Badge>{t("badge")}</Badge>
-            <h1 className="mt-5 text-balance text-4xl font-semibold tracking-tight text-black sm:text-5xl lg:text-6xl">
+            <h1 className="mt-5 text-balance text-3xl font-semibold tracking-tight text-black sm:text-5xl lg:text-6xl">
               {t("title")}
             </h1>
-            <p className="mt-5 max-w-xl text-pretty text-base leading-7 text-zinc-600 sm:text-lg">
+            {/* Sur mobile: on cache la description, mais on garde la note */}
+            <p className="mt-5 hidden max-w-xl text-pretty text-base leading-7 text-zinc-600 sm:block sm:text-lg">
               {t("subtitle")}
             </p>
             <p className="mt-6 text-xs text-zinc-500">
@@ -73,20 +84,21 @@ export async function HeroSection() {
             </p>
           </div>
 
-          <div className="hidden lg:block lg:col-span-6">
+          {/* Desktop/Tablet: recherche compacte dans la colonne droite (sur l'image) */}
+          <div className="hidden md:block md:col-span-5 lg:col-span-6">
             <HeroIllustration
               title={t("illustration.title")}
               subtitle={t("illustration.subtitle")}
               liveLabel={t("illustration.live")}
               alt={t("illustration.alt")}
-            />
+            >
+              <SearchBar variant="compact" />
+            </HeroIllustration>
           </div>
         </div>
 
-        {/* Ligne 2 : recherche full width (style marketplace) */}
+        {/* Ligne 2 : carousel */}
         <div className="mt-10">
-          <SearchBar />
-
           {/* Section indépendante pour que le scroll horizontal ne perturbe pas le reste */}
           <div className="mt-6 overflow-hidden" style={{ contain: "layout paint" }}>
             <TopSearchCarousel locale={locale} items={africaListings.slice(0, 6)} />

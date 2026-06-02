@@ -17,16 +17,16 @@ export default async function Page() {
 
   const categories = isEn
     ? [
-        { t: "Bookings", d: "Confirmation, changes, cancellations." },
-        { t: "Payments", d: "Cards, refunds, invoices." },
-        { t: "Safety", d: "Reporting, trust and safety." },
-        { t: "Hosting", d: "Listing, pricing, rules." },
+        { t: "Bookings", d: "Confirmation, changes, cancellations.", icon: <BookingsIcon /> },
+        { t: "Payments", d: "Cards, refunds, invoices.", icon: <PaymentsIcon /> },
+        { t: "Safety", d: "Reporting, trust and safety.", icon: <SafetyIcon /> },
+        { t: "Hosting", d: "Listing, pricing, rules.", icon: <HostingIcon /> },
       ]
     : [
-        { t: "Réservations", d: "Confirmation, modifications, annulations." },
-        { t: "Paiements", d: "Cartes, remboursements, factures." },
-        { t: "Sécurité", d: "Signalement, confiance et sécurité." },
-        { t: "Héberger", d: "Annonce, tarifs, règles." },
+        { t: "Réservations", d: "Confirmation, modifications, annulations.", icon: <BookingsIcon /> },
+        { t: "Paiements", d: "Cartes, remboursements, factures.", icon: <PaymentsIcon /> },
+        { t: "Sécurité", d: "Signalement, confiance et sécurité.", icon: <SafetyIcon /> },
+        { t: "Héberger", d: "Annonce, tarifs, règles.", icon: <HostingIcon /> },
       ];
 
   const faq: FaqItem[] = isEn
@@ -75,8 +75,11 @@ export default async function Page() {
 
       <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {categories.map((c) => (
-          <Card key={c.t} className="p-6">
-            <p className="text-sm font-semibold text-black">{c.t}</p>
+          <Card key={c.t} className="p-6 shadow-none">
+            <div className="grid h-11 w-11 place-items-center rounded-2xl border border-black/10 bg-white">
+              {c.icon}
+            </div>
+            <p className="mt-4 text-sm font-semibold text-black">{c.t}</p>
             <p className="mt-2 text-sm leading-6 text-zinc-600">{c.d}</p>
           </Card>
         ))}
@@ -113,5 +116,70 @@ export default async function Page() {
         </div>
       </div>
     </MarketingPageLayout>
+  );
+}
+
+function BookingsIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M7 7h10M7 12h10M7 17h6"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+      <path
+        d="M6 3h12a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"
+        stroke="currentColor"
+        strokeWidth="1.8"
+      />
+    </svg>
+  );
+}
+
+function PaymentsIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M3 8h18v10a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V8Z"
+        stroke="currentColor"
+        strokeWidth="1.8"
+      />
+      <path d="M3 10h18" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M7 15h4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function SafetyIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M12 2l7 5v7c0 4.418-3.134 7.418-7 8-3.866-.582-7-3.582-7-8V7l7-5Z"
+        stroke="currentColor"
+        strokeWidth="1.8"
+      />
+      <path
+        d="M8.7 12.4 11 14.7l4.3-4.4"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function HostingIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M4 10.5 12 4l8 6.5V20a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-9.5Z"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+      />
+      <path d="M9.5 22v-7h5v7" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
+    </svg>
   );
 }

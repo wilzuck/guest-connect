@@ -12,9 +12,10 @@ import { DateRangePicker } from "@/components/ui/DateRangePicker";
 type SearchBarProps = {
   onSearch?: (params: SearchParams) => void | Promise<void>;
   defaultValues?: SearchParams;
+  variant?: "auto" | "mobile" | "desktop" | "compact";
 };
 
-export function SearchBar({ onSearch, defaultValues }: SearchBarProps) {
+export function SearchBar({ onSearch, defaultValues, variant = "auto" }: SearchBarProps) {
   const router = useRouter();
   const locale = useLocale();
   const t = useTranslations("searchBar");
@@ -55,10 +56,23 @@ export function SearchBar({ onSearch, defaultValues }: SearchBarProps) {
       onSubmit={handleSubmit}
       className="w-full"
     >
-      {/* Desktop: une seule ligne fluide. Mobile: layout optimisé (dates côte à côte). */}
-      <div className="rounded-[28px] border border-black/10 bg-white/80 p-2 shadow-[0_14px_40px_-30px_rgba(0,0,0,0.25)] backdrop-blur-sm">
+      {/* Desktop: une seule ligne fluide. Mobile: layout optimisé. Compact: version hero (petite). */}
+      <div
+        className={[
+          variant === "compact"
+            ? "rounded-3xl border border-black/10 bg-white/80 p-4 backdrop-blur"
+            : "rounded-[28px] border border-black/10 bg-white/80 p-2 shadow-[0_14px_40px_-30px_rgba(0,0,0,0.25)] backdrop-blur-sm",
+        ].join(" ")}
+      >
         {/* Desktop */}
-        <div className="hidden items-stretch gap-2 rounded-[22px] bg-white p-1 md:flex">
+        <div
+          className={[
+            "items-stretch gap-2 rounded-[22px] bg-white p-1",
+            variant === "desktop" ? "flex" : "",
+            variant === "auto" ? "hidden md:flex" : "",
+            variant === "mobile" || variant === "compact" ? "hidden" : "",
+          ].join(" ")}
+        >
           <FieldShell className="flex-[1.7]">
             <PinIcon className="h-4 w-4 text-zinc-400" />
             <Input
@@ -137,15 +151,21 @@ export function SearchBar({ onSearch, defaultValues }: SearchBarProps) {
         </div>
 
         {/* Mobile */}
-        <div className="grid gap-2 md:hidden">
-          <FieldShell className="h-14 bg-white">
+        <div
+          className={[
+            "grid gap-2",
+            variant === "auto" ? "md:hidden" : "",
+            variant === "mobile" || variant === "compact" ? "" : "hidden",
+          ].join(" ")}
+        >
+          <FieldShell className={variant === "compact" ? "h-12 bg-white px-3" : "h-14 bg-white"}>
             <PinIcon className="h-4 w-4 text-zinc-400" />
             <Input
               value={destination}
               onChange={(e) => setDestination(e.target.value)}
               placeholder={t("placeholderDestination")}
               aria-label={t("ariaDestination")}
-              className="h-12 flex-1 border-0 bg-transparent px-0 shadow-none outline-none focus:ring-0 focus:border-transparent"
+              className="h-11 flex-1 border-0 bg-transparent px-0 shadow-none outline-none focus:ring-0 focus:border-transparent"
             />
             <button
               type="button"
@@ -171,9 +191,10 @@ export function SearchBar({ onSearch, defaultValues }: SearchBarProps) {
             }}
             startLabel={t("arrival")}
             endLabel={t("departure")}
+            size={variant === "compact" ? "sm" : "md"}
           />
 
-          <FieldShell className="h-14 bg-white">
+          <FieldShell className={variant === "compact" ? "h-12 bg-white px-3" : "h-14 bg-white"}>
             <div className="grid">
               <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-zinc-500">
                 {t("guests")}
@@ -200,7 +221,13 @@ export function SearchBar({ onSearch, defaultValues }: SearchBarProps) {
             </div>
           </FieldShell>
 
-          <Button type="submit" className="h-14 w-full rounded-2xl px-6 justify-center transition active:scale-[0.99]">
+          <Button
+            type="submit"
+            className={[
+              "w-full rounded-2xl px-6 justify-center transition active:scale-[0.99]",
+              variant === "compact" ? "h-12" : "h-14",
+            ].join(" ")}
+          >
             <SearchIcon className="h-4 w-4" />
             {t("search")}
           </Button>

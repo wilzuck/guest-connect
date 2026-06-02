@@ -83,7 +83,7 @@ export default async function Page({ params }: PageProps) {
 
               <section className="mt-10">
                 <h2 className="text-xl font-semibold tracking-tight text-black">{t("locationTitle")}</h2>
-                <div className="mt-5 rounded-3xl bg-white p-5 shadow-[0_18px_60px_-45px_rgba(0,0,0,0.55)]">
+                <div className="mt-5 rounded-3xl border border-black/10 bg-white p-5 shadow-sm shadow-black/5">
                   <MapPlaceholder location={listing.location} subtitle={t("mapSubtitle")} />
                 </div>
               </section>
@@ -109,7 +109,7 @@ export default async function Page({ params }: PageProps) {
           {/* Avis: pleine largeur container */}
           <section className="mt-10">
             <h2 className="text-xl font-semibold tracking-tight text-black">{t("reviewsTitle")}</h2>
-            <div className="mt-5 rounded-3xl border border-black/10 bg-zinc-50 p-5 shadow-sm shadow-black/10">
+            <div className="mt-5 rounded-3xl bg-zinc-50 p-6">
               <div className="grid gap-4 lg:grid-cols-2">
                 <ReviewCard
                   rating={listing.rating}
@@ -129,6 +129,14 @@ export default async function Page({ params }: PageProps) {
                   date={t("reviewsSection.three.date")}
                   body={t("reviewsSection.three.body")}
                 />
+              </div>
+              <div className="mt-6 flex justify-center">
+                <button
+                  type="button"
+                  className="rounded-2xl border border-black/10 bg-white px-5 py-3 text-sm font-semibold text-black shadow-sm shadow-black/5 hover:bg-zinc-50 transition"
+                >
+                  {t("loadMoreReviews")}
+                </button>
               </div>
             </div>
           </section>

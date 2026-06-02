@@ -249,6 +249,7 @@
     "locationTitle": "Location",
     "mapSubtitle": "Approximate location — exact address shown after booking",
     "reviewsTitle": "Reviews",
+    "loadMoreReviews": "Load more",
     "reviewsSection": {
       "one": {
         "name": "Amina K.",
