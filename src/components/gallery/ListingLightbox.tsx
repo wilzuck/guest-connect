@@ -7,6 +7,7 @@ import "yet-another-react-lightbox/styles.css";
 import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
+import { useTranslations } from "next-intl";
 
 export function ListingLightbox({
   title,
@@ -15,6 +16,7 @@ export function ListingLightbox({
   title: string;
   images: string[];
 }) {
+  const t = useTranslations("listingGallery");
   const [open, setOpen] = useState(false);
   const [index, setIndex] = useState(0);
 
@@ -32,7 +34,8 @@ export function ListingLightbox({
           type="button"
           onClick={() => openAt(0)}
           className="group relative aspect-[16/10] overflow-hidden rounded-3xl bg-zinc-100 lg:col-span-8"
-          aria-label="Open photos"
+          aria-label={t("openPhotos")}
+          title={t("openPhotos")}
         >
           <Image
             src={images[0]}
@@ -51,7 +54,8 @@ export function ListingLightbox({
               type="button"
               onClick={() => openAt(idx + 1)}
               className="group relative aspect-[16/10] overflow-hidden rounded-3xl bg-zinc-100"
-              aria-label={`Open photo ${idx + 2}`}
+              aria-label={t("openPhoto", { index: idx + 2 })}
+              title={t("openPhoto", { index: idx + 2 })}
             >
               <Image
                 src={src}
@@ -79,4 +83,3 @@ export function ListingLightbox({
     </>
   );
 }
-

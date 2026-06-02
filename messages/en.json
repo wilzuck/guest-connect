@@ -245,7 +245,40 @@
       "breakfast": "Breakfast",
       "parking": "Free parking",
       "securePayment": "Secure payment"
+    },
+    "locationTitle": "Location",
+    "mapSubtitle": "Approximate location — exact address shown after booking",
+    "reviewsTitle": "Reviews",
+    "reviewsSection": {
+      "one": {
+        "name": "Amina K.",
+        "date": "May 2026",
+        "body": "Beautiful place, very clean and calm. Check-in was smooth and the host was responsive."
+      },
+      "two": {
+        "name": "Jean M.",
+        "date": "April 2026",
+        "body": "Great value for money. The location is convenient and the rooms are well maintained."
+      },
+      "three": {
+        "name": "Sophia L.",
+        "date": "March 2026",
+        "body": "Exactly as described. Comfortable bedding and a premium feel overall."
+      }
     }
+  },
+  "bookingCard": {
+    "from": "From",
+    "perNight": "per night",
+    "checkIn": "Check-in",
+    "checkOut": "Check-out",
+    "cta": "Check availability",
+    "save": "Save",
+    "note": "Secure payment · Instant confirmation · No hidden fees"
+  },
+  "listingGallery": {
+    "openPhotos": "Open photos",
+    "openPhoto": "Open photo {index}"
   },
   "hostPage": {
     "eyebrow": "Become a host",

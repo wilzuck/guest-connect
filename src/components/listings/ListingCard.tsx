@@ -53,7 +53,9 @@ export function ListingCard({ locale, listing }: { locale: string; listing: List
           {/* Badge annulation (sans distance, icône moderne) */}
           <div className="mt-3 flex items-center gap-2 text-sm text-zinc-700">
             <MoneyIcon className="h-4 w-4 text-zinc-500" />
-            <span className="truncate">{t("meta.cancellation")}</span>
+            <span className="truncate" title={t("meta.cancellation")}>
+              {t("meta.cancellation")}
+            </span>
           </div>
         </div>
       </Card>

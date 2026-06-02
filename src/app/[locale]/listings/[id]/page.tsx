@@ -1,11 +1,11 @@
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { ButtonLink } from "@/components/ui/Button";
-import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { africaListings } from "@/lib/mock/africa-listings";
 import { ListingLightbox } from "@/components/gallery/ListingLightbox";
 import { getTranslations } from "next-intl/server";
+import { BookingCard } from "@/components/listings/detail/BookingCard";
 
 type PageProps = {
   params: Promise<{ locale: string; id: string }>;
@@ -23,15 +23,19 @@ export default async function Page({ params }: PageProps) {
   return (
     <div className="bg-white">
       <Container className="py-10 sm:py-14">
-        <div className="flex flex-col gap-6">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <div>
+        <div className="flex flex-col gap-10">
+          {/* Header */}
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div className="min-w-0">
               <Badge>{listing.location}</Badge>
-              <h1 className="mt-4 text-balance text-3xl font-semibold tracking-tight text-black sm:text-4xl">
+              <h1
+                className="mt-4 text-balance text-3xl font-semibold tracking-tight text-black sm:text-4xl"
+                title={listing.title}
+              >
                 {listing.title}
               </h1>
               <div className="mt-3 flex flex-wrap items-center gap-2 text-sm text-zinc-600">
-                <span className="inline-flex items-center gap-1 font-medium text-black">
+                <span className="inline-flex items-center gap-1 font-semibold text-black">
                   <Star className="h-4 w-4" />
                   {listing.rating.toFixed(2)}
                 </span>
@@ -56,74 +60,50 @@ export default async function Page({ params }: PageProps) {
           <ListingLightbox title={listing.title} images={images} />
 
           {/* Contenu */}
-          <div className="grid gap-8 lg:grid-cols-12 lg:items-start">
+          <div className="grid gap-10 lg:grid-cols-12 lg:items-start">
+            {/* Main */}
             <div className="lg:col-span-7">
-              <h2 className="text-xl font-semibold tracking-tight text-black">{t("aboutTitle")}</h2>
-              <p className="mt-3 text-sm leading-7 text-zinc-600">
-                {t("aboutBody")}
-              </p>
+              <section className="space-y-3">
+                <h2 className="text-xl font-semibold tracking-tight text-black">{t("aboutTitle")}</h2>
+                <p className="text-sm leading-7 text-zinc-600">{t("aboutBody")}</p>
+              </section>
 
-              <div className="mt-8 grid gap-4 sm:grid-cols-2">
-                <InfoCard title={t("info.flexTitle")} desc={t("info.flexDesc")} />
-                <InfoCard title={t("info.cancelTitle")} desc={t("info.cancelDesc")} />
-                <InfoCard title={t("info.locationTitle")} desc={t("info.locationDesc", { location: listing.location })} />
-                <InfoCard title={t("info.supportTitle")} desc={t("info.supportDesc")} />
-              </div>
-            </div>
-
-            <div className="lg:col-span-5">
-              <Card className="sticky top-24 p-6">
-                <p className="text-sm text-zinc-600">{t("from")}</p>
-                <p className="mt-2 text-3xl font-semibold tracking-tight text-black">
-                  {listing.pricePerNight} {listing.currency}
-                  <span className="text-sm font-medium text-zinc-500"> {t("perNight")}</span>
-                </p>
-                <div className="mt-5 grid gap-3">
-                  <ButtonLink
-                    href={`/${locale}/search`}
-                    variant="primary"
-                    size="lg"
-                    className="w-full"
-                  >
-                    {t("checkAvailability")}
-                  </ButtonLink>
-                  <ButtonLink
-                    href={`/${locale}/favorites`}
-                    variant="outline"
-                    size="lg"
-                    className="w-full"
-                  >
-                    {t("addToFavorites")}
-                  </ButtonLink>
+              <section className="mt-10">
+                <h2 className="text-xl font-semibold tracking-tight text-black">{t("amenitiesTitle")}</h2>
+                <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                  <Amenity icon={<WifiIcon className="h-5 w-5" />} title={t("amenities.wifi")} />
+                  <Amenity icon={<BreakfastIcon className="h-5 w-5" />} title={t("amenities.breakfast")} />
+                  <Amenity icon={<ParkingIcon className="h-5 w-5" />} title={t("amenities.parking")} />
+                  <Amenity icon={<ShieldIcon className="h-5 w-5" />} title={t("amenities.securePayment")} />
                 </div>
-                <p className="mt-4 text-xs leading-5 text-zinc-500">
-                  {t("footerNote")}
-                </p>
-              </Card>
-            </div>
-          </div>
+              </section>
 
-          {/* Caractéristiques (en bas de page) */}
-          <div className="mt-12">
-            <h2 className="text-xl font-semibold tracking-tight text-black">{t("amenitiesTitle")}</h2>
-            <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-              <Amenity icon={<WifiIcon className="h-5 w-5" />} title={t("amenities.wifi")} />
-              <Amenity icon={<BreakfastIcon className="h-5 w-5" />} title={t("amenities.breakfast")} />
-              <Amenity icon={<ParkingIcon className="h-5 w-5" />} title={t("amenities.parking")} />
-              <Amenity icon={<ShieldIcon className="h-5 w-5" />} title={t("amenities.securePayment")} />
+              <section className="mt-10">
+                <h2 className="text-xl font-semibold tracking-tight text-black">{t("locationTitle")}</h2>
+                <div className="mt-5 rounded-3xl bg-white p-5 shadow-[0_18px_60px_-45px_rgba(0,0,0,0.55)]">
+                  <MapPlaceholder location={listing.location} subtitle={t("mapSubtitle")} />
+                </div>
+              </section>
+
+              <section className="mt-10">
+                <h2 className="text-xl font-semibold tracking-tight text-black">{t("reviewsTitle")}</h2>
+                <div className="mt-5 grid gap-4">
+                  <ReviewCard rating={listing.rating} name={t("reviewsSection.one.name")} date={t("reviewsSection.one.date")} body={t("reviewsSection.one.body")} />
+                  <ReviewCard rating={listing.rating} name={t("reviewsSection.two.name")} date={t("reviewsSection.two.date")} body={t("reviewsSection.two.body")} />
+                  <ReviewCard rating={listing.rating} name={t("reviewsSection.three.name")} date={t("reviewsSection.three.date")} body={t("reviewsSection.three.body")} />
+                </div>
+              </section>
+            </div>
+
+            {/* Booking */}
+            <div className="lg:col-span-5">
+              <div className="lg:sticky lg:top-24">
+                <BookingCard locale={locale} pricePerNight={listing.pricePerNight} currency={listing.currency} />
+              </div>
             </div>
           </div>
         </div>
       </Container>
-    </div>
-  );
-}
-
-function InfoCard({ title, desc }: { title: string; desc: string }) {
-  return (
-    <div className="rounded-2xl bg-white p-5">
-      <p className="text-sm font-semibold text-black">{title}</p>
-      <p className="mt-2 text-sm leading-6 text-zinc-600">{desc}</p>
     </div>
   );
 }
@@ -133,6 +113,54 @@ function Amenity({ icon, title }: { icon: React.ReactNode; title: string }) {
     <div className="flex items-center gap-3 rounded-2xl bg-zinc-50 p-4">
       <div className="grid h-10 w-10 place-items-center rounded-2xl bg-white text-black">{icon}</div>
       <p className="text-sm font-semibold text-black">{title}</p>
+    </div>
+  );
+}
+
+function MapPlaceholder({ location, subtitle }: { location: string; subtitle: string }) {
+  return (
+    <div className="relative overflow-hidden rounded-2xl bg-zinc-100">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(0,0,0,0.08),transparent_40%),radial-gradient(circle_at_80%_30%,rgba(0,0,0,0.06),transparent_45%),radial-gradient(circle_at_40%_80%,rgba(0,0,0,0.08),transparent_42%)]" />
+      <div className="relative grid min-h-[220px] place-items-center p-6">
+        <div className="grid place-items-center gap-3">
+          <div className="grid h-14 w-14 place-items-center rounded-2xl bg-white shadow-sm shadow-black/10">
+            <PinIcon className="h-6 w-6 text-black" />
+          </div>
+          <p className="text-sm font-semibold text-black">{location}</p>
+          <p className="text-xs text-zinc-600">{subtitle}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ReviewCard({ rating, name, date, body }: { rating: number; name: string; date: string; body: string }) {
+  const initials = name
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((p) => p[0]?.toUpperCase())
+    .join("");
+  return (
+    <div className="rounded-3xl bg-white p-5 shadow-[0_18px_60px_-45px_rgba(0,0,0,0.55)]">
+      <div className="flex items-start justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <div className="grid h-11 w-11 place-items-center rounded-2xl bg-zinc-100 text-sm font-semibold text-black">
+            {initials}
+          </div>
+          <div className="min-w-0">
+            <p className="truncate text-sm font-semibold text-black" title={name}>
+              {name}
+            </p>
+            <p className="text-xs text-zinc-600">{date}</p>
+          </div>
+        </div>
+        <div className="inline-flex items-center gap-1 text-sm font-semibold text-black">
+          <Star className="h-4 w-4" />
+          {rating.toFixed(1)}
+        </div>
+      </div>
+      <p className="mt-4 text-sm leading-7 text-zinc-700">{body}</p>
     </div>
   );
 }
@@ -215,6 +243,23 @@ function Star({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.7 1.2 6.6L12 17.9 6.1 20.8l1.2-6.6-4.8-4.7 6.6-.9L12 2.5Z" />
+    </svg>
+  );
+}
+
+function PinIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M12 22s7-6.2 7-12A7 7 0 1 0 5 10c0 5.8 7 12 7 12Z"
+        stroke="currentColor"
+        strokeWidth="1.8"
+      />
+      <path
+        d="M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
+        stroke="currentColor"
+        strokeWidth="1.8"
+      />
     </svg>
   );
 }

@@ -245,7 +245,40 @@
       "breakfast": "Petit-déjeuner",
       "parking": "Parking gratuit",
       "securePayment": "Paiement sécurisé"
+    },
+    "locationTitle": "Emplacement",
+    "mapSubtitle": "Localisation approximative — adresse exacte après réservation",
+    "reviewsTitle": "Avis",
+    "reviewsSection": {
+      "one": {
+        "name": "Amina K.",
+        "date": "Mai 2026",
+        "body": "Très bel endroit, propre et calme. Arrivée simple et hôte réactif."
+      },
+      "two": {
+        "name": "Jean M.",
+        "date": "Avril 2026",
+        "body": "Excellent rapport qualité/prix. Emplacement pratique et chambres bien entretenues."
+      },
+      "three": {
+        "name": "Sophia L.",
+        "date": "Mars 2026",
+        "body": "Conforme à la description. Literie confortable et ambiance premium."
+      }
     }
+  },
+  "bookingCard": {
+    "from": "À partir de",
+    "perNight": "par nuit",
+    "checkIn": "Arrivée",
+    "checkOut": "Départ",
+    "cta": "Vérifier les disponibilités",
+    "save": "Enregistrer",
+    "note": "Paiement sécurisé · Confirmation instantanée · Sans frais cachés"
+  },
+  "listingGallery": {
+    "openPhotos": "Ouvrir les photos",
+    "openPhoto": "Ouvrir la photo {index}"
   },
   "hostPage": {
     "eyebrow": "Devenir hôte",
