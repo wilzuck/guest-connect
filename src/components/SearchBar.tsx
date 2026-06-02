@@ -53,12 +53,12 @@ export function SearchBar({ onSearch, defaultValues }: SearchBarProps) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="rounded-3xl border border-black/10 bg-white p-2 shadow-lg shadow-black/10"
+      className="w-full rounded-3xl border border-black/10 bg-white/90 p-2 shadow-lg shadow-black/10 backdrop-blur-sm"
     >
-      {/* Une seule ligne (style Booking) ; sur mobile on garde une ligne avec scroll horizontal */}
+      {/* Une seule ligne (type marketplace). Sur mobile, la ligne scroll horizontalement à l'intérieur du composant (sans scrollbar). */}
       <div className="flex items-stretch gap-2 overflow-x-auto whitespace-nowrap [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {/* Destination */}
-        <div className="flex min-w-[220px] flex-1 items-center gap-2 rounded-2xl border border-black/10 bg-white px-4">
+        <div className="flex w-full items-center gap-2 rounded-2xl border border-black/10 bg-white p-[10px] transition hover:bg-zinc-50 focus-within:border-black/20 focus-within:ring-4 focus-within:ring-black/5 sm:min-w-[220px] sm:flex-1">
           <PinIcon className="h-4 w-4 text-zinc-400" />
           <Input
             value={destination}
@@ -80,7 +80,7 @@ export function SearchBar({ onSearch, defaultValues }: SearchBarProps) {
         </div>
 
         {/* Voyageurs */}
-        <div className="flex min-w-[190px] items-center justify-between gap-3 rounded-2xl border border-black/10 bg-white px-4">
+        <div className="flex min-h-12 w-full items-center justify-between gap-3 rounded-2xl border border-black/10 bg-white p-[10px] transition hover:bg-zinc-50 focus-within:border-black/20 focus-within:ring-4 focus-within:ring-black/5 sm:min-w-[190px]">
           <div className="grid">
             <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-zinc-500">
               {t("guests")}
@@ -112,7 +112,10 @@ export function SearchBar({ onSearch, defaultValues }: SearchBarProps) {
         </div>
 
         {/* CTA */}
-        <Button type="submit" className="h-12 min-w-[150px] rounded-2xl px-6">
+        <Button
+          type="submit"
+          className="h-12 min-w-[150px] rounded-2xl px-6 justify-center"
+        >
           <SearchIcon className="h-4 w-4" />
           {t("search")}
         </Button>
