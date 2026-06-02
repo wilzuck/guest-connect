@@ -187,6 +187,14 @@
     "done": "Done",
     "close": "Close"
   },
+  "dateRangePicker": {
+    "title": "Select dates",
+    "selectedRange": "Selected range",
+    "placeholder": "—",
+    "clear": "Clear",
+    "done": "Done",
+    "close": "Close"
+  },
   "searchPage": {
     "eyebrow": "Search",
     "title": "Search stays",

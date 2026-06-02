@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/Input";
 import type { SearchParams } from "@/types/search";
 import { useLocale } from "next-intl";
 import { useTranslations } from "next-intl";
-import { DatePicker } from "@/components/ui/DatePicker";
+import { DateRangePicker } from "@/components/ui/DateRangePicker";
 
 type SearchBarProps = {
   onSearch?: (params: SearchParams) => void | Promise<void>;
@@ -83,25 +83,20 @@ export function SearchBar({ onSearch, defaultValues }: SearchBarProps) {
 
           <Divider />
 
-          <FieldShell className="flex-[1]">
-            <DatePicker
-              value={checkIn}
-              onChange={(v) => setCheckIn(v ?? "")}
-              label={t("arrival")}
-              className="h-14 border-0 bg-transparent hover:bg-zinc-50 focus:ring-0"
+          <div className="flex-[1.8]">
+            <DateRangePicker
+              value={{
+                from: checkIn || undefined,
+                to: checkOut || undefined,
+              }}
+              onChange={(next) => {
+                setCheckIn(next.from ?? "");
+                setCheckOut(next.to ?? "");
+              }}
+              startLabel={t("arrival")}
+              endLabel={t("departure")}
             />
-          </FieldShell>
-
-          <Divider />
-
-          <FieldShell className="flex-[1]">
-            <DatePicker
-              value={checkOut}
-              onChange={(v) => setCheckOut(v ?? "")}
-              label={t("departure")}
-              className="h-14 border-0 bg-transparent hover:bg-zinc-50 focus:ring-0"
-            />
-          </FieldShell>
+          </div>
 
           <Divider />
 
@@ -165,10 +160,18 @@ export function SearchBar({ onSearch, defaultValues }: SearchBarProps) {
             </button>
           </FieldShell>
 
-          <div className="grid grid-cols-2 gap-2">
-            <DatePicker value={checkIn} onChange={(v) => setCheckIn(v ?? "")} label={t("arrival")} className="h-14" />
-            <DatePicker value={checkOut} onChange={(v) => setCheckOut(v ?? "")} label={t("departure")} className="h-14" />
-          </div>
+          <DateRangePicker
+            value={{
+              from: checkIn || undefined,
+              to: checkOut || undefined,
+            }}
+            onChange={(next) => {
+              setCheckIn(next.from ?? "");
+              setCheckOut(next.to ?? "");
+            }}
+            startLabel={t("arrival")}
+            endLabel={t("departure")}
+          />
 
           <FieldShell className="h-14 bg-white">
             <div className="grid">

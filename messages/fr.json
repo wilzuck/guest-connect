@@ -187,6 +187,14 @@
     "done": "Terminer",
     "close": "Fermer"
   },
+  "dateRangePicker": {
+    "title": "Choisir des dates",
+    "selectedRange": "Plage sélectionnée",
+    "placeholder": "—",
+    "clear": "Effacer",
+    "done": "Terminer",
+    "close": "Fermer"
+  },
   "searchPage": {
     "eyebrow": "Recherche",
     "title": "Rechercher un hébergement",
