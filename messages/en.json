@@ -176,7 +176,9 @@
   }
   ,
   "datePicker": {
-    "clear": "Clear"
+    "clear": "Clear",
+    "done": "Done",
+    "close": "Close"
   },
   "searchPage": {
     "eyebrow": "Search",

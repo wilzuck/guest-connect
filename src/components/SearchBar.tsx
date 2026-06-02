@@ -55,114 +55,173 @@ export function SearchBar({ onSearch, defaultValues }: SearchBarProps) {
       onSubmit={handleSubmit}
       className="w-full"
     >
-      {/* Inspiré des références: bar pill segmentée, fluide, micro-animations. */}
+      {/* Desktop: une seule ligne fluide. Mobile: layout optimisé (dates côte à côte). */}
       <div className="rounded-[28px] bg-zinc-100/70 p-2 backdrop-blur-sm">
-        <div className="grid gap-2 md:grid-cols-12 md:items-stretch md:gap-0 md:overflow-hidden md:rounded-[22px] md:bg-white">
-          {/* Destination */}
-          <div className="group md:col-span-4 md:px-2 md:py-1">
-            <div className="relative flex h-14 items-center gap-2 rounded-2xl bg-white px-4 transition-all duration-200 md:bg-transparent md:hover:bg-zinc-50 md:focus-within:bg-zinc-50">
-              <PinIcon className="h-4 w-4 text-zinc-400 transition-colors group-focus-within:text-black" />
-              <Input
-                value={destination}
-                onChange={(e) => setDestination(e.target.value)}
-                placeholder={t("placeholderDestination")}
-                aria-label={t("ariaDestination")}
-                className="h-12 flex-1 border-0 bg-transparent px-0 shadow-none outline-none focus:ring-0 focus:border-transparent"
-              />
+        {/* Desktop */}
+        <div className="hidden items-stretch gap-2 rounded-[22px] bg-white p-1 md:flex">
+          <FieldShell>
+            <PinIcon className="h-4 w-4 text-zinc-400" />
+            <Input
+              value={destination}
+              onChange={(e) => setDestination(e.target.value)}
+              placeholder={t("placeholderDestination")}
+              aria-label={t("ariaDestination")}
+              className="h-12 flex-1 border-0 bg-transparent px-0 shadow-none outline-none focus:ring-0 focus:border-transparent"
+            />
+            <button
+              type="button"
+              onClick={() => setDestination("")}
+              className={[
+                "grid h-9 w-9 place-items-center rounded-full text-zinc-500 transition",
+                destination ? "opacity-100 hover:bg-black/5 hover:text-black" : "pointer-events-none opacity-0",
+              ].join(" ")}
+              aria-label={t("ariaClearDestination")}
+            >
+              <XIcon className="h-4 w-4" />
+            </button>
+          </FieldShell>
 
-              <button
-                type="button"
-                onClick={() => setDestination("")}
-                className={[
-                  "grid h-9 w-9 place-items-center rounded-full text-zinc-500 transition",
-                  destination ? "opacity-100 hover:bg-black/5 hover:text-black" : "pointer-events-none opacity-0",
-                ].join(" ")}
-                aria-label={t("ariaClearDestination")}
-              >
-                <XIcon className="h-4 w-4" />
-              </button>
+          <Divider />
 
-              <div className="pointer-events-none absolute inset-0 rounded-2xl ring-0 ring-black/10 transition group-focus-within:ring-2" />
-            </div>
-          </div>
-
-          {/* Séparateur */}
-          <div className="hidden md:block md:col-span-1 md:w-px md:justify-self-center md:bg-black/5" />
-
-          {/* Arrivée */}
-          <div className="md:col-span-2 md:px-2 md:py-1">
+          <FieldShell>
             <DatePicker
               value={checkIn}
               onChange={(v) => setCheckIn(v ?? "")}
               label={t("arrival")}
-              className="h-14 md:border-0 md:bg-transparent md:hover:bg-zinc-50 md:focus:ring-0"
+              className="h-14 border-0 bg-transparent hover:bg-zinc-50 focus:ring-0"
             />
-          </div>
+          </FieldShell>
 
-          {/* Séparateur */}
-          <div className="hidden md:block md:col-span-1 md:w-px md:justify-self-center md:bg-black/5" />
+          <Divider />
 
-          {/* Départ */}
-          <div className="md:col-span-2 md:px-2 md:py-1">
+          <FieldShell>
             <DatePicker
               value={checkOut}
               onChange={(v) => setCheckOut(v ?? "")}
               label={t("departure")}
-              className="h-14 md:border-0 md:bg-transparent md:hover:bg-zinc-50 md:focus:ring-0"
+              className="h-14 border-0 bg-transparent hover:bg-zinc-50 focus:ring-0"
             />
-          </div>
+          </FieldShell>
 
-          {/* Séparateur */}
-          <div className="hidden md:block md:col-span-1 md:w-px md:justify-self-center md:bg-black/5" />
+          <Divider />
 
-          {/* Voyageurs */}
-          <div className="md:col-span-3 md:px-2 md:py-1">
-            <div className="group relative flex h-14 items-center justify-between gap-3 rounded-2xl bg-white px-4 transition-all duration-200 md:bg-transparent md:hover:bg-zinc-50 md:focus-within:bg-zinc-50">
-              <div className="grid">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-zinc-500">
-                  {t("guests")}
-                </p>
-                <span className="text-sm font-semibold text-black">{guests}</span>
-              </div>
-
-              <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  className="grid h-9 w-9 place-items-center rounded-full bg-black/[0.04] text-black transition hover:bg-black/[0.08] active:scale-[0.96]"
-                  onClick={() => setGuests((g) => Math.max(1, g - 1))}
-                  aria-label={t("ariaRemoveGuest")}
-                >
-                  −
-                </button>
-                <button
-                  type="button"
-                  className="grid h-9 w-9 place-items-center rounded-full bg-black/[0.04] text-black transition hover:bg-black/[0.08] active:scale-[0.96]"
-                  onClick={() => setGuests((g) => g + 1)}
-                  aria-label={t("ariaAddGuest")}
-                >
-                  +
-                </button>
-              </div>
-
-              <div className="pointer-events-none absolute inset-0 rounded-2xl ring-0 ring-black/10 transition group-focus-within:ring-2" />
+          <FieldShell className="min-w-[240px]">
+            <div className="grid">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-zinc-500">
+                {t("guests")}
+              </p>
+              <span className="text-sm font-semibold text-black">{guests}</span>
             </div>
-          </div>
-
-          {/* CTA */}
-          <div className="md:col-span-12 md:p-1">
-            <div className="flex md:justify-end">
-              <Button
-                type="submit"
-                className="h-14 w-full rounded-2xl px-6 justify-center transition active:scale-[0.99] md:w-auto md:min-w-[160px]"
+            <div className="ml-auto flex items-center gap-2">
+              <button
+                type="button"
+                className="grid h-9 w-9 place-items-center rounded-full bg-black/[0.04] text-black transition hover:bg-black/[0.08] active:scale-[0.96]"
+                onClick={() => setGuests((g) => Math.max(1, g - 1))}
+                aria-label={t("ariaRemoveGuest")}
               >
-                <SearchIcon className="h-4 w-4" />
-                {t("search")}
-              </Button>
+                −
+              </button>
+              <button
+                type="button"
+                className="grid h-9 w-9 place-items-center rounded-full bg-black/[0.04] text-black transition hover:bg-black/[0.08] active:scale-[0.96]"
+                onClick={() => setGuests((g) => g + 1)}
+                aria-label={t("ariaAddGuest")}
+              >
+                +
+              </button>
             </div>
+          </FieldShell>
+
+          <Button
+            type="submit"
+            className="h-14 rounded-2xl px-6 justify-center transition active:scale-[0.99] md:min-w-[160px]"
+          >
+            <SearchIcon className="h-4 w-4" />
+            {t("search")}
+          </Button>
+        </div>
+
+        {/* Mobile */}
+        <div className="grid gap-2 md:hidden">
+          <FieldShell className="h-14 bg-white">
+            <PinIcon className="h-4 w-4 text-zinc-400" />
+            <Input
+              value={destination}
+              onChange={(e) => setDestination(e.target.value)}
+              placeholder={t("placeholderDestination")}
+              aria-label={t("ariaDestination")}
+              className="h-12 flex-1 border-0 bg-transparent px-0 shadow-none outline-none focus:ring-0 focus:border-transparent"
+            />
+            <button
+              type="button"
+              onClick={() => setDestination("")}
+              className={[
+                "grid h-9 w-9 place-items-center rounded-full text-zinc-500 transition",
+                destination ? "opacity-100 hover:bg-black/5 hover:text-black" : "pointer-events-none opacity-0",
+              ].join(" ")}
+              aria-label={t("ariaClearDestination")}
+            >
+              <XIcon className="h-4 w-4" />
+            </button>
+          </FieldShell>
+
+          <div className="grid grid-cols-2 gap-2">
+            <DatePicker value={checkIn} onChange={(v) => setCheckIn(v ?? "")} label={t("arrival")} className="h-14" />
+            <DatePicker value={checkOut} onChange={(v) => setCheckOut(v ?? "")} label={t("departure")} className="h-14" />
           </div>
+
+          <FieldShell className="h-14 bg-white">
+            <div className="grid">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-zinc-500">
+                {t("guests")}
+              </p>
+              <span className="text-sm font-semibold text-black">{guests}</span>
+            </div>
+            <div className="ml-auto flex items-center gap-2">
+              <button
+                type="button"
+                className="grid h-9 w-9 place-items-center rounded-full bg-black/[0.04] text-black transition hover:bg-black/[0.08] active:scale-[0.96]"
+                onClick={() => setGuests((g) => Math.max(1, g - 1))}
+                aria-label={t("ariaRemoveGuest")}
+              >
+                −
+              </button>
+              <button
+                type="button"
+                className="grid h-9 w-9 place-items-center rounded-full bg-black/[0.04] text-black transition hover:bg-black/[0.08] active:scale-[0.96]"
+                onClick={() => setGuests((g) => g + 1)}
+                aria-label={t("ariaAddGuest")}
+              >
+                +
+              </button>
+            </div>
+          </FieldShell>
+
+          <Button type="submit" className="h-14 w-full rounded-2xl px-6 justify-center transition active:scale-[0.99]">
+            <SearchIcon className="h-4 w-4" />
+            {t("search")}
+          </Button>
         </div>
       </div>
     </form>
+  );
+}
+
+function Divider() {
+  return <div className="my-2 w-px bg-black/5" />;
+}
+
+function FieldShell({ children, className }: { children: React.ReactNode; className?: string }) {
+  return (
+    <div
+      className={[
+        "group relative flex h-14 flex-1 items-center gap-2 rounded-2xl px-4 transition-all duration-200 hover:bg-zinc-50 focus-within:bg-zinc-50",
+        className ?? "",
+      ].join(" ")}
+    >
+      {children}
+      <div className="pointer-events-none absolute inset-0 rounded-2xl ring-0 ring-black/10 transition group-focus-within:ring-2" />
+    </div>
   );
 }
 

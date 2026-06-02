@@ -73,7 +73,7 @@ export async function HeroSection() {
             </p>
           </div>
 
-          <div className="lg:col-span-6">
+          <div className="hidden lg:block lg:col-span-6">
             <HeroIllustration
               title={t("illustration.title")}
               subtitle={t("illustration.subtitle")}
