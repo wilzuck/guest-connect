@@ -4,11 +4,15 @@ import Link from "next/link";
 import { Logo } from "@/components/Logo";
 import { Container } from "@/components/ui/Container";
 import { useLocale, useTranslations } from "next-intl";
+import { usePathname } from "next/navigation";
+import { LocaleSwitcher } from "@/components/i18n/LocaleSwitcher";
 import type { ReactNode } from "react";
 
 export function Footer() {
   const locale = useLocale();
   const t = useTranslations("footer");
+  const pathname = usePathname() || "";
+  if (/(^|\/)(login|signup)$/.test(pathname)) return null;
 
   const columns = [
     {
@@ -86,7 +90,10 @@ export function Footer() {
           <p>
             © {new Date().getFullYear()} GuestConnect. {t("copyright")}
           </p>
-          <p>{t("madeFor")}</p>
+          <div className="flex items-center gap-3">
+            <LocaleSwitcher />
+            <p className="hidden sm:block">{t("madeFor")}</p>
+          </div>
         </div>
       </Container>
     </footer>
