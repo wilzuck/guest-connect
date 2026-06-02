@@ -21,8 +21,8 @@ function formatPrice(price: number, currency: string) {
 export function ListingCard({ locale, listing }: { locale: string; listing: Listing }) {
   const t = useTranslations("listingCard");
   return (
-    <Link href={`/${locale}/listings/${listing.id}`} className="block">
-      <Card className="group transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md hover:shadow-black/10">
+    <Link href={`/${locale}/listings/${listing.id}`} className="block mb-4">
+      <Card className="group">
         <div className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-zinc-100">
           <Image
             src={listing.imageUrl}
@@ -32,11 +32,6 @@ export function ListingCard({ locale, listing }: { locale: string; listing: List
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-black/0 to-black/0 opacity-80" />
-
-          <div className="absolute right-3 top-3 inline-flex items-center rounded-full bg-emerald-500 px-3 py-1 text-[12px] font-semibold text-white">
-            {formatPrice(listing.pricePerNight, listing.currency)}
-            <span className="ml-1 font-medium text-white/85">{t("perNightShort")}</span>
-          </div>
         </div>
         <div className="mx-1 mt-3">
           <div className="flex items-start justify-between gap-4">
@@ -44,7 +39,6 @@ export function ListingCard({ locale, listing }: { locale: string; listing: List
               <h3 className="truncate text-base font-semibold tracking-tight text-black">
                 {listing.title}
               </h3>
-              <p className="mt-1 truncate text-sm text-zinc-600">{listing.location}</p>
             </div>
             <div className="inline-flex items-center gap-2 rounded-full bg-zinc-100 px-3 py-1 text-sm text-zinc-700">
               <StarIcon className="h-4 w-4 text-black" />
@@ -53,11 +47,21 @@ export function ListingCard({ locale, listing }: { locale: string; listing: List
             </div>
           </div>
 
-          <div className="mt-4 grid gap-2 text-sm text-zinc-700">
-            <div className="flex items-center gap-2">
-              <CancelIcon className="h-4 w-4 text-zinc-500" />
-              <span className="truncate">{t("meta.cancellation")}</span>
-            </div>
+          {/* Localisation + prix (style Airbnb) */}
+          <div className="mt-1 flex items-start justify-between gap-3">
+            <p className="min-w-0 truncate text-sm text-zinc-600">{listing.location}</p>
+            <p className="shrink-0 text-sm text-zinc-600">
+              <span className="font-semibold text-black">
+                {formatPrice(listing.pricePerNight, listing.currency)}
+              </span>{" "}
+              <span className="text-zinc-600">{t("perNightShort")}</span>
+            </p>
+          </div>
+
+          {/* Badge annulation (sans distance, icône moderne) */}
+          <div className="mt-3 flex items-center gap-2 text-sm text-zinc-700">
+            <CancelIcon className="h-4 w-4 text-zinc-500" />
+            <span className="truncate">{t("meta.cancellation")}</span>
           </div>
         </div>
       </Card>
