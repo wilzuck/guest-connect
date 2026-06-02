@@ -56,7 +56,7 @@ export function SearchBar({ onSearch, defaultValues }: SearchBarProps) {
       className="w-full"
     >
       {/* Desktop: une seule ligne fluide. Mobile: layout optimisé (dates côte à côte). */}
-      <div className="rounded-[28px] border border-black/10 bg-white/80 p-2 shadow-[0_18px_50px_-30px_rgba(0,0,0,0.45)] backdrop-blur-sm">
+      <div className="rounded-[28px] border border-black/10 bg-white/80 p-2 shadow-[0_14px_40px_-30px_rgba(0,0,0,0.25)] backdrop-blur-sm">
         {/* Desktop */}
         <div className="hidden items-stretch gap-2 rounded-[22px] bg-white p-1 md:flex">
           <FieldShell className="flex-[1.7]">

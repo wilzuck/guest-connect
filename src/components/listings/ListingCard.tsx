@@ -6,24 +6,28 @@ import { Card } from "@/components/ui/Card";
 import type { Listing } from "@/types/listing";
 import { useTranslations } from "next-intl";
 import { useCurrency } from "@/components/currency/CurrencyProvider";
+import { useState } from "react";
 
 export function ListingCard({ locale, listing }: { locale: string; listing: Listing }) {
   const t = useTranslations("listingCard");
   const { formatFrom } = useCurrency();
+  const [imgLoaded, setImgLoaded] = useState(false);
   return (
     <Link href={`/${locale}/listings/${listing.id}`} className="block mb-4">
-      <Card className="group">
-        <div className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-zinc-100">
+      <Card className="group rounded-2xl border border-black/10 bg-white shadow-none">
+        <div className="relative aspect-[16/10] overflow-hidden rounded-[14px] bg-zinc-100">
+          {!imgLoaded ? <ImageLoader /> : null}
           <Image
             src={listing.imageUrl}
             alt={listing.title}
             fill
             className="object-cover transition duration-700 group-hover:scale-[1.04]"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+            onLoadingComplete={() => setImgLoaded(true)}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-black/0 to-black/0 opacity-80" />
         </div>
-        <div className="mx-1 mt-3">
+        <div className="px-3 pb-3 pt-3">
           <div className="flex items-start justify-between gap-4">
             <div className="min-w-0">
               <h3
@@ -91,5 +95,11 @@ function MoneyIcon({ className }: { className?: string }) {
       />
       <path d="M12 8v12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" opacity="0.35" />
     </svg>
+  );
+}
+
+function ImageLoader() {
+  return (
+    <div className="absolute inset-0 animate-pulse bg-[linear-gradient(110deg,#f4f4f5,45%,#e4e4e7,55%,#f4f4f5)] bg-[length:200%_100%]" />
   );
 }

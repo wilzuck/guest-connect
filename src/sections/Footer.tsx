@@ -90,11 +90,11 @@ export function Footer() {
         <div className="mt-10 flex flex-col gap-2 border-t border-black/5 pt-6 text-xs text-zinc-500 sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {new Date().getFullYear()} GuestConnect. {t("copyright")}
+            <span className="hidden sm:inline"> · {t("madeFor")}</span>
           </p>
           <div className="flex items-center gap-3">
             <CurrencySwitcher />
             <LocaleSwitcher />
-            <p className="hidden sm:block">{t("madeFor")}</p>
           </div>
         </div>
       </Container>

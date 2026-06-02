@@ -3,10 +3,10 @@
 import { format, isValid, parseISO } from "date-fns";
 import { enUS, fr } from "date-fns/locale";
 import { useEffect, useMemo, useState } from "react";
-import { DayFlag, DayPicker, SelectionState, UI } from "react-day-picker";
 import { useLocale, useTranslations } from "next-intl";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/Popover";
 import { Dialog, DialogClose, DialogContent, DialogTrigger } from "@/components/ui/Dialog";
+import { Calendar } from "@/components/ui/Calendar";
 import { cn } from "@/lib/utils/cn";
 
 type RangeValue = {
@@ -122,7 +122,7 @@ export function DateRangePicker({ value, onChange, startLabel, endLabel, classNa
   );
 
   const calendar = (
-    <DayPicker
+    <Calendar
       mode="range"
       selected={selected}
       onDayClick={onDayClick}
@@ -131,41 +131,7 @@ export function DateRangePicker({ value, onChange, startLabel, endLabel, classNa
       numberOfMonths={wide ? 2 : 1}
       showOutsideDays
       fixedWeeks
-      classNames={{
-        [UI.Months]: "flex flex-col gap-6",
-        [UI.Month]: "space-y-4",
-        [UI.MonthCaption]: "flex items-center justify-between px-2",
-        [UI.CaptionLabel]: "text-sm font-semibold text-black",
-        [UI.Dropdowns]: "flex items-center gap-2",
-        [UI.Dropdown]:
-          "h-10 rounded-xl border border-black/10 bg-white px-2 text-sm font-semibold text-zinc-800 shadow-sm shadow-black/5",
-        [UI.Nav]: "flex items-center gap-2",
-        [UI.PreviousMonthButton]:
-          "h-10 w-10 rounded-xl border border-black/10 bg-white text-zinc-700 shadow-sm shadow-black/5 hover:bg-zinc-50 transition",
-        [UI.NextMonthButton]:
-          "h-10 w-10 rounded-xl border border-black/10 bg-white text-zinc-700 shadow-sm shadow-black/5 hover:bg-zinc-50 transition",
-        [UI.Weekdays]: "flex",
-        [UI.Weekday]:
-          "w-10 text-center text-[11px] font-semibold uppercase tracking-[0.12em] text-zinc-500",
-        [UI.Week]: "flex w-full",
-        [UI.Day]: "relative w-10 text-center",
-        [UI.DayButton]:
-          "h-10 w-10 rounded-xl text-sm text-zinc-700 hover:bg-black/5 transition",
-
-        // Range styles (shadcn-like)
-        [SelectionState.range_start]:
-          "bg-black text-white hover:bg-black",
-        [SelectionState.range_end]:
-          "bg-black text-white hover:bg-black",
-        [SelectionState.range_middle]:
-          "bg-black/5",
-        [SelectionState.selected]:
-          "bg-black text-white hover:bg-black",
-
-        [DayFlag.today]: "ring-2 ring-black/20",
-        [DayFlag.outside]: "text-zinc-300",
-        [DayFlag.disabled]: "text-zinc-300",
-      }}
+      className="bg-white"
     />
   );
 
@@ -251,4 +217,3 @@ export function DateRangePicker({ value, onChange, startLabel, endLabel, classNa
     </Popover>
   );
 }
-

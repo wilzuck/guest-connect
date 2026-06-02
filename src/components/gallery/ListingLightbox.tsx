@@ -19,9 +19,10 @@ export function ListingLightbox({
   const t = useTranslations("listingGallery");
   const [open, setOpen] = useState(false);
   const [index, setIndex] = useState(0);
+  const [loaded, setLoaded] = useState<Record<string, boolean>>({});
 
   const slides = useMemo(() => images.map((src) => ({ src, alt: title })), [images, title]);
-  const remaining = Math.max(0, images.length - 3);
+  const remaining = Math.max(0, images.length - 3); // 3 images affichées (1 + 2)
 
   function openAt(i: number) {
     setIndex(i);
@@ -34,10 +35,11 @@ export function ListingLightbox({
         <button
           type="button"
           onClick={() => openAt(0)}
-          className="group relative aspect-[16/10] overflow-hidden rounded-3xl bg-zinc-100 lg:col-span-8"
+          className="group relative aspect-[16/10] overflow-hidden rounded-3xl bg-zinc-100 lg:col-span-8 cursor-pointer"
           aria-label={t("openPhotos")}
           title={t("openPhotos")}
         >
+          {!loaded[images[0]] ? <ImageLoader /> : null}
           <Image
             src={images[0]}
             alt={`${title} — main`}
@@ -45,6 +47,7 @@ export function ListingLightbox({
             className="object-cover transition duration-500 group-hover:scale-[1.02]"
             sizes="(max-width: 1024px) 100vw, 66vw"
             priority
+            onLoadingComplete={() => setLoaded((p) => ({ ...p, [images[0]]: true }))}
           />
         </button>
 
@@ -54,24 +57,26 @@ export function ListingLightbox({
               key={src}
               type="button"
               onClick={() => openAt(idx + 1)}
-              className="group relative aspect-[16/10] overflow-hidden rounded-3xl bg-zinc-100"
+              className="group relative aspect-[16/10] overflow-hidden rounded-3xl bg-zinc-100 cursor-pointer"
               aria-label={t("openPhoto", { index: idx + 2 })}
               title={t("openPhoto", { index: idx + 2 })}
             >
+              {!loaded[src] ? <ImageLoader /> : null}
               <Image
                 src={src}
                 alt={`${title} — photo ${idx + 2}`}
                 fill
                 className="object-cover transition duration-500 group-hover:scale-[1.02]"
                 sizes="(max-width: 1024px) 50vw, 33vw"
+                onLoadingComplete={() => setLoaded((p) => ({ ...p, [src]: true }))}
               />
               {/* Sur la 3e photo (index 1 de la colonne), affiche +N si on a plus d'images */}
               {idx === 1 && remaining > 0 ? (
                 <div className="absolute inset-0 grid place-items-center">
                   <div className="absolute inset-0 bg-black/25" />
                   <div className="relative inline-flex items-center gap-2 rounded-full bg-black/10 px-4 py-2 text-white backdrop-blur-[2px]">
-                    <span className="text-base font-semibold">+{remaining}</span>
-                    <ImageIcon className="h-5 w-5" />
+                    <span className="text-lg font-semibold">+{remaining}</span>
+                    <ImageIcon className="h-6 w-6" />
                   </div>
                 </div>
               ) : null}
@@ -88,10 +93,16 @@ export function ListingLightbox({
         plugins={[Thumbnails, Zoom]}
         carousel={{ finite: false }}
         controller={{ closeOnBackdropClick: true, closeOnPullDown: true }}
-        animation={{ fade: 180, swipe: 220 }}
+        animation={{ fade: 260, swipe: 240 }}
         styles={{ container: { backgroundColor: "rgba(0,0,0,0.92)" } }}
       />
     </>
+  );
+}
+
+function ImageLoader() {
+  return (
+    <div className="absolute inset-0 animate-pulse bg-[linear-gradient(110deg,#f4f4f5,45%,#e4e4e7,55%,#f4f4f5)] bg-[length:200%_100%]" />
   );
 }
 

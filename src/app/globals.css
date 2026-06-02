@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+/* Évite le "décalage" de layout lors de l'ouverture/fermeture des modales/lightbox (scrollbar stable) */
+html {
+  scrollbar-gutter: stable;
+}
+body {
+  overflow-y: scroll;
+}
+
 /* react-day-picker minimal reset (shadcn-like) */
 .rdp {
   --rdp-cell-size: 2.25rem;
