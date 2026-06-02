@@ -2,8 +2,10 @@
 
 import { format, isValid, parseISO } from "date-fns";
 import { enUS, fr } from "date-fns/locale";
-import { DayFlag, DayPicker, SelectionState, UI } from "react-day-picker";
+import { Animation, DayFlag, DayPicker, SelectionState, UI } from "react-day-picker";
 import { useLocale } from "next-intl";
+import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/Popover";
 import { cn } from "@/lib/utils/cn";
 
@@ -29,19 +31,31 @@ function toISO(d?: Date) {
 
 export function DatePicker({ value, onChange, label, placeholder, className }: DatePickerProps) {
   const locale = useLocale();
+  const t = useTranslations("datePicker");
   const date = toDate(value);
+  const [wide, setWide] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  // Mobile-first : 1 mois. Dès sm, on passe à 2 mois (plus proche Airbnb/Booking).
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 640px)");
+    const on = () => setWide(mq.matches);
+    on();
+    mq.addEventListener?.("change", on);
+    return () => mq.removeEventListener?.("change", on);
+  }, []);
 
   const dateLabel = date
     ? format(date, "d MMM yyyy", { locale: locale === "en" ? enUS : fr })
     : placeholder ?? "—";
 
   return (
-    <Popover>
+    <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <button
           type="button"
           className={cn(
-            "group w-full rounded-2xl border border-black/10 bg-white px-4 py-2 text-left transition hover:bg-zinc-50 focus:outline-none focus:ring-4 focus:ring-black/5 dark:border-white/10 dark:bg-zinc-950 dark:hover:bg-zinc-900",
+            "group h-12 w-full rounded-2xl border border-black/10 bg-white p-[10px] text-left transition hover:bg-zinc-50 focus:outline-none focus:ring-4 focus:ring-black/5 dark:border-white/10 dark:bg-zinc-950 dark:hover:bg-zinc-900",
             className,
           )}
           aria-label={label}
@@ -65,15 +79,27 @@ export function DatePicker({ value, onChange, label, placeholder, className }: D
           <DayPicker
             mode="single"
             selected={date}
-            onSelect={(d) => onChange(toISO(d))}
+            onSelect={(d) => {
+              onChange(toISO(d));
+              // comportement "mobile friendly" : ferme dès qu'une date est choisie
+              if (d) setOpen(false);
+            }}
             weekStartsOn={1}
             locale={locale === "en" ? enUS : fr}
+            animate
+            captionLayout="dropdown"
+            numberOfMonths={wide ? 2 : 1}
+            showOutsideDays
+            fixedWeeks
             className="rounded-xl"
             classNames={{
               [UI.Months]: "flex flex-col gap-4",
               [UI.Month]: "space-y-3",
               [UI.MonthCaption]: "flex items-center justify-between px-2",
               [UI.CaptionLabel]: "text-sm font-semibold text-black dark:text-white",
+              [UI.Dropdowns]: "flex items-center gap-2",
+              [UI.Dropdown]:
+                "h-9 rounded-xl border border-black/10 bg-white px-2 text-sm font-semibold text-zinc-800 shadow-sm shadow-black/5 dark:border-white/10 dark:bg-zinc-950 dark:text-zinc-200",
               [UI.Nav]: "flex items-center gap-2",
               [UI.PreviousMonthButton]:
                 "h-9 w-9 rounded-xl border border-black/10 bg-white text-zinc-700 shadow-sm shadow-black/5 hover:bg-zinc-50 transition dark:border-white/10 dark:bg-zinc-950 dark:text-zinc-200 dark:hover:bg-zinc-900",
@@ -100,6 +126,16 @@ export function DatePicker({ value, onChange, label, placeholder, className }: D
               [DayFlag.today]: "ring-2 ring-black/20 dark:ring-white/20",
               [DayFlag.outside]: "text-zinc-300 dark:text-zinc-600",
               [DayFlag.disabled]: "text-zinc-300 dark:text-zinc-600",
+
+              // Animations de défilement (changement de mois)
+              [Animation.caption_after_enter]: "gc-anim-slide-in-right",
+              [Animation.caption_before_enter]: "gc-anim-slide-in-left",
+              [Animation.caption_after_exit]: "gc-anim-fade-out",
+              [Animation.caption_before_exit]: "gc-anim-fade-out",
+              [Animation.weeks_after_enter]: "gc-anim-slide-in-right",
+              [Animation.weeks_before_enter]: "gc-anim-slide-in-left",
+              [Animation.weeks_after_exit]: "gc-anim-fade-out",
+              [Animation.weeks_before_exit]: "gc-anim-fade-out",
             }}
           />
         </div>
@@ -110,7 +146,7 @@ export function DatePicker({ value, onChange, label, placeholder, className }: D
             className="rounded-xl px-3 py-2 text-xs font-semibold text-zinc-600 hover:text-black hover:bg-zinc-50 transition dark:text-zinc-300 dark:hover:text-white dark:hover:bg-zinc-900"
             onClick={() => onChange(undefined)}
           >
-            {locale === "en" ? "Clear" : "Effacer"}
+            {t("clear")}
           </button>
         </div>
       </PopoverContent>

@@ -1,15 +1,19 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Logo } from "@/components/Logo";
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { UserMenu } from "@/components/nav/UserMenu";
+import { MobileMenu } from "@/components/nav/MobileMenu";
 import { useLocale, useTranslations } from "next-intl";
 
 export function Navbar() {
   const locale = useLocale();
   const t = useTranslations("nav");
+  const pathname = usePathname() || "";
+  if (/(^|\/)(login|signup)$/.test(pathname)) return null;
 
   const links = [
     { label: t("accommodations"), href: `/${locale}/explore` },
@@ -18,8 +22,8 @@ export function Navbar() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 border-b border-black/5 bg-white/80 backdrop-blur">
-      <Container className="flex h-16 items-center justify-between">
+    <header className="sticky top-0 z-50 bg-white/80 backdrop-blur">
+      <Container className="flex h-16 items-center gap-3">
         <div className="flex items-center gap-8">
           <Logo />
 
@@ -33,31 +37,50 @@ export function Navbar() {
                 {l.label}
               </Link>
             ))}
-
-            {/* Recherche = bouton avec icône */}
-            <ButtonLink
-              href={`/${locale}/search`}
-              variant="outline"
-              size="sm"
-              className="rounded-full"
-            >
-              <SearchIcon className="h-4 w-4" />
-              {t("search")}
-            </ButtonLink>
           </nav>
         </div>
 
-        <div className="flex items-center gap-2">
+        {/* Mobile : bouton recherche plein largeur (Airbnb-like) */}
+        <div className="flex flex-1 md:hidden">
+          <ButtonLink
+            href={`/${locale}/search`}
+            variant="outline"
+            size="md"
+            className="w-full justify-start gap-3 rounded-full border-black/10 bg-white px-4 shadow-sm shadow-black/10"
+          >
+            <SearchIcon className="h-4 w-4" />
+            <div className="min-w-0 text-left">
+              <p className="truncate text-sm font-semibold text-black">{t("search")}</p>
+              <p className="truncate text-xs text-zinc-500">
+                {t("searchHint")}
+              </p>
+            </div>
+          </ButtonLink>
+        </div>
+
+        <div className="ml-auto flex items-center gap-2">
           <ButtonLink
             href={`/${locale}/host`}
             variant="primary"
             size="sm"
-            className="hidden sm:inline-flex"
+            className="!hidden xl:!inline-flex"
           >
             <HostIcon className="h-4 w-4" />
             {t("becomeHost")}
           </ButtonLink>
-          <UserMenu />
+          <ButtonLink
+            href={`/${locale}/search`}
+            variant="outline"
+            size="sm"
+            className="rounded-full !hidden xl:!inline-flex"
+          >
+            <SearchIcon className="h-4 w-4" />
+            {t("search")}
+          </ButtonLink>
+          <div className="hidden md:block">
+            <UserMenu />
+          </div>
+          <MobileMenu />
         </div>
       </Container>
     </header>
@@ -86,19 +109,18 @@ function HostIcon({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <path
-        d="M3 11.5 12 4l9 7.5"
+        d="M12 21c4.4 0 8-3.6 8-8s-3.6-8-8-8-8 3.6-8 8 3.6 8 8 8Z"
         stroke="currentColor"
         strokeWidth="1.8"
-        strokeLinejoin="round"
       />
       <path
-        d="M5 10.5V20h14v-9.5"
+        d="M12 8v8"
         stroke="currentColor"
         strokeWidth="1.8"
-        strokeLinejoin="round"
+        strokeLinecap="round"
       />
       <path
-        d="M9.5 20v-6.2a2.5 2.5 0 0 1 5 0V20"
+        d="M8 12h8"
         stroke="currentColor"
         strokeWidth="1.8"
         strokeLinecap="round"

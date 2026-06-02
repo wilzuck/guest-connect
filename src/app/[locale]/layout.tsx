@@ -1,5 +1,5 @@
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
+import { getMessages, setRequestLocale } from "next-intl/server";
 import { ThemeProvider } from "next-themes";
 import { Footer, Navbar } from "@/sections";
 import type { ReactNode } from "react";
@@ -12,14 +12,18 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  // Important: synchronise la locale côté serveur pour que getMessages() charge le bon JSON.
+  setRequestLocale(locale);
   const messages = await getMessages();
 
   return (
     <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
       <NextIntlClientProvider locale={locale} messages={messages}>
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <div className="min-h-dvh overflow-x-hidden flex flex-col">
+          <Navbar />
+          <main className="flex-1 overflow-x-hidden">{children}</main>
+          <Footer />
+        </div>
       </NextIntlClientProvider>
     </ThemeProvider>
   );

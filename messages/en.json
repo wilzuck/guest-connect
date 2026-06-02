@@ -4,7 +4,8 @@
     "destinations": "Destinations",
     "experiences": "Experiences",
     "becomeHost": "Become a host",
-    "search": "Search"
+    "search": "Search",
+    "searchHint": "Destination · Dates · Guests"
   },
   "userMenu": {
     "account": "Account",
@@ -21,7 +22,13 @@
     "subtitle": "GuestConnect helps travelers discover authentic guest houses with a premium experience inspired by Airbnb and Booking.",
     "note": "No hidden fees. Transparent reviews. Instant confirmations.",
     "ctaSearch": "Search",
-    "ctaHost": "Become a host"
+    "ctaHost": "Become a host",
+    "illustration": {
+      "title": "Premium guest houses",
+      "subtitle": "Curated · Verified · Reliable",
+      "live": "Live",
+      "alt": "Premium guest house — GuestConnect"
+    }
   },
   "footer": {
     "about": "About",
@@ -47,5 +54,180 @@
     "departure": "Check-out",
     "guests": "Guests",
     "search": "Search"
+  },
+  "auth": {
+    "fields": {
+      "fullName": "Full name",
+      "email": "Email",
+      "phone": "Phone",
+      "password": "Password",
+      "confirmPassword": "Confirm password"
+    },
+    "placeholders": {
+      "fullName": "Sofia Martin",
+      "email": "you@company.com",
+      "phone": "+229 90 00 00 00",
+      "password": "••••••••",
+      "phoneLoginSoon": "Phone login (OTP) is ready to be connected.",
+      "googleSoon": "Google login is ready to be connected."
+    },
+    "actions": {
+      "show": "Show",
+      "hide": "Hide",
+      "showPassword": "Show password",
+      "hidePassword": "Hide password",
+      "rememberMe": "Remember me",
+      "forgotPassword": "Forgot password?",
+      "login": "Log in",
+      "loggingIn": "Signing in...",
+      "createAccount": "Create account",
+      "creating": "Creating...",
+      "acceptTerms": "I accept the terms and privacy policy",
+      "continueWithPhone": "Continue with phone number",
+      "continueWithGoogle": "Continue with Gmail",
+      "close": "Close",
+      "continue": "Continue"
+    },
+    "phoneDialog": {
+      "title": "Continue with phone",
+      "countryCode": "Country code",
+      "otp": "OTP"
+    },
+    "orContinueWith": "OR CONTINUE WITH",
+    "errors": {
+      "invalidCredentials": "Invalid email or password.",
+      "genericLogin": "Could not sign in. Please try again.",
+      "genericSignup": "Could not create your account. Please check your info.",
+      "passwordMismatch": "Passwords do not match.",
+      "acceptTerms": "Please accept the terms to continue."
+    }
+  }
+  ,
+  "listingCard": {
+    "perNight": "per night"
+  },
+  "explore": {
+    "eyebrow": "Explore",
+    "title": "Browse stays",
+    "description": "Filter and compare stays across Africa — clean, fast, and premium.",
+    "filters": {
+      "all": "All",
+      "guesthouses": "Guest houses",
+      "hotels": "Hotels",
+      "apartments": "Apartments",
+      "budget": "Budget",
+      "mid": "Mid-range",
+      "premium": "Premium",
+      "anyPrice": "Any price",
+      "recommended": "Recommended",
+      "topRated": "Top rated",
+      "lowestPrice": "Lowest price"
+    }
+  },
+  "home": {
+    "topSearchTitle": "Top stays right now"
+  },
+  "mobileMenu": {
+    "openMenu": "Open menu",
+    "account": "Account",
+    "login": "Log in",
+    "signup": "Sign up",
+    "tagline": "Premium guest houses across Benin & Africa."
+  },
+  "homeListings": {
+    "eyebrow": "Explore",
+    "title": "Handpicked stays you'll love",
+    "description": "A curated preview — ready to be powered by your /api/listings backend.",
+    "viewAll": "View all listings"
+  },
+  "localeSwitcher": {
+    "ariaFr": "Switch site to French",
+    "ariaEn": "Switch site to English"
+  },
+  "authPages": {
+    "login": {
+      "title": "Welcome back",
+      "subtitle": "Sign in to book, save, and manage your stays.",
+      "footerText": "No account?",
+      "footerLink": "Create one"
+    },
+    "signup": {
+      "title": "Create your account",
+      "subtitle": "Join GuestConnect and discover premium stays across Africa.",
+      "footerText": "Already have an account?",
+      "footerLink": "Sign in"
+    }
+  },
+  "authShell": {
+    "footer": {
+      "terms": "Terms",
+      "privacy": "Privacy",
+      "cookies": "Cookies"
+    },
+    "illustration": {
+      "title": "Stay anywhere, feel at home",
+      "subtitle": "Discover guest houses, hotels and unique stays across Africa",
+      "alt": "Premium guest house"
+    }
+  }
+  ,
+  "datePicker": {
+    "clear": "Clear"
+  },
+  "searchPage": {
+    "eyebrow": "Search",
+    "title": "Search stays",
+    "description": "Use the search bar to refine your stay.",
+    "results": "{count} result(s)",
+    "resultsFor": " for “{destination}”",
+    "browseByInterests": "Browse by interests"
+  },
+  "listingPage": {
+    "reviews": "{count} reviews",
+    "securePayment": "Secure payment",
+    "back": "Back",
+    "search": "Search",
+    "aboutTitle": "About this stay",
+    "aboutBody": "A premium stay selected for its hospitality and clarity. This page is an Airbnb-like base — connect it to your backend later (photos, availability, policies, etc.).",
+    "info": {
+      "flexTitle": "Flexible check-in",
+      "flexDesc": "Easy arrival (depending on availability).",
+      "cancelTitle": "Clear cancellation",
+      "cancelDesc": "Policies shown before payment.",
+      "locationTitle": "Location",
+      "locationDesc": "Recommended area in {location}.",
+      "supportTitle": "Support",
+      "supportDesc": "24/7 assistance for guests & hosts."
+    },
+    "from": "From",
+    "perNight": "/ night",
+    "checkAvailability": "Check availability",
+    "addToFavorites": "Add to favorites",
+    "footerNote": "Secure payment · Instant confirmation · No hidden fees"
+  },
+  "hostPage": {
+    "eyebrow": "Become a host",
+    "title": "List your place on GuestConnect",
+    "description": "Attract travelers, stay in control, and manage bookings with a premium experience.",
+    "ctaPrimary": "Get started",
+    "ctaSecondary": "See benefits",
+    "stepsTitle": "How it works",
+    "steps": {
+      "oneTitle": "Create your listing",
+      "oneDesc": "Add photos, pricing, and rules in minutes.",
+      "twoTitle": "Receive requests",
+      "twoDesc": "We highlight reliable, well-presented stays.",
+      "threeTitle": "Host and earn",
+      "threeDesc": "Secure payments and dedicated support."
+    },
+    "benefitsTitle": "Why GuestConnect?",
+    "benefits": {
+      "trustTitle": "Trust & quality",
+      "trustDesc": "A clean UX that reassures and converts.",
+      "toolsTitle": "Host tools",
+      "toolsDesc": "Calendar, pricing, rules, bookings — ready to connect to the backend.",
+      "supportTitle": "Premium support",
+      "supportDesc": "Support for both guests and hosts."
+    }
   }
 }

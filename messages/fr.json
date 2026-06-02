@@ -4,7 +4,8 @@
     "destinations": "Destinations",
     "experiences": "Expériences",
     "becomeHost": "Devenir hôte",
-    "search": "Recherche"
+    "search": "Recherche",
+    "searchHint": "Destination · Dates · Voyageurs"
   },
   "userMenu": {
     "account": "Compte",
@@ -21,7 +22,13 @@
     "subtitle": "GuestConnect aide les voyageurs à découvrir des maisons d’hôtes authentiques avec une expérience premium, inspirée d’Airbnb et Booking.",
     "note": "Pas de frais cachés. Avis transparents. Confirmation instantanée.",
     "ctaSearch": "Rechercher",
-    "ctaHost": "Devenir hôte"
+    "ctaHost": "Devenir hôte",
+    "illustration": {
+      "title": "Maisons d’hôtes premium",
+      "subtitle": "Sélectionnées · Vérifiées · Fiables",
+      "live": "Live",
+      "alt": "Maison d’hôtes premium — GuestConnect"
+    }
   },
   "footer": {
     "about": "À propos",
@@ -47,5 +54,180 @@
     "departure": "Départ",
     "guests": "Voyageurs",
     "search": "Rechercher"
+  },
+  "auth": {
+    "fields": {
+      "fullName": "Nom complet",
+      "email": "Email",
+      "phone": "Téléphone",
+      "password": "Mot de passe",
+      "confirmPassword": "Confirmer le mot de passe"
+    },
+    "placeholders": {
+      "fullName": "Sofia Martin",
+      "email": "you@company.com",
+      "phone": "+229 90 00 00 00",
+      "password": "••••••••",
+      "phoneLoginSoon": "Connexion par téléphone (OTP) prête à être branchée.",
+      "googleSoon": "Connexion Google prête à être branchée."
+    },
+    "actions": {
+      "show": "Afficher",
+      "hide": "Masquer",
+      "showPassword": "Afficher le mot de passe",
+      "hidePassword": "Masquer le mot de passe",
+      "rememberMe": "Se souvenir de moi",
+      "forgotPassword": "Mot de passe oublié ?",
+      "login": "Se connecter",
+      "loggingIn": "Connexion...",
+      "createAccount": "Créer mon compte",
+      "creating": "Création...",
+      "acceptTerms": "J’accepte les conditions et la politique de confidentialité",
+      "continueWithPhone": "Continuer avec un numéro",
+      "continueWithGoogle": "Continuer avec Gmail",
+      "close": "Fermer",
+      "continue": "Continuer"
+    },
+    "phoneDialog": {
+      "title": "Continuer avec un téléphone",
+      "countryCode": "Indicatif pays",
+      "otp": "Code OTP"
+    },
+    "orContinueWith": "OU CONTINUER AVEC",
+    "errors": {
+      "invalidCredentials": "Email ou mot de passe invalide.",
+      "genericLogin": "Connexion impossible. Réessaie dans un instant.",
+      "genericSignup": "Impossible de créer le compte. Vérifie tes informations.",
+      "passwordMismatch": "Les mots de passe ne correspondent pas.",
+      "acceptTerms": "Merci d’accepter les conditions pour continuer."
+    }
+  }
+  ,
+  "listingCard": {
+    "perNight": "par nuit"
+  },
+  "explore": {
+    "eyebrow": "Explorer",
+    "title": "Parcourir les hébergements",
+    "description": "Filtrez et comparez des séjours en Afrique — rapide, clair et premium.",
+    "filters": {
+      "all": "Tout",
+      "guesthouses": "Maisons d’hôtes",
+      "hotels": "Hôtels",
+      "apartments": "Appartements",
+      "budget": "Budget",
+      "mid": "Intermédiaire",
+      "premium": "Premium",
+      "anyPrice": "Tous prix",
+      "recommended": "Recommandé",
+      "topRated": "Mieux notés",
+      "lowestPrice": "Prix bas"
+    }
+  },
+  "home": {
+    "topSearchTitle": "Top logements recherchés"
+  },
+  "mobileMenu": {
+    "openMenu": "Ouvrir le menu",
+    "account": "Compte",
+    "login": "Connexion",
+    "signup": "Inscription",
+    "tagline": "Maisons d’hôtes premium au Bénin et en Afrique."
+  },
+  "homeListings": {
+    "eyebrow": "Explorer",
+    "title": "Des maisons d’hôtes sélectionnées pour vous",
+    "description": "Une sélection (aperçu) — prête à être alimentée par votre backend /api/listings.",
+    "viewAll": "Voir toutes les annonces"
+  },
+  "localeSwitcher": {
+    "ariaFr": "Passer le site en français",
+    "ariaEn": "Passer le site en anglais"
+  },
+  "authPages": {
+    "login": {
+      "title": "Bon retour",
+      "subtitle": "Connecte-toi pour réserver, sauvegarder et gérer tes séjours.",
+      "footerText": "Pas de compte ?",
+      "footerLink": "Créer un compte"
+    },
+    "signup": {
+      "title": "Créer un compte",
+      "subtitle": "Rejoins GuestConnect et découvre des séjours premium partout en Afrique.",
+      "footerText": "Déjà un compte ?",
+      "footerLink": "Se connecter"
+    }
+  },
+  "authShell": {
+    "footer": {
+      "terms": "Conditions",
+      "privacy": "Confidentialité",
+      "cookies": "Cookies"
+    },
+    "illustration": {
+      "title": "Séjournez partout, comme à la maison",
+      "subtitle": "Découvrez des maisons d’hôtes, hôtels et séjours uniques partout en Afrique",
+      "alt": "Maison d’hôtes premium"
+    }
+  }
+  ,
+  "datePicker": {
+    "clear": "Effacer"
+  },
+  "searchPage": {
+    "eyebrow": "Recherche",
+    "title": "Rechercher un hébergement",
+    "description": "Utilisez la barre de recherche pour affiner votre séjour.",
+    "results": "{count} résultat(s)",
+    "resultsFor": " pour « {destination} »",
+    "browseByInterests": "Explorer par centres d’intérêt"
+  },
+  "listingPage": {
+    "reviews": "{count} avis",
+    "securePayment": "Paiement sécurisé",
+    "back": "Retour",
+    "search": "Rechercher",
+    "aboutTitle": "À propos de cet hébergement",
+    "aboutBody": "Un séjour premium, sélectionné pour sa qualité d’accueil et sa clarté d’informations. Cette page est une base “Airbnb-like” : branchez-la ensuite à votre backend (photos, disponibilités, conditions, etc.).",
+    "info": {
+      "flexTitle": "Arrivée flexible",
+      "flexDesc": "Check-in facilité (selon disponibilité).",
+      "cancelTitle": "Annulation claire",
+      "cancelDesc": "Conditions affichées avant paiement.",
+      "locationTitle": "Emplacement",
+      "locationDesc": "Quartier recommandé à {location}.",
+      "supportTitle": "Support",
+      "supportDesc": "Assistance 24/7 (voyageurs & hôtes)."
+    },
+    "from": "À partir de",
+    "perNight": "/ nuit",
+    "checkAvailability": "Vérifier les disponibilités",
+    "addToFavorites": "Ajouter aux favoris",
+    "footerNote": "Paiement sécurisé · Confirmation instantanée · Sans frais cachés"
+  },
+  "hostPage": {
+    "eyebrow": "Devenir hôte",
+    "title": "Mettez votre logement en ligne sur GuestConnect",
+    "description": "Attirez des voyageurs, gardez le contrôle et gérez vos réservations avec une expérience premium.",
+    "ctaPrimary": "Commencer",
+    "ctaSecondary": "Découvrir les avantages",
+    "stepsTitle": "Comment ça marche",
+    "steps": {
+      "oneTitle": "Créez votre annonce",
+      "oneDesc": "Ajoutez vos photos, tarifs et règles en quelques minutes.",
+      "twoTitle": "Recevez des demandes",
+      "twoDesc": "Nous mettons en avant les logements fiables et bien présentés.",
+      "threeTitle": "Accueillez et gagnez",
+      "threeDesc": "Paiement sécurisé et assistance dédiée."
+    },
+    "benefitsTitle": "Pourquoi GuestConnect ?",
+    "benefits": {
+      "trustTitle": "Confiance & qualité",
+      "trustDesc": "Un design clair qui rassure et convertit.",
+      "toolsTitle": "Outils hôte",
+      "toolsDesc": "Calendrier, prix, règles, réservations — prêt à brancher au backend.",
+      "supportTitle": "Support premium",
+      "supportDesc": "Accompagnement voyageurs et hôtes."
+    }
   }
 }
