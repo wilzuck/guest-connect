@@ -1,8 +1,9 @@
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages, setRequestLocale } from "next-intl/server";
 import { ThemeProvider } from "next-themes";
 import { Footer, Navbar } from "@/sections";
 import type { ReactNode } from "react";
+
+const locales = ["fr", "en"] as const;
 
 export default async function LocaleLayout({
   children,
@@ -12,13 +13,13 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  // Important: synchronise la locale côté serveur pour que getMessages() charge le bon JSON.
-  setRequestLocale(locale);
-  const messages = await getMessages();
+  const safeLocale = locales.includes(locale as any) ? (locale as (typeof locales)[number]) : "fr";
+  // Charge explicitement le bon fichier JSON (évite les soucis de fallback/cache en dev).
+  const messages = (await import(`../../../messages/${safeLocale}.json`)).default;
 
   return (
     <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
-      <NextIntlClientProvider locale={locale} messages={messages}>
+      <NextIntlClientProvider locale={safeLocale} messages={messages}>
         <div className="min-h-dvh overflow-x-hidden flex flex-col">
           <Navbar />
           <main className="flex-1 overflow-x-hidden">{children}</main>

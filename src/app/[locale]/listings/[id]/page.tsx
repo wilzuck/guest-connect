@@ -102,6 +102,17 @@ export default async function Page({ params }: PageProps) {
               </Card>
             </div>
           </div>
+
+          {/* Caractéristiques (en bas de page) */}
+          <div className="mt-12">
+            <h2 className="text-xl font-semibold tracking-tight text-black">{t("amenitiesTitle")}</h2>
+            <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              <Amenity icon={<WifiIcon className="h-5 w-5" />} title={t("amenities.wifi")} />
+              <Amenity icon={<BreakfastIcon className="h-5 w-5" />} title={t("amenities.breakfast")} />
+              <Amenity icon={<ParkingIcon className="h-5 w-5" />} title={t("amenities.parking")} />
+              <Amenity icon={<ShieldIcon className="h-5 w-5" />} title={t("amenities.securePayment")} />
+            </div>
+          </div>
         </div>
       </Container>
     </div>
@@ -114,6 +125,89 @@ function InfoCard({ title, desc }: { title: string; desc: string }) {
       <p className="text-sm font-semibold text-black">{title}</p>
       <p className="mt-2 text-sm leading-6 text-zinc-600">{desc}</p>
     </div>
+  );
+}
+
+function Amenity({ icon, title }: { icon: React.ReactNode; title: string }) {
+  return (
+    <div className="flex items-center gap-3 rounded-2xl bg-zinc-50 p-4">
+      <div className="grid h-10 w-10 place-items-center rounded-2xl bg-white text-black">{icon}</div>
+      <p className="text-sm font-semibold text-black">{title}</p>
+    </div>
+  );
+}
+
+function WifiIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M2.5 9.5A15 15 0 0 1 12 6.5a15 15 0 0 1 9.5 3"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+      <path
+        d="M5.5 13a10.8 10.8 0 0 1 6.5-2.2c2.4 0 4.7.8 6.5 2.2"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+      <path
+        d="M8.7 16.4A6.2 6.2 0 0 1 12 15.5c1.2 0 2.4.3 3.3.9"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+      <path d="M12 19.5h0" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function BreakfastIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M7 3v7a5 5 0 0 0 10 0V3"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+      <path d="M6 21h12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M9 21v-4h6v4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function ParkingIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M7 4h6a4 4 0 0 1 0 8H7V4Z"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+      />
+      <path d="M7 12v8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function ShieldIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M12 2l7 5v7c0 4.418-3.134 7.418-7 8-3.866-.582-7-3.582-7-8V7l7-5Z"
+        stroke="currentColor"
+        strokeWidth="1.8"
+      />
+      <path
+        d="M9 12.5 11 14.5l4-5"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 }
 

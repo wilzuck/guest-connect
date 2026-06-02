@@ -108,7 +108,14 @@
   }
   ,
   "listingCard": {
-    "perNight": "per night"
+    "perNight": "per night",
+    "perNightShort": "/night",
+    "meta": {
+      "distance": "0.5 km from city center",
+      "cancellation": "Free cancellation"
+    },
+    "ctaHint": "View details",
+    "view": "View rooms"
   },
   "explore": {
     "eyebrow": "Explore",
@@ -209,7 +216,14 @@
     "perNight": "/ night",
     "checkAvailability": "Check availability",
     "addToFavorites": "Add to favorites",
-    "footerNote": "Secure payment · Instant confirmation · No hidden fees"
+    "footerNote": "Secure payment · Instant confirmation · No hidden fees",
+    "amenitiesTitle": "Amenities",
+    "amenities": {
+      "wifi": "Wi‑Fi",
+      "breakfast": "Breakfast",
+      "parking": "Free parking",
+      "securePayment": "Secure payment"
+    }
   },
   "hostPage": {
     "eyebrow": "Become a host",

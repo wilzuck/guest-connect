@@ -49,14 +49,15 @@ export function Navbar() {
   ];
 
   return (
-    <header
-      className={[
-        "sticky top-0 z-50 bg-white/80 backdrop-blur transition-transform duration-200 will-change-transform",
-        visible ? "translate-y-0" : "-translate-y-full",
-        elevated ? "shadow-sm shadow-black/10" : "",
-      ].join(" ")}
-    >
-      <Container className="flex h-16 items-center gap-3">
+    <>
+      <header
+        className={[
+          "fixed left-0 right-0 top-0 z-50 bg-white/80 backdrop-blur transition-transform duration-200 will-change-transform",
+          visible ? "translate-y-0" : "-translate-y-full",
+          elevated ? "shadow-sm shadow-black/10" : "",
+        ].join(" ")}
+      >
+        <Container className="flex h-16 items-center gap-3">
         <div className="flex items-center gap-8">
           <Logo />
 
@@ -116,7 +117,10 @@ export function Navbar() {
           <MobileMenu />
         </div>
       </Container>
-    </header>
+      </header>
+      {/* Spacer pour compenser le header fixed */}
+      <div className="h-16" />
+    </>
   );
 }
 

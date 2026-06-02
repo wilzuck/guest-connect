@@ -108,7 +108,14 @@
   }
   ,
   "listingCard": {
-    "perNight": "par nuit"
+    "perNight": "par nuit",
+    "perNightShort": "/nuit",
+    "meta": {
+      "distance": "À 0,5 km du centre",
+      "cancellation": "Annulation gratuite"
+    },
+    "ctaHint": "Voir le logement",
+    "view": "Voir les chambres"
   },
   "explore": {
     "eyebrow": "Explorer",
@@ -209,7 +216,14 @@
     "perNight": "/ nuit",
     "checkAvailability": "Vérifier les disponibilités",
     "addToFavorites": "Ajouter aux favoris",
-    "footerNote": "Paiement sécurisé · Confirmation instantanée · Sans frais cachés"
+    "footerNote": "Paiement sécurisé · Confirmation instantanée · Sans frais cachés",
+    "amenitiesTitle": "Caractéristiques",
+    "amenities": {
+      "wifi": "Wi‑Fi",
+      "breakfast": "Petit-déjeuner",
+      "parking": "Parking gratuit",
+      "securePayment": "Paiement sécurisé"
+    }
   },
   "hostPage": {
     "eyebrow": "Devenir hôte",
