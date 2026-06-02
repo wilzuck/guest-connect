@@ -135,6 +135,10 @@
       "lowestPrice": "Lowest price"
     }
   },
+  "exploreFiltersBar": {
+    "scrollLeft": "Scroll left",
+    "scrollRight": "Scroll right"
+  },
   "home": {
     "topSearchTitle": "Top stays right now"
   },

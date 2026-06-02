@@ -26,7 +26,10 @@ export function ListingCard({ locale, listing }: { locale: string; listing: List
         <div className="mx-1 mt-3">
           <div className="flex items-start justify-between gap-4">
             <div className="min-w-0">
-              <h3 className="truncate text-base font-semibold tracking-tight text-black">
+              <h3
+                className="truncate text-base font-semibold tracking-tight text-black"
+                title={listing.title}
+              >
                 {listing.title}
               </h3>
             </div>
@@ -42,14 +45,14 @@ export function ListingCard({ locale, listing }: { locale: string; listing: List
             <p className="min-w-0 truncate text-sm text-zinc-600" title={listing.location}>
               {listing.location}
             </p>
-            <p className="shrink-0 text-[15px] font-semibold text-black">
+            <p className="shrink-0 whitespace-nowrap text-[15px] font-semibold text-black">
               {formatFrom(listing.pricePerNight, listing.currency)}
             </p>
           </div>
 
           {/* Badge annulation (sans distance, icône moderne) */}
           <div className="mt-3 flex items-center gap-2 text-sm text-zinc-700">
-            <CancelIcon className="h-4 w-4 text-zinc-500" />
+            <MoneyIcon className="h-4 w-4 text-zinc-500" />
             <span className="truncate">{t("meta.cancellation")}</span>
           </div>
         </div>
@@ -69,21 +72,22 @@ function StarIcon({ className }: { className?: string }) {
   );
 }
 
-function CancelIcon({ className }: { className?: string }) {
+function MoneyIcon({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <path
-        d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"
+        d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z"
         stroke="currentColor"
         strokeWidth="1.8"
       />
       <path
-        d="M8.5 12l2.4 2.4L15.5 9.8"
+        d="M9.5 10.2c.5-.6 1.4-1 2.5-1 1.7 0 3 1 3 2.3 0 1.1-.8 1.8-2.2 2.2l-1.3.4c-1.1.3-1.7.7-1.7 1.5 0 1 1 1.8 2.6 1.8 1.2 0 2.1-.4 2.7-1"
         stroke="currentColor"
         strokeWidth="1.8"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
+      <path d="M12 8v12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" opacity="0.35" />
     </svg>
   );
 }

@@ -135,6 +135,10 @@
       "lowestPrice": "Prix bas"
     }
   },
+  "exploreFiltersBar": {
+    "scrollLeft": "Défiler à gauche",
+    "scrollRight": "Défiler à droite"
+  },
   "home": {
     "topSearchTitle": "Top logements recherchés"
   },

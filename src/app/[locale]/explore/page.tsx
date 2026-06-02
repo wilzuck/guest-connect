@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { getLocale } from "next-intl/server";
 import { getTranslations } from "next-intl/server";
-import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { SearchBar } from "@/components/SearchBar";
 import { africaListings } from "@/lib/mock/africa-listings";
 import { ListingCard } from "@/components/listings/ListingCard";
+import { ExploreFiltersBar } from "@/components/explore/ExploreFiltersBar";
 
 export const metadata: Metadata = {
   title: "Explorer — GuestConnect",
@@ -83,74 +83,35 @@ export default async function Page({ searchParams }: PageProps) {
       <section className="bg-white">
         <Container className="py-12 sm:py-14">
           {/* Filtres (avant la liste) */}
-          <div className="relative -mx-[15px] px-[15px]">
-            <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-white to-transparent" />
-            <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-white to-transparent" />
-
-            <div className="flex items-center gap-2 overflow-x-auto whitespace-nowrap py-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-              <FilterChip
-                href={buildHref(locale, { ...sp, type: "all" })}
-                active={type === "all"}
-                label={t("filters.all")}
-              />
-              <FilterChip
-                href={buildHref(locale, { ...sp, type: "guesthouse" })}
-                active={type === "guesthouse"}
-                label={t("filters.guesthouses")}
-              />
-              <FilterChip
-                href={buildHref(locale, { ...sp, type: "hotel" })}
-                active={type === "hotel"}
-                label={t("filters.hotels")}
-              />
-              <FilterChip
-                href={buildHref(locale, { ...sp, type: "apartment" })}
-                active={type === "apartment"}
-                label={t("filters.apartments")}
-              />
-
-              <span className="mx-1 h-5 w-px bg-black/10" />
-
-              <FilterChip
-                href={buildHref(locale, { ...sp, price: "budget" })}
-                active={price === "budget"}
-                label={t("filters.budget")}
-              />
-              <FilterChip
-                href={buildHref(locale, { ...sp, price: "mid" })}
-                active={price === "mid"}
-                label={t("filters.mid")}
-              />
-              <FilterChip
-                href={buildHref(locale, { ...sp, price: "high" })}
-                active={price === "high"}
-                label={t("filters.premium")}
-              />
-              <FilterChip
-                href={buildHref(locale, { ...sp, price: "all" })}
-                active={price === "all"}
-                label={t("filters.anyPrice")}
-              />
-
-              <span className="mx-1 h-5 w-px bg-black/10" />
-
-              <FilterChip
-                href={buildHref(locale, { ...sp, sort: "recommended" })}
-                active={sort === "recommended"}
-                label={t("filters.recommended")}
-              />
-              <FilterChip
-                href={buildHref(locale, { ...sp, sort: "rating" })}
-                active={sort === "rating"}
-                label={t("filters.topRated")}
-              />
-              <FilterChip
-                href={buildHref(locale, { ...sp, sort: "price" })}
-                active={sort === "price"}
-                label={t("filters.lowestPrice")}
-              />
-            </div>
-          </div>
+          <ExploreFiltersBar
+            chips={[
+              { href: buildHref(locale, { ...sp, type: "all" }), active: type === "all", label: t("filters.all") },
+              {
+                href: buildHref(locale, { ...sp, type: "guesthouse" }),
+                active: type === "guesthouse",
+                label: t("filters.guesthouses"),
+              },
+              { href: buildHref(locale, { ...sp, type: "hotel" }), active: type === "hotel", label: t("filters.hotels") },
+              {
+                href: buildHref(locale, { ...sp, type: "apartment" }),
+                active: type === "apartment",
+                label: t("filters.apartments"),
+              },
+              { divider: true },
+              { href: buildHref(locale, { ...sp, price: "budget" }), active: price === "budget", label: t("filters.budget") },
+              { href: buildHref(locale, { ...sp, price: "mid" }), active: price === "mid", label: t("filters.mid") },
+              { href: buildHref(locale, { ...sp, price: "high" }), active: price === "high", label: t("filters.premium") },
+              { href: buildHref(locale, { ...sp, price: "all" }), active: price === "all", label: t("filters.anyPrice") },
+              { divider: true },
+              {
+                href: buildHref(locale, { ...sp, sort: "recommended" }),
+                active: sort === "recommended",
+                label: t("filters.recommended"),
+              },
+              { href: buildHref(locale, { ...sp, sort: "rating" }), active: sort === "rating", label: t("filters.topRated") },
+              { href: buildHref(locale, { ...sp, sort: "price" }), active: sort === "price", label: t("filters.lowestPrice") },
+            ]}
+          />
 
           <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4">
             {items.map((l) => (
@@ -160,20 +121,5 @@ export default async function Page({ searchParams }: PageProps) {
         </Container>
       </section>
     </div>
-  );
-}
-
-function FilterChip({ href, label, active }: { href: string; label: string; active?: boolean }) {
-  return (
-    <Link
-      href={href}
-      className={
-        active
-          ? "rounded-full bg-black px-4 py-2 text-sm font-semibold text-white"
-          : "rounded-full bg-zinc-100 px-4 py-2 text-sm font-semibold text-zinc-700 hover:bg-zinc-200 hover:text-black"
-      }
-    >
-      {label}
-    </Link>
   );
 }
