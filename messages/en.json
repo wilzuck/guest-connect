@@ -53,7 +53,11 @@
     "arrival": "Check-in",
     "departure": "Check-out",
     "guests": "Guests",
-    "search": "Search"
+    "search": "Search",
+    "ariaDestination": "Destination",
+    "ariaClearDestination": "Clear destination",
+    "ariaRemoveGuest": "Remove one guest",
+    "ariaAddGuest": "Add one guest"
   },
   "auth": {
     "fields": {
