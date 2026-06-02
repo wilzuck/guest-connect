@@ -152,7 +152,7 @@ export default async function Page({ searchParams }: PageProps) {
             </div>
           </div>
 
-          <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4">
+          <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4">
             {items.map((l) => (
               <ListingCard key={l.id} locale={locale} listing={l} />
             ))}

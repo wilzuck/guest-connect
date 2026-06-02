@@ -56,10 +56,10 @@ export function SearchBar({ onSearch, defaultValues }: SearchBarProps) {
       className="w-full"
     >
       {/* Desktop: une seule ligne fluide. Mobile: layout optimisé (dates côte à côte). */}
-      <div className="rounded-[28px] bg-zinc-100/70 p-2 backdrop-blur-sm">
+      <div className="rounded-[28px] border border-black/10 bg-white/80 p-2 shadow-[0_18px_50px_-30px_rgba(0,0,0,0.45)] backdrop-blur-sm">
         {/* Desktop */}
         <div className="hidden items-stretch gap-2 rounded-[22px] bg-white p-1 md:flex">
-          <FieldShell>
+          <FieldShell className="flex-[1.7]">
             <PinIcon className="h-4 w-4 text-zinc-400" />
             <Input
               value={destination}
@@ -83,7 +83,7 @@ export function SearchBar({ onSearch, defaultValues }: SearchBarProps) {
 
           <Divider />
 
-          <FieldShell>
+          <FieldShell className="flex-[1]">
             <DatePicker
               value={checkIn}
               onChange={(v) => setCheckIn(v ?? "")}
@@ -94,7 +94,7 @@ export function SearchBar({ onSearch, defaultValues }: SearchBarProps) {
 
           <Divider />
 
-          <FieldShell>
+          <FieldShell className="flex-[1]">
             <DatePicker
               value={checkOut}
               onChange={(v) => setCheckOut(v ?? "")}
@@ -105,7 +105,7 @@ export function SearchBar({ onSearch, defaultValues }: SearchBarProps) {
 
           <Divider />
 
-          <FieldShell className="min-w-[240px]">
+          <FieldShell className="flex-[0.85]">
             <div className="grid">
               <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-zinc-500">
                 {t("guests")}
