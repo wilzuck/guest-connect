@@ -26,11 +26,15 @@ export function SectionHeading({
         {title}
       </h2>
       {description ? (
-        <p className="mt-4 max-w-2xl text-pretty text-base leading-7 text-zinc-600 sm:text-lg">
+        <p
+          className={cn(
+            "mt-4 max-w-2xl text-pretty text-base leading-7 text-zinc-600 sm:text-lg",
+            align === "center" ? "mx-auto" : "",
+          )}
+        >
           {description}
         </p>
       ) : null}
     </div>
   );
 }
-

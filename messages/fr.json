@@ -1,7 +1,7 @@
 {
   "nav": {
     "accommodations": "Hébergements",
-    "destinations": "Destinations",
+    "destinations": "Services",
     "experiences": "Expériences",
     "becomeHost": "Devenir hôte",
     "search": "Recherche",
@@ -276,6 +276,40 @@
     "save": "Enregistrer",
     "note": "Paiement sécurisé · Confirmation instantanée · Sans frais cachés"
   },
+  "favorites": {
+    "add": "Ajouter aux favoris",
+    "remove": "Retirer des favoris"
+  },
+  "reviewForm": {
+    "title": "Laisser un avis",
+    "subtitle": "Votre avis aide les autres voyageurs à choisir en confiance.",
+    "rating": "Note",
+    "comment": "Commentaire",
+    "placeholder": "Partagez votre expérience (propreté, emplacement, accueil, etc.)",
+    "note": "Ce formulaire est une démo (sans envoi serveur).",
+    "submit": "Publier",
+    "success": "Merci ! Votre avis a été enregistré localement."
+  },
+  "calendarTools": {
+    "eyebrow": "Outils",
+    "title": "Dates claires, réservation rapide",
+    "description": "Une expérience de calendrier inspirée des meilleurs sites d’hébergement : simple, lisible et mobile-first.",
+    "bullet1": "Choisissez vos dates en deux mois, sans friction.",
+    "bullet2": "Option “période flexible” pour maximiser les chances de trouver un bon prix.",
+    "bullet3": "Design blanc, premium, avec elevation légère.",
+    "tabCalendar": "Calendrier",
+    "tabFlexible": "Période flexible",
+    "close": "Fermer",
+    "hint": "Astuce : sélectionnez une plage (arrivée / départ).",
+    "flexTitle": "Vous êtes flexible ?",
+    "flexSubtitle": "Choisissez un type de séjour, on suggère une période idéale.",
+    "flexWeekend": "Week-end",
+    "flexWeek": "1 semaine",
+    "flexTwoWeeks": "2 semaines",
+    "flexMonth": "1 mois",
+    "flexResultTitle": "Suggestion",
+    "flexResultBody": "On affichera ici des périodes recommandées (ex : mi‑semaine, hors pics, etc.)."
+  },
   "listingGallery": {
     "openPhotos": "Ouvrir les photos",
     "openPhoto": "Ouvrir la photo {index}"
@@ -299,9 +333,19 @@
     "eyebrow": "Expériences",
     "title": "Des moments à vivre (pas juste un séjour)",
     "description": "Activités premium, guides locaux et expériences uniques — inspiré Airbnb, version SaaS plus moderne.",
-    "chips": ["Culture", "Food", "Nature", "Nightlife", "Business"],
     "results": "{count} expérience(s)",
-    "browseStays": "Voir les logements"
+    "browseStays": "Voir les logements",
+    "all": "Tout",
+    "tagCulture": "Culture",
+    "tagFood": "Food",
+    "tagNature": "Nature",
+    "tagNightlife": "Nightlife",
+    "tagBusiness": "Business",
+    "promoTitle": "Des expériences qui donnent envie de réserver",
+    "promoBody": "Chaque activité est pensée pour être simple à acheter, claire à comprendre et premium à vivre. Vous gardez une UX moderne, fluide et conversion-first — même sur mobile.",
+    "promoCta": "Explorer les destinations",
+    "promoSecondary": "Parcourir les logements",
+    "promoVideoLabel": "Vidéo de présentation des expériences"
   },
   "hostPage": {
     "eyebrow": "Devenir hôte",

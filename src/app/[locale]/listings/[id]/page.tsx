@@ -6,6 +6,8 @@ import { africaListings } from "@/lib/mock/africa-listings";
 import { ListingLightbox } from "@/components/gallery/ListingLightbox";
 import { getTranslations } from "next-intl/server";
 import { BookingCard } from "@/components/listings/detail/BookingCard";
+import { FavoriteButton } from "@/components/favorites/FavoriteButton";
+import { ReviewForm } from "@/components/reviews/ReviewForm";
 
 type PageProps = {
   params: Promise<{ locale: string; id: string }>;
@@ -47,6 +49,7 @@ export default async function Page({ params }: PageProps) {
             </div>
 
             <div className="flex items-center gap-2">
+              <FavoriteButton locale={locale} listingId={listing.id} />
               <ButtonLink href={`/${locale}/explore`} variant="outline" size="sm">
                 {t("back")}
               </ButtonLink>
@@ -62,7 +65,7 @@ export default async function Page({ params }: PageProps) {
           {/* Contenu */}
           <div className="grid gap-10 lg:grid-cols-12 lg:items-start">
             {/* Main */}
-            <div className="lg:col-span-7">
+            <div className="order-2 lg:order-1 lg:col-span-7">
               <section className="space-y-3">
                 <h2 className="text-xl font-semibold tracking-tight text-black">{t("aboutTitle")}</h2>
                 <p className="text-sm leading-7 text-zinc-600">{t("aboutBody")}</p>
@@ -86,22 +89,49 @@ export default async function Page({ params }: PageProps) {
               </section>
 
               <section className="mt-10">
-                <h2 className="text-xl font-semibold tracking-tight text-black">{t("reviewsTitle")}</h2>
-                <div className="mt-5 grid gap-4">
-                  <ReviewCard rating={listing.rating} name={t("reviewsSection.one.name")} date={t("reviewsSection.one.date")} body={t("reviewsSection.one.body")} />
-                  <ReviewCard rating={listing.rating} name={t("reviewsSection.two.name")} date={t("reviewsSection.two.date")} body={t("reviewsSection.two.body")} />
-                  <ReviewCard rating={listing.rating} name={t("reviewsSection.three.name")} date={t("reviewsSection.three.date")} body={t("reviewsSection.three.body")} />
-                </div>
+                <ReviewForm />
               </section>
             </div>
 
             {/* Booking */}
-            <div className="lg:col-span-5">
+            <div className="order-1 lg:order-2 lg:col-span-5">
               <div className="lg:sticky lg:top-24">
-                <BookingCard locale={locale} pricePerNight={listing.pricePerNight} currency={listing.currency} />
+                <BookingCard
+                  locale={locale}
+                  listingId={listing.id}
+                  pricePerNight={listing.pricePerNight}
+                  currency={listing.currency}
+                />
               </div>
             </div>
           </div>
+
+          {/* Avis: pleine largeur container */}
+          <section className="mt-10">
+            <h2 className="text-xl font-semibold tracking-tight text-black">{t("reviewsTitle")}</h2>
+            <div className="mt-5 rounded-3xl border border-black/10 bg-zinc-50 p-5 shadow-sm shadow-black/10">
+              <div className="grid gap-4 lg:grid-cols-2">
+                <ReviewCard
+                  rating={listing.rating}
+                  name={t("reviewsSection.one.name")}
+                  date={t("reviewsSection.one.date")}
+                  body={t("reviewsSection.one.body")}
+                />
+                <ReviewCard
+                  rating={listing.rating}
+                  name={t("reviewsSection.two.name")}
+                  date={t("reviewsSection.two.date")}
+                  body={t("reviewsSection.two.body")}
+                />
+                <ReviewCard
+                  rating={listing.rating}
+                  name={t("reviewsSection.three.name")}
+                  date={t("reviewsSection.three.date")}
+                  body={t("reviewsSection.three.body")}
+                />
+              </div>
+            </div>
+          </section>
         </div>
       </Container>
     </div>
@@ -142,7 +172,7 @@ function ReviewCard({ rating, name, date, body }: { rating: number; name: string
     .map((p) => p[0]?.toUpperCase())
     .join("");
   return (
-    <div className="rounded-3xl bg-white p-5 shadow-[0_18px_60px_-45px_rgba(0,0,0,0.55)]">
+    <div className="rounded-2xl border border-black/10 bg-white p-5 shadow-none">
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-center gap-3">
           <div className="grid h-11 w-11 place-items-center rounded-2xl bg-zinc-100 text-sm font-semibold text-black">

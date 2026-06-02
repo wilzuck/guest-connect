@@ -2,7 +2,6 @@
 
 import { useMemo, useRef, useState } from "react";
 import { Card } from "@/components/ui/Card";
-import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils/cn";
 
 type Testimonial = {
@@ -54,29 +53,6 @@ export function TestimonialsCarousel({ items }: TestimonialsCarouselProps) {
       <div className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-zinc-50 to-transparent" />
 
       <div className="flex items-center justify-between gap-3">
-        <div className="hidden sm:flex items-center gap-2">
-          <Button
-            type="button"
-            variant="outline"
-            size="sm"
-            className="rounded-full"
-            onClick={() => scrollToIndex(Math.max(0, active - 1))}
-            aria-label="Avis précédent"
-          >
-            <ArrowLeft className="h-4 w-4" />
-          </Button>
-          <Button
-            type="button"
-            variant="outline"
-            size="sm"
-            className="rounded-full"
-            onClick={() => scrollToIndex(Math.min(pages - 1, active + 1))}
-            aria-label="Avis suivant"
-          >
-            <ArrowRight className="h-4 w-4" />
-          </Button>
-        </div>
-
         <div className="ml-auto flex items-center gap-1">
           {items.map((_, idx) => (
             <button
@@ -119,34 +95,6 @@ export function TestimonialsCarousel({ items }: TestimonialsCarouselProps) {
         ))}
       </div>
     </div>
-  );
-}
-
-function ArrowLeft({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path
-        d="M15 18 9 12l6-6"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function ArrowRight({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path
-        d="m9 18 6-6-6-6"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
   );
 }
 

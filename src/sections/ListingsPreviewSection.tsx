@@ -29,7 +29,7 @@ export async function ListingsPreviewSection({ listings }: ListingsPreviewSectio
 
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {listings.map((l) => (
-            <ListingCard key={l.id} locale={locale} listing={l} />
+            <ListingCard key={l.id} locale={locale} listing={l} variant="plain" />
           ))}
         </div>
       </Container>

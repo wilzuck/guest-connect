@@ -1,7 +1,7 @@
 {
   "nav": {
     "accommodations": "Stays",
-    "destinations": "Destinations",
+    "destinations": "Services",
     "experiences": "Experiences",
     "becomeHost": "Become a host",
     "search": "Search",
@@ -276,6 +276,40 @@
     "save": "Save",
     "note": "Secure payment · Instant confirmation · No hidden fees"
   },
+  "favorites": {
+    "add": "Add to favorites",
+    "remove": "Remove from favorites"
+  },
+  "reviewForm": {
+    "title": "Leave a review",
+    "subtitle": "Your feedback helps other travelers book with confidence.",
+    "rating": "Rating",
+    "comment": "Comment",
+    "placeholder": "Share your experience (cleanliness, location, host, etc.)",
+    "note": "Demo form (no server submission).",
+    "submit": "Post",
+    "success": "Thanks! Your review was saved locally."
+  },
+  "calendarTools": {
+    "eyebrow": "Tools",
+    "title": "Clear dates, fast booking",
+    "description": "A calendar experience inspired by top travel marketplaces: simple, readable and mobile-first.",
+    "bullet1": "Pick dates across two months with zero friction.",
+    "bullet2": "“Flexible dates” mode to help users find better prices.",
+    "bullet3": "White, premium UI with soft elevation.",
+    "tabCalendar": "Calendar",
+    "tabFlexible": "Flexible dates",
+    "close": "Close",
+    "hint": "Tip: select a range (check-in / check-out).",
+    "flexTitle": "Flexible?",
+    "flexSubtitle": "Choose a trip type and we’ll suggest the best period.",
+    "flexWeekend": "Weekend",
+    "flexWeek": "1 week",
+    "flexTwoWeeks": "2 weeks",
+    "flexMonth": "1 month",
+    "flexResultTitle": "Suggestion",
+    "flexResultBody": "We’ll show recommended periods here (mid-week, off-peak, etc.)."
+  },
   "listingGallery": {
     "openPhotos": "Open photos",
     "openPhoto": "Open photo {index}"
@@ -299,9 +333,19 @@
     "eyebrow": "Experiences",
     "title": "Moments to live (not just a stay)",
     "description": "Premium activities, local guides and unique experiences — Airbnb-inspired with a modern SaaS finish.",
-    "chips": ["Culture", "Food", "Nature", "Nightlife", "Business"],
     "results": "{count} experience(s)",
-    "browseStays": "Browse stays"
+    "browseStays": "Browse stays",
+    "all": "All",
+    "tagCulture": "Culture",
+    "tagFood": "Food",
+    "tagNature": "Nature",
+    "tagNightlife": "Nightlife",
+    "tagBusiness": "Business",
+    "promoTitle": "Experiences that drive bookings",
+    "promoBody": "Each activity is designed to be easy to buy, clear to understand and premium to enjoy. A modern, smooth, conversion-first UX — even on mobile.",
+    "promoCta": "Explore destinations",
+    "promoSecondary": "Browse stays",
+    "promoVideoLabel": "Experience showcase video"
   },
   "hostPage": {
     "eyebrow": "Become a host",
