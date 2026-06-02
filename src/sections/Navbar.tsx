@@ -8,12 +8,39 @@ import { Container } from "@/components/ui/Container";
 import { UserMenu } from "@/components/nav/UserMenu";
 import { MobileMenu } from "@/components/nav/MobileMenu";
 import { useLocale, useTranslations } from "next-intl";
+import { useEffect, useRef, useState } from "react";
 
 export function Navbar() {
   const locale = useLocale();
   const t = useTranslations("nav");
   const pathname = usePathname() || "";
   if (/(^|\/)(login|signup)$/.test(pathname)) return null;
+
+  const [visible, setVisible] = useState(true);
+  const [elevated, setElevated] = useState(false);
+  const lastY = useRef(0);
+
+  useEffect(() => {
+    lastY.current = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      const delta = y - lastY.current;
+      const goingDown = delta > 4;
+      const goingUp = delta < -4;
+
+      if (y < 8) {
+        setVisible(true);
+        setElevated(false);
+      } else {
+        if (goingDown) setVisible(false);
+        if (goingUp) setVisible(true);
+        setElevated(y > 24);
+      }
+      lastY.current = y;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const links = [
     { label: t("accommodations"), href: `/${locale}/explore` },
@@ -22,7 +49,13 @@ export function Navbar() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-white/80 backdrop-blur">
+    <header
+      className={[
+        "sticky top-0 z-50 bg-white/80 backdrop-blur transition-transform duration-200 will-change-transform",
+        visible ? "translate-y-0" : "-translate-y-full",
+        elevated ? "shadow-sm shadow-black/10" : "",
+      ].join(" ")}
+    >
       <Container className="flex h-16 items-center gap-3">
         <div className="flex items-center gap-8">
           <Logo />
