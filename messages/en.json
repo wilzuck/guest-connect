@@ -195,6 +195,16 @@
     "done": "Done",
     "close": "Close"
   },
+  "currency": {
+    "label": "Currency",
+    "title": "Currency",
+    "codes": {
+      "XOF": "XOF (West Africa CFA)",
+      "XAF": "XAF (Central Africa CFA)",
+      "EUR": "EUR (Euro)",
+      "USD": "USD (US Dollar)"
+    }
+  },
   "searchPage": {
     "eyebrow": "Search",
     "title": "Search stays",

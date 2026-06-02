@@ -195,6 +195,16 @@
     "done": "Terminer",
     "close": "Fermer"
   },
+  "currency": {
+    "label": "Devise",
+    "title": "Devise",
+    "codes": {
+      "XOF": "XOF (Franc CFA BCEAO)",
+      "XAF": "XAF (Franc CFA BEAC)",
+      "EUR": "EUR (Euro)",
+      "USD": "USD (Dollar américain)"
+    }
+  },
   "searchPage": {
     "eyebrow": "Recherche",
     "title": "Rechercher un hébergement",

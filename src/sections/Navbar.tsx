@@ -9,6 +9,7 @@ import { UserMenu } from "@/components/nav/UserMenu";
 import { MobileMenu } from "@/components/nav/MobileMenu";
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
+import { CurrencySwitcher } from "@/components/currency/CurrencySwitcher";
 
 export function Navbar() {
   const locale = useLocale();
@@ -93,6 +94,9 @@ export function Navbar() {
         </div>
 
         <div className="ml-auto flex items-center gap-2">
+          <div className="hidden md:block">
+            <CurrencySwitcher />
+          </div>
           <ButtonLink
             href={`/${locale}/host`}
             variant="primary"

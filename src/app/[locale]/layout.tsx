@@ -2,6 +2,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { ThemeProvider } from "next-themes";
 import { Footer, Navbar } from "@/sections";
 import type { ReactNode } from "react";
+import { CurrencyProvider } from "@/components/currency/CurrencyProvider";
 
 const locales = ["fr", "en"] as const;
 
@@ -20,11 +21,13 @@ export default async function LocaleLayout({
   return (
     <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
       <NextIntlClientProvider locale={safeLocale} messages={messages}>
-        <div className="min-h-dvh overflow-x-hidden flex flex-col">
-          <Navbar />
-          <main className="flex-1 overflow-x-hidden">{children}</main>
-          <Footer />
-        </div>
+        <CurrencyProvider>
+          <div className="min-h-dvh overflow-x-hidden flex flex-col">
+            <Navbar />
+            <main className="flex-1 overflow-x-hidden">{children}</main>
+            <Footer />
+          </div>
+        </CurrencyProvider>
       </NextIntlClientProvider>
     </ThemeProvider>
   );

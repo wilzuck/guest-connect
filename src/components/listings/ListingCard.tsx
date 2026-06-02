@@ -5,21 +5,11 @@ import Link from "next/link";
 import { Card } from "@/components/ui/Card";
 import type { Listing } from "@/types/listing";
 import { useTranslations } from "next-intl";
-
-function formatPrice(price: number, currency: string) {
-  try {
-    return new Intl.NumberFormat(undefined, {
-      style: "currency",
-      currency,
-      maximumFractionDigits: 0,
-    }).format(price);
-  } catch {
-    return `${price} ${currency}`;
-  }
-}
+import { useCurrency } from "@/components/currency/CurrencyProvider";
 
 export function ListingCard({ locale, listing }: { locale: string; listing: Listing }) {
   const t = useTranslations("listingCard");
+  const { formatFrom } = useCurrency();
   return (
     <Link href={`/${locale}/listings/${listing.id}`} className="block mb-4">
       <Card className="group">
@@ -40,7 +30,7 @@ export function ListingCard({ locale, listing }: { locale: string; listing: List
                 {listing.title}
               </h3>
             </div>
-            <div className="inline-flex items-center gap-2 rounded-full bg-zinc-100 px-3 py-1 text-sm text-zinc-700">
+            <div className="inline-flex items-center gap-2 text-sm text-zinc-700">
               <StarIcon className="h-4 w-4 text-black" />
               <span className="font-semibold text-black">{listing.rating.toFixed(1)}</span>
               <span className="text-zinc-500">({listing.reviewCount})</span>
@@ -49,12 +39,11 @@ export function ListingCard({ locale, listing }: { locale: string; listing: List
 
           {/* Localisation + prix (style Airbnb) */}
           <div className="mt-1 flex items-start justify-between gap-3">
-            <p className="min-w-0 truncate text-sm text-zinc-600">{listing.location}</p>
-            <p className="shrink-0 text-sm text-zinc-600">
-              <span className="font-semibold text-black">
-                {formatPrice(listing.pricePerNight, listing.currency)}
-              </span>{" "}
-              <span className="text-zinc-600">{t("perNightShort")}</span>
+            <p className="min-w-0 truncate text-sm text-zinc-600" title={listing.location}>
+              {listing.location}
+            </p>
+            <p className="shrink-0 text-[15px] font-semibold text-black">
+              {formatFrom(listing.pricePerNight, listing.currency)}
             </p>
           </div>
 
