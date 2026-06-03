@@ -21,7 +21,7 @@ export default async function Page() {
   return (
     <div className="bg-white">
       <Container className="py-10 sm:py-14">
-        <div className="ml-auto max-w-3xl">
+        <div className="max-w-3xl">
           <h1 className="text-3xl font-semibold tracking-tight text-black sm:text-4xl">Paramètres</h1>
           <p className="mt-2 text-sm text-zinc-600">Consultez et gérez votre compte.</p>
 
