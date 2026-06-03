@@ -12,8 +12,7 @@ export async function HeroSection() {
   return (
     <section id="top" className="relative overflow-hidden">
       <div className="absolute inset-0 -z-10">
-        <div className="pointer-events-none absolute left-1/2 top-[-120px] h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-black/[0.06] blur-3xl" />
-        <div className="pointer-events-none absolute right-[-160px] top-[220px] h-[460px] w-[460px] rounded-full bg-black/[0.05] blur-3xl" />
+        <div className="pointer-events-none absolute left-1/2 top-[-160px] h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-gradient-to-br from-fuchsia-500/20 via-pink-500/10 to-transparent blur-3xl animate-blob" />
       </div>
 
       <Container className="py-14 sm:py-20">

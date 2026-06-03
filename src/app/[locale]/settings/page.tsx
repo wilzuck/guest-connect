@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { getLocale } from "next-intl/server";
+import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card";
 import Link from "next/link";
-import { AccountShell } from "@/components/account/AccountShell";
+import { MarketingPageLayout } from "@/components/layout/MarketingPageLayout";
 
 export const metadata: Metadata = {
   title: "Paramètres — GuestConnect",
@@ -19,8 +20,14 @@ export default async function Page() {
   };
 
   return (
-    <AccountShell locale={locale} title="Paramètres" subtitle="Consultez et gérez votre compte.">
-      <div className="grid gap-10">
+    <div className="bg-white">
+      <MarketingPageLayout
+            eyebrow="Paramètres"
+            title="Paramètres du compte "
+            description="Consultez et gérez votre compte."
+          >
+        <div className="max-w-3xl">
+          <div className="grid gap-10">
             {/* User info */}
             <Section title="Infos utilisateur">
             <Card className="overflow-hidden border border-black/10 bg-white p-0 shadow-none">
@@ -106,8 +113,10 @@ export default async function Page() {
               </div>
             </Card>
           </Section>
-      </div>
-    </AccountShell>
+        </div>
+        </div>
+      </MarketingPageLayout>
+    </div>
   );
 }
 
