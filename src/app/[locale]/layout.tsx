@@ -3,6 +3,7 @@ import { ThemeProvider } from "next-themes";
 import { Footer, Navbar } from "@/sections";
 import type { ReactNode } from "react";
 import { CurrencyProvider } from "@/components/currency/CurrencyProvider";
+import { ScrollToTopButton } from "@/components/ui/ScrollToTopButton";
 
 const locales = ["fr", "en"] as const;
 
@@ -25,6 +26,7 @@ export default async function LocaleLayout({
           <div className="min-h-dvh overflow-x-hidden flex flex-col">
             <Navbar />
             <main className="flex-1 overflow-x-hidden">{children}</main>
+            <ScrollToTopButton />
             <Footer />
           </div>
         </CurrencyProvider>
