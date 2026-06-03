@@ -97,7 +97,8 @@ export function DateRangePicker({
   const Trigger = (
     <div
       className={cn(
-        "grid grid-cols-2 gap-2",
+        // Mobile: 1 colonne (évite le débordement). Dès sm: 2 colonnes.
+        "grid grid-cols-1 gap-2 sm:grid-cols-2",
         className,
       )}
     >

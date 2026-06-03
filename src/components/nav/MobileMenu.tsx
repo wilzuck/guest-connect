@@ -16,10 +16,7 @@ export function MobileMenu() {
     { label: t("accommodations"), href: `/${locale}/stays` },
     { label: t("destinations"), href: `/${locale}/services` },
     { label: t("experiences"), href: `/${locale}/experiences` },
-    { label: t("blog"), href: `/${locale}/blog` },
-    { label: t("about"), href: `/${locale}/about` },
     { label: t("search"), href: `/${locale}/search` },
-    { label: tm("siteMap"), href: `/${locale}/plan-du-site` },
   ];
 
   return (

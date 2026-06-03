@@ -6,6 +6,7 @@ import { africaListings } from "@/lib/mock/africa-listings";
 import { getLocale } from "next-intl/server";
 import { TopSearchCarousel } from "@/components/listings/TopSearchCarousel";
 import Image from "next/image";
+import Link from "next/link";
 
 export async function HeroSection() {
   const t = await getTranslations("hero");
@@ -58,45 +59,46 @@ export async function HeroSection() {
 
 function HeroVisual() {
   return (
-    <div className="relative">
-      {/* “Mesh” arrière-plan */}
-      <div className="pointer-events-none absolute -inset-10 -z-10 rounded-[40px] bg-[radial-gradient(circle_at_25%_25%,rgba(0,0,0,0.08),transparent_45%),radial-gradient(circle_at_80%_20%,rgba(0,0,0,0.06),transparent_40%),radial-gradient(circle_at_50%_80%,rgba(0,0,0,0.07),transparent_42%)]" />
+    <Link
+      href="/stays"
+      className="group relative block overflow-hidden rounded-[26px] border border-black/10 bg-white shadow-sm shadow-black/10"
+      aria-label="Voir les hébergements"
+      title="Voir les hébergements"
+    >
+      {/* Image plus basse (moins haute) */}
+      <div className="relative aspect-[16/11]">
+        <Image
+          src="https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=2000&q=80"
+          alt="Maison d’hôtes de luxe"
+          fill
+          className="object-cover transition duration-700 group-hover:scale-[1.02]"
+          sizes="(max-width: 1024px) 0px, 40vw"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/0 to-black/0" />
+      </div>
 
-      <div className="relative overflow-hidden rounded-[28px] border border-black/10 bg-white shadow-sm shadow-black/10">
-        <div className="relative aspect-[4/5]">
-          <Image
-            src="https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=2000&q=80"
-            alt="Maison d’hôtes de luxe"
-            fill
-            className="object-cover"
-            sizes="(max-width: 1024px) 0px, 40vw"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-black/0 to-black/0" />
+      {/* Badges flottants */}
+      <div className="pointer-events-none absolute left-5 top-5 grid gap-3">
+        <div className="inline-flex w-fit items-center gap-2 rounded-2xl bg-white/85 px-4 py-2 text-xs font-semibold text-black backdrop-blur">
+          <span className="inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+          Séjours vérifiés
         </div>
-
-        {/* Cartes flottantes */}
-        <div className="pointer-events-none absolute left-5 top-5 grid gap-3">
-          <div className="inline-flex w-fit items-center gap-2 rounded-2xl bg-white/85 px-4 py-2 text-xs font-semibold text-black backdrop-blur">
-            <span className="inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-            Séjours vérifiés
-          </div>
-          <div className="inline-flex w-fit items-center gap-2 rounded-2xl bg-white/85 px-4 py-2 text-xs font-semibold text-black backdrop-blur">
-            <Star className="h-4 w-4" />
-            4,9 • 1 200+ avis
-          </div>
-        </div>
-
-        <div className="pointer-events-none absolute bottom-5 left-5 right-5 rounded-3xl border border-white/20 bg-black/35 p-5 text-white backdrop-blur">
-          <p className="text-sm font-semibold">Guest house sélectionnée</p>
-          <p className="mt-1 text-xs text-white/80">Design, propreté, accueil — standards premium</p>
-          <div className="mt-4 flex items-center justify-between">
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/80">À partir de</p>
-            <p className="text-lg font-semibold">55€ / nuit</p>
-          </div>
+        <div className="inline-flex w-fit items-center gap-2 rounded-2xl bg-white/85 px-4 py-2 text-xs font-semibold text-black backdrop-blur">
+          <Star className="h-4 w-4" />
+          4,9 • 1 200+ avis
         </div>
       </div>
-    </div>
+
+      <div className="pointer-events-none absolute bottom-5 left-5 right-5 rounded-3xl border border-white/20 bg-black/35 p-5 text-white backdrop-blur">
+        <p className="text-sm font-semibold">Guest house sélectionnée</p>
+        <p className="mt-1 text-xs text-white/80">Design, propreté, accueil — standards premium</p>
+        <div className="mt-4 flex items-center justify-between">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/80">À partir de</p>
+          <p className="text-lg font-semibold">55€ / nuit</p>
+        </div>
+      </div>
+    </Link>
   );
 }
 
