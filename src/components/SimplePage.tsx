@@ -9,8 +9,8 @@ type SimplePageProps = {
 
 export function SimplePage({ title, description }: SimplePageProps) {
   return (
-    <div className="min-h-dvh bg-zinc-50">
-      <Container className="py-16">
+    <div className="bg-zinc-50">
+      <Container className="py-10 sm:py-12">
         <div className="rounded-3xl border border-black/10 bg-white p-8 shadow-sm shadow-black/5">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">
             Page temporaire

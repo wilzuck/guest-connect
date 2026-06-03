@@ -12,6 +12,10 @@ export function CalendarToolsDemo() {
   const [mode, setMode] = useState<Mode>("calendar");
   const [range, setRange] = useState<{ from?: Date; to?: Date }>({});
   const [flex, setFlex] = useState<string>("weekend");
+  const [month, setMonth] = useState(() => {
+    const now = new Date();
+    return new Date(now.getFullYear(), now.getMonth(), 1);
+  });
 
   const pills = useMemo(
     () => [
@@ -53,13 +57,26 @@ export function CalendarToolsDemo() {
 
       {mode === "calendar" ? (
         <div className="mt-4">
-          <Calendar
-            mode="range"
-            selected={range as any}
-            onSelect={(next) => setRange((next as any) ?? {})}
-            numberOfMonths={2}
-            className="bg-white"
-          />
+          <div className="max-w-full overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            <Calendar
+              mode="range"
+              selected={range as any}
+              onSelect={(next) => setRange((next as any) ?? {})}
+              numberOfMonths={2}
+              month={month}
+              onMonthChange={setMonth}
+              className="relative bg-white w-max pt-2"
+              classNames={{
+                months: "flex flex-row gap-6",
+                nav: "absolute left-2 right-2 top-2 flex items-center justify-between pointer-events-none",
+                button_previous:
+                  "pointer-events-auto grid h-10 w-10 place-items-center rounded-full border border-black/10 bg-white text-zinc-700 shadow-sm shadow-black/5 transition hover:bg-zinc-50",
+                button_next:
+                  "pointer-events-auto grid h-10 w-10 place-items-center rounded-full border border-black/10 bg-white text-zinc-700 shadow-sm shadow-black/5 transition hover:bg-zinc-50",
+                month_caption: "flex items-center justify-center px-2 pt-1",
+              }}
+            />
+          </div>
           <p className="mt-3 text-xs text-zinc-500">{t("hint")}</p>
         </div>
       ) : (
@@ -89,4 +106,10 @@ export function CalendarToolsDemo() {
       )}
     </div>
   );
+}
+
+function addMonths(d: Date, delta: number) {
+  const next = new Date(d);
+  next.setMonth(next.getMonth() + delta);
+  return next;
 }

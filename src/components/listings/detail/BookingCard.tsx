@@ -9,10 +9,12 @@ import type { CurrencyCode } from "@/lib/currency/currency";
 
 export function BookingCard({
   locale,
+  listingId,
   pricePerNight,
   currency,
 }: {
   locale: string;
+  listingId: string;
   pricePerNight: number;
   currency: CurrencyCode;
 }) {
@@ -23,8 +25,8 @@ export function BookingCard({
   const price = useMemo(() => formatFrom(pricePerNight, currency), [formatFrom, pricePerNight, currency]);
 
   return (
-    <div className="rounded-3xl bg-white p-6 shadow-[0_18px_60px_-45px_rgba(0,0,0,0.55)]">
-      <div className="flex items-end justify-between gap-4">
+    <div className="rounded-3xl border border-black/10 bg-white p-5 shadow-sm shadow-black/10">
+      <div className="flex items-start justify-between gap-4">
         <div>
           <p className="text-sm font-semibold text-zinc-600">{t("from")}</p>
           <p className="mt-2 text-3xl font-semibold tracking-tight text-black">
@@ -47,13 +49,9 @@ export function BookingCard({
         <ButtonLink href={`/${locale}/search`} variant="primary" size="lg" className="w-full">
           {t("cta")}
         </ButtonLink>
-        <ButtonLink href={`/${locale}/favorites`} variant="outline" size="lg" className="w-full">
-          {t("save")}
-        </ButtonLink>
       </div>
 
       <p className="mt-4 text-xs leading-5 text-zinc-500">{t("note")}</p>
     </div>
   );
 }
-

@@ -18,6 +18,11 @@ export function ExploreFiltersBar({ chips, className }: { chips: ExploreFilterCh
   const [canLeft, setCanLeft] = useState(false);
   const [canRight, setCanRight] = useState(false);
   const t = useTranslations("exploreFiltersBar");
+  const dragRef = useRef<{ active: boolean; startX: number; startScrollLeft: number }>({
+    active: false,
+    startX: 0,
+    startScrollLeft: 0,
+  });
 
   function update() {
     const el = scrollerRef.current;
@@ -80,7 +85,30 @@ export function ExploreFiltersBar({ chips, className }: { chips: ExploreFilterCh
 
       <div
         ref={scrollerRef}
-        className="flex items-center gap-2 overflow-x-auto whitespace-nowrap py-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        onPointerDown={(e) => {
+          const el = scrollerRef.current;
+          if (!el) return;
+          if (e.pointerType !== "mouse") return;
+          dragRef.current.active = true;
+          dragRef.current.startX = e.clientX;
+          dragRef.current.startScrollLeft = el.scrollLeft;
+          (e.currentTarget as HTMLDivElement).setPointerCapture(e.pointerId);
+        }}
+        onPointerMove={(e) => {
+          const el = scrollerRef.current;
+          if (!el) return;
+          if (!dragRef.current.active) return;
+          const dx = e.clientX - dragRef.current.startX;
+          el.scrollLeft = dragRef.current.startScrollLeft - dx;
+        }}
+        onPointerUp={() => {
+          dragRef.current.active = false;
+        }}
+        onPointerCancel={() => {
+          dragRef.current.active = false;
+        }}
+        className="flex items-center gap-2 overflow-x-auto whitespace-nowrap py-1 overscroll-x-contain select-none md:cursor-grab md:active:cursor-grabbing [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        style={{ touchAction: "pan-x" }}
       >
         {chips.map((c, idx) => {
           if (c.divider) return <span key={`d-${idx}`} className="mx-1 h-5 w-px bg-black/10" />;

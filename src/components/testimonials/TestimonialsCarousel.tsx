@@ -17,6 +17,11 @@ type TestimonialsCarouselProps = {
 export function TestimonialsCarousel({ items }: TestimonialsCarouselProps) {
   const scrollerRef = useRef<HTMLDivElement | null>(null);
   const [active, setActive] = useState(0);
+  const dragRef = useRef<{ active: boolean; startX: number; startScrollLeft: number }>({
+    active: false,
+    startX: 0,
+    startScrollLeft: 0,
+  });
 
   const pages = useMemo(() => Math.max(1, items.length), [items.length]);
 
@@ -72,8 +77,30 @@ export function TestimonialsCarousel({ items }: TestimonialsCarouselProps) {
       <div
         ref={scrollerRef}
         onScroll={onScroll}
-        className="mt-6 flex gap-4 overflow-x-auto scroll-smooth pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-        style={{ scrollSnapType: "x mandatory" }}
+        onPointerDown={(e) => {
+          const el = scrollerRef.current;
+          if (!el) return;
+          if (e.pointerType !== "mouse") return;
+          dragRef.current.active = true;
+          dragRef.current.startX = e.clientX;
+          dragRef.current.startScrollLeft = el.scrollLeft;
+          (e.currentTarget as HTMLDivElement).setPointerCapture(e.pointerId);
+        }}
+        onPointerMove={(e) => {
+          const el = scrollerRef.current;
+          if (!el) return;
+          if (!dragRef.current.active) return;
+          const dx = e.clientX - dragRef.current.startX;
+          el.scrollLeft = dragRef.current.startScrollLeft - dx;
+        }}
+        onPointerUp={() => {
+          dragRef.current.active = false;
+        }}
+        onPointerCancel={() => {
+          dragRef.current.active = false;
+        }}
+        className="mt-6 flex gap-4 overflow-x-auto scroll-smooth pb-2 overscroll-x-contain select-none md:cursor-grab md:active:cursor-grabbing [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        style={{ scrollSnapType: "x mandatory", touchAction: "pan-x" }}
       >
         {items.map((t) => (
           <Card

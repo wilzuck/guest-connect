@@ -35,7 +35,7 @@ export function ListingLightbox({
         <button
           type="button"
           onClick={() => openAt(0)}
-          className="group relative aspect-[16/10] overflow-hidden rounded-3xl bg-zinc-100 lg:col-span-8 cursor-pointer"
+          className="group relative aspect-[4/3] overflow-hidden rounded-3xl bg-zinc-100 sm:aspect-[16/10] lg:col-span-8 cursor-pointer"
           aria-label={t("openPhotos")}
           title={t("openPhotos")}
         >
@@ -51,13 +51,14 @@ export function ListingLightbox({
           />
         </button>
 
-        <div className="grid gap-3 sm:grid-cols-2 lg:col-span-4 lg:grid-cols-1">
+        {/* Mobile: 2 vignettes côte à côte (Airbnb-like). Desktop: colonne à droite */}
+        <div className="grid grid-cols-2 gap-3 lg:col-span-4 lg:grid-cols-1">
           {images.slice(1, 3).map((src, idx) => (
             <button
               key={src}
               type="button"
               onClick={() => openAt(idx + 1)}
-              className="group relative aspect-[16/10] overflow-hidden rounded-3xl bg-zinc-100 cursor-pointer"
+              className="group relative aspect-[4/3] overflow-hidden rounded-3xl bg-zinc-100 sm:aspect-[16/10] cursor-pointer"
               aria-label={t("openPhoto", { index: idx + 2 })}
               title={t("openPhoto", { index: idx + 2 })}
             >

@@ -2,7 +2,6 @@ import { getLocale } from "next-intl/server";
 import { getTranslations } from "next-intl/server";
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ListingCard } from "@/components/listings/ListingCard";
 import type { Listing } from "@/types/listing";
 
@@ -16,18 +15,24 @@ export async function ListingsPreviewSection({ listings }: ListingsPreviewSectio
   return (
     <section id="listings" className="bg-white">
       <Container className="py-16 sm:py-20">
-        <div className="flex flex-col gap-6">
-          <div className="text-left">
-            <SectionHeading eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
+        <div className="text-left">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">{t("eyebrow")}</p>
+          <div className="mt-3 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <h2 className="text-balance text-3xl font-semibold tracking-tight text-black sm:text-4xl">
+              {t("title")}
+            </h2>
+            <div className="flex justify-center sm:justify-end">
+              <ButtonLink href={`/${locale}/stays`} variant="outline" size="md">
+                {t("viewAll")}
+              </ButtonLink>
+            </div>
           </div>
-          <div className="flex justify-center">
-            <ButtonLink href={`/${locale}/stays`} variant="outline" size="md">
-              {t("viewAll")}
-            </ButtonLink>
-          </div>
+          <p className="mt-4 max-w-2xl text-pretty text-base leading-7 text-zinc-600 sm:text-lg">
+            {t("description")}
+          </p>
         </div>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
           {listings.map((l) => (
             <ListingCard key={l.id} locale={locale} listing={l} variant="plain" />
           ))}

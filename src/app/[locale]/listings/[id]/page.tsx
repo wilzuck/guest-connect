@@ -1,12 +1,11 @@
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
-import { Button, ButtonLink } from "@/components/ui/Button";
+import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { africaListings } from "@/lib/mock/africa-listings";
 import { ListingLightbox } from "@/components/gallery/ListingLightbox";
 import { getTranslations } from "next-intl/server";
 import { BookingCard } from "@/components/listings/detail/BookingCard";
-import { FavoriteButton } from "@/components/favorites/FavoriteButton";
 import { ReviewForm } from "@/components/reviews/ReviewForm";
 
 type PageProps = {
@@ -48,15 +47,6 @@ export default async function Page({ params }: PageProps) {
               </div>
             </div>
 
-            <div className="flex items-center gap-2">
-              <FavoriteButton locale={locale} listingId={listing.id} />
-              <ButtonLink href={`/${locale}/stays`} variant="outline" size="sm">
-                {t("back")}
-              </ButtonLink>
-              <ButtonLink href={`/${locale}/search`} variant="primary" size="sm">
-                {t("search")}
-              </ButtonLink>
-            </div>
           </div>
 
           {/* Galerie */}
@@ -130,7 +120,7 @@ export default async function Page({ params }: PageProps) {
           </div>
 
           <div className="mt-8">
-            <Button type="button" variant="secondary" size="lg" className="rounded-2xl px-6">
+            <Button type="button" variant="secondary" size="md" className="rounded-2xl px-6">
               <PlusIcon className="h-4 w-4" />
               {t("loadMoreReviews")}
             </Button>
@@ -154,8 +144,8 @@ function PlusIcon({ className }: { className?: string }) {
 
 function Amenity({ icon, title }: { icon: React.ReactNode; title: string }) {
   return (
-    <div className="flex items-center gap-3 rounded-2xl bg-zinc-50 p-4">
-      <div className="grid h-10 w-10 place-items-center rounded-2xl bg-white text-black">{icon}</div>
+    <div className="flex items-center gap-3 rounded-2xl border border-black/10 bg-white p-4 shadow-none">
+      <div className="grid h-10 w-10 place-items-center rounded-2xl bg-zinc-50 text-black">{icon}</div>
       <p className="text-sm font-semibold text-black">{title}</p>
     </div>
   );

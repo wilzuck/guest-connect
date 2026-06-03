@@ -1,11 +1,6 @@
-import { SimplePage } from "@/components/SimplePage";
+import { redirect } from "next/navigation";
 
 export default function ReservationsPage() {
-  return (
-    <SimplePage
-      title="Réservations"
-      description="Page placeholder. Affichez ici l’historique et le détail des réservations."
-    />
-  );
+  redirect("/fr/reservations");
+  return null;
 }
-

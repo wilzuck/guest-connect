@@ -27,10 +27,10 @@ export function ListingCard({
     <Link href={`/${locale}/listings/${listing.id}`} className={cn("block mb-6", className)}>
       <Card
         className={cn(
-          "group bg-white border-0 shadow-none",
+          "group bg-white border-0 !shadow-none",
           variant === "outlined"
-            ? "rounded-2xl border border-black/10 shadow-none"
-            : "rounded-2xl hover:shadow-none",
+            ? "rounded-2xl border border-black/10 !shadow-none"
+            : "rounded-2xl hover:!shadow-none",
         )}
       >
         <div className="relative aspect-[16/10] overflow-hidden rounded-[14px] bg-zinc-100">

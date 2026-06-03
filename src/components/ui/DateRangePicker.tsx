@@ -146,7 +146,20 @@ export function DateRangePicker({
       numberOfMonths={wide ? 2 : 1}
       showOutsideDays
       fixedWeeks
-      className="bg-white"
+      className={cn("bg-white", wide ? "relative w-max pt-2" : "")}
+      classNames={
+        wide
+          ? {
+              months: "flex flex-row gap-6",
+              nav: "absolute left-2 right-2 top-2 flex items-center justify-between pointer-events-none",
+              button_previous:
+                "pointer-events-auto grid h-10 w-10 place-items-center rounded-full border border-black/10 bg-white text-zinc-700 shadow-sm shadow-black/5 transition hover:bg-zinc-50",
+              button_next:
+                "pointer-events-auto grid h-10 w-10 place-items-center rounded-full border border-black/10 bg-white text-zinc-700 shadow-sm shadow-black/5 transition hover:bg-zinc-50",
+              month_caption: "flex items-center justify-center px-2 pt-1",
+            }
+          : undefined
+      }
     />
   );
 

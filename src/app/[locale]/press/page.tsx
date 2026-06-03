@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { getLocale } from "next-intl/server";
 import { Card } from "@/components/ui/Card";
 import { ButtonLink } from "@/components/ui/Button";
@@ -13,6 +14,108 @@ export default async function Page() {
   const locale = await getLocale();
   const isEn = locale === "en";
 
+  const posts = isEn
+    ? [
+        {
+          slug: "why-curation-matters",
+          title: "Why curation matters for guest houses",
+          date: "May 2026",
+          excerpt: "Trust, clarity and consistent visuals are the fastest way to improve conversion.",
+        },
+        {
+          slug: "photos-that-sell",
+          title: "Photos that sell: a simple checklist",
+          date: "May 2026",
+          excerpt: "From hero shots to bathrooms: how to avoid mismatched expectations.",
+        },
+        {
+          slug: "pricing-basics",
+          title: "Pricing basics for small hospitality businesses",
+          date: "Apr 2026",
+          excerpt: "Seasonality, minimum stays and rate rules—without losing simplicity.",
+        },
+        {
+          slug: "guest-communication",
+          title: "Guest communication that feels premium",
+          date: "Apr 2026",
+          excerpt: "Templates, response times and the small details that build confidence.",
+        },
+        {
+          slug: "safety-transparency",
+          title: "Safety & transparency: what guests look for",
+          date: "Mar 2026",
+          excerpt: "Clear policies, verified info and frictionless support for peace of mind.",
+        },
+        {
+          slug: "mobile-first-booking",
+          title: "Mobile-first booking UX: 5 quick wins",
+          date: "Mar 2026",
+          excerpt: "Reduce steps, keep labels clear, and make date picking delightful.",
+        },
+        {
+          slug: "host-onboarding",
+          title: "Host onboarding: how to keep it fast",
+          date: "Feb 2026",
+          excerpt: "The minimal set of info needed to publish a high-quality listing.",
+        },
+        {
+          slug: "brand-guidelines",
+          title: "Brand guidelines: consistent, modern, readable",
+          date: "Feb 2026",
+          excerpt: "Typography, spacing and UI patterns for a premium travel marketplace.",
+        },
+      ]
+    : [
+        {
+          slug: "pourquoi-la-curation-compte",
+          title: "Pourquoi la curation change tout pour les maisons d’hôtes",
+          date: "Mai 2026",
+          excerpt: "Confiance, clarté et visuels cohérents : le trio qui améliore la conversion.",
+        },
+        {
+          slug: "photos-qui-vendent",
+          title: "Photos qui vendent : une checklist simple",
+          date: "Mai 2026",
+          excerpt: "De la photo principale aux salles de bain : évitez les mauvaises surprises.",
+        },
+        {
+          slug: "bases-tarification",
+          title: "Les bases de la tarification (sans complexité)",
+          date: "Avril 2026",
+          excerpt: "Saisonnalité, séjour minimum et règles de prix — sans perdre en simplicité.",
+        },
+        {
+          slug: "communication-voyageurs",
+          title: "Communication voyageurs : une expérience premium",
+          date: "Avril 2026",
+          excerpt: "Templates, délais de réponse et détails qui rassurent avant réservation.",
+        },
+        {
+          slug: "securite-transparence",
+          title: "Sécurité & transparence : ce que les voyageurs attendent",
+          date: "Mars 2026",
+          excerpt: "Politiques claires, infos vérifiées et support fluide pour réserver serein.",
+        },
+        {
+          slug: "ux-mobile",
+          title: "UX mobile : 5 optimisations rapides",
+          date: "Mars 2026",
+          excerpt: "Moins d’étapes, des labels clairs, et un calendrier agréable à utiliser.",
+        },
+        {
+          slug: "onboarding-hote",
+          title: "Onboarding hôte : comment aller vite (sans sacrifier la qualité)",
+          date: "Fév 2026",
+          excerpt: "Le minimum d’infos nécessaires pour publier une annonce premium.",
+        },
+        {
+          slug: "guidelines-ui",
+          title: "Guidelines UI : moderne, cohérent, lisible",
+          date: "Fév 2026",
+          excerpt: "Typo, espacements et patterns pour une marketplace voyage premium.",
+        },
+      ];
+
   return (
     <MarketingPageLayout
       eyebrow={isEn ? "Press" : "Presse"}
@@ -23,6 +126,22 @@ export default async function Page() {
           : "Retrouvez notre histoire, les points forts du produit et des ressources de marque."
       }
     >
+      {/* Articles (liste) */}
+      <div>
+        <p className="text-sm font-semibold text-black">{isEn ? "Latest articles" : "Derniers articles"}</p>
+        <div className="mt-4 grid gap-3 md:grid-cols-2">
+          {posts.map((p) => (
+            <Link key={p.slug} href={`/${locale}/press?post=${encodeURIComponent(p.slug)}`} className="block">
+              <Card className="p-6 shadow-none transition hover:bg-zinc-50">
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">{p.date}</p>
+                <p className="mt-2 text-base font-semibold tracking-tight text-black">{p.title}</p>
+                <p className="mt-2 text-sm leading-6 text-zinc-600">{p.excerpt}</p>
+              </Card>
+            </Link>
+          ))}
+        </div>
+      </div>
+
       <div className="grid gap-6 lg:grid-cols-12">
         <div className="lg:col-span-7">
           <Card className="p-6">

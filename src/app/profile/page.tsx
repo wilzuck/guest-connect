@@ -1,11 +1,6 @@
-import { SimplePage } from "@/components/SimplePage";
+import { redirect } from "next/navigation";
 
 export default function ProfilePage() {
-  return (
-    <SimplePage
-      title="Profil"
-      description="Page placeholder. Ajoutez ici les informations du compte et les préférences."
-    />
-  );
+  redirect("/fr/profile");
+  return null;
 }
-

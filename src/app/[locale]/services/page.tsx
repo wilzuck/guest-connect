@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { getLocale, getTranslations } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 import { SearchBar } from "@/components/SearchBar";
 import { africaListings } from "@/lib/mock/africa-listings";
 
@@ -18,10 +17,7 @@ export default async function Page() {
   const BLUR =
     "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMTUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjIwIiBoZWlnaHQ9IjE1IiBmaWxsPSIjZjRmNGY1Ii8+PC9zdmc+";
 
-  const byCity = new Map<
-    string,
-    { city: string; country: string; location: string; imageUrl: string; count: number }
-  >();
+  const byCity = new Map<string, { city: string; location: string; imageUrl: string; count: number }>();
   for (const l of africaListings) {
     const key = l.city;
     const existing = byCity.get(key);
@@ -29,7 +25,6 @@ export default async function Page() {
     else {
       byCity.set(key, {
         city: l.city,
-        country: (l as any).country ?? "",
         location: l.location,
         imageUrl: l.imageUrl,
         count: 1,
@@ -42,7 +37,13 @@ export default async function Page() {
     <div className="bg-white">
       <section className="border-b border-black/5 bg-white">
         <Container className="py-10 sm:py-14">
-          <SectionHeading eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">{t("eyebrow")}</p>
+          <h1 className="mt-4 text-balance text-4xl font-semibold tracking-tight text-black sm:text-5xl">
+            {t("title")}
+          </h1>
+          <p className="mt-4 max-w-2xl text-pretty text-base leading-7 text-zinc-600 sm:text-lg">
+            {t("description")}
+          </p>
           <div className="mt-8">
             <SearchBar />
           </div>
@@ -70,7 +71,7 @@ export default async function Page() {
                       src={c.imageUrl}
                       alt={c.location}
                       fill
-                      className="object-cover"
+                      className="object-cover transition duration-700 group-hover:scale-[1.04]"
                       sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                       quality={75}
                       placeholder="blur"
@@ -90,4 +91,3 @@ export default async function Page() {
     </div>
   );
 }
-

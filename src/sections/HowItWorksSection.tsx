@@ -53,7 +53,10 @@ export async function HowItWorksSection() {
 
         <div className="mt-10 grid gap-4 lg:grid-cols-3">
           {steps.map((s, idx) => (
-            <Card key={s.title} className="p-6">
+            <Card
+              key={s.title}
+              className="rounded-2xl border border-black/10 bg-white p-5 shadow-sm shadow-black/5"
+            >
               <div className="flex items-center gap-3">
                 <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-black text-sm font-semibold text-white">
                   {idx + 1}

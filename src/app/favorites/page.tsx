@@ -1,11 +1,6 @@
-import { SimplePage } from "@/components/SimplePage";
+import { redirect } from "next/navigation";
 
 export default function FavoritesPage() {
-  return (
-    <SimplePage
-      title="Favoris"
-      description="Page placeholder. Ajoutez ici les hébergements enregistrés."
-    />
-  );
+  redirect("/fr/favorites");
+  return null;
 }
-

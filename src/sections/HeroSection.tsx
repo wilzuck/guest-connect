@@ -64,40 +64,23 @@ export async function HeroSection() {
       </div>
 
       <Container className="py-14 sm:py-20">
-        {/* Mobile: la recherche vient en premier */}
-        <div className="md:hidden">
-          <SearchBar variant="mobile" />
-        </div>
-
-        {/* Ligne 1 : headline + illustration */}
-        <div className="grid gap-12 md:grid-cols-12 md:items-center">
-          <div className="md:col-span-7 lg:col-span-6">
+        {/* Main headline section */}
+        <div className="grid gap-8 md:items-center">
+          <div className="max-w-3xl">
             <Badge>{t("badge")}</Badge>
             <h1 className="mt-5 text-balance text-3xl font-semibold tracking-tight text-black sm:text-5xl lg:text-6xl">
               {t("title")}
             </h1>
-            {/* Sur mobile: on cache la description, mais on garde la note */}
-            <p className="mt-5 hidden max-w-xl text-pretty text-base leading-7 text-zinc-600 sm:block sm:text-lg">
+            <p className="mt-5 max-w-xl text-pretty text-base leading-7 text-zinc-600 sm:block sm:text-lg">
               {t("subtitle")}
             </p>
-            <p className="mt-6 text-xs text-zinc-500">
-              {t("note")}
-            </p>
+            <p className="mt-6 text-xs text-zinc-500">{t("note")}</p>
           </div>
+        </div>
 
-          {/* Desktop/Tablet: recherche compacte dans la colonne droite (sur l'image) */}
-          <div className="hidden md:block md:col-span-5 lg:col-span-6">
-            <HeroIllustration
-              title={t("illustration.title")}
-              subtitle={t("illustration.subtitle")}
-              liveLabel={t("illustration.live")}
-              alt={t("illustration.alt")}
-            >
-              <div className="w-full">
-                <SearchBar variant="compact" />
-              </div>
-            </HeroIllustration>
-          </div>
+        {/* Horizontal Search Bar */}
+        <div className="mt-10">
+          <SearchBar variant="auto" />
         </div>
 
         {/* Ligne 2 : carousel */}

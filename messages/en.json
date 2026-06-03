@@ -12,9 +12,13 @@
     "space": "Space",
     "login": "Log in",
     "signup": "Sign up",
+    "dashboard": "Dashboard",
     "profile": "Profile",
     "reservations": "Reservations",
-    "favorites": "Favorites"
+    "favorites": "Favorites",
+    "activities": "Activity",
+    "settings": "Settings",
+    "logout": "Log out"
   },
   "hero": {
     "badge": "Verified stays · Trusted hosts · Secure payments",
@@ -284,7 +288,7 @@
     "perNight": "per night",
     "checkIn": "Check-in",
     "checkOut": "Check-out",
-    "cta": "Check availability",
+    "cta": "Book",
     "save": "Save",
     "note": "Secure payment · Instant confirmation · No hidden fees"
   },

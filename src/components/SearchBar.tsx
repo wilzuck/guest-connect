@@ -82,20 +82,19 @@ export function SearchBar({ onSearch, defaultValues, variant = "auto" }: SearchB
               onChange={(e) => setDestination(e.target.value)}
               placeholder={t("placeholderDestination")}
               aria-label={t("ariaDestination")}
-              className="h-12 flex-1 border-0 bg-transparent px-0 shadow-none outline-none placeholder:text-zinc-500 focus:border-transparent focus:ring-0"
+              className="h-11 w-full rounded-xl bg-white px-4 text-sm text-black placeholder:text-zinc-500 transition h-12 min-w-0 flex-1 border-0 bg-transparent px-0 !shadow-none outline-none placeholder:text-zinc-500 focus:border-transparent"
             />
             <button
               type="button"
               onClick={() => setDestination("")}
               className={[
-                "grid h-9 w-9 place-items-center rounded-full text-zinc-500 transition",
+                "relative z-10 grid h-9 w-9 shrink-0 place-items-center rounded-full text-zinc-500 transition",
                 destination ? "opacity-100 hover:bg-black/5 hover:text-black" : "pointer-events-none opacity-0",
               ].join(" ")}
               aria-label={t("ariaClearDestination")}
             >
               <XIcon className="h-4 w-4" />
             </button>
-            <div className="pointer-events-none absolute inset-0 rounded-2xl ring-0 ring-black/10 transition group-focus-within:ring-2" />
           </div>
 
           <Divider />
@@ -161,27 +160,32 @@ export function SearchBar({ onSearch, defaultValues, variant = "auto" }: SearchB
             variant === "mobile" || variant === "compact" ? "" : "hidden",
           ].join(" ")}
         >
-          <FieldShell className={variant === "compact" ? "h-12 bg-white px-3" : "h-14 bg-white"}>
+          <div
+            className={[
+              "group relative flex items-center gap-2 rounded-2xl transition-all duration-200 hover:bg-zinc-50",
+              variant === "compact" ? "h-12 bg-white px-3" : "h-14 bg-white px-4",
+            ].join(" ")}
+          >
             <PinIcon className="h-4 w-4 text-zinc-400" />
             <Input
               value={destination}
               onChange={(e) => setDestination(e.target.value)}
               placeholder={t("placeholderDestination")}
               aria-label={t("ariaDestination")}
-              className="h-11 flex-1 border-0 bg-transparent px-0 shadow-none outline-none focus:ring-0 focus:border-transparent"
+              className="h-11 w-full rounded-xl bg-white px-4 text-sm text-black placeholder:text-zinc-500 transition h-12 min-w-0 flex-1 border-0 bg-transparent px-0 !shadow-none outline-none placeholder:text-zinc-500 focus:border-transparent"
             />
             <button
               type="button"
               onClick={() => setDestination("")}
               className={[
-                "grid h-9 w-9 place-items-center rounded-full text-zinc-500 transition",
+                "relative z-10 grid h-9 w-9 shrink-0 place-items-center rounded-full text-zinc-500 transition",
                 destination ? "opacity-100 hover:bg-black/5 hover:text-black" : "pointer-events-none opacity-0",
               ].join(" ")}
               aria-label={t("ariaClearDestination")}
             >
               <XIcon className="h-4 w-4" />
             </button>
-          </FieldShell>
+          </div>
 
           <DateRangePicker
             value={{

@@ -1,5 +1,16 @@
 @import "tailwindcss";
 
+/* Typo globale (headings premium) */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-display {
+  font-family: var(--font-display);
+}
+
 /* Évite le "décalage" de layout lors de l'ouverture/fermeture des modales/lightbox (scrollbar stable) */
 html {
   scrollbar-gutter: stable;

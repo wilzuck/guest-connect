@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getLocale } from "next-intl/server";
 import { Card } from "@/components/ui/Card";
-import { SearchBar } from "@/components/SearchBar";
 import { MarketingPageLayout } from "@/components/layout/MarketingPageLayout";
 import { Faq, type FaqItem } from "@/components/ui/Faq";
 
@@ -65,14 +64,10 @@ export default async function Page() {
       title={isEn ? "Help center" : "Centre d’aide"}
       description={
         isEn
-          ? "Search, browse categories, and find quick answers—like modern travel marketplaces."
-          : "Rechercher, parcourir les catégories, obtenir des réponses rapides — comme sur les meilleurs sites de voyage."
+          ? "Browse categories and find quick answers—like modern travel marketplaces."
+          : "Parcourir les catégories, obtenir des réponses rapides — comme sur les meilleurs sites de voyage."
       }
     >
-      <div className="max-w-4xl">
-        <SearchBar />
-      </div>
-
       <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {categories.map((c) => (
           <Card key={c.t} className="p-6 shadow-none">

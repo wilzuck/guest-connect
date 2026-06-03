@@ -19,9 +19,13 @@ export function UserMenu() {
   ];
 
   const account: UserMenuItem[] = [
+    { label: t("dashboard"), href: `/${locale}/dashboard` },
     { label: t("profile"), href: `/${locale}/profile` },
     { label: t("reservations"), href: `/${locale}/reservations` },
     { label: t("favorites"), href: `/${locale}/favorites` },
+    { label: t("activities"), href: `/${locale}/activities` },
+    { label: t("settings"), href: `/${locale}/settings` },
+    { label: t("logout"), href: `/${locale}/logout` },
   ];
 
   useEffect(() => {

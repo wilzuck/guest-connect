@@ -1,6 +1,201 @@
-import ProfilePage from "@/app/profile/page";
+import type { Metadata } from "next";
+import { Container } from "@/components/ui/Container";
+import { Card } from "@/components/ui/Card";
+import { Input } from "@/components/ui/Input";
+import { Textarea } from "@/components/ui/Textarea";
 
-export default function Page() {
-  return <ProfilePage />;
+export const metadata: Metadata = {
+  title: "Profil — GuestConnect",
+  description: "Informations du compte, statistiques et préférences.",
+};
+
+export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const isEn = locale === "en";
+
+  // Démo: utilisateur “connecté”
+  const user = {
+    name: "Amina Kouyaté",
+    email: "amina@example.com",
+    phone: "+221 77 000 00 00",
+    location: isEn ? "Dakar, Senegal" : "Dakar, Sénégal",
+    bio: isEn
+      ? "I love curated stays, local food and design-led experiences."
+      : "J’aime les séjours sélectionnés, la cuisine locale et les expériences premium.",
+  };
+
+  const stats = [
+    { k: isEn ? "Reservations" : "Réservations", v: "2" },
+    { k: isEn ? "Favorites" : "Favoris", v: "6" },
+    { k: isEn ? "Reviews" : "Avis", v: "1" },
+  ];
+
+  return (
+    <div className="bg-white">
+      <section className="border-b border-black/5 bg-white">
+        <Container className="py-10 sm:py-14">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">
+            {isEn ? "Account" : "Compte"}
+          </p>
+          <h1 className="mt-4 text-balance text-4xl font-semibold tracking-tight text-black sm:text-5xl">
+            {isEn ? "Profile" : "Profil"}
+          </h1>
+          <p className="mt-4 max-w-2xl text-pretty text-base leading-7 text-zinc-600 sm:text-lg">
+            {isEn
+              ? "Manage your personal information, security and preferences."
+              : "Gérez vos informations personnelles, votre sécurité et vos préférences."}
+          </p>
+        </Container>
+      </section>
+
+      <section className="bg-white">
+        <Container className="py-12 sm:py-14">
+          <div className="grid gap-6 lg:grid-cols-12">
+            {/* Colonne gauche */}
+            <div className="lg:col-span-4">
+              <Card className="p-6 shadow-none">
+                <div className="flex items-center gap-4">
+                  <div className="grid h-14 w-14 place-items-center rounded-2xl bg-black text-white">
+                    <span className="text-lg font-semibold">{user.name.split(" ").map((s) => s[0]).slice(0, 2).join("")}</span>
+                  </div>
+                  <div className="min-w-0">
+                    <p className="truncate text-base font-semibold text-black">{user.name}</p>
+                    <p className="truncate text-sm text-zinc-600">{user.email}</p>
+                    <p className="truncate text-xs text-zinc-500">{user.location}</p>
+                  </div>
+                </div>
+
+                <div className="mt-6 grid grid-cols-3 gap-3">
+                  {stats.map((s) => (
+                    <div key={s.k} className="rounded-2xl bg-zinc-50 p-3 text-center">
+                      <p className="text-lg font-semibold tracking-tight text-black">{s.v}</p>
+                      <p className="mt-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-zinc-500">
+                        {s.k}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+
+                <p className="mt-5 text-xs text-zinc-500">
+                  {isEn
+                    ? "Demo page — connect to your auth/profile API later."
+                    : "Page démo — à brancher ensuite à votre API d’auth/profil."}
+                </p>
+              </Card>
+            </div>
+
+            {/* Colonne droite */}
+            <div className="lg:col-span-8">
+              <div className="grid gap-6">
+                {/* Infos personnelles */}
+                <Card className="p-6 shadow-none">
+                  <p className="text-sm font-semibold text-black">{isEn ? "Personal information" : "Informations personnelles"}</p>
+                  <p className="mt-2 text-sm leading-6 text-zinc-600">
+                    {isEn
+                      ? "Update your name, email and contact details."
+                      : "Mettez à jour votre nom, email et coordonnées."}
+                  </p>
+
+                  <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                    <label className="grid gap-2">
+                      <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">
+                        {isEn ? "Full name" : "Nom complet"}
+                      </span>
+                      <Input defaultValue={user.name} />
+                    </label>
+                    <label className="grid gap-2">
+                      <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">
+                        {isEn ? "Email" : "Email"}
+                      </span>
+                      <Input type="email" defaultValue={user.email} />
+                    </label>
+                    <label className="grid gap-2">
+                      <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">
+                        {isEn ? "Phone" : "Téléphone"}
+                      </span>
+                      <Input defaultValue={user.phone} />
+                    </label>
+                    <label className="grid gap-2">
+                      <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">
+                        {isEn ? "City" : "Ville"}
+                      </span>
+                      <Input defaultValue={user.location} />
+                    </label>
+                  </div>
+
+                  <label className="mt-4 grid gap-2">
+                    <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">
+                      {isEn ? "Bio" : "Bio"}
+                    </span>
+                    <Textarea defaultValue={user.bio} />
+                  </label>
+
+                  <div className="mt-6 flex flex-wrap gap-3">
+                    <button
+                      type="button"
+                      className="rounded-2xl bg-black px-6 py-3 text-sm font-semibold text-white transition active:scale-[0.99]"
+                    >
+                      {isEn ? "Save changes" : "Enregistrer"}
+                    </button>
+                    <button
+                      type="button"
+                      className="rounded-2xl border border-black/10 bg-white px-6 py-3 text-sm font-semibold text-black hover:bg-zinc-50 transition"
+                    >
+                      {isEn ? "Cancel" : "Annuler"}
+                    </button>
+                  </div>
+                </Card>
+
+                {/* Sécurité */}
+                <Card className="p-6 shadow-none">
+                  <p className="text-sm font-semibold text-black">{isEn ? "Security" : "Sécurité"}</p>
+                  <p className="mt-2 text-sm leading-6 text-zinc-600">
+                    {isEn
+                      ? "Change your password. (UI placeholder)"
+                      : "Changez votre mot de passe. (UI placeholder)"}
+                  </p>
+
+                  <div className="mt-6 grid gap-4 sm:grid-cols-3">
+                    <label className="grid gap-2">
+                      <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">
+                        {isEn ? "Current" : "Actuel"}
+                      </span>
+                      <Input type="password" placeholder={isEn ? "Current password" : "Mot de passe actuel"} />
+                    </label>
+                    <label className="grid gap-2">
+                      <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">
+                        {isEn ? "New" : "Nouveau"}
+                      </span>
+                      <Input type="password" placeholder={isEn ? "New password" : "Nouveau mot de passe"} />
+                    </label>
+                    <label className="grid gap-2">
+                      <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">
+                        {isEn ? "Confirm" : "Confirmer"}
+                      </span>
+                      <Input type="password" placeholder={isEn ? "Confirm password" : "Confirmer"} />
+                    </label>
+                  </div>
+
+                  <div className="mt-6 flex flex-wrap gap-3">
+                    <button
+                      type="button"
+                      className="rounded-2xl bg-black px-6 py-3 text-sm font-semibold text-white transition active:scale-[0.99]"
+                    >
+                      {isEn ? "Update password" : "Mettre à jour"}
+                    </button>
+                    <button
+                      type="button"
+                      className="rounded-2xl border border-black/10 bg-white px-6 py-3 text-sm font-semibold text-black hover:bg-zinc-50 transition"
+                    >
+                      {isEn ? "Log out of other devices" : "Déconnecter les autres appareils"}
+                    </button>
+                  </div>
+                </Card>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
+    </div>
+  );
 }
-

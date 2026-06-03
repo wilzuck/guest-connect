@@ -12,9 +12,13 @@
     "space": "Espace",
     "login": "Connexion",
     "signup": "Inscription",
+    "dashboard": "Tableau de bord",
     "profile": "Profil",
     "reservations": "Réservations",
-    "favorites": "Favoris"
+    "favorites": "Favoris",
+    "activities": "Activités",
+    "settings": "Paramètres",
+    "logout": "Déconnexion"
   },
   "hero": {
     "badge": "Séjours vérifiés · Hôtes de confiance · Paiements sécurisés",
@@ -284,7 +288,7 @@
     "perNight": "par nuit",
     "checkIn": "Arrivée",
     "checkOut": "Départ",
-    "cta": "Vérifier les disponibilités",
+    "cta": "Réserver",
     "save": "Enregistrer",
     "note": "Paiement sécurisé · Confirmation instantanée · Sans frais cachés"
   },
