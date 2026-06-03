@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { getLocale } from "next-intl/server";
 import { getTranslations } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 import { SearchBar } from "@/components/SearchBar";
 import { africaListings } from "@/lib/mock/africa-listings";
 import { ListingCard } from "@/components/listings/ListingCard";
@@ -69,9 +68,29 @@ export default async function Page({ searchParams }: PageProps) {
     <div className="bg-white">
       <section className="border-b border-black/5 bg-white">
         <Container className="py-10 sm:py-14">
-          <SectionHeading eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
-          <div className="mt-8">
-            <SearchBar />
+          {/* Hero (inspiré marketplaces hébergement) */}
+          <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
+            <div className="lg:col-span-7">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">{t("eyebrow")}</p>
+              <h1 className="mt-4 text-balance text-4xl font-semibold tracking-tight text-black sm:text-5xl">
+                {t("title")}
+              </h1>
+              <p className="mt-4 max-w-2xl text-pretty text-base leading-7 text-zinc-600 sm:text-lg">
+                {t("description")}
+              </p>
+            </div>
+
+            {/* Desktop/Tablet: carte de recherche à droite */}
+            <div className="hidden lg:col-span-5 lg:block">
+              <div className="rounded-3xl border border-black/10 bg-white p-4">
+                <SearchBar variant="compact" />
+              </div>
+            </div>
+          </div>
+
+          {/* Mobile: recherche full width */}
+          <div className="mt-8 lg:hidden">
+            <SearchBar variant="mobile" />
           </div>
         </Container>
       </section>
@@ -118,4 +137,3 @@ export default async function Page({ searchParams }: PageProps) {
     </div>
   );
 }
-

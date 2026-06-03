@@ -35,6 +35,7 @@
     "company": "Entreprise",
     "careers": "Carrières",
     "press": "Presse",
+    "pricing": "Tarifs",
     "support": "Support",
     "helpCenter": "Centre d’aide",
     "contact": "Contact",
@@ -48,6 +49,16 @@
     "madeFor": "Conçu pour les marketplaces de voyage modernes."
   }
   ,
+  "pricingPage": {
+    "eyebrow": "Tarifs",
+    "title": "Des offres pensées pour évoluer",
+    "subtitle": "Commencez gratuitement, puis passez au niveau supérieur en fonction de vos besoins.",
+    "note": "Aucun engagement · Annulation simple · Support réactif",
+    "ctaTitle": "Besoin d’un plan sur-mesure ?",
+    "ctaBody": "Nous pouvons adapter l’offre pour des besoins spécifiques (multi-établissements, intégrations, reporting).",
+    "ctaPrimary": "Créer un compte",
+    "ctaSecondary": "Parler à l’équipe"
+  },
   "searchBar": {
     "placeholderDestination": "Où allez-vous ?",
     "arrival": "Arrivée",

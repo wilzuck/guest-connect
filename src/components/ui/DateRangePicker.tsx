@@ -110,7 +110,7 @@ export function DateRangePicker({
         type="button"
         className={cn(
           // Pas de bordure (demandé) : on s’appuie sur le container + hover/focus.
-          "group w-full rounded-2xl bg-transparent text-left transition hover:bg-zinc-50 focus:outline-none focus:ring-4 focus:ring-black/5",
+          "group w-full rounded-2xl bg-white text-left transition hover:bg-zinc-50 focus:outline-none focus:ring-4 focus:ring-black/5",
           size === "sm" ? "h-12 px-3 py-2" : "h-14 p-[10px]",
         )}
         aria-label={startLabel}
@@ -123,7 +123,7 @@ export function DateRangePicker({
       <button
         type="button"
         className={cn(
-          "group w-full rounded-2xl bg-transparent text-left transition hover:bg-zinc-50 focus:outline-none focus:ring-4 focus:ring-black/5",
+          "group w-full rounded-2xl bg-white text-left transition hover:bg-zinc-50 focus:outline-none focus:ring-4 focus:ring-black/5",
           size === "sm" ? "h-12 px-3 py-2" : "h-14 p-[10px]",
         )}
         aria-label={endLabel}

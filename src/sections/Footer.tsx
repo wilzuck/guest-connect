@@ -22,6 +22,7 @@ export function Footer() {
         { label: t("company"), href: `/${locale}/company` },
         { label: t("careers"), href: `/${locale}/careers` },
         { label: t("press"), href: `/${locale}/press` },
+        { label: t("pricing"), href: `/${locale}/pricing` },
       ],
     },
     {

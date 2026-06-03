@@ -35,7 +35,8 @@ function HeroIllustration({
         <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-black/0 to-black/0" />
       </div>
 
-      {children ? <div className="absolute left-5 top-5 w-full max-w-sm">{children}</div> : null}
+      {/* Zone de recherche : occupe toute la surface disponible, en gardant la marge actuelle */}
+      {children ? <div className="absolute inset-5 flex">{children}</div> : null}
 
       <div className="absolute bottom-5 left-5 right-5 rounded-2xl border border-black/10 bg-white/80 p-4 backdrop-blur">
         <div className="flex items-center justify-between">
@@ -92,7 +93,9 @@ export async function HeroSection() {
               liveLabel={t("illustration.live")}
               alt={t("illustration.alt")}
             >
-              <SearchBar variant="compact" />
+              <div className="w-full">
+                <SearchBar variant="compact" />
+              </div>
             </HeroIllustration>
           </div>
         </div>

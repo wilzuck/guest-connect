@@ -16,15 +16,15 @@ export async function ListingsPreviewSection({ listings }: ListingsPreviewSectio
   return (
     <section id="listings" className="bg-white">
       <Container className="py-16 sm:py-20">
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-          <SectionHeading
-            eyebrow={t("eyebrow")}
-            title={t("title")}
-            description={t("description")}
-          />
-          <ButtonLink href={`/${locale}/stays`} variant="outline" size="md" className="w-fit">
-            {t("viewAll")}
-          </ButtonLink>
+        <div className="flex flex-col gap-6">
+          <div className="text-left">
+            <SectionHeading eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
+          </div>
+          <div className="flex justify-center">
+            <ButtonLink href={`/${locale}/stays`} variant="outline" size="md">
+              {t("viewAll")}
+            </ButtonLink>
+          </div>
         </div>
 
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

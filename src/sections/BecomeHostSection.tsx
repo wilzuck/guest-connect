@@ -30,7 +30,12 @@ export async function BecomeHostSection() {
                 <ButtonLink href="/host" variant="secondary" size="lg" className="text-black">
                   {locale === "en" ? "List my property" : "Ajouter mon établissement"}
                 </ButtonLink>
-                <ButtonLink href="#pricing" variant="ghost" size="lg" className="text-white hover:bg-white/10">
+                <ButtonLink
+                  href={`/${locale}/pricing`}
+                  variant="ghost"
+                  size="lg"
+                  className="text-white hover:bg-white/10"
+                >
                   {locale === "en" ? "See pricing" : "Voir les tarifs"}
                 </ButtonLink>
               </div>

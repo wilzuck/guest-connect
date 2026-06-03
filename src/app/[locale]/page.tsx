@@ -1,10 +1,10 @@
 import {
   BecomeHostSection,
+  CalendarToolsSection,
   FeaturesSection,
   HeroSection,
   HowItWorksSection,
   ListingsPreviewSection,
-  PricingSection,
   SocialProofSection,
   TestimonialsSection,
 } from "@/sections";
@@ -26,12 +26,13 @@ export default async function Home() {
     <>
       <HeroSection />
       <SocialProofSection />
-      <HowItWorksSection />
+      {/* Top logements recherchés */}
       <ListingsPreviewSection listings={listings} />
+      <HowItWorksSection />
+      <CalendarToolsSection />
       <FeaturesSection />
       <BecomeHostSection />
       <TestimonialsSection />
-      <PricingSection />
     </>
   );
 }

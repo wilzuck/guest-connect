@@ -29,7 +29,7 @@ export function ListingCard({
         className={cn(
           "group bg-white border-0 shadow-none",
           variant === "outlined"
-            ? "rounded-2xl border border-black/10 shadow-sm shadow-black/10"
+            ? "rounded-2xl border border-black/10 shadow-none"
             : "rounded-2xl hover:shadow-none",
         )}
       >
@@ -76,7 +76,7 @@ export function ListingCard({
 
           {/* Badge annulation (sans distance, icône moderne) */}
           <div className="mt-3 flex items-center gap-2 text-sm text-zinc-700">
-            <MoneyIcon className="h-4 w-4 text-zinc-500" />
+            <TicketIcon className="h-4 w-4 text-zinc-500" />
             <span className="truncate" title={t("meta.cancellation")}>
               {t("meta.cancellation")}
             </span>
@@ -98,22 +98,22 @@ function StarIcon({ className }: { className?: string }) {
   );
 }
 
-function MoneyIcon({ className }: { className?: string }) {
+function TicketIcon({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <path
-        d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z"
+        d="M5 7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4V7Z"
         stroke="currentColor"
         strokeWidth="1.8"
+        strokeLinejoin="round"
       />
       <path
-        d="M9.5 10.2c.5-.6 1.4-1 2.5-1 1.7 0 3 1 3 2.3 0 1.1-.8 1.8-2.2 2.2l-1.3.4c-1.1.3-1.7.7-1.7 1.5 0 1 1 1.8 2.6 1.8 1.2 0 2.1-.4 2.7-1"
+        d="M9 8.5v7"
         stroke="currentColor"
         strokeWidth="1.8"
         strokeLinecap="round"
-        strokeLinejoin="round"
+        opacity="0.35"
       />
-      <path d="M12 8v12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" opacity="0.35" />
     </svg>
   );
 }

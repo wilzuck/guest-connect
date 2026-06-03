@@ -35,6 +35,7 @@
     "company": "Company",
     "careers": "Careers",
     "press": "Press",
+    "pricing": "Pricing",
     "support": "Support",
     "helpCenter": "Help Center",
     "contact": "Contact",
@@ -48,6 +49,16 @@
     "madeFor": "Made for modern travel marketplaces."
   }
   ,
+  "pricingPage": {
+    "eyebrow": "Pricing",
+    "title": "Plans that scale with you",
+    "subtitle": "Start free, then upgrade when you’re ready.",
+    "note": "No commitment · Easy cancellation · Responsive support",
+    "ctaTitle": "Need a custom plan?",
+    "ctaBody": "We can tailor pricing for multi-property hosts, integrations, and advanced reporting.",
+    "ctaPrimary": "Create an account",
+    "ctaSecondary": "Talk to the team"
+  },
   "searchBar": {
     "placeholderDestination": "Where are you going?",
     "arrival": "Check-in",
