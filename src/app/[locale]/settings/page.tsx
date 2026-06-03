@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { getLocale } from "next-intl/server";
-import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card";
 import Link from "next/link";
+import { AccountShell } from "@/components/account/AccountShell";
 
 export const metadata: Metadata = {
   title: "Paramètres — GuestConnect",
@@ -19,13 +19,8 @@ export default async function Page() {
   };
 
   return (
-    <div className="bg-white">
-      <Container className="py-10 sm:py-14">
-        <div className="max-w-3xl">
-          <h1 className="text-3xl font-semibold tracking-tight text-black sm:text-4xl">Paramètres</h1>
-          <p className="mt-2 text-sm text-zinc-600">Consultez et gérez votre compte.</p>
-
-          <div className="mt-10 grid gap-10">
+    <AccountShell locale={locale} title="Paramètres" subtitle="Consultez et gérez votre compte.">
+      <div className="grid gap-10">
             {/* User info */}
             <Section title="Infos utilisateur">
             <Card className="overflow-hidden border border-black/10 bg-white p-0 shadow-none">
@@ -111,10 +106,8 @@ export default async function Page() {
               </div>
             </Card>
           </Section>
-        </div>
-        </div>
-      </Container>
-    </div>
+      </div>
+    </AccountShell>
   );
 }
 

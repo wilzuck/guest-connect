@@ -1,14 +1,16 @@
-import { MarketingPageLayout } from "@/components/layout/MarketingPageLayout";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { notifications } from "@/lib/mock/notifications";
+import { getLocale } from "next-intl/server";
+import { AccountShell } from "@/components/account/AccountShell";
 
-export default function NotificationsPage() {
+export default async function NotificationsPage() {
+  const locale = await getLocale();
   return (
-    <MarketingPageLayout
-      eyebrow="Centre"
+    <AccountShell
+      locale={locale}
       title="Notifications"
-      description="Suivez les confirmations, messages et mises à jour importantes. Tout est regroupé ici."
+      subtitle="Suivez les confirmations, messages et mises à jour importantes. Tout est regroupé ici."
     >
       <div className="grid gap-4">
         {notifications.map((n) => (
@@ -31,7 +33,7 @@ export default function NotificationsPage() {
           </Card>
         ))}
       </div>
-    </MarketingPageLayout>
+    </AccountShell>
   );
 }
 
@@ -109,4 +111,3 @@ function Icon({ type }: { type: (typeof notifications)[number]["type"] }) {
       );
   }
 }
-

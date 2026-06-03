@@ -11,10 +11,32 @@ type AuthShellProps = {
   subtitle: string;
   children: ReactNode;
   footerHint?: ReactNode;
+  illustration?: {
+    imageUrl: string;
+    alt: string;
+    badge?: string;
+    title?: string;
+    subtitle?: string;
+  };
 };
 
-export async function AuthShell({ locale, title, subtitle, children, footerHint }: AuthShellProps) {
+export async function AuthShell({
+  locale,
+  title,
+  subtitle,
+  children,
+  footerHint,
+  illustration,
+}: AuthShellProps) {
   const t = await getTranslations("authShell");
+  const illu = {
+    imageUrl:
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=2400&q=80",
+    alt: t("illustration.alt"),
+    badge: "GUESTCONNECT",
+    title: t("illustration.title"),
+    subtitle: t("illustration.subtitle"),
+  };
   return (
     <div className="min-h-dvh bg-zinc-50">
       <div className="flex min-h-dvh w-full">
@@ -60,8 +82,8 @@ export async function AuthShell({ locale, title, subtitle, children, footerHint 
         <div className="relative hidden w-2/5 overflow-hidden md:block lg:w-1/2">
           <div className="absolute inset-0">
             <Image
-              src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=2400&q=80"
-              alt={t("illustration.alt")}
+              src={illustration?.imageUrl ?? illu.imageUrl}
+              alt={illustration?.alt ?? illu.alt}
               fill
               className="object-cover"
               sizes="50vw"
@@ -72,13 +94,13 @@ export async function AuthShell({ locale, title, subtitle, children, footerHint 
 
           <div className="relative flex h-full flex-col justify-end p-10">
             <p className="inline-flex w-fit rounded-full bg-white/10 px-4 py-2 text-xs font-semibold tracking-[0.16em] text-white backdrop-blur">
-              GUESTCONNECT
+              {illustration?.badge ?? illu.badge}
             </p>
             <h2 className="mt-4 text-balance text-4xl font-semibold tracking-tight text-white">
-              {t("illustration.title")}
+              {illustration?.title ?? illu.title}
             </h2>
             <p className="mt-3 max-w-md text-sm leading-6 text-white/85">
-              {t("illustration.subtitle")}
+              {illustration?.subtitle ?? illu.subtitle}
             </p>
           </div>
         </div>

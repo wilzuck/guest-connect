@@ -12,6 +12,14 @@ export default async function Page() {
       locale={locale}
       title={t("title")}
       subtitle={t("subtitle")}
+      illustration={{
+        imageUrl:
+          "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=2400&q=80",
+        alt: "Maison d’hôtes — inscription",
+        badge: "CRÉER UN COMPTE",
+        title: "Rejoignez GuestConnect",
+        subtitle: "Créez votre profil, enregistrez vos favoris et gérez vos réservations en quelques clics.",
+      }}
       footerHint={
         <span>
           {t("footerText")}{" "}
