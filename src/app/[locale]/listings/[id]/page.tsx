@@ -7,6 +7,7 @@ import { ListingLightbox } from "@/components/gallery/ListingLightbox";
 import { getTranslations } from "next-intl/server";
 import { BookingCard } from "@/components/listings/detail/BookingCard";
 import { ReviewForm } from "@/components/reviews/ReviewForm";
+import { FavoriteButton } from "@/components/favorites/FavoriteButton";
 
 type PageProps = {
   params: Promise<{ locale: string; id: string }>;
@@ -47,6 +48,10 @@ export default async function Page({ params }: PageProps) {
               </div>
             </div>
 
+            {/* Action: favoris (en haut à droite) */}
+            <div className="flex items-center justify-end gap-2">
+              <FavoriteButton listingId={listing.id} locale={locale} />
+            </div>
           </div>
 
           {/* Galerie */}

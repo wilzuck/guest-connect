@@ -8,6 +8,7 @@ import { useTranslations } from "next-intl";
 import { useCurrency } from "@/components/currency/CurrencyProvider";
 import { useState } from "react";
 import { cn } from "@/lib/utils/cn";
+import { FavoriteButton } from "@/components/favorites/FavoriteButton";
 
 export function ListingCard({
   locale,
@@ -45,6 +46,18 @@ export function ListingCard({
             onLoadingComplete={() => setImgLoaded(true)}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-black/0 to-black/0 opacity-80" />
+
+          {/* Favoris (sur chaque card) */}
+          <div
+            className="absolute right-3 top-3 z-10"
+            onClick={(e) => {
+              // Empêche la navigation du Link quand on clique sur le cœur
+              e.preventDefault();
+              e.stopPropagation();
+            }}
+          >
+            <FavoriteButton listingId={listing.id} locale={locale} className="h-10 w-10 rounded-2xl" />
+          </div>
         </div>
         {/* Info: sans padding (demandé), uniquement spacing vertical */}
         <div className="mt-3">

@@ -3,6 +3,8 @@
     "accommodations": "Hébergements",
     "destinations": "Services",
     "experiences": "Expériences",
+    "blog": "Blog",
+    "about": "À propos",
     "becomeHost": "Devenir hôte",
     "search": "Recherche",
     "searchHint": "Destination · Dates · Voyageurs"
@@ -52,6 +54,7 @@
     "terms": "Conditions",
     "privacy": "Confidentialité",
     "cookies": "Cookies",
+    "siteMap": "Plan du site",
     "tagline": "GuestConnect est une marketplace premium de maisons d’hôtes — pensée pour la confiance, la clarté et la conversion.",
     "copyright": "Tous droits réservés.",
     "madeFor": "Conçu pour les marketplaces de voyage modernes."
@@ -166,6 +169,7 @@
     "account": "Compte",
     "login": "Connexion",
     "signup": "Inscription",
+    "siteMap": "Plan du site",
     "tagline": "Maisons d’hôtes premium au Bénin et en Afrique."
   },
   "homeListings": {

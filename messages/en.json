@@ -3,6 +3,8 @@
     "accommodations": "Stays",
     "destinations": "Services",
     "experiences": "Experiences",
+    "blog": "Blog",
+    "about": "About",
     "becomeHost": "Become a host",
     "search": "Search",
     "searchHint": "Destination · Dates · Guests"
@@ -52,6 +54,7 @@
     "terms": "Terms",
     "privacy": "Privacy",
     "cookies": "Cookies",
+    "siteMap": "Sitemap",
     "tagline": "GuestConnect is a premium marketplace for guest houses—built for trust, clarity, and conversion.",
     "copyright": "All rights reserved.",
     "madeFor": "Made for modern travel marketplaces."
@@ -166,6 +169,7 @@
     "account": "Account",
     "login": "Log in",
     "signup": "Sign up",
+    "siteMap": "Sitemap",
     "tagline": "Premium guest houses across Benin & Africa."
   },
   "homeListings": {
