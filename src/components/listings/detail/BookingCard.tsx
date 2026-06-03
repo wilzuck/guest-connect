@@ -42,6 +42,7 @@ export function BookingCard({
           onChange={setRange}
           startLabel={t("checkIn")}
           endLabel={t("checkOut")}
+          fieldVariant="bordered"
         />
       </div>
 

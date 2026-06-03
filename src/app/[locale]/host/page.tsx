@@ -14,7 +14,7 @@ export default async function Page() {
         <Container className="py-12 sm:py-16">
           <SectionHeading eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
           <div className="mt-8 flex flex-wrap gap-3">
-            <ButtonLink href={`/${locale}/signup`} variant="primary" size="lg">
+            <ButtonLink href={`/${locale}/host/new`} variant="primary" size="lg">
               {t("ctaPrimary")}
             </ButtonLink>
             <ButtonLink href="#benefits" variant="outline" size="lg">
@@ -51,7 +51,7 @@ export default async function Page() {
 
 function Step({ title, desc }: { title: string; desc: string }) {
   return (
-    <div className="rounded-2xl bg-zinc-50 p-6">
+    <div className="rounded-2xl border border-black/10 bg-white p-6 shadow-none">
       <p className="text-sm font-semibold text-black">{title}</p>
       <p className="mt-2 text-sm leading-6 text-zinc-600">{desc}</p>
     </div>

@@ -7,8 +7,8 @@ import { SearchBar } from "@/components/SearchBar";
 import { africaListings } from "@/lib/mock/africa-listings";
 
 export const metadata: Metadata = {
-  title: "Services — GuestConnect",
-  description: "Browse services and discover destinations quickly.",
+  title: "Destinations — GuestConnect",
+  description: "Explore destinations and start your search in one click.",
 };
 
 export default async function Page() {
@@ -52,10 +52,7 @@ export default async function Page() {
 
       <section className="bg-white">
         <Container className="py-12 sm:py-14">
-          <div className="flex items-end justify-between gap-4">
-            <h2 className="text-xl font-semibold tracking-tight text-black">{t("popularTitle")}</h2>
-            <p className="text-sm text-zinc-600">{t("popularHint")}</p>
-          </div>
+          <h2 className="text-xl font-semibold tracking-tight text-black">{t("popularTitle")}</h2>
 
           <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
             {cities.map((c) => (

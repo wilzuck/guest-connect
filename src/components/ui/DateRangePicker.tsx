@@ -21,6 +21,7 @@ type DateRangePickerProps = {
   endLabel: string;
   className?: string;
   size?: "md" | "sm";
+  fieldVariant?: "plain" | "bordered";
 };
 
 function toDate(value?: string) {
@@ -41,6 +42,7 @@ export function DateRangePicker({
   endLabel,
   className,
   size = "md",
+  fieldVariant = "plain",
 }: DateRangePickerProps) {
   const locale = useLocale();
   const t = useTranslations("dateRangePicker");
@@ -107,6 +109,7 @@ export function DateRangePicker({
         className={cn(
           // Pas de bordure (demandé) : on s’appuie sur le container + hover/focus.
           "group w-full rounded-2xl bg-white text-left transition hover:bg-zinc-50 focus:outline-none focus:ring-4 focus:ring-black/5",
+          fieldVariant === "bordered" ? "border border-black/10" : "",
           size === "sm" ? "h-12 px-3 py-2" : "h-14 p-[10px]",
         )}
         aria-label={startLabel}
@@ -120,6 +123,7 @@ export function DateRangePicker({
         type="button"
         className={cn(
           "group w-full rounded-2xl bg-white text-left transition hover:bg-zinc-50 focus:outline-none focus:ring-4 focus:ring-black/5",
+          fieldVariant === "bordered" ? "border border-black/10" : "",
           size === "sm" ? "h-12 px-3 py-2" : "h-14 p-[10px]",
         )}
         aria-label={endLabel}
