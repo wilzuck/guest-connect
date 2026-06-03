@@ -20,6 +20,7 @@ type DateRangePickerProps = {
   startLabel: string;
   endLabel: string;
   className?: string;
+  size?: "md" | "sm";
 };
 
 function toDate(value?: string) {
@@ -33,7 +34,14 @@ function toISO(d?: Date) {
   return format(d, "yyyy-MM-dd");
 }
 
-export function DateRangePicker({ value, onChange, startLabel, endLabel, className }: DateRangePickerProps) {
+export function DateRangePicker({
+  value,
+  onChange,
+  startLabel,
+  endLabel,
+  className,
+  size = "md",
+}: DateRangePickerProps) {
   const locale = useLocale();
   const t = useTranslations("dateRangePicker");
   const [open, setOpen] = useState(false);
@@ -100,7 +108,11 @@ export function DateRangePicker({ value, onChange, startLabel, endLabel, classNa
     >
       <button
         type="button"
-        className="group h-14 w-full rounded-2xl border border-black/10 bg-white p-[10px] text-left transition hover:bg-zinc-50 focus:outline-none focus:ring-4 focus:ring-black/5"
+        className={cn(
+          // Pas de bordure (demandé) : on s’appuie sur le container + hover/focus.
+          "group w-full rounded-2xl bg-transparent text-left transition hover:bg-zinc-50 focus:outline-none focus:ring-4 focus:ring-black/5",
+          size === "sm" ? "h-12 px-3 py-2" : "h-14 p-[10px]",
+        )}
         aria-label={startLabel}
       >
         <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-zinc-500">{startLabel}</p>
@@ -110,7 +122,10 @@ export function DateRangePicker({ value, onChange, startLabel, endLabel, classNa
       </button>
       <button
         type="button"
-        className="group h-14 w-full rounded-2xl border border-black/10 bg-white p-[10px] text-left transition hover:bg-zinc-50 focus:outline-none focus:ring-4 focus:ring-black/5"
+        className={cn(
+          "group w-full rounded-2xl bg-transparent text-left transition hover:bg-zinc-50 focus:outline-none focus:ring-4 focus:ring-black/5",
+          size === "sm" ? "h-12 px-3 py-2" : "h-14 p-[10px]",
+        )}
         aria-label={endLabel}
       >
         <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-zinc-500">{endLabel}</p>
@@ -197,7 +212,7 @@ export function DateRangePicker({ value, onChange, startLabel, endLabel, classNa
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>{Trigger}</PopoverTrigger>
-      <PopoverContent align="start" className="p-3">
+      <PopoverContent side="top" align="start" className="p-3">
         {calendar}
         <div className="mt-3 flex items-center justify-between">
           <p className="text-xs font-semibold text-zinc-500">

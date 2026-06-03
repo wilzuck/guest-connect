@@ -59,15 +59,17 @@ export function SearchBar({ onSearch, defaultValues, variant = "auto" }: SearchB
       {/* Desktop: une seule ligne fluide. Mobile: layout optimisé. Compact: version hero (petite). */}
       <div
         className={[
+          // Compact (hero) : transparent premium, pas de shadow
           variant === "compact"
-            ? "rounded-3xl border border-black/10 bg-white/80 p-4 backdrop-blur"
-            : "rounded-[28px] border border-black/10 bg-white/80 p-2 shadow-[0_14px_40px_-30px_rgba(0,0,0,0.25)] backdrop-blur-sm",
+            ? "rounded-2xl border border-black/10 bg-white/80 p-4 backdrop-blur"
+            : // Full width : pas de shadow, radius plus petit
+              "rounded-2xl border border-black/10 bg-white/80 p-2 backdrop-blur-sm",
         ].join(" ")}
       >
         {/* Desktop */}
         <div
           className={[
-            "items-stretch gap-2 rounded-[22px] bg-white p-1",
+            "items-stretch gap-2 rounded-2xl bg-white p-1",
             variant === "desktop" ? "flex" : "",
             variant === "auto" ? "hidden md:flex" : "",
             variant === "mobile" || variant === "compact" ? "hidden" : "",

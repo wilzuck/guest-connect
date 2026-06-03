@@ -22,7 +22,7 @@ export async function ListingsPreviewSection({ listings }: ListingsPreviewSectio
             title={t("title")}
             description={t("description")}
           />
-          <ButtonLink href={`/${locale}/explore`} variant="outline" size="md" className="w-fit">
+          <ButtonLink href={`/${locale}/stays`} variant="outline" size="md" className="w-fit">
             {t("viewAll")}
           </ButtonLink>
         </div>

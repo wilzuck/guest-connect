@@ -13,8 +13,8 @@ export function MobileMenu() {
   const tm = useTranslations("mobileMenu");
 
   const links = [
-    { label: t("accommodations"), href: `/${locale}/explore` },
-    { label: t("destinations"), href: `/${locale}/search` },
+    { label: t("accommodations"), href: `/${locale}/stays` },
+    { label: t("destinations"), href: `/${locale}/services` },
     { label: t("experiences"), href: `/${locale}/experiences` },
     { label: t("search"), href: `/${locale}/search` },
   ];
@@ -54,7 +54,7 @@ export function MobileMenu() {
             <DialogClose asChild key={l.href}>
               <Link
                 href={l.href}
-                className="flex items-center justify-between rounded-2xl px-4 py-3 text-base font-medium text-zinc-800 hover:bg-zinc-50 hover:text-black transition dark:text-zinc-200 dark:hover:bg-zinc-900 dark:hover:text-white"
+                className="flex items-center justify-between rounded-2xl border border-black/10 bg-white p-5 shadow-sm shadow-black/5 text-base font-medium text-zinc-800 hover:bg-zinc-50 hover:text-black transition dark:border-white/10 dark:bg-zinc-950 dark:text-zinc-200 dark:hover:bg-zinc-900 dark:hover:text-white"
               >
                 <span>{l.label}</span>
                 <ChevronRight className="h-5 w-5 text-zinc-400" />

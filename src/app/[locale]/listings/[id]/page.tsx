@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
-import { ButtonLink } from "@/components/ui/Button";
+import { Button, ButtonLink } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { africaListings } from "@/lib/mock/africa-listings";
 import { ListingLightbox } from "@/components/gallery/ListingLightbox";
@@ -50,7 +50,7 @@ export default async function Page({ params }: PageProps) {
 
             <div className="flex items-center gap-2">
               <FavoriteButton locale={locale} listingId={listing.id} />
-              <ButtonLink href={`/${locale}/explore`} variant="outline" size="sm">
+              <ButtonLink href={`/${locale}/stays`} variant="outline" size="sm">
                 {t("back")}
               </ButtonLink>
               <ButtonLink href={`/${locale}/search`} variant="primary" size="sm">
@@ -105,44 +105,51 @@ export default async function Page({ params }: PageProps) {
               </div>
             </div>
           </div>
-
-          {/* Avis: pleine largeur container */}
-          <section className="mt-10">
-            <h2 className="text-xl font-semibold tracking-tight text-black">{t("reviewsTitle")}</h2>
-            <div className="mt-5 rounded-3xl bg-zinc-50 p-6">
-              <div className="grid gap-4 lg:grid-cols-2">
-                <ReviewCard
-                  rating={listing.rating}
-                  name={t("reviewsSection.one.name")}
-                  date={t("reviewsSection.one.date")}
-                  body={t("reviewsSection.one.body")}
-                />
-                <ReviewCard
-                  rating={listing.rating}
-                  name={t("reviewsSection.two.name")}
-                  date={t("reviewsSection.two.date")}
-                  body={t("reviewsSection.two.body")}
-                />
-                <ReviewCard
-                  rating={listing.rating}
-                  name={t("reviewsSection.three.name")}
-                  date={t("reviewsSection.three.date")}
-                  body={t("reviewsSection.three.body")}
-                />
-              </div>
-              <div className="mt-6 flex justify-center">
-                <button
-                  type="button"
-                  className="rounded-2xl border border-black/10 bg-white px-5 py-3 text-sm font-semibold text-black shadow-sm shadow-black/5 hover:bg-zinc-50 transition"
-                >
-                  {t("loadMoreReviews")}
-                </button>
-              </div>
-            </div>
-          </section>
         </div>
       </Container>
+
+      {/* Avis: fond plein largeur (comme Features), contenu aligné sur Container */}
+      <section className="bg-zinc-50 py-10">
+        <Container>
+          <h2 className="text-xl font-semibold tracking-tight text-black">{t("reviewsTitle")}</h2>
+          <div className="mt-5 grid gap-4 lg:grid-cols-2">
+            <ReviewCard
+              rating={listing.rating}
+              name={t("reviewsSection.one.name")}
+              date={t("reviewsSection.one.date")}
+              body={t("reviewsSection.one.body")}
+            />
+            <ReviewCard
+              rating={listing.rating}
+              name={t("reviewsSection.two.name")}
+              date={t("reviewsSection.two.date")}
+              body={t("reviewsSection.two.body")}
+            />
+            <ReviewCard
+              rating={listing.rating}
+              name={t("reviewsSection.three.name")}
+              date={t("reviewsSection.three.date")}
+              body={t("reviewsSection.three.body")}
+            />
+          </div>
+
+          <div className="mt-8">
+            <Button type="button" variant="primary" size="lg" className="rounded-2xl px-6">
+              <PlusIcon className="h-4 w-4" />
+              {t("loadMoreReviews")}
+            </Button>
+          </div>
+        </Container>
+      </section>
     </div>
+  );
+}
+
+function PlusIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    </svg>
   );
 }
 

@@ -170,7 +170,7 @@ export default function CompanyPage() {
                 <ButtonLink href="/host" variant="primary" size="lg">
                   Ajouter mon établissement
                 </ButtonLink>
-                <ButtonLink href="/explore" variant="outline" size="lg">
+                <ButtonLink href="/stays" variant="outline" size="lg">
                   Explorer les annonces
                 </ButtonLink>
               </div>

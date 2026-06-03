@@ -66,7 +66,7 @@ export default async function Page({ searchParams }: PageProps) {
               {t("results", { count: filtered.length })}
               {destination ? t("resultsFor", { destination }) : ""}
             </p>
-            <ButtonLink href={`/${locale}/explore`} variant="outline" size="sm">
+            <ButtonLink href={`/${locale}/stays`} variant="outline" size="sm">
               {t("browseByInterests")}
             </ButtonLink>
           </div>

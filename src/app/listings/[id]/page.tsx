@@ -43,7 +43,7 @@ export default async function ListingPage({ params }: PageProps) {
             </div>
 
             <div className="flex items-center gap-2">
-              <ButtonLink href={`/${locale}/explore`} variant="outline" size="sm">
+              <ButtonLink href={`/${locale}/stays`} variant="outline" size="sm">
                 Retour
               </ButtonLink>
               <ButtonLink href={`/${locale}/search`} variant="primary" size="sm">

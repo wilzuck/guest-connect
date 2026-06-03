@@ -9,7 +9,6 @@ import { UserMenu } from "@/components/nav/UserMenu";
 import { MobileMenu } from "@/components/nav/MobileMenu";
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
-import { CurrencySwitcher } from "@/components/currency/CurrencySwitcher";
 
 export function Navbar() {
   const locale = useLocale();
@@ -44,8 +43,8 @@ export function Navbar() {
   }, []);
 
   const links = [
-    { label: t("accommodations"), href: `/${locale}/explore` },
-    { label: t("destinations"), href: `/${locale}/destinations` },
+    { label: t("accommodations"), href: `/${locale}/stays` },
+    { label: t("destinations"), href: `/${locale}/services` },
     { label: t("experiences"), href: `/${locale}/experiences` },
   ];
 
@@ -81,7 +80,7 @@ export function Navbar() {
             href={`/${locale}/search`}
             variant="outline"
             size="md"
-            className="w-full justify-start gap-3 rounded-full border-black/10 bg-white px-4 shadow-sm shadow-black/10"
+            className="w-full justify-start gap-3 rounded-2xl border border-black/10 bg-white px-4 py-3 shadow-sm shadow-black/5"
           >
             <SearchIcon className="h-4 w-4" />
             <div className="min-w-0 text-left">
@@ -94,9 +93,6 @@ export function Navbar() {
         </div>
 
         <div className="ml-auto flex items-center gap-2">
-          <div className="hidden md:block">
-            <CurrencySwitcher />
-          </div>
           <ButtonLink
             href={`/${locale}/host`}
             variant="primary"
