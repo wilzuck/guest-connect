@@ -29,7 +29,11 @@ export default function Page() {
     setTimeout(() => setIds(readFavorites()), 0);
   }, []);
 
-  const items = useMemo(() => africaListings.filter((l) => ids.includes(l.id)), [ids]);
+  const favorites = useMemo(() => africaListings.filter((l) => ids.includes(l.id)), [ids]);
+  const items = useMemo(() => {
+    const base = favorites.length > 0 ? favorites : africaListings.slice(0, 5);
+    return base.slice(0, 5);
+  }, [favorites]);
 
   return (
     <div className="bg-white">
@@ -51,30 +55,31 @@ export default function Page() {
 
       <section className="bg-white">
         <Container className="py-12 sm:py-14">
-          {items.length === 0 ? (
-            <Card className="p-8 shadow-none">
-              <p className="text-sm font-semibold text-black">{isEn ? "No favorites yet" : "Aucun favori"}</p>
-              <p className="mt-2 text-sm leading-6 text-zinc-600">
-                {isEn
-                  ? "Browse stays and tap the heart to save listings."
-                  : "Parcourez les hébergements et cliquez sur le cœur pour enregistrer une annonce."}
+          <div className="flex items-end justify-between gap-4">
+            <div>
+              <p className="text-sm font-semibold text-black">
+                {favorites.length > 0 ? (isEn ? "Your saved stays" : "Vos favoris") : isEn ? "Recommended for you" : "Suggestions"}
               </p>
-              <div className="mt-6">
-                <Link
-                  href={`/${locale}/stays`}
-                  className="inline-flex items-center justify-center rounded-2xl bg-black px-6 py-3 text-sm font-semibold text-white transition"
-                >
-                  {isEn ? "Browse stays" : "Voir les hébergements"}
-                </Link>
-              </div>
-            </Card>
-          ) : (
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {items.map((l) => (
-                <ListingCard key={l.id} locale={locale} listing={l} variant="outlined" />
-              ))}
+              <p className="mt-1 text-sm text-zinc-600">
+                {favorites.length > 0
+                  ? isEn
+                    ? "Showing up to 5 saved listings."
+                    : "Affichage de 5 favoris maximum."
+                  : isEn
+                    ? "You don’t have favorites yet — here are 5 picks to start."
+                    : "Vous n’avez pas encore de favoris — voici 5 suggestions pour commencer."}
+              </p>
             </div>
-          )}
+            <Link href={`/${locale}/stays`} className="text-sm font-semibold text-black hover:underline">
+              {isEn ? "Browse stays" : "Voir les hébergements"}
+            </Link>
+          </div>
+
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {items.map((l) => (
+              <ListingCard key={l.id} locale={locale} listing={l} variant="outlined" />
+            ))}
+          </div>
         </Container>
       </section>
     </div>

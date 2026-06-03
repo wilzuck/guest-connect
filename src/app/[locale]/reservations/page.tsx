@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { getLocale } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card";
+import { africaListings } from "@/lib/mock/africa-listings";
 
 export const metadata: Metadata = {
   title: "Réservations — GuestConnect",
@@ -20,6 +22,7 @@ export default async function Page() {
       location: isEn ? "Dakar, Senegal" : "Dakar, Sénégal",
       dates: isEn ? "12–15 Jun 2026" : "12–15 Juin 2026",
       status: isEn ? "Confirmed" : "Confirmée",
+      imageUrl: africaListings[0]?.imageUrl,
     },
     {
       id: "rsv-002",
@@ -27,6 +30,7 @@ export default async function Page() {
       location: isEn ? "Marrakech, Morocco" : "Marrakech, Maroc",
       dates: isEn ? "01–04 Jul 2026" : "01–04 Juil 2026",
       status: isEn ? "Pending" : "En attente",
+      imageUrl: africaListings[1]?.imageUrl ?? africaListings[0]?.imageUrl,
     },
   ];
 
@@ -88,10 +92,26 @@ export default async function Page() {
               {upcoming.map((r) => (
                 <Card key={r.id} className="p-6 shadow-none">
                   <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                    <div className="min-w-0">
-                      <p className="truncate text-base font-semibold text-black">{r.title}</p>
-                      <p className="mt-1 text-sm text-zinc-600">{r.location}</p>
-                      <p className="mt-2 text-sm font-semibold text-black">{r.dates}</p>
+                    <div className="flex min-w-0 gap-4">
+                      {/* Miniature */}
+                      <div className="relative h-14 w-16 shrink-0 overflow-hidden rounded-2xl bg-zinc-100">
+                        {r.imageUrl ? (
+                          <Image
+                            src={r.imageUrl}
+                            alt={r.title}
+                            fill
+                            className="object-cover"
+                            sizes="64px"
+                            quality={70}
+                          />
+                        ) : null}
+                      </div>
+
+                      <div className="min-w-0">
+                        <p className="truncate text-base font-semibold text-black">{r.title}</p>
+                        <p className="mt-1 text-sm text-zinc-600">{r.location}</p>
+                        <p className="mt-2 text-sm font-semibold text-black">{r.dates}</p>
+                      </div>
                     </div>
                     <span
                       className={[

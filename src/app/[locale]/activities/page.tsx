@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getLocale } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
-import { Card } from "@/components/ui/Card";
+import { ActivitiesTable } from "@/components/account/ActivitiesTable";
 
 export const metadata: Metadata = {
   title: "Activity — GuestConnect",
@@ -11,18 +11,6 @@ export const metadata: Metadata = {
 export default async function Page() {
   const locale = await getLocale();
   const isEn = locale === "en";
-
-  const items = isEn
-    ? [
-        { t: "Saved a listing", d: "You added “Maison d’hôtes premium” to favorites." },
-        { t: "Search completed", d: "Destination: Dakar · Dates: flexible · Guests: 2." },
-        { t: "Review sent", d: "Thanks for sharing feedback — it helps everyone book with confidence." },
-      ]
-    : [
-        { t: "Ajout aux favoris", d: "Vous avez ajouté “Maison d’hôtes premium” aux favoris." },
-        { t: "Recherche effectuée", d: "Destination : Dakar · Dates : flexibles · Voyageurs : 2." },
-        { t: "Avis envoyé", d: "Merci pour votre retour — cela aide à réserver en toute confiance." },
-      ];
 
   return (
     <div className="bg-white">
@@ -42,17 +30,9 @@ export default async function Page() {
 
       <section className="bg-white">
         <Container className="py-12 sm:py-14">
-          <div className="grid gap-3">
-            {items.map((x) => (
-              <Card key={x.t} className="p-6 shadow-none">
-                <p className="text-sm font-semibold text-black">{x.t}</p>
-                <p className="mt-2 text-sm leading-6 text-zinc-600">{x.d}</p>
-              </Card>
-            ))}
-          </div>
+          <ActivitiesTable isEn={isEn} />
         </Container>
       </section>
     </div>
   );
 }
-

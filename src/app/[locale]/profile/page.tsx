@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card";
-import { Input } from "@/components/ui/Input";
-import { Textarea } from "@/components/ui/Textarea";
+import { ProfileClient } from "@/components/account/ProfileClient";
 
 export const metadata: Metadata = {
   title: "Profil — GuestConnect",
@@ -86,112 +85,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
 
             {/* Colonne droite */}
             <div className="lg:col-span-8">
-              <div className="grid gap-6">
-                {/* Infos personnelles */}
-                <Card className="p-6 shadow-none">
-                  <p className="text-sm font-semibold text-black">{isEn ? "Personal information" : "Informations personnelles"}</p>
-                  <p className="mt-2 text-sm leading-6 text-zinc-600">
-                    {isEn
-                      ? "Update your name, email and contact details."
-                      : "Mettez à jour votre nom, email et coordonnées."}
-                  </p>
-
-                  <div className="mt-6 grid gap-4 sm:grid-cols-2">
-                    <label className="grid gap-2">
-                      <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">
-                        {isEn ? "Full name" : "Nom complet"}
-                      </span>
-                      <Input defaultValue={user.name} />
-                    </label>
-                    <label className="grid gap-2">
-                      <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">
-                        {isEn ? "Email" : "Email"}
-                      </span>
-                      <Input type="email" defaultValue={user.email} />
-                    </label>
-                    <label className="grid gap-2">
-                      <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">
-                        {isEn ? "Phone" : "Téléphone"}
-                      </span>
-                      <Input defaultValue={user.phone} />
-                    </label>
-                    <label className="grid gap-2">
-                      <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">
-                        {isEn ? "City" : "Ville"}
-                      </span>
-                      <Input defaultValue={user.location} />
-                    </label>
-                  </div>
-
-                  <label className="mt-4 grid gap-2">
-                    <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">
-                      {isEn ? "Bio" : "Bio"}
-                    </span>
-                    <Textarea defaultValue={user.bio} />
-                  </label>
-
-                  <div className="mt-6 flex flex-wrap gap-3">
-                    <button
-                      type="button"
-                      className="rounded-2xl bg-black px-6 py-3 text-sm font-semibold text-white transition active:scale-[0.99]"
-                    >
-                      {isEn ? "Save changes" : "Enregistrer"}
-                    </button>
-                    <button
-                      type="button"
-                      className="rounded-2xl border border-black/10 bg-white px-6 py-3 text-sm font-semibold text-black hover:bg-zinc-50 transition"
-                    >
-                      {isEn ? "Cancel" : "Annuler"}
-                    </button>
-                  </div>
-                </Card>
-
-                {/* Sécurité */}
-                <Card className="p-6 shadow-none">
-                  <p className="text-sm font-semibold text-black">{isEn ? "Security" : "Sécurité"}</p>
-                  <p className="mt-2 text-sm leading-6 text-zinc-600">
-                    {isEn
-                      ? "Change your password. (UI placeholder)"
-                      : "Changez votre mot de passe. (UI placeholder)"}
-                  </p>
-
-                  <div className="mt-6 grid gap-4 sm:grid-cols-3">
-                    <label className="grid gap-2">
-                      <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">
-                        {isEn ? "Current" : "Actuel"}
-                      </span>
-                      <Input type="password" placeholder={isEn ? "Current password" : "Mot de passe actuel"} />
-                    </label>
-                    <label className="grid gap-2">
-                      <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">
-                        {isEn ? "New" : "Nouveau"}
-                      </span>
-                      <Input type="password" placeholder={isEn ? "New password" : "Nouveau mot de passe"} />
-                    </label>
-                    <label className="grid gap-2">
-                      <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">
-                        {isEn ? "Confirm" : "Confirmer"}
-                      </span>
-                      <Input type="password" placeholder={isEn ? "Confirm password" : "Confirmer"} />
-                    </label>
-                  </div>
-
-                  <div className="mt-6 flex flex-wrap gap-3">
-                    <button
-                      type="button"
-                      className="rounded-2xl bg-black px-6 py-3 text-sm font-semibold text-white transition active:scale-[0.99]"
-                    >
-                      {isEn ? "Update password" : "Mettre à jour"}
-                    </button>
-                    <button
-                      type="button"
-                      className="rounded-2xl border border-black/10 bg-white px-6 py-3 text-sm font-semibold text-black hover:bg-zinc-50 transition"
-                    >
-                      {isEn ? "Log out of other devices" : "Déconnecter les autres appareils"}
-                    </button>
-                  </div>
-                </Card>
-              </div>
+              <ProfileClient isEn={isEn} user={user} />
             </div>
           </div>
         </Container>
