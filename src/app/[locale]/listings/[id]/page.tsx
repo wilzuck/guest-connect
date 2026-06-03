@@ -83,13 +83,9 @@ export default async function Page({ params }: PageProps) {
 
               <section className="mt-10">
                 <h2 className="text-xl font-semibold tracking-tight text-black">{t("locationTitle")}</h2>
-                <div className="mt-5 rounded-3xl border border-black/10 bg-white p-5 shadow-sm shadow-black/5">
+                <div className="mt-5 rounded-3xl border border-black/10 bg-white p-3 shadow-sm shadow-black/5">
                   <MapPlaceholder location={listing.location} subtitle={t("mapSubtitle")} />
                 </div>
-              </section>
-
-              <section className="mt-10">
-                <ReviewForm />
               </section>
             </div>
 
@@ -134,11 +130,14 @@ export default async function Page({ params }: PageProps) {
           </div>
 
           <div className="mt-8">
-            <Button type="button" variant="primary" size="lg" className="rounded-2xl px-6">
+            <Button type="button" variant="secondary" size="lg" className="rounded-2xl px-6">
               <PlusIcon className="h-4 w-4" />
               {t("loadMoreReviews")}
             </Button>
           </div>
+          <section className="mt-10">
+            <ReviewForm />
+          </section>
         </Container>
       </section>
     </div>

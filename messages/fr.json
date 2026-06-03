@@ -234,7 +234,7 @@
     "back": "Retour",
     "search": "Rechercher",
     "aboutTitle": "À propos de cet hébergement",
-    "aboutBody": "Un séjour premium, sélectionné pour sa qualité d’accueil et sa clarté d’informations. Cette page est une base “Airbnb-like” : branchez-la ensuite à votre backend (photos, disponibilités, conditions, etc.).",
+    "aboutBody": "Un séjour premium, sélectionné pour sa qualité d’accueil et sa clarté d’informations. Vous trouverez ici l’essentiel : photos fidèles, caractéristiques, emplacement (approx.) et avis. Conditions et paiement sont affichés avant de confirmer, pour réserver en toute confiance. Cette page est une base “Airbnb-like” : branchez-la ensuite à votre backend (photos, disponibilités, conditions, etc.).",
     "info": {
       "flexTitle": "Arrivée flexible",
       "flexDesc": "Check-in facilité (selon disponibilité).",
