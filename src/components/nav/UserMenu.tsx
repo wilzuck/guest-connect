@@ -24,6 +24,8 @@ export function UserMenu() {
     { label: t("reservations"), href: `/${locale}/reservations` },
     { label: t("favorites"), href: `/${locale}/favorites` },
     { label: t("activities"), href: `/${locale}/activities` },
+    { label: t("messages"), href: `/${locale}/messages` },
+    { label: t("notifications"), href: `/${locale}/notifications` },
     { label: t("settings"), href: `/${locale}/settings` },
     { label: t("logout"), href: `/${locale}/logout` },
   ];

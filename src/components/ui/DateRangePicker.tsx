@@ -45,13 +45,15 @@ export function DateRangePicker({
   const locale = useLocale();
   const t = useTranslations("dateRangePicker");
   const [open, setOpen] = useState(false);
-  const [wide, setWide] = useState(false);
+  const [wide, setWide] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return window.matchMedia("(min-width: 640px)").matches;
+  });
 
   // Mobile-first : plein écran. Dès sm, popover.
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 640px)");
     const on = () => setWide(mq.matches);
-    on();
     mq.addEventListener?.("change", on);
     return () => mq.removeEventListener?.("change", on);
   }, []);
@@ -59,18 +61,11 @@ export function DateRangePicker({
   const fromProp = toDate(value?.from);
   const toProp = toDate(value?.to);
 
-  const [from, setFrom] = useState<Date | undefined>(fromProp);
-  const [to, setTo] = useState<Date | undefined>(toProp);
-
-  // Sync externe → interne
-  useEffect(() => setFrom(fromProp), [value?.from]); // eslint-disable-line react-hooks/exhaustive-deps
-  useEffect(() => setTo(toProp), [value?.to]); // eslint-disable-line react-hooks/exhaustive-deps
-
+  const from = fromProp;
+  const to = toProp;
   const selected = useMemo(() => ({ from, to }), [from, to]);
 
   function setRange(nextFrom?: Date, nextTo?: Date) {
-    setFrom(nextFrom);
-    setTo(nextTo);
     onChange({ from: toISO(nextFrom), to: toISO(nextTo) });
   }
 

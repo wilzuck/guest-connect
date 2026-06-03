@@ -14,13 +14,14 @@ export function Navbar() {
   const locale = useLocale();
   const t = useTranslations("nav");
   const pathname = usePathname() || "";
-  if (/(^|\/)(login|signup)$/.test(pathname)) return null;
+  const hide = /(^|\/)(login|signup)$/.test(pathname);
 
   const [visible, setVisible] = useState(true);
   const [elevated, setElevated] = useState(false);
   const lastY = useRef(0);
 
   useEffect(() => {
+    if (hide) return;
     lastY.current = window.scrollY;
     const onScroll = () => {
       const y = window.scrollY;
@@ -40,7 +41,9 @@ export function Navbar() {
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [hide]);
+
+  if (hide) return null;
 
   const links = [
     { label: t("accommodations"), href: `/${locale}/stays` },

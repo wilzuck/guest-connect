@@ -4,13 +4,14 @@ import { useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Calendar } from "@/components/ui/Calendar";
 import { cn } from "@/lib/utils/cn";
+import type { DateRange } from "react-day-picker";
 
 type Mode = "calendar" | "flexible";
 
 export function CalendarToolsDemo() {
   const t = useTranslations("calendarTools");
   const [mode, setMode] = useState<Mode>("calendar");
-  const [range, setRange] = useState<{ from?: Date; to?: Date }>({});
+  const [range, setRange] = useState<DateRange | undefined>(undefined);
   const [flex, setFlex] = useState<string>("weekend");
   const [month, setMonth] = useState(() => {
     const now = new Date();
@@ -60,8 +61,8 @@ export function CalendarToolsDemo() {
           <div className="max-w-full overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             <Calendar
               mode="range"
-              selected={range as any}
-              onSelect={(next) => setRange((next as any) ?? {})}
+              selected={range}
+              onSelect={setRange}
               numberOfMonths={2}
               month={month}
               onMonthChange={setMonth}
@@ -106,10 +107,4 @@ export function CalendarToolsDemo() {
       )}
     </div>
   );
-}
-
-function addMonths(d: Date, delta: number) {
-  const next = new Date(d);
-  next.setMonth(next.getMonth() + delta);
-  return next;
 }

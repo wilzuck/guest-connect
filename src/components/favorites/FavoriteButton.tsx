@@ -26,7 +26,7 @@ function writeFavorites(ids: string[]) {
 
 export function FavoriteButton({
   listingId,
-  locale,
+  locale: _locale,
   className,
 }: {
   listingId: string;
@@ -37,8 +37,12 @@ export function FavoriteButton({
   const [active, setActive] = useState(false);
 
   useEffect(() => {
-    const ids = readFavorites();
-    setActive(ids.includes(listingId));
+    // évite setState synchronisé dans l’effet (lint)
+    const t = setTimeout(() => {
+      const ids = readFavorites();
+      setActive(ids.includes(listingId));
+    }, 0);
+    return () => clearTimeout(t);
   }, [listingId]);
 
   const label = useMemo(() => (active ? t("remove") : t("add")), [active, t]);

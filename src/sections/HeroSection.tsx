@@ -1,57 +1,10 @@
 import { SearchBar } from "@/components/SearchBar";
 import { Badge } from "@/components/ui/Badge";
 import { Container } from "@/components/ui/Container";
-import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { africaListings } from "@/lib/mock/africa-listings";
 import { getLocale } from "next-intl/server";
 import { TopSearchCarousel } from "@/components/listings/TopSearchCarousel";
-import type { ReactNode } from "react";
-
-function HeroIllustration({
-  title,
-  subtitle,
-  liveLabel,
-  alt,
-  children,
-}: {
-  title: string;
-  subtitle: string;
-  liveLabel: string;
-  alt: string;
-  children?: ReactNode;
-}) {
-  return (
-    <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-black/10 bg-zinc-100 shadow-sm shadow-black/5">
-      <div className="absolute inset-0">
-        <Image
-          src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=2000&q=80"
-          alt={alt}
-          fill
-          priority
-          sizes="(max-width: 1024px) 100vw, 50vw"
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-black/0 to-black/0" />
-      </div>
-
-      {/* Zone de recherche : occupe toute la surface disponible, en gardant la marge actuelle */}
-      {children ? <div className="absolute inset-5 flex">{children}</div> : null}
-
-      <div className="absolute bottom-5 left-5 right-5 rounded-2xl border border-black/10 bg-white/80 p-4 backdrop-blur">
-        <div className="flex items-center justify-between">
-          <div>
-            <p className="text-sm font-semibold text-black">{title}</p>
-            <p className="text-xs text-zinc-600">{subtitle}</p>
-          </div>
-          <span className="inline-flex items-center rounded-full bg-black px-3 py-1 text-xs font-medium text-white">
-            {liveLabel}
-          </span>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 export async function HeroSection() {
   const t = await getTranslations("hero");

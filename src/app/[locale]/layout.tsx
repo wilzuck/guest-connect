@@ -15,7 +15,9 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const safeLocale = locales.includes(locale as any) ? (locale as (typeof locales)[number]) : "fr";
+  const safeLocale = (locales as readonly string[]).includes(locale)
+    ? (locale as (typeof locales)[number])
+    : "fr";
   // Charge explicitement le bon fichier JSON (évite les soucis de fallback/cache en dev).
   const messages = (await import(`../../../messages/${safeLocale}.json`)).default;
 

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getLocale, getTranslations } from "next-intl/server";
+import { getLocale } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card";
 
@@ -79,6 +79,27 @@ export default async function Page() {
               desc={isEn ? "Notifications and security" : "Notifications et sécurité"}
             />
           </div>
+
+          <div className="mt-10">
+            <p className="text-sm font-semibold text-black">{isEn ? "Management" : "Gestion"}</p>
+            <p className="mt-2 text-sm text-zinc-600">
+              {isEn
+                ? "Host and admin dashboards (demo)."
+                : "Accès aux espaces Hôte et Admin (démo)."}
+            </p>
+            <div className="mt-4 grid gap-4 sm:grid-cols-2">
+              <QuickLink
+                href={`/${locale}/dashboard/host`}
+                title={isEn ? "Host dashboard" : "Espace hôte"}
+                desc={isEn ? "Create and manage your listings" : "Créer et gérer vos logements"}
+              />
+              <QuickLink
+                href={`/${locale}/dashboard/admin`}
+                title={isEn ? "Admin back-office" : "Back-office admin"}
+                desc={isEn ? "Manage categories, locations, services…" : "Gérer catégories, lieux, services…"}
+              />
+            </div>
+          </div>
         </Container>
       </section>
     </div>
@@ -95,4 +116,3 @@ function QuickLink({ href, title, desc }: { href: string; title: string; desc: s
     </Link>
   );
 }
-

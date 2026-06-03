@@ -17,6 +17,8 @@
     "reservations": "Reservations",
     "favorites": "Favorites",
     "activities": "Activity",
+    "messages": "Messages",
+    "notifications": "Notifications",
     "settings": "Settings",
     "logout": "Log out"
   },
@@ -36,9 +38,11 @@
   },
   "footer": {
     "about": "About",
+    "aboutUs": "Our story",
     "company": "Company",
     "careers": "Careers",
     "press": "Press",
+    "blog": "Blog",
     "pricing": "Pricing",
     "support": "Support",
     "helpCenter": "Help Center",

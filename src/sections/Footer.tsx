@@ -19,9 +19,11 @@ export function Footer() {
     {
       title: t("about"),
       links: [
+        { label: t("aboutUs"), href: `/${locale}/about` },
         { label: t("company"), href: `/${locale}/company` },
         { label: t("careers"), href: `/${locale}/careers` },
         { label: t("press"), href: `/${locale}/press` },
+        { label: t("blog"), href: `/${locale}/blog` },
         { label: t("pricing"), href: `/${locale}/pricing` },
       ],
     },

@@ -1,0 +1,52 @@
+{
+  "meta": {
+    "version": 1,
+    "updatedAt": "2026-06-03T00:00:00.000Z"
+  },
+  "categories": [
+    { "id": "cat-guesthouse", "name": "Maison d’hôtes", "slug": "maison-dhotes" },
+    { "id": "cat-apartment", "name": "Appartement", "slug": "appartement" },
+    { "id": "cat-villa", "name": "Villa", "slug": "villa" }
+  ],
+  "locations": [
+    { "id": "loc-cotonou", "city": "Cotonou", "country": "Bénin", "countryCode": "BJ" },
+    { "id": "loc-porto-novo", "city": "Porto‑Novo", "country": "Bénin", "countryCode": "BJ" },
+    { "id": "loc-dakar", "city": "Dakar", "country": "Sénégal", "countryCode": "SN" }
+  ],
+  "services": [
+    { "id": "srv-airport", "name": "Transfert aéroport", "slug": "transfert-aeroport", "active": true },
+    { "id": "srv-chef", "name": "Chef à domicile", "slug": "chef-a-domicile", "active": true },
+    { "id": "srv-cleaning", "name": "Ménage", "slug": "menage", "active": true }
+  ],
+  "experiences": [
+    {
+      "id": "exp-cotonou-culture-04",
+      "title": "Cotonou — art & artisanat (atelier + marché)",
+      "cityId": "loc-cotonou",
+      "tag": "Culture",
+      "priceFrom": 18,
+      "currency": "EUR",
+      "rating": 4.84,
+      "reviewCount": 188,
+      "imageUrl": "https://images.unsplash.com/photo-1452860606245-08befc0ff44b?auto=format&fit=crop&w=1600&q=80",
+      "excerpt": "Découvrez l’artisanat local, rencontrez des créateurs et repartez avec une pièce unique."
+    }
+  ],
+  "listings": [
+    {
+      "id": "lst-demo-001",
+      "title": "Maison d’hôtes premium",
+      "location": "Cotonou, Bénin",
+      "cityId": "loc-cotonou",
+      "categoryId": "cat-guesthouse",
+      "pricePerNight": 55,
+      "currency": "EUR",
+      "rating": 4.9,
+      "reviewCount": 128,
+      "imageUrl": "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1600&q=80",
+      "shortDescription": "Calme, lumineux, accueil chaleureux. Idéal pour une escapade ou un voyage pro.",
+      "serviceIds": ["srv-airport", "srv-cleaning"]
+    }
+  ]
+}
+

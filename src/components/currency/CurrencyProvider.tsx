@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useContext, useMemo, useState } from "react";
 import type { CurrencyCode } from "@/lib/currency/currency";
 import { convertCurrency, formatCurrency } from "@/lib/currency/currency";
 import { useLocale } from "next-intl";
@@ -17,16 +17,15 @@ const STORAGE_KEY = "guestconnect_currency";
 
 export function CurrencyProvider({ children }: { children: React.ReactNode }) {
   const locale = useLocale();
-  const [currency, setCurrencyState] = useState<CurrencyCode>("XOF");
-
-  useEffect(() => {
+  const [currency, setCurrencyState] = useState<CurrencyCode>(() => {
     try {
       const raw = window.localStorage.getItem(STORAGE_KEY);
-      if (raw === "XOF" || raw === "XAF" || raw === "EUR" || raw === "USD") setCurrencyState(raw);
+      if (raw === "XOF" || raw === "XAF" || raw === "EUR" || raw === "USD") return raw;
     } catch {
       // ignore
     }
-  }, []);
+    return "XOF";
+  });
 
   function setCurrency(next: CurrencyCode) {
     setCurrencyState(next);
@@ -56,4 +55,3 @@ export function useCurrency() {
   if (!ctx) throw new Error("useCurrency must be used within CurrencyProvider");
   return ctx;
 }
-
