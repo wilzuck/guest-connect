@@ -60,7 +60,7 @@ export const experiences: Experience[] = [
     rating: 4.84,
     reviewCount: 188,
     tag: "Culture",
-    imageUrl: "https://images.unsplash.com/photo-1520975682031-ae9f4dbb8b76?auto=format&fit=crop&w=1600&q=80",
+    imageUrl: "https://images.unsplash.com/photo-1526481280695-3c687fd5432c?auto=format&fit=crop&w=1600&q=80",
   },
   {
     id: "exp-cape-town-nightlife-05",
@@ -111,4 +111,3 @@ export const experiences: Experience[] = [
     imageUrl: "https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&w=1600&q=80",
   },
 ];
-

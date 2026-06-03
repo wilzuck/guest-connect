@@ -75,14 +75,14 @@ export function SearchBar({ onSearch, defaultValues, variant = "auto" }: SearchB
             variant === "mobile" || variant === "compact" ? "hidden" : "",
           ].join(" ")}
         >
-          <FieldShell className="flex-[1.7]">
+          <div className="group relative flex h-14 flex-1 items-center gap-2 rounded-2xl px-4 transition-all duration-200 flex-[1.7]">
             <PinIcon className="h-4 w-4 text-zinc-400" />
             <Input
               value={destination}
               onChange={(e) => setDestination(e.target.value)}
               placeholder={t("placeholderDestination")}
               aria-label={t("ariaDestination")}
-              className="h-12 flex-1 border-0 bg-transparent px-0 shadow-none outline-none focus:ring-0 focus:border-transparent"
+              className="h-12 flex-1 border-0 bg-transparent px-0 shadow-none outline-none placeholder:text-zinc-500 focus:border-transparent focus:ring-0"
             />
             <button
               type="button"
@@ -95,7 +95,8 @@ export function SearchBar({ onSearch, defaultValues, variant = "auto" }: SearchB
             >
               <XIcon className="h-4 w-4" />
             </button>
-          </FieldShell>
+            <div className="pointer-events-none absolute inset-0 rounded-2xl ring-0 ring-black/10 transition group-focus-within:ring-2" />
+          </div>
 
           <Divider />
 
