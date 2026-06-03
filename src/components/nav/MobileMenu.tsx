@@ -2,10 +2,14 @@
 
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
-import { Dialog, DialogClose, DialogContent, DialogTrigger } from "@/components/ui/Dialog";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogTrigger,
+} from "@/components/ui/Dialog";
 import { ButtonLink } from "@/components/ui/Button";
 import { Logo } from "@/components/Logo";
-import { cn } from "@/lib/utils/cn";
 
 export function MobileMenu() {
   const locale = useLocale();
@@ -16,10 +20,9 @@ export function MobileMenu() {
     { label: t("accommodations"), href: `/${locale}/stays` },
     { label: t("destinations"), href: `/${locale}/services` },
     { label: t("experiences"), href: `/${locale}/experiences` },
-    { label: t("blog"), href: `/${locale}/blog` },
-    { label: t("about"), href: `/${locale}/about` },
     { label: t("search"), href: `/${locale}/search` },
     { label: tm("siteMap"), href: `/${locale}/plan-du-site` },
+    
   ];
 
   return (
@@ -27,136 +30,95 @@ export function MobileMenu() {
       <DialogTrigger asChild>
         <button
           type="button"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-black/10 bg-white shadow-sm shadow-black/5 hover:bg-zinc-50 transition-colors dark:border-white/10 dark:bg-zinc-950 dark:hover:bg-zinc-900 md:hidden"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white hover:bg-gray-50 transition md:hidden"
           aria-label={tm("openMenu")}
         >
-          <MenuIcon className="h-5 w-5 text-zinc-700 dark:text-zinc-200" />
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-gray-700"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
         </button>
       </DialogTrigger>
 
-      <DialogContent className="flex flex-col">
-        <div className="flex items-center justify-between gap-3">
+      <DialogContent className="flex flex-col gap-4 bg-white p-4">
+        {/* HEADER */}
+        <div className="flex items-center justify-between">
           <DialogClose asChild>
             <Link href={`/${locale}`} className="inline-flex">
               <Logo />
             </Link>
           </DialogClose>
+
           <DialogClose asChild>
             <button
               type="button"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-black/10 bg-white hover:bg-zinc-50 transition-colors dark:border-white/10 dark:bg-zinc-950 dark:hover:bg-zinc-900"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-gray-200 bg-white hover:bg-gray-50 transition"
               aria-label="Fermer le menu"
             >
-              <XIcon className="h-5 w-5 text-zinc-700 dark:text-zinc-200" />
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-gray-700"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
             </button>
           </DialogClose>
         </div>
 
-        <nav className="mt-6 flex flex-col gap-1">
+        {/* NAV */}
+        <nav className="flex flex-col gap-2 mt-2">
           {links.map((l) => (
             <DialogClose asChild key={l.href}>
               <Link
                 href={l.href}
-                className="flex items-center justify-between rounded-2xl border border-black/10 bg-white p-5 shadow-sm shadow-black/5 text-base font-medium text-zinc-800 hover:bg-zinc-50 hover:text-black transition dark:border-white/10 dark:bg-zinc-950 dark:text-zinc-200 dark:hover:bg-zinc-900 dark:hover:text-white"
+                className="flex items-center justify-between bg-white px-4 py-3 text-sm font-medium text-gray-800 hover:bg-gray-50 transition"
               >
                 <span>{l.label}</span>
-                <ChevronRight className="h-5 w-5 text-zinc-400" />
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 text-gray-400"><path d="m9 18 6-6-6-6"/></svg>
               </Link>
             </DialogClose>
           ))}
         </nav>
 
-        <div className="mt-6 grid gap-3">
+        {/* CTA SEARCH */}
+        <div className="mt-2">
           <DialogClose asChild>
-            <ButtonLink href={`/${locale}/search`} variant="primary" size="lg" className="w-full">
-              <SearchIcon className="h-4 w-4" />
+            <ButtonLink
+              href={`/${locale}/search`}
+              variant="primary"
+              size="lg"
+              className="w-full"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
               {t("search")}
             </ButtonLink>
           </DialogClose>
         </div>
 
-        <div className="mt-6 grid gap-2">
-          <p className="px-1 text-xs font-semibold uppercase tracking-[0.18em] text-zinc-500">
+        {/* ACCOUNT */}
+        <div className="mt-3 flex flex-col gap-2">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-gray-400">
             {tm("account")}
           </p>
-          <div className="grid gap-2">
-            <DialogClose asChild>
-              <ButtonLink href={`/${locale}/login`} variant="ghost" size="lg" className="w-full">
-                {tm("login")}
-              </ButtonLink>
-            </DialogClose>
-            <DialogClose asChild>
-              <ButtonLink href={`/${locale}/signup`} variant="ghost" size="lg" className="w-full">
-                {tm("signup")}
-              </ButtonLink>
-            </DialogClose>
-          </div>
+
+          <DialogClose asChild>
+            <Link
+              href={`/${locale}/login`}
+              className="w-full rounded-xl border border-gray-200 bg-white py-3 text-center text-sm font-medium text-gray-700 hover:bg-gray-50 transition"
+            >
+              {tm("login")}
+            </Link>
+          </DialogClose>
+
+          <DialogClose asChild>
+            <Link
+              href={`/${locale}/signup`}
+              className="w-full rounded-xl border border-gray-200 bg-white py-3 text-center text-sm font-medium text-gray-700 hover:bg-gray-50 transition"
+            >
+              {tm("signup")}
+            </Link>
+          </DialogClose>
         </div>
 
-        <div className="mt-auto pt-6">
-          <p className="text-xs text-zinc-500">
+        {/* FOOTER */}
+        <div className="mt-auto pt-2">
+          <p className="text-xs text-gray-400">
             {tm("tagline")}
           </p>
         </div>
       </DialogContent>
     </Dialog>
-  );
-}
-
-function MenuIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path
-        d="M4 7h16M4 12h16M4 17h16"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
-
-function XIcon({ className }: { className?: string }) {
-  return (
-    <svg className={cn(className)} viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path
-        d="M18 6 6 18M6 6l12 12"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
-
-function ChevronRight({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path
-        d="m10 17 5-5-5-5"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function SearchIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path
-        d="M11 19a8 8 0 1 1 0-16 8 8 0 0 1 0 16Z"
-        stroke="currentColor"
-        strokeWidth="1.8"
-      />
-      <path
-        d="M21 21l-4.35-4.35"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-      />
-    </svg>
   );
 }
