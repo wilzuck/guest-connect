@@ -89,7 +89,7 @@ export default async function Page() {
           <div className="grid gap-4 lg:grid-cols-12">
             {groups.map((g) => (
               <Card key={g.title} className="p-6 shadow-none lg:col-span-6">
-                <p className="text-sm font-semibold text-black">{g.title}</p>
+                <p className="text-base font-bold tracking-tight text-black sm:text-lg">{g.title}</p>
                 <ul className="mt-4 grid gap-2">
                   {g.items.map((i) => (
                     <li key={i.href} className="flex items-start justify-between gap-4">
@@ -108,4 +108,3 @@ export default async function Page() {
     </div>
   );
 }
-
