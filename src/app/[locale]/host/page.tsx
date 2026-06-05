@@ -14,7 +14,7 @@ export default async function Page() {
         <Container className="py-12 sm:py-16">
           <SectionHeading eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
           <div className="mt-8 flex flex-wrap gap-3">
-            <ButtonLink href={`/${locale}/host/new`} variant="primary" size="lg">
+            <ButtonLink href={`/${locale}/add-property`} variant="primary" size="lg">
               {t("ctaPrimary")}
             </ButtonLink>
             <ButtonLink href="#benefits" variant="outline" size="lg">

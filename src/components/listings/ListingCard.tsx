@@ -15,18 +15,22 @@ export function ListingCard({
   listing,
   variant = "plain",
   className,
+  linkable = true,
+  badge,
 }: {
-  locale: string;
+  locale?: string;
   listing: Listing;
   variant?: "plain" | "outlined";
   className?: string;
+  linkable?: boolean;
+  badge?: string;
 }) {
   const t = useTranslations("listingCard");
   const { formatFrom } = useCurrency();
   const [imgLoaded, setImgLoaded] = useState(false);
-  return (
-    <Link href={`/${locale}/listings/${listing.id}`} className={cn("block mb-6", className)}>
-      <Card
+  const normalizedLocale = locale ?? "fr";
+  const content = (
+    <Card
         className={cn(
           "group bg-white border-0 !shadow-none",
           variant === "outlined"
@@ -47,6 +51,12 @@ export function ListingCard({
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-black/0 to-black/0 opacity-80" />
 
+          {badge ? (
+            <div className="absolute left-3 top-3 rounded-full bg-black/80 px-2 py-1 text-[11px] font-semibold text-white">
+              {badge}
+            </div>
+          ) : null}
+
           {/* Favoris (sur chaque card) */}
           <div
             className="absolute right-3 top-3 z-10"
@@ -56,9 +66,14 @@ export function ListingCard({
               e.stopPropagation();
             }}
           >
-            <FavoriteButton listingId={listing.id} locale={locale} className="h-10 w-10 rounded-2xl" />
+            <FavoriteButton listingId={listing.id} locale={normalizedLocale} className="h-10 w-10 rounded-2xl" />
           </div>
         </div>
+        {listing.propertyType ? (
+          <p className="mt-3 text-xs uppercase tracking-[0.2em] text-zinc-500">
+            {listing.propertyType}
+          </p>
+        ) : null}
         {/* Info: sans padding (demandé), uniquement spacing vertical */}
         <div className="mt-3">
           <div className="flex items-start justify-between gap-4">
@@ -96,6 +111,15 @@ export function ListingCard({
           </div>
         </div>
       </Card>
+  );
+
+  if (!linkable) {
+    return <div className={cn("block mb-6", className)}>{content}</div>;
+  }
+
+  return (
+    <Link href={`/${normalizedLocale}/listings/${listing.id}`} className={cn("block mb-6", className)}>
+      {content}
     </Link>
   );
 }
