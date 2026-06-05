@@ -117,154 +117,222 @@ export function ListingFormClient({
   }
 
   return (
-    <form onSubmit={onSubmit} className="grid gap-4">
-      <Card className="p-6 shadow-none">
-        <p className="text-sm font-semibold text-black">
-          {isEdit ? "Modifier un logement" : "Créer un logement"}
-        </p>
-        <p className="mt-2 text-sm text-zinc-600">
-          Donnez l’essentiel: un titre clair, une photo premium, et une description courte orientée bénéfice.
-        </p>
+  <div >
+    <form
+      onSubmit={onSubmit}
+      className="grid grid-cols-1 gap-8 lg:grid-cols-3"
+    >
+      {/* LEFT - MAIN CONTENT */}
+      <div className="lg:col-span-2 space-y-6">
+        {/* HEADER */}
+        <div>
 
-        <div className="mt-6 grid gap-4 sm:grid-cols-2">
-          <label className="grid gap-2 sm:col-span-2">
-            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">
-              {titleLabel ?? "Titre"}
-            </span>
+          <h1 className="mt-2 text-xl font-semibold text-black">
+            {title || "Décrivez votre logement"}
+          </h1>
+
+          <p className="mt-2 text-sm text-zinc-500">
+            Un titre clair et une bonne description augmentent les réservations.
+          </p>
+        </div>
+
+        {/* TITLE + DESCRIPTION */}
+
+          <div>
+            <label className="text-xs uppercase tracking-[0.2em] text-zinc-400">
+              Titre
+            </label>
             <Input
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder="Villa avec piscine et rooftop"
-              required
+              className="mt-2"
+              placeholder="Belle villa avec vue sur l'océan"
             />
-          </label>
-
-          <label className="grid gap-2">
-            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">Ville (référence)</span>
-            <select value={cityId} onChange={(e) => setCityId(e.target.value)} className={selectClassName}>
-              {locations.map((l) => (
-                <option key={l.id} value={l.id}>
-                  {l.city}
-                  {l.country ? `, ${l.country}` : ""}
-                </option>
-              ))}
-            </select>
-            <span className="text-xs text-zinc-500">Sélectionné: {cityLabel || "—"}</span>
-          </label>
-
-          <label className="grid gap-2">
-            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">Catégorie</span>
-            <select value={categoryId} onChange={(e) => setCategoryId(e.target.value)} className={selectClassName}>
-              {categories.map((c) => (
-                <option key={c.id} value={c.id}>
-                  {c.name}
-                </option>
-              ))}
-            </select>
-            <span className="text-xs text-zinc-500">Choisie: {categoryLabel || "—"}</span>
-          </label>
-
-          <label className="grid gap-2 sm:col-span-2">
-            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">Localisation affichée</span>
-            <Input
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-              placeholder="Cotonou, Bénin"
-            />
-            <span className="text-xs text-zinc-500">
-              Optionnel: si vide, on reprend la ville sélectionnée.
-            </span>
-          </label>
-
-          <label className="grid gap-2">
-            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">Prix / nuit</span>
-            <Input type="number" value={pricePerNight} onChange={(e) => setPricePerNight(e.target.value)} min={0} step={1} />
-          </label>
-
-          <label className="grid gap-2">
-            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">Devise</span>
-            <Input value={currency} onChange={(e) => setCurrency(e.target.value)} placeholder="EUR" />
-          </label>
-
-          <label className="grid gap-2">
-            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">Note</span>
-            <Input type="number" value={rating} onChange={(e) => setRating(e.target.value)} min={0} max={5} step={0.01} />
-          </label>
-
-          <label className="grid gap-2">
-            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">Avis</span>
-            <Input type="number" value={reviewCount} onChange={(e) => setReviewCount(e.target.value)} min={0} step={1} />
-          </label>
-
-          <label className="grid gap-2 sm:col-span-2">
-            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">Image (URL)</span>
-            <Input value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} placeholder="https://images.unsplash.com/..." />
-            <span className="text-xs text-zinc-500">Idéal: une photo lumineuse, cadrage large, peu d’objets.</span>
-          </label>
-
-          <label className="grid gap-2 sm:col-span-2">
-            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">Pitch</span>
-            <Textarea value={shortDescription} onChange={(e) => setShortDescription(e.target.value)} />
-            <span className="text-xs text-zinc-500">1–2 phrases, confort + bénéfice (wifi, calme, proche centre…).</span>
-          </label>
-        </div>
-
-        <div className="mt-6">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">Services inclus</p>
-          <div className="mt-3 grid gap-2 sm:grid-cols-2">
-            {activeServices.length ? (
-              activeServices.map((s) => {
-                const checked = serviceIds.includes(s.id);
-                return (
-                  <label
-                    key={s.id}
-                    className="flex items-center justify-between gap-3 rounded-2xl border border-black/10 bg-white px-4 py-3 hover:bg-zinc-50 transition"
-                  >
-                    <span className="text-sm font-semibold text-black">{s.name}</span>
-                    <input
-                      type="checkbox"
-                      checked={checked}
-                      onChange={() => toggleService(s.id)}
-                      className="h-5 w-5 rounded border border-black/10 accent-black"
-                      aria-label={s.name}
-                    />
-                  </label>
-                );
-              })
-            ) : (
-              <p className="text-sm text-zinc-600">Aucun service actif en base.</p>
-            )}
           </div>
 
-          {serviceIds.length ? (
-            <div className="mt-3 flex flex-wrap gap-2">
-              {serviceIds.map((id) => (
-                <Badge key={id}>{services.find((s) => s.id === id)?.name ?? id}</Badge>
-              ))}
-            </div>
-          ) : (
-            <p className="mt-3 text-sm text-zinc-600">Aucun service sélectionné.</p>
-          )}
-        </div>
+          <div>
+            <label className="text-xs uppercase tracking-[0.2em] text-zinc-400">
+              Description
+            </label>
 
-        <div className="mt-6 flex flex-wrap gap-3">
+            <Textarea
+              value={shortDescription}
+              onChange={(e) => setShortDescription(e.target.value)}
+              className="mt-2 min-h-[220px] rounded-2xl border-black/10 text-sm leading-relaxed"
+              placeholder="Racontez l'histoire de votre logement..."
+            />
+
+            <p className="mt-2 text-xs text-zinc-400">
+              Écrivez comme une page d'accueil, pas comme une fiche technique.
+            </p>
+          </div>
+
+
+        {/* IMAGE */}
+          <label className="text-xs uppercase tracking-[0.2em] text-zinc-400">
+            Image URL
+          </label>
+
+          <Input
+            type="url"
+            value={imageUrl}
+            onChange={(e) => setImageUrl(e.target.value)}
+            className="mt-2"
+            placeholder="https://images.unsplash.com/..."
+          />
+
+          <p className="mt-2 text-xs text-zinc-400">
+            Utilisez une image lumineuse, grand angle et de haute qualité.
+          </p>
+
+      </div>
+
+      {/* RIGHT - CONTROL PANEL */}
+      <div className="space-y-4">
+
+        {/* ACTIONS */}
+        <Card className="p-4 rounded-3xl border border-black/5 sticky top-6 space-y-2">
           <button
             type="submit"
             disabled={pending}
-            className="inline-flex h-11 items-center justify-center rounded-2xl bg-black px-6 text-sm font-semibold text-white transition disabled:opacity-50"
+            className="w-full h-11 rounded-2xl bg-black text-white font-semibold"
           >
-            {isEdit ? "Enregistrer" : "Créer"}
+            {isEdit ? "Enregistrer les modifications" : "Publier l'annonce"}
           </button>
+
           <button
             type="button"
             onClick={() => router.push(`/${locale}${redirectTo}`)}
-            className="inline-flex h-11 items-center justify-center rounded-2xl border border-black/10 bg-white px-6 text-sm font-semibold text-black hover:bg-zinc-50 transition"
+            className="w-full h-11 rounded-2xl border border-black/10"
           >
             Annuler
           </button>
-        </div>
-      </Card>
+        </Card>
+
+        {/* LOCATION */}
+        <Card className="p-4 rounded-3xl border border-black/5 space-y-3">
+          <p className="text-xs uppercase tracking-[0.2em] text-zinc-400">
+            Localisation
+          </p>
+
+          <select
+            value={cityId}
+            onChange={(e) => setCityId(e.target.value)}
+            className={selectClassName}
+          >
+            {locations.map((l) => (
+              <option key={l.id} value={l.id}>
+                {l.city}
+              </option>
+            ))}
+          </select>
+
+          <Input
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            placeholder="Quartier"
+          />
+
+          <Input
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            placeholder="Adresse complète"
+          />
+        </Card>
+
+        {/* AVAILABILITY (DATES) */}
+        <Card className="p-4 rounded-3xl border border-black/5 space-y-3">
+          <p className="text-xs uppercase tracking-[0.2em] text-zinc-400">
+            Disponibilité
+          </p>
+
+          <div className="grid grid-cols-2 gap-2">
+            <div>
+              <p className="text-xs text-zinc-400">Début</p>
+              <Input
+                type="date"
+                value=''
+                onChange={(e) => (e.target.value)}
+                className="mt-1"
+              />
+            </div>
+
+            <div>
+              <p className="text-xs text-zinc-400">Fin</p>
+              <Input
+                type="date"
+                value=''
+                onChange={(e) => (e.target.value)}
+                className="mt-1"
+              />
+            </div>
+          </div>
+
+          <p className="text-xs text-zinc-400">
+            Définissez les périodes de disponibilité de votre logement.
+          </p>
+        </Card>
+
+        {/* CATEGORY + PRICE */}
+        <Card className="p-4 rounded-3xl border border-black/5 space-y-3">
+          <p className="text-xs uppercase tracking-[0.2em] text-zinc-400">
+            Catégorie & Tarif
+          </p>
+
+          <select
+            value={categoryId}
+            onChange={(e) => setCategoryId(e.target.value)}
+            className={selectClassName}
+          >
+            {categories.map((c) => (
+              <option key={c.id} value={c.id}>
+                {c.name}
+              </option>
+            ))}
+          </select>
+
+          <div className="grid grid-cols-2 gap-2">
+            <Input
+              type="number"
+              value={pricePerNight}
+              onChange={(e) => setPricePerNight(e.target.value)}
+              placeholder="Tarif"
+            />
+
+            <Input
+              value={currency}
+              onChange={(e) => setCurrency(e.target.value)}
+              placeholder="Devise"
+            />
+          </div>
+        </Card>
+
+        {/* SERVICES */}
+        <Card className="p-4 rounded-3xl border border-black/5">
+          <p className="text-xs uppercase tracking-[0.2em] text-zinc-400">
+            Équipements
+          </p>
+
+          <div className="mt-3 space-y-2">
+            {activeServices.map((s) => (
+              <label
+                key={s.id}
+                className="flex items-center justify-between rounded-2xl border border-black/5 px-4 py-3 hover:bg-zinc-50"
+              >
+                <span className="text-sm">{s.name}</span>
+                <input
+                  type="checkbox"
+                  checked={serviceIds.includes(s.id)}
+                  onChange={() => toggleService(s.id)}
+                />
+              </label>
+            ))}
+          </div>
+        </Card>
+
+      </div>
     </form>
-  );
+  </div>
+);
 }
 
