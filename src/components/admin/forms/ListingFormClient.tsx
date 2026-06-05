@@ -65,6 +65,8 @@ export function ListingFormClient({
       "Calme, lumineux, accueil chaleureux. Une adresse vérifiée, pensée pour le confort au quotidien.",
   );
   const [serviceIds, setServiceIds] = useState<string[]>(initial?.serviceIds ?? []);
+    const [startDate, setStartDate] = useState("");
+    const [endDate, setEndDate] = useState("");
 
   const cityLabel = useMemo(() => {
     const found = locations.find((l) => l.id === cityId);
@@ -251,8 +253,8 @@ export function ListingFormClient({
               <p className="text-xs text-zinc-400">Début</p>
               <Input
                 type="date"
-                value=''
-                onChange={(e) => (e.target.value)}
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
                 className="mt-1"
               />
             </div>
@@ -261,8 +263,8 @@ export function ListingFormClient({
               <p className="text-xs text-zinc-400">Fin</p>
               <Input
                 type="date"
-                value=''
-                onChange={(e) => (e.target.value)}
+                value={endDate}
+                onChange={(e) => setEndDate(e.target.value)}
                 className="mt-1"
               />
             </div>
