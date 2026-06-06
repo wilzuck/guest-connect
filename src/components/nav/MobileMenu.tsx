@@ -18,7 +18,7 @@ export function MobileMenu() {
 
   const links = [
     { label: t("accommodations"), href: `/${locale}/stays` },
-    { label: t("destinations"), href: `/${locale}/services` },
+    { label: t("services"), href: `/${locale}/services` },
     { label: t("experiences"), href: `/${locale}/experiences` },
     { label: t("search"), href: `/${locale}/search` },
     { label: tm("siteMap"), href: `/${locale}/plan-du-site` },

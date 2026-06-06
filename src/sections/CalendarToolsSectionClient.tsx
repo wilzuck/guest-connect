@@ -91,8 +91,8 @@ export function CalendarToolsDemo() {
                 type="button"
                 onClick={() => setFlex(o.key)}
                 className={cn(
-                  "rounded-full border border-black/10 bg-white px-4 py-2 text-sm font-semibold shadow-sm shadow-black/5 transition",
-                  flex === o.key ? "bg-black text-white" : "text-zinc-700 hover:bg-zinc-50",
+                  "rounded-full border border-black/10 px-4 py-2 text-sm font-semibold shadow-sm shadow-black/5 transition",
+                  flex === o.key ? "bg-black/80 text-white" : "text-zinc-700 hover:bg-zinc-50",
                 )}
               >
                 {o.label}

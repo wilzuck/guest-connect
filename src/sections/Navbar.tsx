@@ -47,10 +47,8 @@ export function Navbar() {
 
   const links = [
     { label: t("accommodations"), href: `/${locale}/stays` },
-    { label: t("destinations"), href: `/${locale}/services` },
+    { label: t("services"), href: `/${locale}/services` },
     { label: t("experiences"), href: `/${locale}/experiences` },
-    { label: t("blog"), href: `/${locale}/blog` },
-    { label: t("about"), href: `/${locale}/about` },
   ];
 
   return (

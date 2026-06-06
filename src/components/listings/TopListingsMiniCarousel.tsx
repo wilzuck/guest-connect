@@ -52,41 +52,49 @@ export function TopListingsMiniCarousel({ locale, items, title }: TopListingsMin
 
   return (
     <div className="relative mt-6" style={{ contain: "layout paint" }}>
+      
       {/* Container indépendant (évite les reflows sur le hero) */}
       <div className="relative -mx-[15px] px-[15px]">
-        {/* Gradients */}
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-white to-transparent dark:from-zinc-950" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-white to-transparent dark:from-zinc-950" />
-
+        
         {/* Arrows (comme la barre de filtres Explore) */}
         <button
           type="button"
           onClick={() => scrollBy(-320)}
           className={cn(
-            "absolute left-2 top-1/2 -translate-y-1/2 z-10 grid h-10 w-10 place-items-center rounded-full bg-white shadow-sm shadow-black/10 transition",
+            "absolute left-2 top-1/2 -translate-y-1/2 z-10 grid h-10 w-10 place-items-center rounded-full bg-white shadow-sm transition",
             canLeft ? "opacity-100" : "opacity-0 pointer-events-none",
           )}
           aria-label="Défiler à gauche"
           title="Défiler à gauche"
         >
-          <ChevronLeft className="h-5 w-5 text-zinc-700" />
+          <ChevronLeft className="h-5 w-5 text-zinc-700 shadow-xl" />
         </button>
         <button
           type="button"
           onClick={() => scrollBy(320)}
           className={cn(
-            "absolute right-2 top-1/2 -translate-y-1/2 z-10 grid h-10 w-10 place-items-center rounded-full bg-white shadow-sm shadow-black/10 transition",
+            ` absolute right-2 top-1/2 -translate-y-1/2 z-10 grid h-10 w-10 place-items-center rounded-full bg-white shadow-sm transition
+            `,
             canRight ? "opacity-100" : "opacity-0 pointer-events-none",
           )}
+
           aria-label="Défiler à droite"
           title="Défiler à droite"
         >
-          <ChevronRight className="h-5 w-5 text-zinc-700" />
+          <ChevronRight className="h-5 w-5 text-zinc-700 shadow-xl" />
         </button>
 
-        <div className="flex items-end justify-between gap-4">
-          <h3 className="text-sm font-semibold text-black dark:text-white">{title}</h3>
-        </div>
+        <div className="flex items-center justify-between">
+        <h2 className="text-md font-semibold">{title}</h2>
+
+        <Link
+          href={`/${locale}/stays`}
+          className="flex items-center gap-2 text-sm font-medium text-zinc-700 transition hover:text-black"
+        >
+          Voir tout
+          <ChevronRight className="h-4 w-4" />
+        </Link>
+      </div>
 
         <div
           ref={scrollerRef}
@@ -118,11 +126,11 @@ export function TopListingsMiniCarousel({ locale, items, title }: TopListingsMin
           {items.map((l) => (
             <Card
               key={l.id}
-              className="group min-w-[200px] overflow-hidden border border-black/10 bg-white !shadow-none transition hover:-translate-y-0.5 hover:!shadow-none dark:border-white/10 dark:bg-zinc-950 sm:min-w-[240px]"
+              className="group min-w-[200px] overflow-hidden border-0 bg-white !shadow-none transition hover:-translate-y-0.5 hover:!shadow-none dark:border-white/10 dark:bg-zinc-950 sm:min-w-[240px]"
               style={{ scrollSnapAlign: "start" }}
             >
               <Link href={`/${locale}/listings/${l.id}`} className="block">
-                <div className="relative h-20 w-full overflow-hidden bg-zinc-100 dark:bg-zinc-900">
+                <div className="relative h-25 rounded-xl w-full overflow-hidden bg-zinc-100 dark:bg-zinc-900">
                   <Image
                     src={l.imageUrl}
                     alt={l.title}
@@ -131,9 +139,15 @@ export function TopListingsMiniCarousel({ locale, items, title }: TopListingsMin
                     sizes="240px"
                   />
                 </div>
-                <div className="p-2">
-                  <p className="truncate text-sm font-semibold text-black dark:text-white">{l.title}</p>
-                  <p className="mt-1 truncate text-xs text-zinc-600 dark:text-zinc-400">{l.location}</p>
+                <div className="py-2">
+                  <p className="truncate text-xs font-semibold text-black dark:text-white">{l.title}</p>
+                 <div className="flex items-center justify-between gap-2">
+                  <p className="truncate text-xs text-zinc-600 dark:text-zinc-400">{l.location}</p>
+                  <div className="flex items-center">
+                    <span className="text-sm font-bold text-black dark:text-white">{l.pricePerNight} {String(l.currency ?? "€")}</span>
+                    <span className="text-xs text-zinc-600 dark:text-zinc-400">/nuit</span>
+                  </div>
+                 </div>
                 </div>
               </Link>
             </Card>

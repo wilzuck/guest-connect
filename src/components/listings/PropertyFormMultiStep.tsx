@@ -220,7 +220,7 @@ export function PropertyFormMultiStep() {
       <form onSubmit={handleSubmit}>
         <div className="grid gap-10 lg:grid-cols-12 lg:items-start">
           {/* Colonne gauche: Formulaire */}
-          <div className="lg:col-span-6 lg:order-1">
+          <div className="lg:col-span-8 lg:order-1">
             <Stepper
               steps={STEPS}
               currentStep={currentStep}
@@ -584,21 +584,20 @@ export function PropertyFormMultiStep() {
                     </p>
                     <p className="text-xs text-green-800">
                       Votre propriété sera visible aux voyageurs immédiatement
-                      après la soumission.
+                      après sa validation.
                     </p>
                   </Card>
                 </div>
               )}
 
               {/* Navigation */}
-              <div className="mt-8 flex gap-3">
+              <div className="mt-8 flex gap-3 justify-between">
                 <Button
                   type="button"
                   variant="secondary"
                   size="lg"
                   onClick={handlePrev}
                   disabled={currentStep === 0}
-                  className="flex-1"
                 >
                   ← Précédent
                 </Button>
@@ -607,7 +606,6 @@ export function PropertyFormMultiStep() {
                   <Button
                     type="submit"
                     size="lg"
-                    className="flex-1"
                   >
                     Publier la propriété
                   </Button>
@@ -616,7 +614,6 @@ export function PropertyFormMultiStep() {
                     type="button"
                     size="lg"
                     onClick={handleNext}
-                    className="flex-1"
                   >
                     Suivant →
                   </Button>
@@ -626,7 +623,7 @@ export function PropertyFormMultiStep() {
           </div>
 
           {/* Colonne droite: Prévisualisation */}
-          <div className="lg:col-span-6 lg:order-2">
+          <div className="lg:col-span-4 lg:order-2">
             <div className="sticky top-24">
               <div className="mb-4">
                 <p className="text-xs font-semibold uppercase tracking-wide text-zinc-600">

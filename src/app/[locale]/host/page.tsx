@@ -23,7 +23,7 @@ export default async function Page() {
           </div>
         </Container>
       </section>
-
+      
       <section className="bg-white">
         <Container className="py-12 sm:py-14">
           <h2 className="text-xl font-semibold tracking-tight text-black">{t("stepsTitle")}</h2>

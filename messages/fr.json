@@ -1,7 +1,7 @@
 {
   "nav": {
     "accommodations": "Hébergements",
-    "destinations": "Destinations",
+    "services": "Services",
     "experiences": "Expériences",
     "blog": "Blog",
     "about": "À propos",
@@ -27,7 +27,7 @@
   "hero": {
     "badge": "Séjours vérifiés · Hôtes de confiance · Paiements sécurisés",
     "title": "Trouvez et réservez la maison d’hôtes idéale, partout",
-    "subtitle": "GuestConnect aide les voyageurs à découvrir des maisons d’hôtes authentiques avec une expérience premium, inspirée d’Airbnb et Booking.",
+    "subtitle": "Séjours authentiques, hôtes passionnés, expériences inoubliables.",
     "note": "Pas de frais cachés. Avis transparents. Confirmation instantanée.",
     "ctaSearch": "Rechercher",
     "ctaHost": "Devenir hôte",
@@ -184,7 +184,7 @@
   },
   "authPages": {
     "login": {
-      "title": "Bon retour",
+      "title": "Connexion",
       "subtitle": "Connecte-toi pour réserver, sauvegarder et gérer tes séjours.",
       "footerText": "Pas de compte ?",
       "footerLink": "Créer un compte"

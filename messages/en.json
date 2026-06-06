@@ -1,7 +1,7 @@
 {
   "nav": {
     "accommodations": "Stays",
-    "destinations": "Destinations",
+    "services": "Services",
     "experiences": "Experiences",
     "blog": "Blog",
     "about": "About",
@@ -27,7 +27,7 @@
   "hero": {
     "badge": "Verified stays · Trusted hosts · Secure payments",
     "title": "Find and book the perfect guest house, anywhere",
-    "subtitle": "GuestConnect helps travelers discover authentic guest houses with a premium experience inspired by Airbnb and Booking.",
+    "subtitle": "Authentic stays, passionate hosts, unforgettable experiences",
     "note": "No hidden fees. Transparent reviews. Instant confirmations.",
     "ctaSearch": "Search",
     "ctaHost": "Become a host",
@@ -346,7 +346,7 @@
     "perNight": "/ night"
   },
   "destinationsPage": {
-    "eyebrow": "Destinations",
+    "eyebrow": "Services",
     "title": "Where are you going?",
     "description": "Browse popular cities and start your search in one click.",
     "popularTitle": "Popular destinations",

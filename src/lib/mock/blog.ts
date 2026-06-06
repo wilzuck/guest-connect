@@ -50,7 +50,7 @@ export const blogPosts: BlogPost[] = [
     date: "2026-04-11",
     readingTime: "7 min",
     coverImage:
-      "https://images.unsplash.com/photo-1542317854-ec13b5a58783?auto=format&fit=crop&w=1600&q=80",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1600&q=80",
     tags: ["Destinations", "Dakar", "Guide"],
     content: [
       "Jour 1: commencez par une balade douce, puis un déjeuner simple dans une adresse qui travaille des produits frais. L’objectif: prendre le rythme de la ville sans vouloir tout faire.",

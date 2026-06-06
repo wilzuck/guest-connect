@@ -22,7 +22,7 @@ export function ListingLightbox({
   const [loaded, setLoaded] = useState<Record<string, boolean>>({});
 
   const slides = useMemo(() => images.map((src) => ({ src, alt: title })), [images, title]);
-  const remaining = Math.max(0, images.length - 3); // 3 images affichées (1 + 2)
+  const remaining = Math.max(0, images.length - 2); // 3 images affichées (1 + 2)
 
   function openAt(i: number) {
     setIndex(i);

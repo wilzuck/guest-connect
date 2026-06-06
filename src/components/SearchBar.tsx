@@ -8,6 +8,7 @@ import type { SearchParams } from "@/types/search";
 import { useLocale } from "next-intl";
 import { useTranslations } from "next-intl";
 import { DateRangePicker } from "@/components/ui/DateRangePicker";
+import Divider from "@/components/ui/Divider";
 
 type SearchBarProps = {
   onSearch?: (params: SearchParams) => void | Promise<void>;
@@ -71,18 +72,18 @@ export function SearchBar({ onSearch, defaultValues, variant = "auto" }: SearchB
           className={[
             "items-stretch gap-2 rounded-2xl bg-white p-1",
             variant === "desktop" ? "flex" : "",
-            variant === "auto" ? "hidden md:flex" : "",
+            variant === "auto" ? "md:flex" : "",
             variant === "mobile" || variant === "compact" ? "hidden" : "",
           ].join(" ")}
         >
-          <div className="group relative flex h-14 flex-1 items-center gap-2 rounded-2xl px-4 transition-all duration-200 flex-[1.7]">
+          <div className="group relative flex h-14 flex-1 border border-black/10 items-center gap-2 rounded-xl px-4 transition-all duration-200 flex-[1.7]">
             <PinIcon className="h-4 w-4 text-zinc-400" />
             <Input
               value={destination}
               onChange={(e) => setDestination(e.target.value)}
               placeholder={t("placeholderDestination")}
               aria-label={t("ariaDestination")}
-              className="h-11 w-full rounded-xl bg-white px-4 text-sm text-black placeholder:text-zinc-500 transition h-12 min-w-0 flex-1 border-0 bg-transparent px-0 !shadow-none outline-none placeholder:text-zinc-500 focus:border-transparent"
+              className="h-11 w-full rounded-md bg-white px-4 text-sm text-black placeholder:text-zinc-500 transition h-12 min-w-0 flex-1 border-0 bg-transparent px-0 !shadow-none outline-none placeholder:text-zinc-500 focus:border-transparent"
             />
             <button
               type="button"
@@ -97,9 +98,8 @@ export function SearchBar({ onSearch, defaultValues, variant = "auto" }: SearchB
             </button>
           </div>
 
-          <Divider />
 
-          <div className="flex-[1.8]">
+          <div className=" border border-black/10 my-2 md:my-0 rounded-xl  transition-all duration-200 flex-[1.8]">
             <DateRangePicker
               value={{
                 from: checkIn || undefined,
@@ -114,9 +114,8 @@ export function SearchBar({ onSearch, defaultValues, variant = "auto" }: SearchB
             />
           </div>
 
-          <Divider />
 
-          <FieldShell className="flex-[0.85]">
+          <FieldShell className=" border border-black/10 rounded-xl px-2 transition-all duration-200 flex-[0.85]">
             <div className="grid">
               <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-zinc-500">
                 {t("guests")}
@@ -132,6 +131,7 @@ export function SearchBar({ onSearch, defaultValues, variant = "auto" }: SearchB
               >
                 −
               </button>
+              
               <button
                 type="button"
                 className="grid h-9 w-9 place-items-center rounded-full bg-black/[0.04] text-black transition hover:bg-black/[0.08] active:scale-[0.96]"
@@ -145,7 +145,7 @@ export function SearchBar({ onSearch, defaultValues, variant = "auto" }: SearchB
 
           <Button
             type="submit"
-            className="h-14 rounded-2xl px-6 justify-center transition active:scale-[0.99] md:min-w-[160px]"
+            className="h-14 w-full md:w-fit mt-4 md:mt-0 rounded-xl px-6 justify-center transition active:scale-[0.99] md:min-w-[160px]"
           >
             <SearchIcon className="h-4 w-4" />
             {t("search")}
@@ -172,7 +172,7 @@ export function SearchBar({ onSearch, defaultValues, variant = "auto" }: SearchB
               onChange={(e) => setDestination(e.target.value)}
               placeholder={t("placeholderDestination")}
               aria-label={t("ariaDestination")}
-              className="h-11 w-full rounded-xl bg-white px-4 text-sm text-black placeholder:text-zinc-500 transition h-12 min-w-0 flex-1 border-0 bg-transparent px-0 !shadow-none outline-none placeholder:text-zinc-500 focus:border-transparent"
+              className="h-12 w-full min-w-0 flex-1 border-0 bg-transparent px-0 !shadow-none outline-none text-sm text-black placeholder:text-zinc-500 transition focus:border-transparent"
             />
             <button
               type="button"
@@ -227,7 +227,7 @@ export function SearchBar({ onSearch, defaultValues, variant = "auto" }: SearchB
               </button>
             </div>
           </FieldShell>
-
+          
           <Button
             type="submit"
             className={[
@@ -242,10 +242,6 @@ export function SearchBar({ onSearch, defaultValues, variant = "auto" }: SearchB
       </div>
     </form>
   );
-}
-
-function Divider() {
-  return <div className="my-2 w-px bg-black/5" />;
 }
 
 function FieldShell({ children, className }: { children: React.ReactNode; className?: string }) {

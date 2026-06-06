@@ -101,7 +101,6 @@ export default async function ListingPage({ params }: PageProps) {
                 <InfoCard title="Support" desc="Assistance 24/7 (voyageurs & hôtes)." />
               </div>
             </div>
-
             <div className="lg:col-span-5">
               <Card className="sticky top-24 p-6">
                 <p className="text-sm text-zinc-600">À partir de</p>

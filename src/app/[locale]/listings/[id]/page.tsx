@@ -25,7 +25,7 @@ export default async function Page({ params }: PageProps) {
 
   return (
     <div className="bg-white">
-      <Container className="py-10 sm:py-14">
+      <Container className="py-5 sm:py-8">
         <div className="flex flex-col gap-10">
           {/* Header */}
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
@@ -53,7 +53,7 @@ export default async function Page({ params }: PageProps) {
             <div className="flex items-center justify-end gap-2">
               <Link 
                 href={`/${locale}/blog`} 
-                className="rounded-2xl border border-black/10 bg-white px-4 py-2 text-sm font-semibold text-zinc-600 transition hover:bg-zinc-50 hover:text-black"
+                className="rounded-2xl  bg-white px-4 py-2 text-sm font-semibold text-zinc-600 transition hover:bg-zinc-50 hover:text-black"
               >
                 ← Retour au blog
               </Link>

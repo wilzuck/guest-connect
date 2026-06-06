@@ -61,7 +61,7 @@ export function FavoriteButton({
       aria-label={label}
       title={label}
       className={cn(
-        "grid h-11 w-11 place-items-center rounded-2xl border border-black/10 bg-white shadow-sm shadow-black/10 transition hover:bg-zinc-50 active:scale-[0.98]",
+        "grid h-10 w-10 place-items-center rounded-xl border border-black/10 bg-white shadow-sm shadow-black/10 transition hover:bg-zinc-50 active:scale-[0.98]",
         className,
       )}
     >

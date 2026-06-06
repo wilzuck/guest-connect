@@ -35,7 +35,6 @@ export default async function Page() {
       items: [
         { label: "Notre histoire", href: `/${locale}/about` },
         { label: "Blog", href: `/${locale}/blog` },
-        { label: "Presse", href: `/${locale}/press` },
         { label: "Sécurité", href: `/${locale}/safety` },
         { label: "Centre d’aide", href: `/${locale}/support` },
         { label: "Contact", href: `/${locale}/contact` },

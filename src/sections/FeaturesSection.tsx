@@ -242,6 +242,7 @@ export async function FeaturesSection() {
               ? "A premium experience inspired by the best travel marketplaces and modern SaaS design."
               : "Une expérience premium, orientée conversion, inspirée des meilleurs marketplaces et des SaaS modernes."
           }
+          className="max-w-xl"
         />
 
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

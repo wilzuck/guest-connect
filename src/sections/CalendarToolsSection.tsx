@@ -10,7 +10,7 @@ export async function CalendarToolsSection() {
     <section className="bg-white">
       <Container className="py-16 sm:py-20">
         <div className="grid gap-10 lg:grid-cols-12 lg:items-start">
-          <div className="lg:col-span-5">
+          <div className="lg:col-span-6">
             <SectionHeading eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
             <ul className="mt-8 grid gap-3 text-sm text-zinc-600">
               <li className="flex gap-2">
@@ -28,7 +28,7 @@ export async function CalendarToolsSection() {
             </ul>
           </div>
 
-          <div className="lg:col-span-7">
+          <div className="lg:col-span-6">
             <CalendarToolsDemo />
           </div>
         </div>

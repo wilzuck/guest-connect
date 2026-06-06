@@ -1,56 +1,125 @@
 import { SearchBar } from "@/components/SearchBar";
 import { Badge } from "@/components/ui/Badge";
 import { Container } from "@/components/ui/Container";
-import { getTranslations } from "next-intl/server";
-import { africaListings } from "@/lib/mock/africa-listings";
-import { getLocale } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { TopSearchCarousel } from "@/components/listings/TopSearchCarousel";
+import { africaListings } from "@/lib/mock/africa-listings";
+import {
+  ShieldCheck,
+  RefreshCcw,
+  BadgeCheck,
+  Star,
+  SeparatorHorizontal,
+} from "lucide-react";
+import Divider from "@/components/ui/Divider";
 
 export async function HeroSection() {
   const t = await getTranslations("hero");
   const locale = await getLocale();
+
   return (
-    <section id="top" className="relative overflow-hidden">
-      <div className="absolute inset-0 -z-10">
-        <div className="pointer-events-none absolute left-1/2 top-[-160px] h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-gradient-to-br from-fuchsia-500/20 via-pink-500/10 to-transparent blur-3xl animate-blob" />
-      </div>
+    <section className="relative overflow-hidden">
+      <div className="relative min-h-80 lg:min-h-[350px]">
+        {/* Background image */}
+        <div className="absolute inset-0">
+          <img
+            src="https://plus.unsplash.com/premium_photo-1733259774864-ee718f86b9b2?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y290b25vdXxlbnwwfHwwfHx8MA%3D%3D"
+            alt="Guest house"
+            className="h-full w-full object-cover bg-center"
+          />
 
-      <Container className="py-14 sm:py-20">
-        {/* Main headline section */}
-        <div className="grid gap-8">
-          <div className="max-w-3xl">
-            <Badge>{t("badge")}</Badge>
-            <h1 className="mt-5 text-balance text-3xl font-semibold tracking-tight text-black sm:text-5xl lg:text-6xl">
-              {t("title")}
-            </h1>
-            <p className="mt-5 max-w-xl text-pretty text-base leading-7 text-zinc-600 sm:block sm:text-lg">
-              {t("subtitle")}
-            </p>
-            <p className="mt-6 text-xs text-zinc-500">{t("note")}</p>
-          </div>
+          <div className="absolute inset-0 bg-black/50" />
 
-          {/* Search Bar pleine largeur */}
-          <div className="mt-2 w-full">
-            <SearchBar variant="auto" />
-          </div>
+          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/35 to-transparent" />
         </div>
 
-        {/* Ligne 2 : carousel */}
-        <div className="mt-10">
-          {/* Section indépendante pour que le scroll horizontal ne perturbe pas le reste */}
-          <div className="mt-6 overflow-hidden" style={{ contain: "layout paint" }}>
-            <TopSearchCarousel locale={locale} items={africaListings.slice(0, 6)} />
+        <Container className="relative z-10 pt-10 pb-12 lg:pt-16">
+          <div className="max-w-3xl">
+            <Badge>
+              <ShieldCheck className="size-4 mr-0.5" /> {t("badge")}
+            </Badge>
+
+            <h1 className="mt-6 text-balance text-4xl font-semibold leading-none text-white sm:text-4xl lg:text-5xl">
+              {t("title")}
+            </h1>
+
+            <p className="my-6 max-w-2xl text-lg leading-8 text-white/85">
+              {t("subtitle")}
+            </p>
           </div>
+        </Container>
+      </div>
+      <Container className="-mt-22 relative z-20">
+        {/* Search */}
+        <div className="mt-10 rounded-3xl bg-white  shadow-lg">
+          <SearchBar variant="auto" />
+        </div>
+      </Container>
+      <Container className="mt-8">
+        {/* Trust indicators */}
+        <div className="flex items-center justify-between gap-4 overflow-x-auto rounded-2xl p-5 backdrop-blur-md">
+          <TrustItem
+            icon={<ShieldCheck className="size-6" />}
+            title="Paiement sécurisé"
+            subtitle="Transactions protégées"
+          />
+
+          <Divider />
+
+          <TrustItem
+            icon={<RefreshCcw className="size-6" />}
+            title="Annulation flexible"
+            subtitle="Conditions claires"
+          />
+
+          <Divider />   
+
+          <TrustItem
+            icon={<BadgeCheck className="size-6" />}
+            title="Hôtes vérifiés"
+            subtitle="Profils contrôlés"
+          />
+
+          <Divider />
+
+          <TrustItem
+            icon={<Star className="size-6" />}
+            title="Avis 5 étoiles"
+            subtitle="+1200 voyageurs"
+          />
+        </div>
+      </Container>
+      {/* Carousel */}
+      <Container className=" pb-10 relative z-20">
+        <div className="" style={{ contain: "layout paint" }}>
+          <TopSearchCarousel
+            locale={locale}
+            items={africaListings.slice(0, 6)}
+          />
         </div>
       </Container>
     </section>
   );
 }
 
-function Star({ className }: { className?: string }) {
+function TrustItem({
+  icon,
+  title,
+  subtitle,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  subtitle: string;
+}) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.7 1.2 6.6L12 17.9 6.1 20.8l1.2-6.6-4.8-4.7 6.6-.9L12 2.5Z" />
-    </svg>
+    <div className="flex gap-3">
+      <div className="mt-1">{icon}</div>
+
+      <div>
+        <p className="text-sm font-medium">{title}</p>
+
+        <p className="text-xs text-black/70">{subtitle}</p>
+      </div>
+    </div>
   );
 }
