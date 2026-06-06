@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
@@ -50,6 +51,12 @@ export default async function Page({ params }: PageProps) {
 
             {/* Action: favoris (en haut à droite) */}
             <div className="flex items-center justify-end gap-2">
+              <Link 
+                href={`/${locale}/blog`} 
+                className="rounded-2xl border border-black/10 bg-white px-4 py-2 text-sm font-semibold text-zinc-600 transition hover:bg-zinc-50 hover:text-black"
+              >
+                ← Retour au blog
+              </Link>
               <FavoriteButton listingId={listing.id} locale={locale} />
             </div>
           </div>

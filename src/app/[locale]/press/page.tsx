@@ -129,7 +129,7 @@ export default async function Page() {
       {/* Articles (liste) */}
       <div>
         <p className="text-sm font-semibold text-black">{isEn ? "Latest articles" : "Derniers articles"}</p>
-        <div className="mt-4 grid gap-3 md:grid-cols-2">
+        <div className="mt-4 grid gap-3 md:grid-cols-3">
           {posts.map((p) => (
             <Link key={p.slug} href={`/${locale}/press?post=${encodeURIComponent(p.slug)}`} className="block">
               <Card className="p-6 shadow-none transition hover:bg-zinc-50">
@@ -142,7 +142,7 @@ export default async function Page() {
         </div>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-12">
+      <div className="grid gap-6 lg:grid-cols-12 mt-10">
         <div className="lg:col-span-7">
           <Card className="p-6">
             <p className="text-sm font-semibold text-black">{isEn ? "About GuestConnect" : "À propos de GuestConnect"}</p>

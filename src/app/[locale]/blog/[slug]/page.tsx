@@ -16,7 +16,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   return (
     <div className="bg-white">
       <section className="border-b border-black/5 bg-white">
-        <Container className="py-10 sm:py-14">
+        <Container className="py-10 max-w-2xl sm:py-14">
           <Link href={`/${locale}/blog`} className="text-sm font-semibold text-zinc-600 hover:text-black transition">
             ← Retour au blog
           </Link>
@@ -38,7 +38,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       </section>
 
       <section className="bg-white">
-        <Container className="py-12 sm:py-14">
+        <Container className="py-12  max-w-2xl sm:py-14 ">
           <Card className="overflow-hidden p-0 shadow-none">
             <div className="relative aspect-[16/9] w-full">
               <Image
