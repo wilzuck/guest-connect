@@ -26,7 +26,6 @@ function writeFavorites(ids: string[]) {
 
 export function FavoriteButton({
   listingId,
-  locale: _locale,
   className,
 }: {
   listingId: string;

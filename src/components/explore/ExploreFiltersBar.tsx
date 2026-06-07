@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import type { ReactNode } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils/cn";
 import { useTranslations } from "next-intl";
@@ -13,7 +14,15 @@ export type ExploreFilterChip = {
   title?: string;
 };
 
-export function ExploreFiltersBar({ chips, className }: { chips: ExploreFilterChip[]; className?: string }) {
+export function ExploreFiltersBar({
+  chips,
+  className,
+  leading,
+}: {
+  chips: ExploreFilterChip[];
+  className?: string;
+  leading?: ReactNode;
+}) {
   const scrollerRef = useRef<HTMLDivElement | null>(null);
   const [canLeft, setCanLeft] = useState(false);
   const [canRight, setCanRight] = useState(false);
@@ -52,7 +61,9 @@ export function ExploreFiltersBar({ chips, className }: { chips: ExploreFilterCh
   }
 
   return (
-    <div className={cn("relative -mx-[15px] px-[15px]", className)}>
+    <div className={cn("relative -mx-[15px] flex items-center gap-2 px-[15px]", className)}>
+      {leading ? <div className="relative z-20 shrink-0 bg-white pr-1">{leading}</div> : null}
+
       {/* Gradients */}
       <div className="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-white to-transparent" />
       <div className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-white to-transparent" />
@@ -62,7 +73,8 @@ export function ExploreFiltersBar({ chips, className }: { chips: ExploreFilterCh
         type="button"
         onClick={() => scrollBy(-320)}
         className={cn(
-          "hidden md:grid absolute left-2 top-1/2 -translate-y-1/2 z-10 h-10 w-10 place-items-center rounded-full bg-white shadow-sm shadow-black/10 transition",
+          "hidden md:grid absolute top-1/2 -translate-y-1/2 z-10 h-10 w-10 place-items-center rounded-full bg-white shadow-sm shadow-black/10 transition",
+          leading ? "left-32" : "left-2",
           canLeft ? "opacity-100" : "opacity-0 pointer-events-none",
         )}
         aria-label={t("scrollLeft")}
@@ -107,7 +119,7 @@ export function ExploreFiltersBar({ chips, className }: { chips: ExploreFilterCh
         onPointerCancel={() => {
           dragRef.current.active = false;
         }}
-        className="flex items-center gap-2 overflow-x-auto whitespace-nowrap py-1 overscroll-x-contain select-none md:cursor-grab md:active:cursor-grabbing [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="flex min-w-0 flex-1 items-center gap-2 overflow-x-auto whitespace-nowrap py-1 overscroll-x-contain select-none md:cursor-grab md:active:cursor-grabbing [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         style={{ touchAction: "pan-x" }}
       >
         {chips.map((c, idx) => {

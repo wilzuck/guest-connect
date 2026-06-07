@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { Card } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
-import { Badge } from "@/components/ui/Badge";
 
 type Option = { id: string; name: string };
 type LocationOption = { id: string; city: string; country?: string };
@@ -54,8 +53,8 @@ export function ListingFormClient({
   const [categoryId, setCategoryId] = useState(initial?.categoryId ?? (categories[0]?.id ?? ""));
   const [pricePerNight, setPricePerNight] = useState(String(initial?.pricePerNight ?? 55));
   const [currency, setCurrency] = useState(initial?.currency ?? "EUR");
-  const [rating, setRating] = useState(String(initial?.rating ?? 4.9));
-  const [reviewCount, setReviewCount] = useState(String(initial?.reviewCount ?? 120));
+  const [rating] = useState(String(initial?.rating ?? 4.9));
+  const [reviewCount] = useState(String(initial?.reviewCount ?? 120));
   const [imageUrl, setImageUrl] = useState(
     initial?.imageUrl ??
       "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1600&q=80",
@@ -73,8 +72,6 @@ export function ListingFormClient({
     if (!found) return "";
     return `${found.city}${found.country ? `, ${found.country}` : ""}`;
   }, [locations, cityId]);
-
-  const categoryLabel = useMemo(() => categories.find((c) => c.id === categoryId)?.name ?? "", [categories, categoryId]);
 
   const activeServices = useMemo(() => services.filter((s) => s.active !== false), [services]);
 
@@ -130,7 +127,7 @@ export function ListingFormClient({
         <div>
 
           <h1 className="mt-2 text-xl font-semibold text-black">
-            {title || "Décrivez votre logement"}
+            {title || titleLabel || "Décrivez votre logement"}
           </h1>
 
           <p className="mt-2 text-sm text-zinc-500">
@@ -165,7 +162,7 @@ export function ListingFormClient({
             />
 
             <p className="mt-2 text-xs text-zinc-400">
-              Écrivez comme une page d'accueil, pas comme une fiche technique.
+              Écrivez comme une page d&apos;accueil, pas comme une fiche technique.
             </p>
           </div>
 
@@ -199,7 +196,7 @@ export function ListingFormClient({
             disabled={pending}
             className="w-full h-11 rounded-2xl bg-black text-white font-semibold"
           >
-            {isEdit ? "Enregistrer les modifications" : "Publier l'annonce"}
+            {isEdit ? "Enregistrer les modifications" : "Publier l’annonce"}
           </button>
 
           <button

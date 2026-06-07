@@ -8,7 +8,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/Popover
 import { Dialog, DialogClose, DialogContent, DialogTrigger } from "@/components/ui/Dialog";
 import { Calendar } from "@/components/ui/Calendar";
 import { cn } from "@/lib/utils/cn";
-import { Calendar1, CalendarCheck, Users } from "lucide-react";
+import { Calendar1 } from "lucide-react";
 
 type RangeValue = {
   from?: string; // ISO YYYY-MM-DD

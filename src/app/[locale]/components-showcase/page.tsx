@@ -157,7 +157,7 @@ export default function ComponentsShowcasePage() {
             <Card className="border-red-200 bg-red-50 p-6">
               <p className="text-sm font-semibold text-red-900">Card Error</p>
               <p className="mt-2 text-xs text-red-800">
-                Avec fond rouge pour les messages d'erreur
+                Avec fond rouge pour les messages d&apos;erreur
               </p>
             </Card>
           </div>

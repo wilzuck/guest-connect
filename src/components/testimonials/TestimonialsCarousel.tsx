@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Card } from "@/components/ui/Card";
 import { cn } from "@/lib/utils/cn";
 
@@ -22,8 +22,6 @@ export function TestimonialsCarousel({ items }: TestimonialsCarouselProps) {
     startX: 0,
     startScrollLeft: 0,
   });
-
-  const pages = useMemo(() => Math.max(1, items.length), [items.length]);
 
   function scrollToIndex(index: number) {
     const el = scrollerRef.current;

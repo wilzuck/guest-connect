@@ -1,9 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import Link from "next/link";
 import { useLocale } from "next-intl";
-import { Container } from "@/components/ui/Container";
 import { africaListings } from "@/lib/mock/africa-listings";
 import { ListingCard } from "@/components/listings/ListingCard";
 import { AccountShell } from "@/components/account/AccountShell";

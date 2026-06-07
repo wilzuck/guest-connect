@@ -1,35 +1,15 @@
 import { UserAccessTable } from "@/components/admin/UserAccessTable";
+import { PERMISSION_LABELS, ROLE_LABELS, ROLE_PERMISSIONS, type UserRole } from "@/lib/auth/access-control";
 
-const roles = [
-  {
-    id: "role-admin",
-    name: "Administrateur",
-    email: "Accès complet",
-    role: "Tous modules",
-    status: "Actif",
-  },
-  {
-    id: "role-host",
-    name: "Hôte",
-    email: "Logements, réservations",
-    role: "Création limitée",
-    status: "Actif",
-  },
-  {
-    id: "role-reviewer",
-    name: "Validateur",
-    email: "Validation des annonces",
-    role: "Publication",
-    status: "Actif",
-  },
-  {
-    id: "role-service-manager",
-    name: "Gestionnaire services",
-    email: "Catalogue services",
-    role: "Services uniquement",
-    status: "Actif",
-  },
-];
+const roleOrder: UserRole[] = ["admin", "host", "reviewer", "service_manager", "support", "traveler"];
+
+const roles = roleOrder.map((role) => ({
+  id: `role-${role}`,
+  name: ROLE_LABELS[role],
+  email: ROLE_PERMISSIONS[role].map((permission) => PERMISSION_LABELS[permission]).join(", "),
+  role: `${ROLE_PERMISSIONS[role].length} droits`,
+  status: "Actif",
+}));
 
 export default function Page() {
   return (

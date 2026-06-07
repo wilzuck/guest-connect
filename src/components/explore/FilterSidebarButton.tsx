@@ -22,9 +22,11 @@ export type FilterSidebarSection = {
 export function FilterSidebarButton({
   sections,
   label = "Filtre",
+  resetHref,
 }: {
   sections: FilterSidebarSection[];
   label?: string;
+  resetHref?: string;
 }) {
   return (
     <Dialog>
@@ -38,11 +40,11 @@ export function FilterSidebarButton({
         </button>
       </DialogTrigger>
 
-      <DialogContent className="flex w-[calc(100vw-24px)] max-w-md flex-col overflow-hidden bg-white p-0">
+      <DialogContent className="flex h-[min(780px,calc(100dvh-24px))] w-[calc(100vw-24px)] max-w-lg flex-col overflow-hidden bg-white p-0">
         <div className="flex items-center justify-between border-b border-black/10 px-5 py-4">
           <div>
             <p className="text-base font-semibold text-black">{label}</p>
-            <p className="mt-1 text-xs text-zinc-500">Affinez les résultats affichés</p>
+            <p className="mt-1 text-xs text-zinc-500">Prix, capacité, équipements et disponibilités</p>
           </div>
           <DialogClose asChild>
             <button
@@ -55,21 +57,21 @@ export function FilterSidebarButton({
           </DialogClose>
         </div>
 
-        <div className="grid gap-6 overflow-y-auto px-5 py-5">
+        <div className="grid flex-1 content-start gap-4 overflow-y-auto bg-zinc-50 px-4 py-4">
           {sections.map((section) => (
-            <section key={section.title}>
+            <section key={section.title} className="rounded-2xl border border-black/10 bg-white p-4">
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">
                 {section.title}
               </p>
-              <div className="mt-3 grid gap-2">
+              <div className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
                 {section.options.map((option) => (
                   <DialogClose asChild key={option.href}>
                     <Link
                       href={option.href}
                       className={
                         option.active
-                          ? "rounded-2xl border border-black bg-black px-4 py-3 text-white"
-                          : "rounded-2xl border border-black/10 bg-white px-4 py-3 text-black transition hover:bg-zinc-50"
+                          ? "rounded-xl border border-black bg-black px-4 py-3 text-white"
+                          : "rounded-xl border border-black/10 bg-white px-4 py-3 text-black transition hover:bg-zinc-50"
                       }
                     >
                       <span className="block text-sm font-semibold">{option.label}</span>
@@ -84,6 +86,23 @@ export function FilterSidebarButton({
               </div>
             </section>
           ))}
+        </div>
+
+        <div className="flex items-center justify-between gap-3 border-t border-black/10 bg-white px-5 py-4">
+          {resetHref ? (
+            <DialogClose asChild>
+              <Link href={resetHref} className="text-sm font-semibold text-zinc-600 hover:text-black">
+                Réinitialiser
+              </Link>
+            </DialogClose>
+          ) : (
+            <span />
+          )}
+          <DialogClose asChild>
+            <button type="button" className="rounded-2xl bg-black px-5 py-3 text-sm font-semibold text-white">
+              Voir les résultats
+            </button>
+          </DialogClose>
         </div>
       </DialogContent>
     </Dialog>

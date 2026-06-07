@@ -20,6 +20,12 @@ import {
   Users,
 } from "lucide-react";
 import { Button, ButtonLink } from "@/components/ui/Button";
+import {
+  ROLE_LABELS,
+  filterByPermissions,
+  getCurrentUserAccess,
+  type Permission,
+} from "@/lib/auth/access-control";
 import { cn } from "@/lib/utils/cn";
 import type { ReactNode } from "react";
 
@@ -27,6 +33,7 @@ type NavItem = {
   href: string;
   label: string;
   icon: typeof LayoutDashboard;
+  permission?: Permission;
 };
 
 export function AdminShell({
@@ -37,31 +44,37 @@ export function AdminShell({
   children: ReactNode;
 }) {
   const pathname = usePathname() || "";
+  const currentUser = getCurrentUserAccess();
 
   const mainNav: NavItem[] = [
-    { href: `/${locale}/dashboard/admin`, label: "Vue d'ensemble", icon: LayoutDashboard },
-    { href: `/${locale}/dashboard/admin/listings`, label: "Logements", icon: Building2 },
-    { href: `/${locale}/dashboard/admin/categories`, label: "Catégories", icon: FolderTree },
-    { href: `/${locale}/dashboard/admin/locations`, label: "Lieux", icon: MapPin },
-    { href: `/${locale}/dashboard/admin/services`, label: "Services", icon: BriefcaseBusiness },
-    { href: `/${locale}/dashboard/admin/experiences`, label: "Expériences", icon: Sparkles },
+    { href: `/${locale}/dashboard/admin`, label: "Vue d'ensemble", icon: LayoutDashboard, permission: "admin.read" },
+    { href: `/${locale}/dashboard/admin/listings`, label: "Logements", icon: Building2, permission: "listings.manage" },
+    { href: `/${locale}/dashboard/admin/categories`, label: "Catégories", icon: FolderTree, permission: "categories.manage" },
+    { href: `/${locale}/dashboard/admin/locations`, label: "Lieux", icon: MapPin, permission: "locations.manage" },
+    { href: `/${locale}/dashboard/admin/services`, label: "Services", icon: BriefcaseBusiness, permission: "services.manage" },
+    { href: `/${locale}/dashboard/admin/experiences`, label: "Expériences", icon: Sparkles, permission: "experiences.manage" },
   ];
 
   const accessNav: NavItem[] = [
-    { href: `/${locale}/dashboard/admin/users`, label: "Utilisateurs", icon: Users },
-    { href: `/${locale}/dashboard/admin/roles`, label: "Rôles", icon: ShieldCheck },
-    { href: `/${locale}/dashboard/admin/permissions`, label: "Droits", icon: FileQuestion },
+    { href: `/${locale}/dashboard/admin/users`, label: "Utilisateurs", icon: Users, permission: "users.manage" },
+    { href: `/${locale}/dashboard/admin/roles`, label: "Rôles", icon: ShieldCheck, permission: "roles.manage" },
+    { href: `/${locale}/dashboard/admin/permissions`, label: "Droits", icon: FileQuestion, permission: "permissions.manage" },
   ];
 
   const docsNav: NavItem[] = [
-    { href: `/${locale}/support`, label: "Support", icon: LifeBuoy },
-    { href: `/${locale}/dashboard/admin/docs/usage`, label: "Documentation", icon: BookOpen },
-    { href: `/${locale}/dashboard/admin/docs/best-practices`, label: "Bonnes pratiques", icon: Sparkles },
+    { href: `/${locale}/support`, label: "Support", icon: LifeBuoy, permission: "docs.read" },
+    { href: `/${locale}/dashboard/admin/docs/usage`, label: "Documentation", icon: BookOpen, permission: "docs.read" },
+    { href: `/${locale}/dashboard/admin/docs/best-practices`, label: "Bonnes pratiques", icon: Sparkles, permission: "docs.read" },
   ];
 
+  const visibleMainNav = filterByPermissions(mainNav, currentUser);
+  const visibleAccessNav = filterByPermissions(accessNav, currentUser);
+  const visibleDocsNav = filterByPermissions(docsNav, currentUser);
+  const visibleMobileNav = [...visibleMainNav, ...visibleAccessNav, ...visibleDocsNav];
+
   return (
-    <div className="min-h-dvh">
-      <div className="mx-auto flex min-h-dvh border-x border-t border-[#E8E8EC] bg-white">
+    <div className="min-h-dvh w-full">
+      <div className="flex min-h-dvh w-full max-w-none border-t border-[#E8E8EC] bg-white">
         <aside className="hidden w-[256px] shrink-0 border-r border-[#E8E8EC] bg-[#F7F7F8] lg:flex lg:flex-col">
           <div className="flex h-16 items-center justify-between px-4">
             <Link href={`/${locale}/dashboard/admin`} className="flex items-center gap-2">
@@ -86,15 +99,15 @@ export function AdminShell({
           </div>
 
           <nav className="flex-1 overflow-y-auto px-3">
-            <NavGroup title="Main menu" items={mainNav} pathname={pathname} />
-            <NavGroup title="Accès" items={accessNav} pathname={pathname} />
-            <NavGroup title="Support / Documentation" items={docsNav} pathname={pathname} />
+            <NavGroup title="Main menu" items={visibleMainNav} pathname={pathname} />
+            <NavGroup title="Accès" items={visibleAccessNav} pathname={pathname} />
+            <NavGroup title="Support / Documentation" items={visibleDocsNav} pathname={pathname} />
           </nav>
 
           <div className="m-3 rounded-xl border border-[#E8E8EC] bg-white p-3">
             <p className="text-xs font-semibold text-[#202024]">Admin workspace</p>
             <p className="mt-1 text-xs leading-5 text-[#8E8E93]">
-              Gérez les contenus visibles sur GuestConnect.
+              {currentUser.name} - {ROLE_LABELS[currentUser.role]}
             </p>
           </div>
         </aside>
@@ -126,7 +139,7 @@ export function AdminShell({
 
           <div className="border-b border-[#E8E8EC] bg-[#F7F7F8] px-3 py-2 lg:hidden">
             <div className="flex gap-2 overflow-x-auto">
-              {[...mainNav, ...accessNav, ...docsNav].map((item) => (
+              {visibleMobileNav.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
@@ -138,7 +151,7 @@ export function AdminShell({
             </div>
           </div>
 
-          <main className="min-w-0 flex-1 bg-white p-4 lg:p-6">{children}</main>
+          <main className="min-w-0 flex-1 bg-white px-4 py-4 lg:px-6 lg:py-6">{children}</main>
         </div>
       </div>
     </div>
@@ -154,6 +167,8 @@ function NavGroup({
   items: NavItem[];
   pathname: string;
 }) {
+  if (items.length === 0) return null;
+
   return (
     <div className="pb-5">
       <p className="px-3 pb-2 text-[11px] font-medium uppercase tracking-[0.12em] text-[#A4A4AA]">

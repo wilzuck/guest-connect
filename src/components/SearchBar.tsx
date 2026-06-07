@@ -8,7 +8,6 @@ import type { SearchParams } from "@/types/search";
 import { useLocale } from "next-intl";
 import { useTranslations } from "next-intl";
 import { DateRangePicker } from "@/components/ui/DateRangePicker";
-import Divider from "@/components/ui/Divider";
 import { Calendar1, Users } from "lucide-react";
 
 type SearchBarProps = {

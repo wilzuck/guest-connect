@@ -1,4 +1,4 @@
-import { MarketingPageLayout } from "@/components/layout/MarketingPageLayout";
+import Image from "next/image";
 import { ConversationSidebar } from "@/components/messages/ConversationSidebar";
 import { ConversationView } from "@/components/messages/ConversationView";
 import { Container } from "@/components/ui/Container";
@@ -23,10 +23,12 @@ export default function MessagesPage() {
           />
 
           <aside className="hidden border-l border-zinc-200 p-6 lg:block">
-            <img
+            <Image
               src={selectedThread.coverImage}
-              className="h-52 w-full rounded-2xl object-cover"
               alt=""
+              width={640}
+              height={416}
+              className="h-52 w-full rounded-2xl object-cover"
             />
 
             <h3 className="mt-5 font-semibold">

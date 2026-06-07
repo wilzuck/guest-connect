@@ -4,14 +4,20 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils/cn";
 import { useLocale, useTranslations } from "next-intl";
+import {
+  filterByPermissions,
+  getCurrentUserAccess,
+  type Permission,
+} from "@/lib/auth/access-control";
 
-type UserMenuItem = { label: string; href: string };
+type UserMenuItem = { label: string; href: string; permission?: Permission };
 
 export function UserMenu() {
   const locale = useLocale();
   const t = useTranslations("userMenu");
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement | null>(null);
+  const currentUser = getCurrentUserAccess();
 
   const primary: UserMenuItem[] = [
     { label: t("login"), href: `/${locale}/login` },
@@ -19,18 +25,20 @@ export function UserMenu() {
   ];
 
   const account: UserMenuItem[] = [
-    { label: t("dashboard"), href: `/${locale}/dashboard` },
-    { label: "Administration", href: `/${locale}/dashboard/admin` },
-    { label: "Gestion de mes services", href: `/${locale}/dashboard/admin/services` },
+    { label: t("dashboard"), href: `/${locale}/dashboard`, permission: "dashboard.read" },
+    { label: "Administration", href: `/${locale}/dashboard/admin`, permission: "admin.read" },
+    { label: "Gestion de mes services", href: `/${locale}/dashboard/admin/services`, permission: "services.manage" },
     { label: t("profile"), href: `/${locale}/profile` },
-    { label: t("reservations"), href: `/${locale}/reservations` },
-    { label: t("favorites"), href: `/${locale}/favorites` },
+    { label: t("reservations"), href: `/${locale}/reservations`, permission: "reservations.read" },
+    { label: t("favorites"), href: `/${locale}/favorites`, permission: "favorites.read" },
     { label: t("activities"), href: `/${locale}/activities` },
-    { label: t("messages"), href: `/${locale}/messages` },
+    { label: t("messages"), href: `/${locale}/messages`, permission: "messages.read" },
     { label: t("notifications"), href: `/${locale}/notifications` },
     { label: t("settings"), href: `/${locale}/settings` },
     { label: t("logout"), href: `/${locale}/logout` },
   ];
+
+  const visibleAccount = filterByPermissions(account, currentUser);
 
   useEffect(() => {
     function onDocClick(e: MouseEvent) {
@@ -67,7 +75,7 @@ export function UserMenu() {
         <div className="p-2">
           <MenuSection title={t("account")} items={primary} onSelect={() => setOpen(false)} />
           <div className="my-2 h-px bg-black/5" />
-          <MenuSection title={t("space")} items={account} onSelect={() => setOpen(false)} />
+          <MenuSection title={t("space")} items={visibleAccount} onSelect={() => setOpen(false)} />
         </div>
       </div>
     </div>

@@ -5,7 +5,16 @@
 
 import type { PropertyFormData, FormValidationResult } from "@/types/forms";
 
-export const ValidationRules = {
+type ValidationRule = {
+  required?: boolean;
+  minLength?: number;
+  maxLength?: number;
+  min?: number;
+  max?: number;
+  pattern?: RegExp;
+};
+
+export const ValidationRules: Partial<Record<keyof PropertyFormData, ValidationRule>> = {
   propertyName: {
     required: true,
     minLength: 3,
@@ -81,16 +90,16 @@ export const ValidationRules = {
     min: 0,
     max: 100,
   },
-} as const;
+} satisfies Partial<Record<keyof PropertyFormData, ValidationRule>>;
 
 /**
  * Valide un champ unique
  */
 export function validateField(
   field: keyof PropertyFormData,
-  value: any,
+  value: PropertyFormData[keyof PropertyFormData] | undefined,
 ): string | null {
-  const rules = ValidationRules[field as keyof typeof ValidationRules] as any;
+  const rules = ValidationRules[field];
   if (!rules) return null;
 
   // Champs requis

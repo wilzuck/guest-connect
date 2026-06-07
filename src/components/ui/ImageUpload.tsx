@@ -25,7 +25,7 @@ export function ImageUpload({
   const [error, setError] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const validateFiles = (files: File[]): File[] => {
+  const validateFiles = useCallback((files: File[]): File[] => {
     const maxSizeInBytes = maxSizeInMB * 1024 * 1024;
     const validFiles: File[] = [];
 
@@ -44,7 +44,7 @@ export function ImageUpload({
     }
 
     return validFiles.slice(0, maxFiles - previews.length);
-  };
+  }, [maxFiles, maxSizeInMB, previews.length]);
 
   const handleFiles = useCallback((files: File[]) => {
     const validFiles = validateFiles(files);
@@ -58,7 +58,7 @@ export function ImageUpload({
     onPreviewsChange?.(updatedPreviews);
     onFilesSelected?.(validFiles);
     setError(null);
-  }, [previews, maxFiles, maxSizeInMB, onFilesSelected, onPreviewsChange]);
+  }, [previews, validateFiles, onFilesSelected, onPreviewsChange]);
 
   const handleDrag = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();

@@ -1,14 +1,19 @@
 import type { Metadata } from "next";
-import { getLocale } from "next-intl/server";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { SearchBar } from "@/components/SearchBar";
 import { ButtonLink } from "@/components/ui/Button";
 import { africaListings } from "@/lib/mock/africa-listings";
-import type { Listing } from "@/types/listing";
 import { ListingCard } from "@/components/listings/ListingCard";
 import { FilterSidebarButton } from "@/components/explore/FilterSidebarButton";
+import { ExploreFiltersBar } from "@/components/explore/ExploreFiltersBar";
+import {
+  applyListingFilters,
+  buildListingChips,
+  buildListingFilterSections,
+  type ListingFilterParams,
+} from "@/lib/listings/listing-filters";
 
 export const metadata: Metadata = {
   title: "Recherche — GuestConnect",
@@ -16,55 +21,21 @@ export const metadata: Metadata = {
 };
 
 type PageProps = {
-  searchParams: Promise<{
-    destination?: string;
+  searchParams: Promise<ListingFilterParams & {
     checkIn?: string;
     checkOut?: string;
-    guests?: string;
-    price?: string;
-    sort?: string;
   }>;
 };
-
-function buildHref(locale: string, sp: Record<string, string | undefined>) {
-  const params = new URLSearchParams();
-  for (const [key, value] of Object.entries(sp)) {
-    if (value) params.set(key, value);
-  }
-  const qs = params.toString();
-  return `/${locale}/search${qs ? `?${qs}` : ""}`;
-}
 
 export default async function Page({ searchParams }: PageProps) {
   const locale = await getLocale();
   const t = await getTranslations("searchPage");
   const sp = await searchParams;
-
   const destination = sp.destination?.trim() ?? "";
   const guests = sp.guests ? Number(sp.guests) : 2;
-  const price = sp.price ?? "all";
-  const sort = sp.sort ?? "recommended";
-
-  let filtered: Listing[] = destination
-    ? africaListings.filter((l) =>
-        `${l.title} ${l.location}`.toLowerCase().includes(destination.toLowerCase()),
-      )
-    : africaListings;
-
-  if (price !== "all") {
-    filtered =
-      price === "budget"
-        ? filtered.filter((l) => l.pricePerNight <= 50)
-        : price === "mid"
-          ? filtered.filter((l) => l.pricePerNight > 50 && l.pricePerNight <= 80)
-          : filtered.filter((l) => l.pricePerNight > 80);
-  }
-
-  filtered.sort((a, b) => {
-    if (sort === "price") return a.pricePerNight - b.pricePerNight;
-    if (sort === "rating") return b.rating - a.rating;
-    return b.rating * 10 + b.reviewCount / 10 - (a.rating * 10 + a.reviewCount / 10);
-  });
+  const filtered = applyListingFilters(africaListings, sp);
+  const filterSections = buildListingFilterSections({ locale, path: "search", params: sp });
+  const filterChips = buildListingChips(locale, "search", sp);
 
   return (
     <div className="bg-white">
@@ -90,42 +61,25 @@ export default async function Page({ searchParams }: PageProps) {
 
       <section className="bg-white">
         <Container className="py-12 sm:py-14">
-          <div className="flex items-end justify-between gap-4">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <p className="text-sm font-medium text-zinc-600">
               {t("results", { count: filtered.length })}
               {destination ? t("resultsFor", { destination }) : ""}
             </p>
-            <div className="flex items-center gap-2">
-              <FilterSidebarButton
-                sections={[
-                  {
-                    title: "Budget",
-                    options: [
-                      { href: buildHref(locale, { ...sp, price: "all" }), active: price === "all", label: "Tous les prix" },
-                      { href: buildHref(locale, { ...sp, price: "budget" }), active: price === "budget", label: "Budget" },
-                      { href: buildHref(locale, { ...sp, price: "mid" }), active: price === "mid", label: "Intermédiaire" },
-                      { href: buildHref(locale, { ...sp, price: "high" }), active: price === "high", label: "Premium" },
-                    ],
-                  },
-                  {
-                    title: "Tri",
-                    options: [
-                      { href: buildHref(locale, { ...sp, sort: "recommended" }), active: sort === "recommended", label: "Recommandé" },
-                      { href: buildHref(locale, { ...sp, sort: "rating" }), active: sort === "rating", label: "Mieux notés" },
-                      { href: buildHref(locale, { ...sp, sort: "price" }), active: sort === "price", label: "Prix bas" },
-                    ],
-                  },
-                ]}
-              />
-              <ButtonLink href={`/${locale}/stays`} variant="outline" size="sm">
-                {t("browseByInterests")}
-              </ButtonLink>
-            </div>
+            <ButtonLink href={`/${locale}/stays`} variant="outline" size="sm" className="w-fit">
+              {t("browseByInterests")}
+            </ButtonLink>
           </div>
 
+          <ExploreFiltersBar
+            className="mt-5"
+            leading={<FilterSidebarButton sections={filterSections} resetHref={`/${locale}/search`} />}
+            chips={filterChips}
+          />
+
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
-            {filtered.map((l) => (
-              <ListingCard key={l.id} locale={locale} listing={l} />
+            {filtered.map((listing) => (
+              <ListingCard key={listing.id} locale={locale} listing={listing} />
             ))}
           </div>
         </Container>

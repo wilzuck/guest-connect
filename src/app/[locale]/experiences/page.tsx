@@ -6,6 +6,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { experiences } from "@/lib/mock/experiences";
 import { ExperienceCard } from "@/components/experiences/ExperienceCard";
 import { FilterSidebarButton } from "@/components/explore/FilterSidebarButton";
+import { ExploreFiltersBar } from "@/components/explore/ExploreFiltersBar";
 
 export const metadata: Metadata = {
   title: "Expériences — GuestConnect",
@@ -31,51 +32,41 @@ export default async function Page({ searchParams }: PageProps) {
     { key: "Business", label: t("tagBusiness") },
   ];
 
-  const filtered = activeTag === "all" ? experiences : experiences.filter((e) => e.tag === activeTag);
+  const filtered = activeTag === "all" ? experiences : experiences.filter((experience) => experience.tag === activeTag);
 
   return (
     <div className="bg-white">
       <section className="border-b border-black/5 bg-white">
         <Container className="py-10 sm:py-14">
           <SectionHeading eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
-          <div className="mt-8 flex flex-wrap gap-2">
-            <FilterSidebarButton
-              sections={[
-                {
-                  title: "Expériences",
-                  options: tags.map((tag) => ({
-                    href:
-                      tag.key === "all"
-                        ? `/${locale}/experiences`
-                        : `/${locale}/experiences?tag=${encodeURIComponent(tag.key)}`,
-                    active: activeTag === tag.key,
-                    label: tag.key === "all" ? "Toutes les expériences" : tag.label,
-                  })),
-                },
-              ]}
-            />
-            {tags.map((tag) => {
-              if (tag.key === "all") return null;
-              const href =
-                tag.key === "all"
-                  ? `/${locale}/experiences`
-                  : `/${locale}/experiences?tag=${encodeURIComponent(tag.key)}`;
-              const active = activeTag === tag.key;
-              return (
-                <Link
-                  key={tag.key}
-                  href={href}
-                  className={
-                    active
-                      ? "rounded-full bg-black px-4 py-2 text-sm font-semibold text-white"
-                      : "rounded-full bg-zinc-100 px-4 py-2 text-sm font-semibold text-zinc-700 hover:bg-zinc-200 hover:text-black"
-                  }
-                >
-                  {tag.label}
-                </Link>
-              );
-            })}
-          </div>
+          <ExploreFiltersBar
+            className="mt-8"
+            leading={
+              <FilterSidebarButton
+                resetHref={`/${locale}/experiences`}
+                sections={[
+                  {
+                    title: "Expériences",
+                    options: tags.map((tag) => ({
+                      href:
+                        tag.key === "all"
+                          ? `/${locale}/experiences`
+                          : `/${locale}/experiences?tag=${encodeURIComponent(tag.key)}`,
+                      active: activeTag === tag.key,
+                      label: tag.key === "all" ? "Toutes les expériences" : tag.label,
+                    })),
+                  },
+                ]}
+              />
+            }
+            chips={tags
+              .filter((tag) => tag.key !== "all")
+              .map((tag) => ({
+                href: `/${locale}/experiences?tag=${encodeURIComponent(tag.key)}`,
+                active: activeTag === tag.key,
+                label: tag.label,
+              }))}
+          />
         </Container>
       </section>
 
@@ -89,12 +80,11 @@ export default async function Page({ searchParams }: PageProps) {
           </div>
 
           <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
-            {filtered.map((e) => (
-              <ExperienceCard key={e.id} experience={e} />
+            {filtered.map((experience) => (
+              <ExperienceCard key={experience.id} experience={experience} />
             ))}
           </div>
 
-          {/* Bloc éditorial (50/50) */}
           <div className="mt-14 grid gap-8 lg:grid-cols-12 lg:items-center">
             <div className="lg:col-span-6">
               <h2 className="text-2xl font-semibold tracking-tight text-black">{t("promoTitle")}</h2>

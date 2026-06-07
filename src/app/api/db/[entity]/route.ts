@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { assertEntity, newId, readDb, writeDb } from "@/lib/server/db";
+import { validateListingPayload } from "@/lib/server/listing-validation";
 
 export const dynamic = "force-dynamic";
 
@@ -22,13 +23,15 @@ export async function POST(req: Request, { params }: { params: Promise<{ entity:
   const { entity } = await params;
   assertEntity(entity);
   const payload = (await req.json()) as Record<string, unknown>;
+  const validation = entity === "listings" ? validateListingPayload(payload, "create") : { ok: true as const, data: payload };
+  if (!validation.ok) return NextResponse.json({ errors: validation.errors }, { status: 400 });
 
   const db = await readDb();
   const arr = (db[entity] ?? []) as Array<Record<string, unknown>>;
 
   const item = {
     id: typeof payload.id === "string" && payload.id.trim() ? payload.id.trim() : newId(PREFIX[entity] ?? "id"),
-    ...payload,
+    ...validation.data,
   };
 
   arr.push(item);

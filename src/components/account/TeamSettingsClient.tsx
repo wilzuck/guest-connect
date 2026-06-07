@@ -1,6 +1,7 @@
 // components/account/TeamSettingsClient.tsx
 "use client";
 
+import Image from "next/image";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button"; // suppose que tu as ce composant
 
@@ -32,7 +33,7 @@ export default function TeamSettingsClient({ isEn }: { isEn: boolean }) {
       <Card className="p-6">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h3 className="text-lg font-semibold">Teams you are on</h3>
+            <h3 className="text-lg font-semibold">{isEn ? "Teams you are on" : "Vos équipes"}</h3>
             <p className="text-sm text-zinc-500">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
           </div>
           <Button className="bg-blue-600 hover:bg-blue-700">Join Another Team</Button>
@@ -72,9 +73,11 @@ export default function TeamSettingsClient({ isEn }: { isEn: boolean }) {
           {teamMembers.map((member) => (
             <div key={member.id} className="flex items-center justify-between py-3 border-b last:border-none group">
               <div className="flex items-center gap-3">
-                <img
+                <Image
                   src={member.avatar}
                   alt={member.name}
+                  width={36}
+                  height={36}
                   className="w-9 h-9 rounded-full object-cover"
                 />
                 <div>

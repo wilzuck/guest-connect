@@ -5,6 +5,7 @@ import { ThemeProvider } from "next-themes";
 import { NextIntlClientProvider } from "next-intl";
 import { CurrencyProvider } from "@/components/currency/CurrencyProvider";
 import type { ReactNode } from "react";
+import type { AbstractIntlMessages } from "next-intl";
 
 export function Providers({
   locale,
@@ -12,7 +13,7 @@ export function Providers({
   children,
 }: {
   locale: string;
-  messages: any;
+  messages: AbstractIntlMessages;
   children: ReactNode;
 }) {
   return (

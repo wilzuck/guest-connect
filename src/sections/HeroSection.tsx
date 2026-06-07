@@ -1,4 +1,5 @@
 import { SearchBar } from "@/components/SearchBar";
+import Image from "next/image";
 import { Badge } from "@/components/ui/Badge";
 import { Container } from "@/components/ui/Container";
 import { getLocale, getTranslations } from "next-intl/server";
@@ -9,7 +10,6 @@ import {
   RefreshCcw,
   BadgeCheck,
   Star,
-  SeparatorHorizontal,
 } from "lucide-react";
 import Divider from "@/components/ui/Divider";
 
@@ -22,9 +22,12 @@ export async function HeroSection() {
       <div className="relative min-h-80 lg:min-h-[350px]">
         {/* Background image */}
         <div className="absolute inset-0">
-          <img
+          <Image
             src="https://plus.unsplash.com/premium_photo-1733259774864-ee718f86b9b2?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y290b25vdXxlbnwwfHwwfHx8MA%3D%3D"
             alt="Guest house"
+            fill
+            priority
+            sizes="100vw"
             className="h-full w-full object-cover bg-center"
           />
 

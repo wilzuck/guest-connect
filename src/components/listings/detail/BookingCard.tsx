@@ -9,7 +9,6 @@ import type { CurrencyCode } from "@/lib/currency/currency";
 
 export function BookingCard({
   locale,
-  listingId,
   pricePerNight,
   currency,
 }: {
