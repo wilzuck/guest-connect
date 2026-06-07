@@ -8,6 +8,7 @@ import { africaListings } from "@/lib/mock/africa-listings";
 import { ListingCard } from "@/components/listings/ListingCard";
 import { FilterSidebarButton } from "@/components/explore/FilterSidebarButton";
 import { ExploreFiltersBar } from "@/components/explore/ExploreFiltersBar";
+import { CatalogEmptyState } from "@/components/explore/CatalogEmptyState";
 import {
   applyListingFilters,
   buildListingChips,
@@ -77,11 +78,19 @@ export default async function Page({ searchParams }: PageProps) {
             chips={filterChips}
           />
 
-          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
-            {filtered.map((listing) => (
-              <ListingCard key={listing.id} locale={locale} listing={listing} />
-            ))}
-          </div>
+          {filtered.length > 0 ? (
+            <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+              {filtered.map((listing) => (
+                <ListingCard key={listing.id} locale={locale} listing={listing} />
+              ))}
+            </div>
+          ) : (
+            <CatalogEmptyState
+              title="Aucun résultat pour cette recherche"
+              description="Essayez une autre destination ou retirez quelques filtres de capacité, budget ou équipements."
+              resetHref={`/${locale}/search`}
+            />
+          )}
         </Container>
       </section>
     </div>

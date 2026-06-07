@@ -61,7 +61,10 @@ export function ExploreFiltersBar({
   }
 
   return (
-    <div className={cn("relative -mx-[15px] flex items-center gap-2 px-[15px]", className)}>
+    <nav
+      className={cn("relative -mx-[15px] flex items-center gap-2 px-[15px]", className)}
+      aria-label="Filtres rapides"
+    >
       {leading ? <div className="relative z-20 shrink-0 bg-white pr-1">{leading}</div> : null}
 
       {/* Gradients */}
@@ -129,6 +132,7 @@ export function ExploreFiltersBar({
               key={c.href ?? `c-${idx}`}
               href={c.href ?? "#"}
               title={c.title ?? c.label}
+              aria-current={c.active ? "page" : undefined}
               className={
                 c.active
                   ? "rounded-full bg-black px-4 py-2 text-sm font-semibold text-white"
@@ -140,7 +144,7 @@ export function ExploreFiltersBar({
           );
         })}
       </div>
-    </div>
+    </nav>
   );
 }
 

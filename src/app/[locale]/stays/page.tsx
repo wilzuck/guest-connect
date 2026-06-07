@@ -6,6 +6,7 @@ import { africaListings } from "@/lib/mock/africa-listings";
 import { ListingCard } from "@/components/listings/ListingCard";
 import { ExploreFiltersBar } from "@/components/explore/ExploreFiltersBar";
 import { FilterSidebarButton } from "@/components/explore/FilterSidebarButton";
+import { CatalogEmptyState } from "@/components/explore/CatalogEmptyState";
 import {
   applyListingFilters,
   buildListingChips,
@@ -54,11 +55,23 @@ export default async function Page({ searchParams }: PageProps) {
             chips={filterChips}
           />
 
-          <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-            {items.map((listing) => (
-              <ListingCard key={listing.id} locale={locale} listing={listing} variant="outlined" />
-            ))}
-          </div>
+          <p className="mt-5 text-sm font-medium text-zinc-600">
+            {items.length} hébergement(s) trouvé(s)
+          </p>
+
+          {items.length > 0 ? (
+            <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+              {items.map((listing) => (
+                <ListingCard key={listing.id} locale={locale} listing={listing} variant="outlined" />
+              ))}
+            </div>
+          ) : (
+            <CatalogEmptyState
+              title="Aucun hébergement ne correspond à ces filtres"
+              description="Essayez d’élargir votre budget, de réduire le nombre de chambres ou de retirer un équipement."
+              resetHref={`/${locale}/stays`}
+            />
+          )}
         </Container>
       </section>
     </div>

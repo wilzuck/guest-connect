@@ -7,6 +7,7 @@ import { experiences } from "@/lib/mock/experiences";
 import { ExperienceCard } from "@/components/experiences/ExperienceCard";
 import { FilterSidebarButton } from "@/components/explore/FilterSidebarButton";
 import { ExploreFiltersBar } from "@/components/explore/ExploreFiltersBar";
+import { CatalogEmptyState } from "@/components/explore/CatalogEmptyState";
 
 export const metadata: Metadata = {
   title: "Expériences — GuestConnect",
@@ -79,11 +80,19 @@ export default async function Page({ searchParams }: PageProps) {
             </Link>
           </div>
 
-          <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
-            {filtered.map((experience) => (
-              <ExperienceCard key={experience.id} experience={experience} />
-            ))}
-          </div>
+          {filtered.length > 0 ? (
+            <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+              {filtered.map((experience) => (
+                <ExperienceCard key={experience.id} experience={experience} />
+              ))}
+            </div>
+          ) : (
+            <CatalogEmptyState
+              title="Aucune expérience dans cette catégorie"
+              description="Explorez toutes les expériences ou choisissez une autre catégorie."
+              resetHref={`/${locale}/experiences`}
+            />
+          )}
 
           <div className="mt-14 grid gap-8 lg:grid-cols-12 lg:items-center">
             <div className="lg:col-span-6">
