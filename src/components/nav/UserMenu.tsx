@@ -20,6 +20,8 @@ export function UserMenu() {
 
   const account: UserMenuItem[] = [
     { label: t("dashboard"), href: `/${locale}/dashboard` },
+    { label: "Administration", href: `/${locale}/dashboard/admin` },
+    { label: "Gestion de mes services", href: `/${locale}/dashboard/admin/services` },
     { label: t("profile"), href: `/${locale}/profile` },
     { label: t("reservations"), href: `/${locale}/reservations` },
     { label: t("favorites"), href: `/${locale}/favorites` },

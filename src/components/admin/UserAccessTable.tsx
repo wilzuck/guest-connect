@@ -1,0 +1,98 @@
+import { Filter, Pencil, Plus, Search, Trash2 } from "lucide-react";
+import { Button, ButtonLink } from "@/components/ui/Button";
+
+type AccessRow = {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+  status: string;
+};
+
+export function UserAccessTable({
+  title,
+  description,
+  addLabel,
+  rows,
+}: {
+  title: string;
+  description: string;
+  addLabel: string;
+  rows: AccessRow[];
+}) {
+  return (
+    <section className="grid gap-4">
+      <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
+        <div>
+          <h1 className="text-xl font-semibold tracking-tight text-[#202024]">{title}</h1>
+          <p className="mt-1 text-sm text-[#8E8E93]">{description}</p>
+        </div>
+
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+          <label className="flex h-10 min-w-0 items-center gap-2 rounded-lg border border-[#E8E8EC] bg-white px-3 text-sm text-[#8E8E93] sm:w-72">
+            <Search className="h-4 w-4" aria-hidden="true" />
+            <input
+              placeholder="Rechercher..."
+              className="min-w-0 flex-1 bg-transparent outline-none placeholder:text-[#B1B1B7]"
+            />
+          </label>
+          <Button type="button" variant="secondary" size="sm" className="h-10 rounded-lg">
+            <Filter className="h-4 w-4" aria-hidden="true" />
+            Filtrer
+          </Button>
+          <ButtonLink href="#" variant="primary" size="sm" className="h-10 rounded-lg">
+            <Plus className="h-4 w-4" aria-hidden="true" />
+            {addLabel}
+          </ButtonLink>
+        </div>
+      </div>
+
+      <div className="overflow-hidden rounded-xl border border-[#E8E8EC] bg-white">
+        <div className="hidden grid-cols-[1.3fr_1.2fr_1fr_1fr_120px] gap-3 border-b border-[#E8E8EC] bg-[#FAFAFB] px-4 py-3 text-xs font-medium text-[#8E8E93] lg:grid">
+          <div>Nom</div>
+          <div>Email / portée</div>
+          <div>Rôle</div>
+          <div>Statut</div>
+          <div className="text-right">Actions</div>
+        </div>
+
+        <div className="divide-y divide-[#EFEFF2]">
+          {rows.map((row) => (
+            <div
+              key={row.id}
+              className="grid gap-3 px-4 py-4 lg:grid-cols-[1.3fr_1.2fr_1fr_1fr_120px] lg:items-center"
+            >
+              <div>
+                <p className="text-sm font-semibold text-[#202024]">{row.name}</p>
+                <p className="mt-1 text-xs text-[#8E8E93] lg:hidden">{row.email}</p>
+              </div>
+              <div className="hidden truncate text-sm text-[#73737A] lg:block">{row.email}</div>
+              <div className="text-sm text-[#73737A]">{row.role}</div>
+              <div>
+                <span className="rounded-md bg-[#F0F8F6] px-2 py-1 text-xs font-semibold text-[#21A99A]">
+                  {row.status}
+                </span>
+              </div>
+              <div className="flex justify-end gap-2">
+                <button
+                  type="button"
+                  className="grid h-9 w-9 place-items-center rounded-lg border border-[#E8E8EC] text-[#73737A]"
+                  aria-label="Modifier"
+                >
+                  <Pencil className="h-4 w-4" aria-hidden="true" />
+                </button>
+                <button
+                  type="button"
+                  className="grid h-9 w-9 place-items-center rounded-lg border border-[#E8E8EC] text-[#E04F5F]"
+                  aria-label="Supprimer"
+                >
+                  <Trash2 className="h-4 w-4" aria-hidden="true" />
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

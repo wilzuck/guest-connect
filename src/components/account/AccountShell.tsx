@@ -20,7 +20,7 @@ export function AccountShell({
   const items = [
     { href: `/${locale}/dashboard`, label: "Tableau de bord" },
     { href: `/${locale}/profile`, label: "Profil" },
-    { href: `/${locale}/reservations`, label: "Réservations" },
+    { href: `/${locale}/reservations`, label: "Mes réservations" },
     { href: `/${locale}/favorites`, label: "Favoris" },
     { href: `/${locale}/activities`, label: "Activités" },
     { href: `/${locale}/notifications`, label: "Notifications" },
@@ -28,7 +28,7 @@ export function AccountShell({
   ];
 
   return (
-    <div className="min-h-screen">
+    <div >
       <div className="border-b border-zinc-200">
         <Container className="pt-6 sm:pt-8 lg:pt-10">
           {/* Header */}
@@ -73,7 +73,7 @@ export function AccountShell({
         </Container>
       </div>
 
-      <div className="bg-zinc-50 min-h-screen">
+      <div className="bg-zinc-50 min-h-[max(calc(100vh-400px),350px)]">
         <Container className="py-6 sm:py-8 lg:py-10">
           <div className="space-y-6 sm:space-y-8">{children}</div>
         </Container>

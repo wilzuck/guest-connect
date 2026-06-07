@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GuestConnect - Mise à jour juin 2026</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            color: #000;
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .subtitle {
+            font-size: 1.2em;
+            color: #666;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        .card h2 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #000;
+        }
+        .card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        .badge {
+            display: inline-block;
+            background: #f0f0f0;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 0.85em;
+            color: #666;
+            margin-right: 5px;
+            margin-bottom: 10px;
+        }
+        .badge.new {
+            background: #c3e7ff;
+            color: #0056b3;
+        }
+        .badge.fixed {
+            background: #d4edda;
+            color: #155724;
+        }
+        .links {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .links h3 {
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+        .link-group {
+            margin-bottom: 20px;
+        }
+        .link-group a {
+            display: block;
+            padding: 12px;
+            background: #f5f5f5;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            transition: background 0.2s;
+            font-family: monospace;
+        }
+        .link-group a:hover {
+            background: #e9ecef;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .stat {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+        .stat-label {
+            color: #666;
+            font-size: 0.9em;
+        }
+        .footer {
+            text-align: center;
+            color: #666;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+        .checkmark { color: #28a745; }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 8px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>✨ GuestConnect - Mise à jour juin 2026</h1>
+            <p class="subtitle">Formulaire multi-étapes, composants réutilisables et polices optimisées</p>
+        </header>
+
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-number">4</div>
+                <div class="stat-label">Composants créés</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">1</div>
+                <div class="stat-label">Formulaire complet</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">~1500</div>
+                <div class="stat-label">Lignes de code</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">0</div>
+                <div class="stat-label">Dépendances</div>
+            </div>
+        </div>
+
+        <div class="links">
+            <h3>🎯 Pages de démo</h3>
+            <div class="link-group">
+                <a href="http://localhost:3000/fr/add-property" target="_blank">→ Formulaire d'ajout de propriété (5 étapes)</a>
+                <a href="http://localhost:3000/fr/components-showcase" target="_blank">→ Galerie de composants UI</a>
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <h2><span class="checkmark">✓</span> Polices typographiques</h2>
+                <span class="badge fixed">FIXE</span>
+                <p>Configuration des polices dans les fichiers existants:</p>
+                <ul>
+                    <li><strong>Manrope</strong> - Corps de texte</li>
+                    <li><strong>Plus Jakarta Sans</strong> - Titres</li>
+                    <li>Support accents français</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2><span class="checkmark">✓</span> Image article Dakar</h2>
+                <span class="badge fixed">FIXE</span>
+                <p>L'image de l'article "Un week-end à Dakar" a été remplacée par une image valide depuis Unsplash.</p>
+                <p><small>Ancien ID: photo-1542317854</small><br><small>Nouveau ID: photo-1506905925</small></p>
+            </div>
+
+            <div class="card">
+                <h2><span class="checkmark">✓</span> FormField</h2>
+                <span class="badge new">NOUVEAU</span>
+                <p>Composant wrapper pour champs formulaire avec:</p>
+                <ul>
+                    <li>Label, erreur, hint</li>
+                    <li>Indicateur "requis"</li>
+                    <li>Intégration Input/Select/Textarea</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2><span class="checkmark">✓</span> Select</h2>
+                <span class="badge new">NOUVEAU</span>
+                <p>Dropdown réutilisable avec:</p>
+                <ul>
+                    <li>Options typées</li>
+                    <li>Placeholder customizable</li>
+                    <li>Style cohérent</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2><span class="checkmark">✓</span> ImageUpload</h2>
+                <span class="badge new">NOUVEAU</span>
+                <p>Zone drag & drop avec:</p>
+                <ul>
+                    <li>Glisser-déposer fichiers</li>
+                    <li>Prévisualisation temps réel</li>
+                    <li>Suppression d'images</li>
+                    <li>Validation taille/format</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2><span class="checkmark">✓</span> Stepper</h2>
+                <span class="badge new">NOUVEAU</span>
+                <p>Indicateur d'étapes avec:</p>
+                <ul>
+                    <li>Étapes numérotées</li>
+                    <li>Ligne de progression</li>
+                    <li>Navigation clickable</li>
+                    <li>Indicateurs visuels</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2><span class="checkmark">✓</span> Formulaire 5 étapes</h2>
+                <span class="badge new">NOUVEAU</span>
+                <p>Formulaire complet PropertyFormMultiStep:</p>
+                <ul>
+                    <li>1️⃣ Détails du logement</li>
+                    <li>2️⃣ Localisation</li>
+                    <li>3️⃣ Spécifications</li>
+                    <li>4️⃣ Équipements & photos</li>
+                    <li>5️⃣ Tarification</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2><span class="checkmark">✓</span> Validation</h2>
+                <span class="badge new">NOUVEAU</span>
+                <p>Utilitaires de validation réutilisables:</p>
+                <ul>
+                    <li>validateField() - Champ unique</li>
+                    <li>validateStep() - Étape courant</li>
+                    <li>validateForm() - Formulaire complet</li>
+                    <li>Règles centralisées</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2><span class="checkmark">✓</span> Types TypeScript</h2>
+                <span class="badge new">NOUVEAU</span>
+                <p>Interfaces complètes pour:</p>
+                <ul>
+                    <li>PropertyFormData</li>
+                    <li>FormValidationResult</li>
+                    <li>SelectOption</li>
+                    <li>StepperStep</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2><span class="checkmark">✓</span> Prévisualisation</h2>
+                <span class="badge new">FEATURE</span>
+                <p>Colonne de prévisualisation côté droit (Airbnb-like) avec:</p>
+                <ul>
+                    <li>Image principale</li>
+                    <li>Détails en temps réel</li>
+                    <li>Specs et amenities</li>
+                    <li>Prix actualisé</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2><span class="checkmark">✓</span> Responsive</h2>
+                <span class="badge fixed">DESIGN</span>
+                <p>Adapté à tous les écrans:</p>
+                <ul>
+                    <li>Mobile (single column)</li>
+                    <li>Tablet (2 colonnes)</li>
+                    <li>Desktop (formulaire + preview)</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>📚 Documentation</h2>
+                <span class="badge">INFO</span>
+                <p>Fichiers de documentation fournis:</p>
+                <ul>
+                    <li><code>COMPOSANTS.md</code> - Guide détaillé</li>
+                    <li><code>INTEGRATION.md</code> - Intégration backend</li>
+                    <li><code>QUICK_START.md</code> - Démarrage rapide</li>
+                    <li><code>RELEASE_NOTES.md</code> - Notes de version</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>✨ Réalisé par GitHub Copilot</strong></p>
+            <p>Juin 5, 2026 | Version 1.0.0</p>
+            <p>TypeScript strict • Next.js 15 • React 18 • Tailwind CSS 3</p>
+        </div>
+    </div>
+</body>
+</html>

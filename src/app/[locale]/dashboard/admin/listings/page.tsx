@@ -24,7 +24,7 @@ export default async function Page() {
     <ListingsTable
       initialRows={db.listings ?? []}
       createHref={`/${locale}/dashboard/admin/listings/new`}
-      editBaseHref={`/${locale}/dashboard/admin/listings/edit`}
+      editBaseHref={`/${locale}/dashboard/admin/listings`}
       catById={catById}
       locById={locById}
     />

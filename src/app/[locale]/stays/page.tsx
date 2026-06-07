@@ -6,6 +6,7 @@ import { SearchBar } from "@/components/SearchBar";
 import { africaListings } from "@/lib/mock/africa-listings";
 import { ListingCard } from "@/components/listings/ListingCard";
 import { ExploreFiltersBar } from "@/components/explore/ExploreFiltersBar";
+import { FilterSidebarButton } from "@/components/explore/FilterSidebarButton";
 
 export const metadata: Metadata = {
   title: "Stays — GuestConnect",
@@ -83,9 +84,40 @@ export default async function Page({ searchParams }: PageProps) {
 
       <section className="bg-white">
         <Container className="py-12 sm:py-14">
+          <div className="mb-4 flex items-center gap-2">
+            <FilterSidebarButton
+              sections={[
+                {
+                  title: "Type",
+                  options: [
+                    { href: buildHref(locale, { ...sp, type: "all" }), active: type === "all", label: "Tous les hébergements" },
+                    { href: buildHref(locale, { ...sp, type: "guesthouse" }), active: type === "guesthouse", label: t("filters.guesthouses") },
+                    { href: buildHref(locale, { ...sp, type: "hotel" }), active: type === "hotel", label: t("filters.hotels") },
+                    { href: buildHref(locale, { ...sp, type: "apartment" }), active: type === "apartment", label: t("filters.apartments") },
+                  ],
+                },
+                {
+                  title: "Budget",
+                  options: [
+                    { href: buildHref(locale, { ...sp, price: "all" }), active: price === "all", label: t("filters.anyPrice") },
+                    { href: buildHref(locale, { ...sp, price: "budget" }), active: price === "budget", label: t("filters.budget") },
+                    { href: buildHref(locale, { ...sp, price: "mid" }), active: price === "mid", label: t("filters.mid") },
+                    { href: buildHref(locale, { ...sp, price: "high" }), active: price === "high", label: t("filters.premium") },
+                  ],
+                },
+                {
+                  title: "Tri",
+                  options: [
+                    { href: buildHref(locale, { ...sp, sort: "recommended" }), active: sort === "recommended", label: t("filters.recommended") },
+                    { href: buildHref(locale, { ...sp, sort: "rating" }), active: sort === "rating", label: t("filters.topRated") },
+                    { href: buildHref(locale, { ...sp, sort: "price" }), active: sort === "price", label: t("filters.lowestPrice") },
+                  ],
+                },
+              ]}
+            />
+          </div>
           <ExploreFiltersBar
             chips={[
-              { href: buildHref(locale, { ...sp, type: "all" }), active: type === "all", label: t("filters.all") },
               {
                 href: buildHref(locale, { ...sp, type: "guesthouse" }),
                 active: type === "guesthouse",

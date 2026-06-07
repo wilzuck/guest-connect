@@ -10,13 +10,17 @@ const COLUMNS = [
   { key: "categoryId", label: "Catégorie", renderKey: "category" },
 ];
 
-export  function ListingsTable({
+export function ListingsTable({
+  title = "Logements",
+  entity = "listings",
   initialRows,
   createHref,
   editBaseHref,
-  catById,   // Map sérialisée en objet depuis le server
+  catById,
   locById,
 }: {
+  title?: string;
+  entity?: "listings" | "experiences";
   initialRows: Array<Record<string, unknown>>;
   createHref: string;
   editBaseHref: string;
@@ -24,22 +28,22 @@ export  function ListingsTable({
   locById: Record<string, string>;
 }) {
   const renderers = {
-    category: (r: Record<string, unknown>) => {
-      const id = String(r.categoryId ?? "");
+    category: (row: Record<string, unknown>) => {
+      const id = String(row.categoryId ?? "");
       return <Badge>{catById[id] ?? id}</Badge>;
     },
-    location: (r: Record<string, unknown>) => {
-      const id = String(r.cityId ?? "");
+    location: (row: Record<string, unknown>) => {
+      const id = String(row.cityId ?? "");
       return locById[id] ?? id;
     },
-    price: (r: Record<string, unknown>) =>
-      `${String(r.pricePerNight ?? "—")} ${String(r.currency ?? "EUR")}`,
+    price: (row: Record<string, unknown>) =>
+      `${String(row.pricePerNight ?? "—")} ${String(row.currency ?? "EUR")}`,
   };
 
   return (
     <EntityTableClient
-      title="Logements"
-      entity="listings"
+      title={title}
+      entity={entity}
       initialRows={initialRows}
       columns={COLUMNS}
       createHref={createHref}

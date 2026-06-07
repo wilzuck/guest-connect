@@ -1,0 +1,40 @@
+{
+  "metadataTitle": "Services — GuestConnect",
+  "metadataDescription": "Des services voyageurs et hôtes pensés pour réserver, accueillir et gérer en confiance.",
+  "eyebrow": "Services GuestConnect",
+  "title": "Tout ce qu’il faut pour voyager et héberger en confiance",
+  "description": "GuestConnect réunit les services essentiels d’une marketplace d’hébergement premium : recherche claire, réservation sécurisée, outils hôtes et accompagnement humain.",
+  "searchTitle": "Lancer une recherche",
+  "travelerTitle": "Pour les voyageurs",
+  "travelerDescription": "Réservez plus vite, comparez mieux et gardez le contrôle avant, pendant et après votre séjour.",
+  "hostTitle": "Pour les hôtes",
+  "hostDescription": "Mettez votre logement en valeur, gérez vos disponibilités et développez vos réservations avec une expérience simple.",
+  "trustTitle": "Un cadre clair pour chaque réservation",
+  "trustDescription": "Photos, règles, prix, conditions et informations clés sont structurés pour réduire les doutes et améliorer la conversion.",
+  "ctaTitle": "Prêt à avancer ?",
+  "ctaDescription": "Explorez les hébergements disponibles ou démarrez la mise en ligne de votre logement.",
+  "ctaSearch": "Explorer les logements",
+  "ctaHost": "Devenir hôte",
+  "items": {
+    "secureBookingTitle": "Réservation sécurisée",
+    "secureBookingDesc": "Parcours clair, informations visibles et confirmation pensée pour rassurer.",
+    "smartSearchTitle": "Recherche guidée",
+    "smartSearchDesc": "Destination, dates et voyageurs restent au centre du parcours mobile.",
+    "supportTitle": "Assistance voyage",
+    "supportDesc": "Un point d’entrée simple pour les questions avant ou après réservation.",
+    "hostToolsTitle": "Outils hôtes",
+    "hostToolsDesc": "Gestion d’annonce, prix, disponibilités et informations clés.",
+    "visibilityTitle": "Visibilité premium",
+    "visibilityDesc": "Une présentation plus éditoriale pour mieux valoriser chaque adresse.",
+    "dashboardTitle": "Pilotage centralisé",
+    "dashboardDesc": "Un espace dashboard pour suivre réservations, annonces et activité."
+  },
+  "stats": {
+    "oneValue": "24/7",
+    "oneLabel": "Support prêt à évoluer",
+    "twoValue": "0",
+    "twoLabel": "Frais cachés dans le parcours",
+    "threeValue": "100%",
+    "threeLabel": "Mobile-first"
+  }
+}

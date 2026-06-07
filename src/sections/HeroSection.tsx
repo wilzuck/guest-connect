@@ -57,37 +57,38 @@ export async function HeroSection() {
       </Container>
       <Container className="mt-8">
         {/* Trust indicators */}
-        <div className="flex items-center justify-between gap-4 overflow-x-auto rounded-2xl p-5 backdrop-blur-md">
-          <TrustItem
-            icon={<ShieldCheck className="size-6" />}
-            title="Paiement sécurisé"
-            subtitle="Transactions protégées"
-          />
+        {/* Trust indicators */}
+<div className="grid grid-cols-2 gap-4 rounded-2xl p-5 backdrop-blur-md lg:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] lg:items-center">
+  <TrustItem
+    icon={<ShieldCheck className="size-6" />}
+    title="Paiement sécurisé"
+    subtitle="Transactions protégées"
+  />
 
-          <Divider />
+  <Divider className="hidden lg:block" />
 
-          <TrustItem
-            icon={<RefreshCcw className="size-6" />}
-            title="Annulation flexible"
-            subtitle="Conditions claires"
-          />
+  <TrustItem
+    icon={<RefreshCcw className="size-6" />}
+    title="Annulation flexible"
+    subtitle="Conditions claires"
+  />
 
-          <Divider />   
+  <Divider className="hidden lg:block" />
 
-          <TrustItem
-            icon={<BadgeCheck className="size-6" />}
-            title="Hôtes vérifiés"
-            subtitle="Profils contrôlés"
-          />
+  <TrustItem
+    icon={<BadgeCheck className="size-6" />}
+    title="Hôtes vérifiés"
+    subtitle="Profils contrôlés"
+  />
 
-          <Divider />
+  <Divider className="hidden lg:block" />
 
-          <TrustItem
-            icon={<Star className="size-6" />}
-            title="Avis 5 étoiles"
-            subtitle="+1200 voyageurs"
-          />
-        </div>
+  <TrustItem
+    icon={<Star className="size-6" />}
+    title="Avis 5 étoiles"
+    subtitle="+1200 voyageurs"
+  />
+</div>
       </Container>
       {/* Carousel */}
       <Container className=" pb-10 relative z-20">
@@ -112,13 +113,12 @@ function TrustItem({
   subtitle: string;
 }) {
   return (
-    <div className="flex gap-3">
-      <div className="mt-1">{icon}</div>
+    <div className="flex min-w-0 my-2 md:mt-0 items-start lg:justify-center justify-start gap-3">
+      <div className="mt-1 shrink-0">{icon}</div>
 
-      <div>
-        <p className="text-sm font-medium">{title}</p>
-
-        <p className="text-xs text-black/70">{subtitle}</p>
+      <div className="min-w-0">
+        <p className="text-sm font-medium leading-tight">{title}</p>
+        <p className="mt-1 text-xs leading-tight text-black/70">{subtitle}</p>
       </div>
     </div>
   );

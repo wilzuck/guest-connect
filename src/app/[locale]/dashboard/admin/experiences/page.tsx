@@ -15,11 +15,13 @@ export default async function Page() {
 
   return (
     <ListingsTable
+      title="Expériences"
+      entity="experiences"
       initialRows={db.experiences ?? []}
       createHref={`/${locale}/dashboard/admin/experiences/new`}
-      editBaseHref={`/${locale}/dashboard/admin/experiences/edit`}
+      editBaseHref={`/${locale}/dashboard/admin/experiences`}
       locById={locById}
-      catById={{}} // si pas de catégories pour experiences
+      catById={{}}
     />
   );
 }

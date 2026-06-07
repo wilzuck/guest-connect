@@ -5,6 +5,7 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { experiences } from "@/lib/mock/experiences";
 import { ExperienceCard } from "@/components/experiences/ExperienceCard";
+import { FilterSidebarButton } from "@/components/explore/FilterSidebarButton";
 
 export const metadata: Metadata = {
   title: "Expériences — GuestConnect",
@@ -38,7 +39,23 @@ export default async function Page({ searchParams }: PageProps) {
         <Container className="py-10 sm:py-14">
           <SectionHeading eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
           <div className="mt-8 flex flex-wrap gap-2">
+            <FilterSidebarButton
+              sections={[
+                {
+                  title: "Expériences",
+                  options: tags.map((tag) => ({
+                    href:
+                      tag.key === "all"
+                        ? `/${locale}/experiences`
+                        : `/${locale}/experiences?tag=${encodeURIComponent(tag.key)}`,
+                    active: activeTag === tag.key,
+                    label: tag.key === "all" ? "Toutes les expériences" : tag.label,
+                  })),
+                },
+              ]}
+            />
             {tags.map((tag) => {
+              if (tag.key === "all") return null;
               const href =
                 tag.key === "all"
                   ? `/${locale}/experiences`

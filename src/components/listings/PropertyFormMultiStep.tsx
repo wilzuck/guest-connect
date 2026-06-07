@@ -1,56 +1,76 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
-import Image from "next/image";
-import { Container } from "@/components/ui/Container";
-import { Card } from "@/components/ui/Card";
+import { useMemo, useState, type FormEvent, type ReactNode } from "react";
+import {
+  Building2,
+  CalendarDays,
+  Camera,
+  Car,
+  Check,
+  ChevronLeft,
+  ChevronRight,
+  Coffee,
+  Home,
+  Leaf,
+  MapPin,
+  Save,
+  ShieldCheck,
+  Snowflake,
+  Sparkles,
+  Trees,
+  Upload,
+  Utensils,
+  Warehouse,
+  Waves,
+  Wifi,
+  X,
+} from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { Input } from "@/components/ui/Input";
-import { Textarea } from "@/components/ui/Textarea";
-import { Select } from "@/components/ui/Select";
+import { Container } from "@/components/ui/Container";
 import { FormField } from "@/components/ui/FormField";
 import { ImageUpload } from "@/components/ui/ImageUpload";
-import { Stepper } from "@/components/ui/Stepper";
-import { ListingCard } from "@/components/listings/ListingCard";
+import { Input } from "@/components/ui/Input";
+import { MarkdownTextarea } from "@/components/ui/MarkdownTextarea";
+import { Select } from "@/components/ui/Select";
 import type { CurrencyCode } from "@/lib/currency/currency";
 
-// Types de données
 type PropertyFormData = {
-  // Étape 1: Détails de base
   propertyName: string;
   propertyType: string;
   description: string;
-
-  // Étape 2: Localisation
   address: string;
   city: string;
   country: string;
   zipCode: string;
-
-  // Étape 3: Détails du logement
   bedrooms: number;
   bathrooms: number;
   maxGuests: number;
   squareFeet: number;
-
-  // Étape 4: Équipements
   amenities: string[];
-  imageUrls: string[];
-
-  // Étape 5: Tarification & Publication
   pricePerNight: number;
-  currency: string;
+  currency: CurrencyCode;
   minNights: number;
   maxMonthlyDiscount: number;
+  availableWeekdays: string[];
+  unavailableDates: string[];
+  validationStatus: "pending" | "approved" | "rejected";
 };
 
+const STEPS = [
+  { label: "Détails", sub: "Infos basiques" },
+  { label: "Localisation", sub: "Où se trouve-t-il ?" },
+  { label: "Spécifications", sub: "Chambres, etc." },
+  { label: "Équipements", sub: "Amenities & images" },
+  { label: "Tarification", sub: "Prix & conditions" },
+];
+
 const PROPERTY_TYPES = [
-  { value: "apartment", label: "Appartement" },
-  { value: "house", label: "Maison" },
-  { value: "villa", label: "Villa" },
-  { value: "studio", label: "Studio" },
-  { value: "loft", label: "Loft" },
-  { value: "townhouse", label: "Maison de ville" },
+  { value: "apartment", label: "Appartement", icon: Building2 },
+  { value: "villa", label: "Villa", icon: Home },
+  { value: "house", label: "Maison", icon: Warehouse },
+  { value: "studio", label: "Studio", icon: Sparkles },
+  { value: "loft", label: "Loft", icon: Building2 },
+  { value: "bungalow", label: "Bungalow", icon: Trees },
 ];
 
 const COUNTRIES = [
@@ -63,33 +83,35 @@ const COUNTRIES = [
 ];
 
 const AMENITIES = [
-  "WiFi",
-  "Climatisation",
-  "Chauffage",
-  "Cuisine équipée",
-  "Lave-linge",
-  "Sèche-linge",
-  "Parking",
-  "Piscine",
-  "Jardin",
-  "Terrasse",
-  "Coffre-fort",
-  "Petit-déjeuner inclus",
+  { value: "WiFi", label: "WiFi", icon: Wifi },
+  { value: "Climatisation", label: "Climatisation", icon: Snowflake },
+  { value: "Cuisine équipée", label: "Cuisine équipée", icon: Utensils },
+  { value: "Parking", label: "Parking", icon: Car },
+  { value: "Piscine", label: "Piscine", icon: Waves },
+  { value: "Jardin", label: "Jardin", icon: Leaf },
+  { value: "Terrasse", label: "Terrasse", icon: Trees },
+  { value: "Coffre-fort", label: "Coffre-fort", icon: ShieldCheck },
+  { value: "Petit-déjeuner inclus", label: "Petit-déjeuner", icon: Coffee },
 ];
 
-const STEPS = [
-  { title: "Détails du logement", description: "Infos basiques" },
-  { title: "Localisation", description: "Où se trouve-t-il?" },
-  { title: "Spécifications", description: "Chambres, salles d'eau..." },
-  { title: "Équipements & photos", description: "Amenités et images" },
-  { title: "Tarification", description: "Prix et conditions" },
+const WEEKDAYS = [
+  { value: "mon", label: "Lun", longLabel: "Lundi" },
+  { value: "tue", label: "Mar", longLabel: "Mardi" },
+  { value: "wed", label: "Mer", longLabel: "Mercredi" },
+  { value: "thu", label: "Jeu", longLabel: "Jeudi" },
+  { value: "fri", label: "Ven", longLabel: "Vendredi" },
+  { value: "sat", label: "Sam", longLabel: "Samedi" },
+  { value: "sun", label: "Dim", longLabel: "Dimanche" },
 ];
 
-export function PropertyFormMultiStep() {
+export function PropertyFormMultiStep({ context = "public" }: { context?: "public" | "admin" }) {
   const [currentStep, setCurrentStep] = useState(0);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [imagePreviews, setImagePreviews] = useState<string[]>([]);
+  const [blockedDate, setBlockedDate] = useState("");
   const [formData, setFormData] = useState<PropertyFormData>({
     propertyName: "",
-    propertyType: "",
+    propertyType: "apartment",
     description: "",
     address: "",
     city: "",
@@ -100,548 +122,695 @@ export function PropertyFormMultiStep() {
     maxGuests: 2,
     squareFeet: 0,
     amenities: [],
-    imageUrls: [],
     pricePerNight: 0,
-    currency: "USD",
+    currency: "XOF",
     minNights: 1,
     maxMonthlyDiscount: 0,
+    availableWeekdays: WEEKDAYS.map((day) => day.value),
+    unavailableDates: [],
+    validationStatus: "pending",
   });
 
-  const [errors, setErrors] = useState<Record<string, string>>({});
-  const [imagePreviews, setImagePreviews] = useState<string[]>([]);
+  const completion = useMemo(() => {
+    const checks = [
+      !!formData.propertyName.trim(),
+      !!formData.propertyType,
+      formData.description.trim().length > 20,
+      !!formData.city.trim(),
+      !!formData.country,
+      imagePreviews.length > 0,
+      formData.pricePerNight > 0,
+      formData.availableWeekdays.length > 0,
+    ];
+    return Math.round((checks.filter(Boolean).length / checks.length) * 100);
+  }, [formData, imagePreviews.length]);
 
   const previewLocation = formData.city
     ? `${formData.city}${formData.country ? `, ${COUNTRIES.find((c) => c.value === formData.country)?.label ?? formData.country}` : ""}`
     : "Ville non définie";
 
-  const previewListing = {
-    id: "preview",
-    title: formData.propertyName || "Titre du logement",
-    location: previewLocation,
-    pricePerNight: formData.pricePerNight || 0,
-    currency: formData.currency as CurrencyCode,
-    rating: 4.8,
-    reviewCount: 12,
-    imageUrl:
-      imagePreviews[0] ??
-      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80",
-    propertyType: PROPERTY_TYPES.find((t) => t.value === formData.propertyType)?.label,
-    shortDescription: formData.description || undefined,
-  };
+  const selectedType = PROPERTY_TYPES.find((type) => type.value === formData.propertyType);
 
-  // Validation par étape
-  const validateStep = (step: number): boolean => {
-    const newErrors: Record<string, string> = {};
-
-    switch (step) {
-      case 0: // Détails de base
-        if (!formData.propertyName.trim()) newErrors.propertyName = "Requis";
-        if (!formData.propertyType) newErrors.propertyType = "Sélectionner un type";
-        if (!formData.description.trim()) newErrors.description = "Requis";
-        break;
-      case 1: // Localisation
-        if (!formData.address.trim()) newErrors.address = "Requis";
-        if (!formData.city.trim()) newErrors.city = "Requis";
-        if (!formData.country) newErrors.country = "Sélectionner un pays";
-        break;
-      case 2: // Spécifications
-        if (formData.bedrooms < 1) newErrors.bedrooms = "Au minimum 1";
-        if (formData.bathrooms < 1) newErrors.bathrooms = "Au minimum 1";
-        if (formData.maxGuests < 1) newErrors.maxGuests = "Au minimum 1";
-        break;
-      case 3: // Équipements & photos
-        if (imagePreviews.length === 0) {
-          newErrors.imageUrls = "Au moins 1 image requise";
-        }
-        break;
-      case 4: // Tarification
-        if (formData.pricePerNight <= 0) newErrors.pricePerNight = "Doit être > 0";
-        break;
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleNext = () => {
-    if (validateStep(currentStep)) {
-      if (currentStep < STEPS.length - 1) {
-        setCurrentStep(currentStep + 1);
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }
-    }
-  };
-
-  const handlePrev = () => {
-    if (currentStep > 0) {
-      setCurrentStep(currentStep - 1);
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  };
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (validateStep(currentStep)) {
-      console.log("Formulaire soumis:", formData);
-      alert("Propriété créée avec succès!");
-    }
-  };
-
-  const handleInputChange = (
-    field: keyof PropertyFormData,
-    value: any,
-  ) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
+  function updateField<K extends keyof PropertyFormData>(field: K, value: PropertyFormData[K]) {
+    setFormData((current) => ({ ...current, [field]: value }));
     if (errors[field]) {
-      setErrors((prev) => {
-        const updated = { ...prev };
-        delete updated[field];
-        return updated;
+      setErrors((current) => {
+        const next = { ...current };
+        delete next[field];
+        return next;
       });
     }
-  };
+  }
 
-  const toggleAmenity = (amenity: string) => {
-    setFormData((prev) => ({
-      ...prev,
-      amenities: prev.amenities.includes(amenity)
-        ? prev.amenities.filter((a) => a !== amenity)
-        : [...prev.amenities, amenity],
-    }));
-  };
+  function validateStep(step: number) {
+    const nextErrors: Record<string, string> = {};
+    if (step === 0) {
+      if (!formData.propertyName.trim()) nextErrors.propertyName = "Requis";
+      if (!formData.propertyType) nextErrors.propertyType = "Sélectionner un type";
+      if (!formData.description.trim()) nextErrors.description = "Requis";
+    }
+    if (step === 1) {
+      if (!formData.address.trim()) nextErrors.address = "Requis";
+      if (!formData.city.trim()) nextErrors.city = "Requis";
+      if (!formData.country) nextErrors.country = "Sélectionner un pays";
+    }
+    if (step === 2) {
+      if (formData.bedrooms < 1) nextErrors.bedrooms = "Au minimum 1";
+      if (formData.bathrooms < 1) nextErrors.bathrooms = "Au minimum 1";
+      if (formData.maxGuests < 1) nextErrors.maxGuests = "Au minimum 1";
+    }
+    if (step === 3 && imagePreviews.length === 0) {
+      nextErrors.imageUrls = "Au moins 1 image requise";
+    }
+    if (step === 4) {
+      if (formData.pricePerNight <= 0) nextErrors.pricePerNight = "Doit être supérieur à 0";
+      if (formData.availableWeekdays.length === 0) {
+        nextErrors.availableWeekdays = "Choisir au moins un jour disponible";
+      }
+    }
+    setErrors(nextErrors);
+    return Object.keys(nextErrors).length === 0;
+  }
 
-  const handleImagesSelected = (files: File[]) => {
-    // Ici, vous pouvez uploader les fichiers vers votre serveur
-    console.log("Fichiers sélectionnés:", files);
-  };
+  function goToStep(step: number) {
+    if (step <= currentStep || validateStep(currentStep)) {
+      setCurrentStep(step);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }
+
+  function goNext() {
+    if (!validateStep(currentStep)) return;
+    setCurrentStep((step) => Math.min(STEPS.length - 1, step + 1));
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function goPrev() {
+    setCurrentStep((step) => Math.max(0, step - 1));
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function submitForm(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (!validateStep(currentStep)) return;
+    alert("Propriété créée avec succès ! Elle sera visible après validation admin.");
+  }
+
+  function toggleAmenity(amenity: string) {
+    updateField(
+      "amenities",
+      formData.amenities.includes(amenity)
+        ? formData.amenities.filter((item) => item !== amenity)
+        : [...formData.amenities, amenity],
+    );
+  }
+
+  function toggleWeekday(day: string) {
+    updateField(
+      "availableWeekdays",
+      formData.availableWeekdays.includes(day)
+        ? formData.availableWeekdays.filter((item) => item !== day)
+        : [...formData.availableWeekdays, day],
+    );
+  }
+
+  function addUnavailableDate() {
+    if (!blockedDate || formData.unavailableDates.includes(blockedDate)) return;
+    updateField("unavailableDates", [...formData.unavailableDates, blockedDate].sort());
+    setBlockedDate("");
+  }
+
+  function removeUnavailableDate(date: string) {
+    updateField(
+      "unavailableDates",
+      formData.unavailableDates.filter((item) => item !== date),
+    );
+  }
 
   return (
-    <Container className="py-10 sm:py-14">
-      <form onSubmit={handleSubmit}>
-        <div className="grid gap-10 lg:grid-cols-12 lg:items-start">
-          {/* Colonne gauche: Formulaire */}
-          <div className="lg:col-span-8 lg:order-1">
-            <Stepper
-              steps={STEPS}
-              currentStep={currentStep}
-              onStepClick={(step) => {
-                if (validateStep(currentStep)) {
-                  setCurrentStep(step);
-                  window.scrollTo({ top: 0, behavior: "smooth" });
-                }
-              }}
-            />
+    <Container className="py-8 sm:py-12">
+      <div className="mb-6">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">
+          {context === "admin" ? "Administration" : "Devenir hôte"}
+        </p>
+        <h1 className="mt-3 text-balance text-3xl font-semibold tracking-tight text-zinc-950 sm:text-4xl">
+          Ajouter un logement
+        </h1>
+        <p className="mt-3 max-w-2xl text-sm leading-7 text-zinc-600">
+          Créez une annonce complète. Elle restera en attente jusqu&apos;à validation par un administrateur.
+        </p>
+      </div>
 
-            <Card className="mt-10 p-6 sm:p-8">
-              {/* Étape 0: Détails de base */}
+      <form onSubmit={submitForm} className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_320px]">
+        <div className="grid gap-4">
+          <StepperTabs currentStep={currentStep} onStepClick={goToStep} />
+
+          <div className="overflow-hidden rounded-2xl border border-zinc-200 bg-white">
+            <div className="border-b border-zinc-100 px-5 py-5 sm:px-7">
+              <h2 className="text-xl font-semibold tracking-tight text-zinc-950">
+                {STEPS[currentStep].label === "Détails" ? "Détails du logement" : STEPS[currentStep].label}
+              </h2>
+              <p className="mt-1 text-sm text-zinc-500">{STEPS[currentStep].sub}</p>
+            </div>
+
+            <div className="grid gap-6 px-5 py-6 sm:px-7">
               {currentStep === 0 && (
-                <div className="space-y-5">
-                  <div>
-                    <h2 className="text-2xl font-semibold text-black">
-                      Détails du logement
-                    </h2>
-                    <p className="mt-2 text-sm text-zinc-600">
-                      Commençons par les informations basiques sur votre
-                      propriété.
-                    </p>
-                  </div>
-
-                  <FormField
-                    label="Nom de la propriété"
-                    required
-                    error={errors.propertyName as string}
-                  >
+                <>
+                  <FormField label="Nom de la propriété" required error={errors.propertyName}>
                     <Input
-                      placeholder="Ex: Villa paradis Dakar"
                       value={formData.propertyName}
-                      onChange={(e) =>
-                        handleInputChange("propertyName", e.target.value)
-                      }
+                      onChange={(event) => updateField("propertyName", event.target.value)}
+                      placeholder="Ex : Villa Paradis Cotonou"
+                      className="rounded-xl"
                     />
+                    <HelpText>
+                      Utilisez un titre court et concret. Les voyageurs doivent comprendre le lieu et l&apos;ambiance en un coup d&apos;oeil.
+                    </HelpText>
                   </FormField>
 
-                  <FormField
-                    label="Type de propriété"
-                    required
-                    error={errors.propertyType as string}
-                  >
-                    <Select
-                      options={PROPERTY_TYPES}
-                      value={formData.propertyType}
-                      onChange={(e) =>
-                        handleInputChange("propertyType", e.target.value)
-                      }
-                    />
+                  <FormField label="Type de propriété" required error={errors.propertyType}>
+                    <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+                      {PROPERTY_TYPES.map((type) => {
+                        const Icon = type.icon;
+                        const active = formData.propertyType === type.value;
+                        return (
+                          <button
+                            key={type.value}
+                            type="button"
+                            onClick={() => updateField("propertyType", type.value)}
+                            className={[
+                              "flex min-h-16 items-center gap-3 rounded-xl border px-3 py-3 text-left transition",
+                              active ? "border-zinc-950 bg-zinc-50 shadow-sm" : "border-zinc-200 hover:bg-zinc-50",
+                            ].join(" ")}
+                          >
+                            <span className="grid h-9 w-9 place-items-center rounded-xl bg-zinc-100 text-zinc-900">
+                              <Icon className="h-4 w-4" aria-hidden="true" />
+                            </span>
+                            <span className="text-sm font-semibold text-zinc-800">{type.label}</span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                    <HelpText>
+                      Ce choix sert aux filtres de recherche. S&apos;il y a plusieurs possibilités, choisissez le type principal du logement.
+                    </HelpText>
                   </FormField>
 
                   <FormField
                     label="Description"
                     required
-                    hint="Décrivez votre propriété en 2-3 phrases"
-                    error={errors.description as string}
+                    hint="Écrivez en Markdown. Le champ grandit automatiquement."
+                    error={errors.description}
                   >
-                    <Textarea
-                      placeholder="Ex: Une belle villa avec vue sur l'océan, piscine privée, jardin..."
-                      rows={4}
+                    <MarkdownTextarea
                       value={formData.description}
-                      onChange={(e) =>
-                        handleInputChange("description", e.target.value)
-                      }
+                      onChange={(value) => updateField("description", value)}
+                      placeholder="Ex : **Maison d'hôtes lumineuse** avec piscine, jardin tropical et accueil personnalisé."
                     />
+                    <HelpText>
+                      Ajoutez les points forts, le quartier, les règles importantes et ce qui rend le séjour simple pour le voyageur.
+                    </HelpText>
                   </FormField>
-                </div>
+                </>
               )}
 
-              {/* Étape 1: Localisation */}
               {currentStep === 1 && (
-                <div className="space-y-5">
-                  <div>
-                    <h2 className="text-2xl font-semibold text-black">
-                      Localisation
-                    </h2>
-                    <p className="mt-2 text-sm text-zinc-600">
-                      Où se trouve votre propriété?
-                    </p>
-                  </div>
-
-                  <FormField
-                    label="Adresse"
-                    required
-                    error={errors.address as string}
-                  >
+                <>
+                  <FormField label="Adresse" required error={errors.address}>
                     <Input
-                      placeholder="Ex: 123 Avenue Bourguiba"
                       value={formData.address}
-                      onChange={(e) =>
-                        handleInputChange("address", e.target.value)
-                      }
+                      onChange={(event) => updateField("address", event.target.value)}
+                      placeholder="Ex : 123 Rue des Palmiers"
+                      className="rounded-xl"
                     />
+                    <HelpText>
+                      L&apos;adresse précise aide l&apos;équipe à valider l&apos;annonce. Elle peut rester privée côté voyageurs avant réservation.
+                    </HelpText>
                   </FormField>
-
                   <div className="grid gap-4 sm:grid-cols-2">
-                    <FormField
-                      label="Ville"
-                      required
-                      error={errors.city as string}
-                    >
+                    <FormField label="Ville" required error={errors.city}>
                       <Input
-                        placeholder="Ex: Dakar"
                         value={formData.city}
-                        onChange={(e) =>
-                          handleInputChange("city", e.target.value)
-                        }
+                        onChange={(event) => updateField("city", event.target.value)}
+                        placeholder="Ex : Cotonou"
+                        className="rounded-xl"
                       />
                     </FormField>
-
-                    <FormField
-                      label="Code postal"
-                      error={errors.zipCode as string}
-                    >
+                    <FormField label="Code postal" error={errors.zipCode}>
                       <Input
-                        placeholder="Ex: 10500"
                         value={formData.zipCode}
-                        onChange={(e) =>
-                          handleInputChange("zipCode", e.target.value)
-                        }
+                        onChange={(event) => updateField("zipCode", event.target.value)}
+                        placeholder="Ex : 00229"
+                        className="rounded-xl"
                       />
+                      <HelpText>Optionnel si votre ville n&apos;utilise pas de code postal.</HelpText>
                     </FormField>
                   </div>
-
-                  <FormField
-                    label="Pays"
-                    required
-                    error={errors.country as string}
-                  >
+                  <FormField label="Pays" required error={errors.country}>
                     <Select
                       options={COUNTRIES}
                       value={formData.country}
-                      onChange={(e) =>
-                        handleInputChange("country", e.target.value)
-                      }
+                      onChange={(event) => updateField("country", event.target.value)}
+                    />
+                    <HelpText>
+                      Le pays permet d&apos;appliquer les bonnes devises, zones et règles de validation.
+                    </HelpText>
+                  </FormField>
+                </>
+              )}
+
+              {currentStep === 2 && (
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <FormField label="Chambres" error={errors.bedrooms}>
+                    <Input
+                      type="number"
+                      min="1"
+                      value={formData.bedrooms}
+                      onChange={(event) => updateField("bedrooms", Number.parseInt(event.target.value, 10) || 1)}
+                      className="rounded-xl"
                     />
                   </FormField>
-                </div>
-              )}
-
-              {/* Étape 2: Spécifications */}
-              {currentStep === 2 && (
-                <div className="space-y-5">
-                  <div>
-                    <h2 className="text-2xl font-semibold text-black">
-                      Spécifications
-                    </h2>
-                    <p className="mt-2 text-sm text-zinc-600">
-                      Détails sur votre logement.
-                    </p>
-                  </div>
-
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    <FormField
-                      label="Chambres"
-                      required
-                      error={errors.bedrooms}
-                    >
-                      <Input
-                        type="number"
-                        min="1"
-                        value={formData.bedrooms}
-                        onChange={(e) =>
-                          handleInputChange("bedrooms", parseInt(e.target.value))
-                        }
-                      />
-                    </FormField>
-
-                    <FormField
-                      label="Salles de bain"
-                      required
-                      error={errors.bathrooms}
-                    >
-                      <Input
-                        type="number"
-                        min="1"
-                        value={formData.bathrooms}
-                        onChange={(e) =>
-                          handleInputChange("bathrooms", parseInt(e.target.value))
-                        }
-                      />
-                    </FormField>
-
-                    <FormField
-                      label="Nombre max de clients"
-                      required
-                      error={errors.maxGuests}
-                    >
-                      <Input
-                        type="number"
-                        min="1"
-                        value={formData.maxGuests}
-                        onChange={(e) =>
-                          handleInputChange("maxGuests", parseInt(e.target.value))
-                        }
-                      />
-                    </FormField>
-
-                    <FormField
-                      label="Superficie (m²)"
-                      error={errors.squareFeet}
-                    >
-                      <Input
-                        type="number"
-                        min="0"
-                        value={formData.squareFeet || ""}
-                        onChange={(e) =>
-                          handleInputChange("squareFeet", parseInt(e.target.value))
-                        }
-                      />
-                    </FormField>
-                  </div>
-                </div>
-              )}
-
-              {/* Étape 3: Équipements & Photos */}
-              {currentStep === 3 && (
-                <div className="space-y-6">
-                  <div>
-                    <h2 className="text-2xl font-semibold text-black">
-                      Équipements & Photos
-                    </h2>
-                    <p className="mt-2 text-sm text-zinc-600">
-                      Sélectionnez les équipements et téléchargez des photos.
-                    </p>
-                  </div>
-
-                  {/* Équipements */}
-                  <div>
-                    <label className="mb-3 block text-sm font-semibold text-black">
-                      Équipements
-                    </label>
-                    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-                      {AMENITIES.map((amenity) => (
-                        <label
-                          key={amenity}
-                          className="flex cursor-pointer items-center gap-2 rounded-lg border border-black/10 bg-white p-3 transition hover:bg-zinc-50"
-                        >
-                          <input
-                            type="checkbox"
-                            checked={formData.amenities.includes(amenity)}
-                            onChange={() => toggleAmenity(amenity)}
-                            className="h-4 w-4 cursor-pointer rounded border-black/20"
-                          />
-                          <span className="text-sm font-medium text-black">
-                            {amenity}
-                          </span>
-                        </label>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Upload images */}
-                  <div>
-                    <label className="mb-3 block text-sm font-semibold text-black">
-                      Photos
-                      <span className="ml-1 text-red-500">*</span>
-                    </label>
-                    <ImageUpload
-                      onPreviewsChange={setImagePreviews}
-                      onFilesSelected={handleImagesSelected}
-                      maxFiles={10}
-                      maxSizeInMB={10}
+                  <FormField label="Salles de bain" error={errors.bathrooms}>
+                    <Input
+                      type="number"
+                      min="1"
+                      value={formData.bathrooms}
+                      onChange={(event) => updateField("bathrooms", Number.parseInt(event.target.value, 10) || 1)}
+                      className="rounded-xl"
                     />
-                    {errors.imageUrls && (
-                      <p className="mt-2 text-xs text-red-500">
-                        {errors.imageUrls}
-                      </p>
-                    )}
+                  </FormField>
+                  <FormField label="Voyageurs max" error={errors.maxGuests}>
+                    <Input
+                      type="number"
+                      min="1"
+                      value={formData.maxGuests}
+                      onChange={(event) => updateField("maxGuests", Number.parseInt(event.target.value, 10) || 1)}
+                      className="rounded-xl"
+                    />
+                  </FormField>
+                  <FormField label="Superficie (m²)">
+                    <Input
+                      type="number"
+                      min="0"
+                      value={formData.squareFeet}
+                      onChange={(event) => updateField("squareFeet", Number.parseInt(event.target.value, 10) || 0)}
+                      className="rounded-xl"
+                    />
+                  </FormField>
+                  <div className="sm:col-span-2">
+                    <HelpText>
+                      Ces valeurs alimentent les filtres voyageurs. Gardez des chiffres réalistes pour éviter les réservations mal qualifiées.
+                    </HelpText>
                   </div>
                 </div>
               )}
 
-              {/* Étape 4: Tarification */}
-              {currentStep === 4 && (
-                <div className="space-y-5">
+              {currentStep === 3 && (
+                <>
                   <div>
-                    <h2 className="text-2xl font-semibold text-black">
-                      Tarification
-                    </h2>
-                    <p className="mt-2 text-sm text-zinc-600">
-                      Définissez votre stratégie de prix.
-                    </p>
+                    <p className="text-sm font-semibold text-zinc-900">Équipements</p>
+                    <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3">
+                      {AMENITIES.map((amenity) => {
+                        const Icon = amenity.icon;
+                        const active = formData.amenities.includes(amenity.value);
+                        return (
+                          <button
+                            key={amenity.value}
+                            type="button"
+                            onClick={() => toggleAmenity(amenity.value)}
+                            className={[
+                              "flex min-h-16 items-center gap-3 rounded-xl border px-3 py-3 text-left transition",
+                              active ? "border-zinc-950 bg-zinc-50 shadow-sm" : "border-zinc-200 bg-white hover:bg-zinc-50",
+                            ].join(" ")}
+                          >
+                            <span className="grid h-9 w-9 place-items-center rounded-xl bg-zinc-100 text-zinc-900">
+                              <Icon className="h-4 w-4" aria-hidden="true" />
+                            </span>
+                            <span className="text-sm font-semibold text-zinc-800">{amenity.label}</span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                    <HelpText>
+                      Les équipements sélectionnés apparaissent comme des badges et améliorent la visibilité dans les recherches filtrées.
+                    </HelpText>
                   </div>
 
+                  <div>
+                    <p className="text-sm font-semibold text-zinc-900">
+                      Photos <span className="text-red-500">*</span>
+                    </p>
+                    <div className="mt-3">
+                      <ImageUpload
+                        onPreviewsChange={setImagePreviews}
+                        onFilesSelected={() => undefined}
+                        maxFiles={10}
+                        maxSizeInMB={10}
+                      />
+                    </div>
+                    <HelpText>
+                      Ajoutez des photos lumineuses de chaque pièce importante. La première photo devient l&apos;image principale de l&apos;annonce.
+                    </HelpText>
+                    {errors.imageUrls && <p className="mt-2 text-xs text-red-500">{errors.imageUrls}</p>}
+                  </div>
+                </>
+              )}
+
+              {currentStep === 4 && (
+                <>
                   <div className="grid gap-4 sm:grid-cols-2">
-                    <FormField
-                      label="Devises"
-                      required
-                      error={errors.currency as string}
-                    >
+                    <FormField label="Devise" required>
                       <Select
                         options={[
-                          { value: "USD", label: "USD ($)" },
-                          { value: "EUR", label: "EUR (€)" },
                           { value: "XOF", label: "XOF (FCFA)" },
+                          { value: "EUR", label: "EUR (€)" },
+                          { value: "USD", label: "USD ($)" },
                         ]}
                         value={formData.currency}
-                        onChange={(e) =>
-                          handleInputChange("currency", e.target.value)
-                        }
+                        onChange={(event) => updateField("currency", event.target.value as CurrencyCode)}
                       />
+                      <HelpText>Choisissez la devise qui sera affichée aux voyageurs.</HelpText>
                     </FormField>
-
-                    <FormField
-                      label="Prix par nuit"
-                      required
-                      error={errors.pricePerNight}
-                    >
+                    <FormField label="Prix par nuit" required error={errors.pricePerNight}>
                       <Input
                         type="number"
                         min="1"
-                        step="0.01"
                         value={formData.pricePerNight || ""}
-                        onChange={(e) =>
-                          handleInputChange("pricePerNight", parseFloat(e.target.value))
-                        }
+                        onChange={(event) => updateField("pricePerNight", Number.parseFloat(event.target.value) || 0)}
+                        className="rounded-xl"
                       />
+                      <HelpText>Indiquez le prix public hors éventuelles promotions ou remises mensuelles.</HelpText>
                     </FormField>
-
-                    <FormField
-                      label="Nuit minimum"
-                      hint="Nombre minimum de nuits à réserver"
-                      error={errors.minNights}
-                    >
+                    <FormField label="Nuits minimum">
                       <Input
                         type="number"
                         min="1"
                         value={formData.minNights}
-                        onChange={(e) =>
-                          handleInputChange("minNights", parseInt(e.target.value))
-                        }
+                        onChange={(event) => updateField("minNights", Number.parseInt(event.target.value, 10) || 1)}
+                        className="rounded-xl"
                       />
+                      <HelpText>Fixe la durée minimale acceptée pour une réservation.</HelpText>
                     </FormField>
-
-                    <FormField
-                      label="Remise mensuelle (%)"
-                      hint="Remise pour les réservations mensuelles"
-                      error={errors.maxMonthlyDiscount}
-                    >
+                    <FormField label="Remise mensuelle (%)">
                       <Input
                         type="number"
                         min="0"
                         max="100"
                         value={formData.maxMonthlyDiscount}
-                        onChange={(e) =>
-                          handleInputChange(
-                            "maxMonthlyDiscount",
-                            parseInt(e.target.value),
-                          )
+                        onChange={(event) =>
+                          updateField("maxMonthlyDiscount", Number.parseInt(event.target.value, 10) || 0)
                         }
+                        className="rounded-xl"
                       />
+                      <HelpText>Optionnel. Utile pour attirer les séjours de longue durée.</HelpText>
                     </FormField>
                   </div>
 
-                  <Card className="mt-6 space-y-3 bg-green-50 p-4">
-                    <p className="text-sm font-semibold text-green-900">
-                      ✓ Prêt à publier
+                  <div className="rounded-2xl border border-zinc-200 bg-white p-4">
+                    <div className="flex items-start gap-3">
+                      <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-zinc-100 text-zinc-900">
+                        <CalendarDays className="h-5 w-5" aria-hidden="true" />
+                      </span>
+                      <div>
+                        <p className="text-sm font-semibold text-zinc-950">
+                          Disponibilités <span className="text-red-500">*</span>
+                        </p>
+                        <p className="mt-1 text-sm leading-6 text-zinc-500">
+                          Sélectionnez les jours habituellement ouverts, puis bloquez les dates déjà réservées ou indisponibles.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="mt-4 grid grid-cols-4 gap-2 sm:grid-cols-7">
+                      {WEEKDAYS.map((day) => {
+                        const active = formData.availableWeekdays.includes(day.value);
+                        return (
+                          <button
+                            key={day.value}
+                            type="button"
+                            onClick={() => toggleWeekday(day.value)}
+                            title={day.longLabel}
+                            className={[
+                              "h-11 rounded-xl border text-sm font-semibold transition",
+                              active
+                                ? "border-zinc-950 bg-zinc-950 text-white"
+                                : "border-zinc-200 bg-white text-zinc-500 hover:bg-zinc-50",
+                            ].join(" ")}
+                          >
+                            {day.label}
+                          </button>
+                        );
+                      })}
+                    </div>
+                    {errors.availableWeekdays && (
+                      <p className="mt-2 text-xs text-red-500">{errors.availableWeekdays}</p>
+                    )}
+
+                    <div className="mt-4 grid gap-3 sm:grid-cols-[minmax(0,1fr)_auto]">
+                      <Input
+                        type="date"
+                        value={blockedDate}
+                        onChange={(event) => setBlockedDate(event.target.value)}
+                        className="rounded-xl"
+                        aria-label="Date indisponible"
+                      />
+                      <Button type="button" variant="secondary" size="sm" onClick={addUnavailableDate}>
+                        Bloquer la date
+                      </Button>
+                    </div>
+
+                    {formData.unavailableDates.length > 0 && (
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        {formData.unavailableDates.map((date) => (
+                          <button
+                            key={date}
+                            type="button"
+                            onClick={() => removeUnavailableDate(date)}
+                            className="inline-flex items-center gap-2 rounded-full bg-zinc-100 px-3 py-1.5 text-xs font-medium text-zinc-600 hover:bg-zinc-200"
+                          >
+                            {date}
+                            <X className="h-3.5 w-3.5" aria-hidden="true" />
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                    <input type="hidden" name="availableWeekdays" value={formData.availableWeekdays.join(",")} />
+                    <input type="hidden" name="unavailableDates" value={formData.unavailableDates.join(",")} />
+                  </div>
+
+                  <div className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3">
+                    <p className="text-sm font-semibold text-amber-950">Validation</p>
+                    <p className="mt-1 text-sm text-amber-800">
+                      Statut initial : <span className="font-semibold">En attente de validation admin</span>.
                     </p>
-                    <p className="text-xs text-green-800">
-                      Votre propriété sera visible aux voyageurs immédiatement
-                      après sa validation.
-                    </p>
-                  </Card>
-                </div>
+                    <input type="hidden" name="validationStatus" value={formData.validationStatus} />
+                  </div>
+                </>
               )}
+            </div>
 
-              {/* Navigation */}
-              <div className="mt-8 flex gap-3 justify-between">
-                <Button
-                  type="button"
-                  variant="secondary"
-                  size="lg"
-                  onClick={handlePrev}
-                  disabled={currentStep === 0}
-                >
-                  ← Précédent
+            <div className="flex flex-col gap-3 border-t border-zinc-100 px-5 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-7">
+              <Button type="button" variant="ghost" size="sm" className="justify-start text-zinc-500">
+                <Save className="h-4 w-4" aria-hidden="true" />
+                Sauvegarder le brouillon
+              </Button>
+
+              <div className="flex items-center gap-2">
+                <Button type="button" variant="secondary" size="sm" onClick={goPrev} disabled={currentStep === 0}>
+                  <ChevronLeft className="h-4 w-4" aria-hidden="true" />
+                  Retour
                 </Button>
-
                 {currentStep === STEPS.length - 1 ? (
-                  <Button
-                    type="submit"
-                    size="lg"
-                  >
-                    Publier la propriété
-                  </Button>
+                  <Button type="submit" size="sm">Publier</Button>
                 ) : (
-                  <Button
-                    type="button"
-                    size="lg"
-                    onClick={handleNext}
-                  >
-                    Suivant →
+                  <Button type="button" size="sm" onClick={goNext}>
+                    Continuer
+                    <ChevronRight className="h-4 w-4" aria-hidden="true" />
                   </Button>
                 )}
               </div>
-            </Card>
-          </div>
-
-          {/* Colonne droite: Prévisualisation */}
-          <div className="lg:col-span-4 lg:order-2">
-            <div className="sticky top-24">
-              <div className="mb-4">
-                <p className="text-xs font-semibold uppercase tracking-wide text-zinc-600">
-                  Aperçu de votre annonce
-                </p>
-              </div>
-              <ListingCard
-                locale="fr"
-                listing={previewListing}
-                variant="outlined"
-                linkable={false}
-                badge={`${Math.min(imagePreviews.length, 12)}/${12}`}
-                 className="mb-0!"
-              />
             </div>
           </div>
         </div>
+
+        <PreviewPanel
+          completion={completion}
+          formData={formData}
+          imagePreviews={imagePreviews}
+          previewLocation={previewLocation}
+          selectedType={selectedType?.label ?? "Appartement"}
+        />
       </form>
     </Container>
+  );
+}
+
+function StepperTabs({
+  currentStep,
+  onStepClick,
+}: {
+  currentStep: number;
+  onStepClick: (step: number) => void;
+}) {
+  return (
+    <div className="overflow-hidden rounded-2xl border border-zinc-200 bg-white">
+      <div className="grid grid-cols-5">
+        {STEPS.map((step, index) => {
+          const active = currentStep === index;
+          const done = currentStep > index;
+          return (
+            <button
+              key={step.label}
+              type="button"
+              onClick={() => onStepClick(index)}
+              className={[
+                "flex h-[88px] min-w-0 items-center gap-3 border-r border-zinc-100 px-3 text-left transition last:border-r-0",
+                active ? "bg-zinc-950" : done ? "bg-zinc-50 hover:bg-zinc-100" : "hover:bg-zinc-50",
+              ].join(" ")}
+            >
+              <span
+                className={[
+                  "grid h-9 w-9 shrink-0 place-items-center rounded-full text-sm font-semibold",
+                  active ? "bg-white text-zinc-950" : done ? "bg-emerald-500 text-white" : "bg-zinc-100 text-zinc-500",
+                ].join(" ")}
+              >
+                {done ? <Check className="h-4 w-4" aria-hidden="true" /> : index + 1}
+              </span>
+              <span className="hidden min-w-0 flex-col md:flex">
+                <span className={active ? "truncate text-sm font-semibold text-white" : "truncate text-sm font-semibold text-zinc-800"}>
+                  {step.label}
+                </span>
+                <span className={active ? "truncate text-sm text-zinc-400" : "truncate text-sm text-zinc-500"}>
+                  {step.sub}
+                </span>
+              </span>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function PreviewPanel({
+  completion,
+  formData,
+  imagePreviews,
+  previewLocation,
+  selectedType,
+}: {
+  completion: number;
+  formData: PropertyFormData;
+  imagePreviews: string[];
+  previewLocation: string;
+  selectedType: string;
+}) {
+  const checklist = [
+    { label: "Nom de la propriété", done: !!formData.propertyName },
+    { label: "Type de propriété", done: !!formData.propertyType },
+    { label: "Description", done: formData.description.length > 20 },
+    { label: "Localisation", done: !!formData.city && !!formData.country },
+    { label: "Photos", done: imagePreviews.length > 0 },
+    { label: "Prix", done: formData.pricePerNight > 0 },
+    { label: "Disponibilités", done: formData.availableWeekdays.length > 0 },
+  ];
+
+  return (
+    <aside className="lg:sticky lg:top-24 lg:self-start">
+      <div className="overflow-hidden rounded-2xl border border-zinc-200 bg-white">
+        <div className="flex items-center justify-between border-b border-zinc-100 px-4 py-3">
+          <span className="text-sm text-zinc-500">Complétion</span>
+          <span className="text-sm font-semibold text-zinc-950">{completion}%</span>
+        </div>
+
+        <div
+          className="relative flex h-44 flex-col items-center justify-center gap-2 bg-zinc-100 bg-cover bg-center"
+          style={imagePreviews[0] ? { backgroundImage: `url(${imagePreviews[0]})` } : undefined}
+        >
+          {!imagePreviews[0] && (
+            <>
+              <Camera className="h-8 w-8 text-zinc-300" aria-hidden="true" />
+              <p className="text-xs text-zinc-400">Photos à l&apos;étape 4</p>
+            </>
+          )}
+          <div className="absolute left-3 top-3 rounded-full bg-black/70 px-2 py-1 text-[10px] font-semibold text-white">
+            {imagePreviews.length} / 10
+          </div>
+          <div className="absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-full bg-white text-zinc-700 shadow-sm">
+            <Upload className="h-4 w-4" aria-hidden="true" />
+          </div>
+        </div>
+
+        <div className="p-4">
+          <p className="text-sm font-semibold leading-snug text-zinc-950">
+            {formData.propertyName || "Titre du logement"}
+          </p>
+          <p className="mt-1 flex items-center gap-1 text-xs text-zinc-400">
+            <MapPin className="h-3.5 w-3.5" aria-hidden="true" />
+            {previewLocation}
+          </p>
+
+          <div className="my-3 h-px bg-zinc-100" />
+
+          <div className="flex items-baseline justify-between">
+            <span className="text-sm font-semibold text-zinc-950">
+              {formData.pricePerNight || 0} {formData.currency}
+              <span className="text-xs font-normal text-zinc-400"> / nuit</span>
+            </span>
+            <span className="text-xs text-zinc-400">4.8 (12)</span>
+          </div>
+
+          <div className="mt-3 flex flex-wrap gap-1.5">
+            <PreviewBadge>En attente</PreviewBadge>
+            <PreviewBadge>{selectedType}</PreviewBadge>
+            {formData.amenities.slice(0, 2).map((amenity) => (
+              <PreviewBadge key={amenity}>{amenity}</PreviewBadge>
+            ))}
+            {formData.availableWeekdays.length > 0 && (
+              <PreviewBadge>{`${formData.availableWeekdays.length} jours ouverts`}</PreviewBadge>
+            )}
+          </div>
+        </div>
+
+        <div className="border-t border-zinc-100 px-4 py-3">
+          <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-zinc-400">
+            À compléter
+          </p>
+          <div className="grid gap-1.5">
+            {checklist.map((item) => (
+              <div key={item.label} className="flex items-center gap-2">
+                <span
+                  className={[
+                    "grid h-4 w-4 place-items-center rounded-full text-[10px]",
+                    item.done ? "bg-emerald-100 text-emerald-600" : "bg-zinc-100 text-zinc-300",
+                  ].join(" ")}
+                >
+                  {item.done ? <Check className="h-3 w-3" aria-hidden="true" /> : "○"}
+                </span>
+                <span className={item.done ? "text-xs text-zinc-400 line-through" : "text-xs text-zinc-600"}>
+                  {item.label}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </aside>
+  );
+}
+
+function PreviewBadge({ children }: { children: ReactNode }) {
+  return (
+    <span className="rounded-full bg-zinc-100 px-2.5 py-1 text-[11px] font-medium text-zinc-500">
+      {children}
+    </span>
+  );
+}
+
+function HelpText({ children }: { children: ReactNode }) {
+  return (
+    <p className="mt-2 rounded-xl bg-zinc-50 px-3 py-2 text-xs leading-5 text-zinc-500">
+      {children}
+    </p>
   );
 }

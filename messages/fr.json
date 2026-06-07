@@ -16,7 +16,7 @@
     "signup": "Inscription",
     "dashboard": "Tableau de bord",
     "profile": "Profil",
-    "reservations": "Réservations",
+    "reservations": "Mes réservations",
     "favorites": "Favoris",
     "activities": "Activités",
     "messages": "Messages",
@@ -170,6 +170,10 @@
     "login": "Connexion",
     "signup": "Inscription",
     "siteMap": "Plan du site",
+    "staysDesc": "Maisons, hôtels et séjours premium",
+    "servicesDesc": "Options utiles pour mieux voyager",
+    "experiencesDesc": "Activités locales et moments uniques",
+    "siteMapDesc": "Toutes les pages en un clin d'œil",
     "tagline": "Maisons d’hôtes premium au Bénin et en Afrique."
   },
   "homeListings": {

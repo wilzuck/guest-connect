@@ -1,0 +1,98 @@
+[
+  {
+    "id": "svc-photo-home",
+    "title": "Photographie de logement",
+    "category": "photography",
+    "location": "Cotonou, Bénin",
+    "priceFrom": 45,
+    "currency": "EUR",
+    "rating": 4.91,
+    "reviewCount": 128,
+    "imageUrl": "https://images.unsplash.com/photo-1452587925148-ce544e77e70d?auto=format&fit=crop&w=1600&q=80",
+    "description": "Shooting lumineux pour annonces premium, chambres, espaces communs et détails d’accueil."
+  },
+  {
+    "id": "svc-tailor-linen",
+    "title": "Couture linge & rideaux",
+    "category": "tailoring",
+    "location": "Porto-Novo, Bénin",
+    "priceFrom": 22,
+    "currency": "EUR",
+    "rating": 4.82,
+    "reviewCount": 76,
+    "imageUrl": "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=1600&q=80",
+    "description": "Retouches, rideaux, linge de maison et finitions textiles pour hébergements."
+  },
+  {
+    "id": "svc-repair-aircon",
+    "title": "Réparation climatisation",
+    "category": "repair",
+    "location": "Abidjan, Côte d'Ivoire",
+    "priceFrom": 35,
+    "currency": "EUR",
+    "rating": 4.78,
+    "reviewCount": 94,
+    "imageUrl": "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1600&q=80",
+    "description": "Diagnostic rapide, maintenance et petits dépannages avant l’arrivée des voyageurs."
+  },
+  {
+    "id": "svc-play-space",
+    "title": "Aménagement aire de jeux",
+    "category": "play",
+    "location": "Dakar, Sénégal",
+    "priceFrom": 60,
+    "currency": "EUR",
+    "rating": 4.86,
+    "reviewCount": 61,
+    "imageUrl": "https://images.unsplash.com/photo-1596464716127-f2a82984de30?auto=format&fit=crop&w=1600&q=80",
+    "description": "Création de coins famille, jeux extérieurs et zones enfants sécurisées."
+  },
+  {
+    "id": "svc-entertainment",
+    "title": "Animation & distraction locale",
+    "category": "entertainment",
+    "location": "Marrakech, Maroc",
+    "priceFrom": 40,
+    "currency": "EUR",
+    "rating": 4.88,
+    "reviewCount": 143,
+    "imageUrl": "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1600&q=80",
+    "description": "Musique, ateliers, soirées privées et moments locaux pour voyageurs."
+  },
+  {
+    "id": "svc-cleaning",
+    "title": "Ménage premium entre séjours",
+    "category": "cleaning",
+    "location": "Cotonou, Bénin",
+    "priceFrom": 18,
+    "currency": "EUR",
+    "rating": 4.9,
+    "reviewCount": 210,
+    "imageUrl": "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1600&q=80",
+    "description": "Nettoyage complet, préparation chambres et contrôle qualité avant check-in."
+  },
+  {
+    "id": "svc-welcome-basket",
+    "title": "Panier d’accueil local",
+    "category": "hospitality",
+    "location": "Ouidah, Bénin",
+    "priceFrom": 15,
+    "currency": "EUR",
+    "rating": 4.74,
+    "reviewCount": 48,
+    "imageUrl": "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1600&q=80",
+    "description": "Sélection locale, boissons, snacks et petite attention personnalisée."
+  },
+  {
+    "id": "svc-garden",
+    "title": "Entretien jardin & terrasse",
+    "category": "repair",
+    "location": "Le Cap, Afrique du Sud",
+    "priceFrom": 30,
+    "currency": "EUR",
+    "rating": 4.8,
+    "reviewCount": 89,
+    "imageUrl": "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=1600&q=80",
+    "description": "Jardin, terrasse, piscine légère et extérieur prêt pour les photos."
+  }
+]

@@ -41,8 +41,8 @@ export async function AuthShell({
     <div className="min-h-dvh bg-zinc-50">
       <div className="flex min-h-dvh w-full">
         {/* Left: auth */}
-        <div className="flex w-full flex-col px-5 py-6 sm:px-8 sm:py-8 md:w-3/5 lg:w-1/2">
-          <main className="flex flex-1 max-w-md mx-auto items-start py-6 sm:py-10">
+        <div className="flex w-full flex-col px-5 py-2 sm:px-8 sm:py-8 md:w-3/5 lg:w-1/2">
+          <main className="flex flex-1 max-w-md mx-auto items-start py-2 sm:py-10">
             <div className="w-full max-w-md">
               <header className="flex items-center py-10 justify-between">
                 <Link href={`/${locale}`} className="inline-flex items-center gap-2">

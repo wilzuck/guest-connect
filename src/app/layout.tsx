@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
-import { Manrope, Plus_Jakarta_Sans, Inter } from "next/font/google";
+import { Geist, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import type { ReactNode } from "react";
 
-const sans = Inter({
+const sans = Geist({
   variable: "--font-sans",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
 });
 
 // Police "Airbnb-like" (sans moderne, proche de Cereal/Circular)

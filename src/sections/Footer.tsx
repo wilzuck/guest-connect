@@ -7,6 +7,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
 import { LocaleSwitcher } from "@/components/i18n/LocaleSwitcher";
 import { CurrencySwitcher } from "@/components/currency/CurrencySwitcher";
+import { DashboardFooter } from "@/components/dashboard/DashboardFooter";
 import type { ReactNode } from "react";
 
 export function Footer() {
@@ -14,6 +15,7 @@ export function Footer() {
   const t = useTranslations("footer");
   const pathname = usePathname() || "";
   if (/(^|\/)(login|signup)$/.test(pathname)) return null;
+  if (/(^|\/)dashboard(\/|$)/.test(pathname)) return <DashboardFooter />;
 
   const columns = [
     {

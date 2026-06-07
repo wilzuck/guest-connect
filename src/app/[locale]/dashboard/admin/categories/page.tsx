@@ -12,16 +12,8 @@ export default async function Page() {
       entity="categories"
       initialRows={db.categories ?? []}
       columns={[
-        {
-          key: "name",
-          label: "Nom",
-          renderKey: "name",
-        },
-        {
-          key: "slug",
-          label: "Slug",
-          renderKey: "slug",
-        },
+        { key: "name", label: "Nom", renderKey: "name" },
+        { key: "slug", label: "Slug", renderKey: "slug" },
       ]}
       createHref={`/${locale}/dashboard/admin/categories/new`}
       editBaseHref={`/${locale}/dashboard/admin/categories`}

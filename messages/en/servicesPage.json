@@ -1,0 +1,40 @@
+{
+  "metadataTitle": "Services — GuestConnect",
+  "metadataDescription": "Traveler and host services designed to book, welcome and manage with confidence.",
+  "eyebrow": "GuestConnect Services",
+  "title": "Everything you need to travel and host with confidence",
+  "description": "GuestConnect brings together the essential services of a premium accommodation marketplace: clear search, secure booking, host tools and human support.",
+  "searchTitle": "Start a search",
+  "travelerTitle": "For travelers",
+  "travelerDescription": "Book faster, compare better and stay in control before, during and after your stay.",
+  "hostTitle": "For hosts",
+  "hostDescription": "Showcase your property, manage availability and grow bookings with a simple experience.",
+  "trustTitle": "A clear framework for every booking",
+  "trustDescription": "Photos, rules, pricing, policies and key information are structured to reduce doubt and improve conversion.",
+  "ctaTitle": "Ready to move forward?",
+  "ctaDescription": "Explore available stays or start listing your property.",
+  "ctaSearch": "Explore stays",
+  "ctaHost": "Become a host",
+  "items": {
+    "secureBookingTitle": "Secure booking",
+    "secureBookingDesc": "A clear flow, visible information and confirmation designed to reassure.",
+    "smartSearchTitle": "Guided search",
+    "smartSearchDesc": "Destination, dates and guests stay at the center of the mobile journey.",
+    "supportTitle": "Travel support",
+    "supportDesc": "A simple entry point for questions before or after booking.",
+    "hostToolsTitle": "Host tools",
+    "hostToolsDesc": "Listing management, pricing, availability and key information.",
+    "visibilityTitle": "Premium visibility",
+    "visibilityDesc": "A more editorial presentation to showcase every property.",
+    "dashboardTitle": "Centralized control",
+    "dashboardDesc": "A dashboard space to track bookings, listings and activity."
+  },
+  "stats": {
+    "oneValue": "24/7",
+    "oneLabel": "Support ready to scale",
+    "twoValue": "0",
+    "twoLabel": "Hidden fees in the journey",
+    "threeValue": "100%",
+    "threeLabel": "Mobile-first"
+  }
+}
