@@ -464,7 +464,7 @@ export function PropertyFormMultiStep({ context = "public" }: { context?: "publi
                       <ImageUpload
                         onPreviewsChange={setImagePreviews}
                         onFilesSelected={() => undefined}
-                        maxFiles={10}
+                        maxFiles={5}
                         maxSizeInMB={10}
                       />
                     </div>
@@ -734,7 +734,7 @@ function PreviewPanel({
             </>
           )}
           <div className="absolute left-3 top-3 rounded-full bg-black/70 px-2 py-1 text-[10px] font-semibold text-white">
-            {imagePreviews.length} / 10
+            {imagePreviews.length} / 5
           </div>
           <div className="absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-full bg-white text-zinc-700 shadow-sm">
             <Upload className="h-4 w-4" aria-hidden="true" />

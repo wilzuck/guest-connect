@@ -54,7 +54,7 @@ export default async function Page() {
         <p className="mt-2 text-sm text-zinc-600">{isEn ? "Host and admin dashboards (demo)." : "Accès aux espaces Hôte et Admin (démo)."}</p>
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
           <QuickLink href={`/${locale}/dashboard/host`} title={isEn ? "Host dashboard" : "Espace hôte"} desc={isEn ? "Create and manage your listings" : "Créer et gérer vos logements"} />
-          <QuickLink href={`/${locale}/dashboard/admin`} title={isEn ? "Admin back-office" : "Back-office admin"} desc={isEn ? "Manage categories, locations, services…" : "Gérer catégories, lieux, services…"} />
+          <QuickLink href={`/${locale}/dashboard/service-management`} title={isEn ? "Admin back-office" : "Back-office admin"} desc={isEn ? "Manage categories, locations, services…" : "Gérer catégories, lieux, services…"} />
         </div>
       </div>
     </AccountShell>

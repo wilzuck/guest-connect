@@ -26,8 +26,8 @@ export function UserMenu() {
 
   const account: UserMenuItem[] = [
     { label: t("dashboard"), href: `/${locale}/dashboard`, permission: "dashboard.read" },
-    { label: "Administration", href: `/${locale}/dashboard/admin`, permission: "admin.read" },
-    { label: "Gestion de mes services", href: `/${locale}/dashboard/admin/services`, permission: "services.manage" },
+    { label: "Administration", href: `/${locale}/dashboard/service-management`, permission: "admin.read" },
+    { label: "Gestion de mes services", href: `/${locale}/dashboard/service-management/services`, permission: "services.manage" },
     { label: t("profile"), href: `/${locale}/profile` },
     { label: t("reservations"), href: `/${locale}/reservations`, permission: "reservations.read" },
     { label: t("favorites"), href: `/${locale}/favorites`, permission: "favorites.read" },

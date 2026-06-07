@@ -3,11 +3,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  Bell,
   BookOpen,
   BriefcaseBusiness,
   Building2,
-  ChevronDown,
   FileQuestion,
   FolderTree,
   LayoutDashboard,
@@ -19,7 +17,7 @@ import {
   Sparkles,
   Users,
 } from "lucide-react";
-import { Button, ButtonLink } from "@/components/ui/Button";
+import { ButtonLink } from "@/components/ui/Button";
 import {
   ROLE_LABELS,
   filterByPermissions,
@@ -47,24 +45,24 @@ export function AdminShell({
   const currentUser = getCurrentUserAccess();
 
   const mainNav: NavItem[] = [
-    { href: `/${locale}/dashboard/admin`, label: "Vue d'ensemble", icon: LayoutDashboard, permission: "admin.read" },
-    { href: `/${locale}/dashboard/admin/listings`, label: "Logements", icon: Building2, permission: "listings.manage" },
-    { href: `/${locale}/dashboard/admin/categories`, label: "Catégories", icon: FolderTree, permission: "categories.manage" },
-    { href: `/${locale}/dashboard/admin/locations`, label: "Lieux", icon: MapPin, permission: "locations.manage" },
-    { href: `/${locale}/dashboard/admin/services`, label: "Services", icon: BriefcaseBusiness, permission: "services.manage" },
-    { href: `/${locale}/dashboard/admin/experiences`, label: "Expériences", icon: Sparkles, permission: "experiences.manage" },
+    { href: `/${locale}/dashboard/service-management`, label: "Vue d'ensemble", icon: LayoutDashboard, permission: "admin.read" },
+    { href: `/${locale}/dashboard/service-management/listings`, label: "Logements", icon: Building2, permission: "listings.manage" },
+    { href: `/${locale}/dashboard/service-management/categories`, label: "Catégories", icon: FolderTree, permission: "categories.manage" },
+    { href: `/${locale}/dashboard/service-management/locations`, label: "Lieux", icon: MapPin, permission: "locations.manage" },
+    { href: `/${locale}/dashboard/service-management/services`, label: "Services", icon: BriefcaseBusiness, permission: "services.manage" },
+    { href: `/${locale}/dashboard/service-management/experiences`, label: "Expériences", icon: Sparkles, permission: "experiences.manage" },
   ];
 
   const accessNav: NavItem[] = [
-    { href: `/${locale}/dashboard/admin/users`, label: "Utilisateurs", icon: Users, permission: "users.manage" },
-    { href: `/${locale}/dashboard/admin/roles`, label: "Rôles", icon: ShieldCheck, permission: "roles.manage" },
-    { href: `/${locale}/dashboard/admin/permissions`, label: "Droits", icon: FileQuestion, permission: "permissions.manage" },
+    { href: `/${locale}/dashboard/service-management/users`, label: "Utilisateurs", icon: Users, permission: "users.manage" },
+    { href: `/${locale}/dashboard/service-management/roles`, label: "Rôles", icon: ShieldCheck, permission: "roles.manage" },
+    { href: `/${locale}/dashboard/service-management/permissions`, label: "Droits", icon: FileQuestion, permission: "permissions.manage" },
   ];
 
   const docsNav: NavItem[] = [
     { href: `/${locale}/support`, label: "Support", icon: LifeBuoy, permission: "docs.read" },
-    { href: `/${locale}/dashboard/admin/docs/usage`, label: "Documentation", icon: BookOpen, permission: "docs.read" },
-    { href: `/${locale}/dashboard/admin/docs/best-practices`, label: "Bonnes pratiques", icon: Sparkles, permission: "docs.read" },
+    { href: `/${locale}/dashboard/service-management/docs/usage`, label: "Documentation", icon: BookOpen, permission: "docs.read" },
+    { href: `/${locale}/dashboard/service-management/docs/best-practices`, label: "Bonnes pratiques", icon: Sparkles, permission: "docs.read" },
   ];
 
   const visibleMainNav = filterByPermissions(mainNav, currentUser);
@@ -73,11 +71,12 @@ export function AdminShell({
   const visibleMobileNav = [...visibleMainNav, ...visibleAccessNav, ...visibleDocsNav];
 
   return (
-    <div className="min-h-dvh w-full">
+    <div className="min-h-dvh w-full border-t border-black/10 bg-white">
       <div className="flex min-h-dvh w-full max-w-none border-t border-[#E8E8EC] bg-white">
         <aside className="hidden w-[256px] shrink-0 border-r border-[#E8E8EC] bg-[#F7F7F8] lg:flex lg:flex-col">
+          {/* Brand 
           <div className="flex h-16 items-center justify-between px-4">
-            <Link href={`/${locale}/dashboard/admin`} className="flex items-center gap-2">
+            <Link href={`/${locale}/dashboard/service-management`} className="flex items-center gap-2">
               <span className="grid h-8 w-8 place-items-center rounded-lg bg-black text-sm font-bold text-white shadow-sm shadow-black/10">
                 G
               </span>
@@ -85,8 +84,8 @@ export function AdminShell({
             </Link>
             <ChevronDown className="h-4 w-4 text-[#9B9BA1]" aria-hidden="true" />
           </div>
-
-          <div className="px-3 pb-4">
+          */}
+          <div className="px-3 py-4">
             <label className="flex h-10 items-center gap-2 rounded-lg bg-white px-3 text-sm text-[#8E8E93] shadow-sm shadow-black/[0.03]">
               <Search className="h-4 w-4" aria-hidden="true" />
               <input
@@ -116,17 +115,8 @@ export function AdminShell({
           <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-[#E8E8EC] bg-white/95 px-4 backdrop-blur lg:px-6">
             <p className="text-lg font-semibold tracking-tight text-[#202024]">Dashboard</p>
             <div className="flex items-center gap-2">
-              <Button
-                type="button"
-                variant="secondary"
-                size="sm"
-                className="h-10 w-10 rounded-lg px-0 text-[#73737A]"
-                aria-label="Notifications"
-              >
-                <Bell className="h-4 w-4" aria-hidden="true" />
-              </Button>
               <ButtonLink
-                href={`/${locale}/dashboard/admin/listings/new`}
+                href={`/${locale}/dashboard/service-management/listings/new`}
                 variant="primary"
                 size="sm"
                 className="h-10 rounded-lg"
@@ -136,7 +126,6 @@ export function AdminShell({
               </ButtonLink>
             </div>
           </header>
-
           <div className="border-b border-[#E8E8EC] bg-[#F7F7F8] px-3 py-2 lg:hidden">
             <div className="flex gap-2 overflow-x-auto">
               {visibleMobileNav.map((item) => (
@@ -177,7 +166,9 @@ function NavGroup({
       <div className="grid gap-1">
         {items.map((item) => {
           const Icon = item.icon;
-          const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
+          const active = item.href.endsWith("/dashboard/service-management")
+            ? pathname === item.href
+            : pathname === item.href || pathname.startsWith(`${item.href}/`);
 
           return (
             <Link

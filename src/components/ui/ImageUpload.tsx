@@ -24,6 +24,8 @@ export function ImageUpload({
   const [dragActive, setDragActive] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const replaceInputRef = useRef<HTMLInputElement>(null);
+  const replaceIndexRef = useRef<number | null>(null);
 
   const validateFiles = useCallback((files: File[]): File[] => {
     const maxSizeInBytes = maxSizeInMB * 1024 * 1024;
@@ -47,6 +49,10 @@ export function ImageUpload({
   }, [maxFiles, maxSizeInMB, previews.length]);
 
   const handleFiles = useCallback((files: File[]) => {
+    if (previews.length >= maxFiles) {
+      setError(`Maximum ${maxFiles} images`);
+      return;
+    }
     const validFiles = validateFiles(files);
 
     if (validFiles.length === 0) return;
@@ -58,7 +64,7 @@ export function ImageUpload({
     onPreviewsChange?.(updatedPreviews);
     onFilesSelected?.(validFiles);
     setError(null);
-  }, [previews, validateFiles, onFilesSelected, onPreviewsChange]);
+  }, [previews, maxFiles, validateFiles, onFilesSelected, onPreviewsChange]);
 
   const handleDrag = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -82,6 +88,34 @@ export function ImageUpload({
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files || []);
     handleFiles(files);
+    e.target.value = "";
+  };
+
+  const handleReplaceChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    const index = replaceIndexRef.current;
+    e.target.value = "";
+    replaceIndexRef.current = null;
+    if (!file || index === null) return;
+    if (!file.type.startsWith("image/")) {
+      setError("Seules les images sont acceptées");
+      return;
+    }
+    if (file.size > maxSizeInMB * 1024 * 1024) {
+      setError(`Fichier trop volumineux (max ${maxSizeInMB}MB)`);
+      return;
+    }
+    const next = [...previews];
+    next[index] = URL.createObjectURL(file);
+    setPreviews(next);
+    onPreviewsChange?.(next);
+    onFilesSelected?.([file]);
+    setError(null);
+  };
+
+  const openReplacePicker = (index: number) => {
+    replaceIndexRef.current = index;
+    replaceInputRef.current?.click();
   };
 
   const removePreview = (index: number) => {
@@ -114,6 +148,13 @@ export function ImageUpload({
           onChange={handleChange}
           className="hidden"
         />
+        <input
+          ref={replaceInputRef}
+          type="file"
+          accept="image/*"
+          onChange={handleReplaceChange}
+          className="hidden"
+        />
 
         <div className="flex flex-col items-center gap-2">
           <svg
@@ -133,7 +174,7 @@ export function ImageUpload({
             Glissez vos images ici ou cliquez
           </p>
           <p className="text-xs text-zinc-500">
-            PNG, JPG ou GIF (max {maxSizeInMB}MB)
+            PNG, JPG ou GIF (max {maxSizeInMB}MB). Jusqu&apos;à {maxFiles} images.
           </p>
         </div>
       </div>
@@ -157,24 +198,22 @@ export function ImageUpload({
                   className="object-cover"
                 />
               </div>
-              <button
-                onClick={() => removePreview(index)}
-                className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 transition group-hover:opacity-100"
-              >
-                <svg
-                  className="h-6 w-6 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+              <div className="absolute inset-x-2 bottom-2 grid grid-cols-2 gap-2 opacity-0 transition group-hover:opacity-100 group-focus-within:opacity-100">
+                <button
+                  type="button"
+                  onClick={() => openReplacePicker(index)}
+                  className="rounded-lg bg-white px-2 py-2 text-xs font-semibold text-black shadow-sm"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 13l-.867 12.142A2 2 0 0116.138 27H7.862a2 2 0 01-1.995-1.858L5 13m5 0V7a1 1 0 011-1h2a1 1 0 011 1v6m0 0v6"
-                  />
-                </svg>
-              </button>
+                  Remplacer
+                </button>
+                <button
+                  type="button"
+                  onClick={() => removePreview(index)}
+                  className="rounded-lg bg-black px-2 py-2 text-xs font-semibold text-white shadow-sm"
+                >
+                  Supprimer
+                </button>
+              </div>
               <span className="absolute bottom-1 right-1 inline-flex items-center rounded-lg bg-black/70 px-2 py-1 text-xs font-semibold text-white">
                 {index + 1}
               </span>

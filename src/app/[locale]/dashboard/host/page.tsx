@@ -3,5 +3,5 @@ import { getLocale } from "next-intl/server";
 
 export default async function Page() {
   const locale = await getLocale();
-  redirect(`/${locale}/dashboard/admin/host-listings`);
+  redirect(`/${locale}/dashboard/service-management/host-listings`);
 }

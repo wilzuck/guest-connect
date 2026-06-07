@@ -42,7 +42,7 @@ export function CategoryFormClient({
       });
     }
 
-    startTransition(() => router.push(`/${locale}/dashboard/admin/categories`));
+    startTransition(() => router.push(`/${locale}/dashboard/service-management/categories`));
   }
 
   return (
@@ -75,7 +75,7 @@ export function CategoryFormClient({
           </button>
           <button
             type="button"
-            onClick={() => router.push(`/${locale}/dashboard/admin/categories`)}
+            onClick={() => router.push(`/${locale}/dashboard/service-management/categories`)}
             className="inline-flex h-11 items-center justify-center rounded-2xl border border-black/10 bg-white px-6 text-sm font-semibold text-black hover:bg-zinc-50 transition"
           >
             Annuler

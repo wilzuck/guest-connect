@@ -9,6 +9,7 @@ import { useCurrency } from "@/components/currency/CurrencyProvider";
 import { useState } from "react";
 import { cn } from "@/lib/utils/cn";
 import { FavoriteButton } from "@/components/favorites/FavoriteButton";
+import { Building2, CalendarDays, Car, Leaf } from "lucide-react";
 
 export function ListingCard({
   locale,
@@ -109,6 +110,20 @@ export function ListingCard({
               {t("meta.cancellation")}
             </span>
           </div>
+          <div className="mt-3 flex flex-wrap gap-1.5">
+            {getFeatureBadges(listing).map((feature) => {
+              const Icon = feature.icon;
+              return (
+                <span
+                  key={feature.label}
+                  className="inline-flex items-center gap-1 rounded-full bg-zinc-100 px-2.5 py-1 text-[11px] font-semibold text-zinc-700"
+                >
+                  <Icon className="h-3.5 w-3.5" aria-hidden="true" />
+                  {feature.label}
+                </span>
+              );
+            })}
+          </div>
         </div>
       </Card>
   );
@@ -122,6 +137,21 @@ export function ListingCard({
       {content}
     </Link>
   );
+}
+
+function getFeatureBadges(listing: Listing) {
+  const text = `${listing.title} ${listing.location} ${listing.propertyType ?? ""}`.toLowerCase();
+  const type = listing.propertyType ?? (text.includes("villa") ? "Villa" : text.includes("studio") ? "Studio" : "Appartement");
+  const hasGarden = /jardin|eco|lodge|bungalow|nature|villa/.test(text);
+  const hasParking = listing.pricePerNight >= 55 || /villa|premium|design/.test(text);
+  const openDays = listing.pricePerNight > 90 ? "7j/7" : "5j+";
+
+  return [
+    { label: type, icon: Building2 },
+    ...(hasGarden ? [{ label: "Jardin", icon: Leaf }] : []),
+    ...(hasParking ? [{ label: "Parking", icon: Car }] : []),
+    { label: openDays, icon: CalendarDays },
+  ].slice(0, 4);
 }
 
 function StarIcon({ className }: { className?: string }) {

@@ -59,7 +59,7 @@ export default async function Page() {
       icon: "backoffice",
       items: [
         { label: "Espace hôte", href: `/${locale}/dashboard/host`, desc: "CRUD logements (démo JSON)" },
-        { label: "Back-office admin", href: `/${locale}/dashboard/admin`, desc: "CRUD complet (démo JSON)" },
+        { label: "Back-office admin", href: `/${locale}/dashboard/service-management`, desc: "CRUD complet (démo JSON)" },
       ],
     },
     {
