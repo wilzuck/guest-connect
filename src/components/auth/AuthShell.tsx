@@ -42,16 +42,15 @@ export async function AuthShell({
       <div className="flex min-h-dvh w-full">
         {/* Left: auth */}
         <div className="flex w-full flex-col px-5 py-6 sm:px-8 sm:py-8 md:w-3/5 lg:w-1/2">
-          <main className="flex flex-1 max-w-md mx-auto items-start py-10 sm:py-14">
+          <main className="flex flex-1 max-w-md mx-auto items-start py-6 sm:py-10">
             <div className="w-full max-w-md">
               <header className="flex items-center py-10 justify-between">
                 <Link href={`/${locale}`} className="inline-flex items-center gap-2">
                   <Logo />
                 </Link>
-                <Link href={`/${locale}`} >
-                  <button className="text-sm p-2 border border-black/10 rounded-4xl font-medium text-zinc-500 hover:text-zinc-600">
+                <Link href={`/${locale}`} className="text-sm p-2 border border-black/10 rounded-4xl font-medium text-zinc-500 hover:text-zinc-600">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                  </button>
+                 
                 </Link>
               </header>
               <div className="mb-7">

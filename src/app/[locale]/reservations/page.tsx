@@ -39,6 +39,7 @@ export default async function Page() {
       locale={locale}
       title={isEn ? "Reservations" : "Réservations"}
       subtitle={isEn ? "Track upcoming stays and your booking history." : "Suivez vos séjours à venir et votre historique."}
+      activeHref={`/${locale}/reservations`}
     >
       <div className="grid gap-4 md:grid-cols-12">
         <Card className="p-6 shadow-none md:col-span-4">

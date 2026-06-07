@@ -11,6 +11,7 @@ export default async function NotificationsPage() {
       locale={locale}
       title="Notifications"
       subtitle="Suivez les confirmations, messages et mises à jour importantes. Tout est regroupé ici."
+      activeHref={`/${locale}/notifications`}
     >
       <div className="grid gap-4">
         {notifications.map((n) => (

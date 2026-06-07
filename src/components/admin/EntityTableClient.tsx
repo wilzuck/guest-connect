@@ -7,7 +7,7 @@ import { Card } from "@/components/ui/Card";
 export type Column = {
   key: string;
   label: string;
-  render?: (row: Record<string, unknown>) => React.ReactNode;
+  renderKey?: string; // clé optionnelle pour un renderer custom
 };
 
 export function EntityTableClient({
@@ -16,18 +16,19 @@ export function EntityTableClient({
   entity,
   columns,
   initialRows,
-  editHref,
+  editBaseHref,
+  renderers = {},
 }: {
   title: string;
   createHref: string;
   entity: string;
   columns: Column[];
   initialRows: Array<Record<string, unknown>>;
-  editHref: (id: string) => string;
+  editBaseHref: string;
+  renderers?: Record<string, (row: Record<string, unknown>) => React.ReactNode>;
 }) {
   const [rows, setRows] = useState(initialRows);
   const [pending, startTransition] = useTransition();
-
   const headerCols = useMemo(() => columns, [columns]);
 
   async function onDelete(id: string) {
@@ -35,7 +36,7 @@ export function EntityTableClient({
     await fetch(`/api/db/${entity}/${encodeURIComponent(id)}`, { method: "DELETE" });
     startTransition(() => setRows((r) => r.filter((x) => x.id !== id)));
   }
-
+const gridTemplate = `repeat(${columns.length}, minmax(0, 1fr)) 180px`;
   return (
     <div className="grid gap-4">
       <div className="flex flex-wrap items-end justify-between gap-4">
@@ -52,50 +53,71 @@ export function EntityTableClient({
       </div>
 
       <Card className="overflow-hidden p-0 shadow-none">
-        <div className="grid grid-cols-12 gap-3 border-b border-black/10 bg-white px-4 py-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-zinc-500">
-          {headerCols.map((c) => (
-            <div key={c.key} className="col-span-4 sm:col-span-3">
-              {c.label}
-            </div>
-          ))}
-          <div className="col-span-4 sm:col-span-3 text-right">Actions</div>
-        </div>
+  <div
+    className="border-b border-black/10 bg-white px-4 py-3 text-[11px] font-medium uppercase tracking-[0.16em] text-zinc-500"
+    style={{
+      display: "grid",
+      gridTemplateColumns: gridTemplate,
+      gap: "0.75rem",
+    }}
+  >
+    {headerCols.map((c) => (
+      <div key={c.key}>{c.label}</div>
+    ))}
+    <div className="text-right">Actions</div>
+  </div>
 
-        <div className="divide-y divide-black/5">
-          {rows.map((r) => {
-            const id = String(r.id ?? "");
+  <div className="divide-y divide-black/5">
+    {rows.map((r) => {
+      const id = r.id as string;
+      if (!id) return null;
+
+      return (
+        <div
+          key={id}
+          className="items-center px-4 py-3"
+          style={{
+            display: "grid",
+            gridTemplateColumns: gridTemplate,
+            gap: "0.75rem",
+          }}
+        >
+          {headerCols.map((c) => {
+            const renderer = c.renderKey
+              ? renderers[c.renderKey]
+              : undefined;
+
             return (
-              <div key={id} className="grid grid-cols-12 items-center gap-3 px-4 py-3">
-                {headerCols.map((c) => (
-                  <div key={c.key} className="col-span-4 sm:col-span-3 min-w-0">
-                    <div className="truncate text-sm font-semibold text-black">
-                      {c.render ? c.render(r) : String(r[c.key] ?? "")}
-                    </div>
-                  </div>
-                ))}
-
-                <div className="col-span-4 sm:col-span-3 flex justify-end gap-2">
-                  <Link
-                    href={editHref(id)}
-                    className="rounded-2xl border border-black/10 bg-white px-4 py-2 text-sm font-semibold text-black hover:bg-zinc-50 transition"
-                  >
-                    Modifier
-                  </Link>
-                  <button
-                    type="button"
-                    onClick={() => onDelete(id)}
-                    disabled={pending}
-                    className="rounded-2xl border border-black/10 bg-white px-4 py-2 text-sm font-semibold text-red-600 hover:bg-zinc-50 transition disabled:opacity-50"
-                  >
-                    Supprimer
-                  </button>
+              <div key={c.key} className="min-w-0">
+                <div className="truncate text-sm font-normal text-black">
+                  {renderer ? renderer(r) : String(r[c.key])}
                 </div>
               </div>
             );
           })}
+
+          <div className="flex justify-end gap-2">
+            <Link
+              href={`${editBaseHref}/${id}`}
+              className="rounded-2xl border border-black/10 bg-white px-4 py-2 text-sm font-semibold text-black hover:bg-zinc-50 transition"
+            >
+              Modifier
+            </Link>
+
+            <button
+              type="button"
+              onClick={() => onDelete(id)}
+              disabled={pending}
+              className="rounded-2xl border border-black/10 bg-white px-4 py-2 text-sm font-semibold text-red-600 hover:bg-zinc-50 transition disabled:opacity-50"
+            >
+              Supprimer
+            </button>
+          </div>
         </div>
-      </Card>
+      );
+    })}
+  </div>
+</Card>
     </div>
   );
 }
-

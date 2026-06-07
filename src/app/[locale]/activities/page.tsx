@@ -17,6 +17,7 @@ export default async function Page() {
       locale={locale}
       title={isEn ? "Recent activity" : "Activité récente"}
       subtitle={isEn ? "A compact log with pagination." : "Un journal compact avec pagination."}
+      activeHref={`/${locale}/activities`}
     >
       <ActivitiesTable isEn={isEn} />
     </AccountShell>

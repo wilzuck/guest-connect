@@ -1,22 +1,64 @@
 {
   "meta": {
     "version": 1,
-    "updatedAt": "2026-06-03T00:00:00.000Z"
+    "updatedAt": "2026-06-07T13:13:46.969Z"
   },
   "categories": [
-    { "id": "cat-guesthouse", "name": "Maison d’hôtes", "slug": "maison-dhotes" },
-    { "id": "cat-apartment", "name": "Appartement", "slug": "appartement" },
-    { "id": "cat-villa", "name": "Villa", "slug": "villa" }
+    {
+      "id": "cat-guesthouse",
+      "name": "Maison d’hôtes",
+      "slug": "maison-dhotes"
+    },
+    {
+      "id": "cat-apartment",
+      "name": "Appartement",
+      "slug": "appartement"
+    },
+    {
+      "id": "cat-villa",
+      "name": "Villa",
+      "slug": "villa"
+    }
   ],
   "locations": [
-    { "id": "loc-cotonou", "city": "Cotonou", "country": "Bénin", "countryCode": "BJ" },
-    { "id": "loc-porto-novo", "city": "Porto‑Novo", "country": "Bénin", "countryCode": "BJ" },
-    { "id": "loc-dakar", "city": "Dakar", "country": "Sénégal", "countryCode": "SN" }
+    {
+      "id": "loc-cotonou",
+      "city": "Cotonou",
+      "country": "Bénin",
+      "countryCode": "BJ"
+    },
+    {
+      "id": "loc-porto-novo",
+      "city": "Porto‑Novo",
+      "country": "Bénin",
+      "countryCode": "BJ"
+    },
+    {
+      "id": "loc-dakar",
+      "city": "Dakar",
+      "country": "Sénégal",
+      "countryCode": "SN"
+    }
   ],
   "services": [
-    { "id": "srv-airport", "name": "Transfert aéroport", "slug": "transfert-aeroport", "active": true },
-    { "id": "srv-chef", "name": "Chef à domicile", "slug": "chef-a-domicile", "active": true },
-    { "id": "srv-cleaning", "name": "Ménage", "slug": "menage", "active": true }
+    {
+      "id": "srv-airport",
+      "name": "Transfert aéroport",
+      "slug": "transfert-aeroport",
+      "active": true
+    },
+    {
+      "id": "srv-chef",
+      "name": "Chef à domicile",
+      "slug": "chef-a-domicile",
+      "active": true
+    },
+    {
+      "id": "srv-cleaning",
+      "name": "Ménage",
+      "slug": "menage",
+      "active": true
+    }
   ],
   "experiences": [
     {
@@ -45,8 +87,27 @@
       "reviewCount": 128,
       "imageUrl": "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1600&q=80",
       "shortDescription": "Calme, lumineux, accueil chaleureux. Idéal pour une escapade ou un voyage pro.",
-      "serviceIds": ["srv-airport", "srv-cleaning"]
+      "serviceIds": [
+        "srv-airport",
+        "srv-cleaning"
+      ]
+    },
+    {
+      "id": "lst-16ed1f0cced9",
+      "title": "zddzzddzdz",
+      "location": "zdaadaaddaadadad",
+      "cityId": "loc-porto-novo",
+      "categoryId": "cat-guesthouse",
+      "pricePerNight": 12,
+      "currency": "EUR",
+      "rating": 4.9,
+      "reviewCount": 120,
+      "imageUrl": "https://programmelogements.bj/upload/logement/e95ecd849c125b6748c2c7eb99c483d4.png",
+      "shortDescription": "Calme, lumineux, accueil chaleureux. Une adresse vérifiée, pensée pour le confort au quotidien.",
+      "serviceIds": [
+        "srv-chef",
+        "srv-airport"
+      ]
     }
   ]
 }
-

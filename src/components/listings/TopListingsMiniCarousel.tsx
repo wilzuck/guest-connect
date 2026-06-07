@@ -120,7 +120,7 @@ export function TopListingsMiniCarousel({ locale, items, title }: TopListingsMin
           onPointerCancel={() => {
             dragRef.current.active = false;
           }}
-          className="mt-3 flex gap-3 overflow-x-auto scroll-smooth pb-2 overscroll-x-contain select-none md:cursor-grab md:active:cursor-grabbing [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="mt-3 flex gap-4 overflow-x-auto scroll-smooth pb-2 overscroll-x-contain select-none md:cursor-grab md:active:cursor-grabbing [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           style={{ scrollSnapType: "x mandatory", touchAction: "pan-x" }}
         >
           {items.map((l) => (

@@ -23,8 +23,8 @@ export function Logo({ className }: LogoProps) {
           priority
         />
       </span>
-      <span className="hidden sm:inline text-sm font-semibold tracking-tight text-black">
-        GuestConnect
+      <span className="hidden md:hidden text-sm font-semibold tracking-tight text-black">
+        Guest-Connect
       </span>
     </Link>
   );

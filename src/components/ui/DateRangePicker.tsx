@@ -8,6 +8,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/Popover
 import { Dialog, DialogClose, DialogContent, DialogTrigger } from "@/components/ui/Dialog";
 import { Calendar } from "@/components/ui/Calendar";
 import { cn } from "@/lib/utils/cn";
+import { Calendar1, CalendarCheck, Users } from "lucide-react";
 
 type RangeValue = {
   from?: string; // ISO YYYY-MM-DD
@@ -98,42 +99,68 @@ export function DateRangePicker({
 
   const Trigger = (
     <div
-      className={cn(
-        // Mobile: 1 colonne (évite le débordement). Dès sm: 2 colonnes.
-        "grid grid-cols-1 gap-2 sm:grid-cols-2",
-        className,
-      )}
-    >
-      <button
-        type="button"
-        className={cn(
-          // Pas de bordure (demandé) : on s’appuie sur le container + hover/focus.
-          "group w-full rounded-2xl bg-white text-left transition hover:bg-zinc-50 focus:outline-none focus:ring-4 focus:ring-black/5",
-          fieldVariant === "bordered" ? "border border-black/10" : "",
-          size === "sm" ? "h-12 px-3 py-2" : "h-14 p-[10px]",
-        )}
-        aria-label={startLabel}
-      >
-        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-zinc-500">{startLabel}</p>
-        <p className={cn("mt-1 truncate text-sm font-semibold", from ? "text-black" : "text-zinc-500")}>
+  className={cn(
+    "grid grid-cols-1 gap-2 sm:grid-cols-2",
+    className,
+  )}
+>
+  {/* START DATE */}
+  <button
+    type="button"
+    className={cn(
+      "group w-full rounded-2xl bg-white text-left transition hover:bg-zinc-50 focus:outline-none focus:ring-4 focus:ring-black/5",
+      fieldVariant === "bordered" ? "border border-black/10" : "",
+      size === "sm" ? "h-12 px-3 py-2" : "h-14 p-[10px]",
+    )}
+    aria-label={startLabel}
+  >
+    <div className="flex items-start gap-3">
+      <Calendar1 className="h-4 w-4 md:hidden lg:block text-zinc-400 shrink-0" />
+
+      <div className="min-w-0">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-zinc-500">
+          {startLabel}
+        </p>
+        <p
+          className={cn(
+            "mt-1 truncate text-sm font-semibold",
+            from ? "text-black" : "text-zinc-500",
+          )}
+        >
           {startText}
         </p>
-      </button>
-      <button
-        type="button"
-        className={cn(
-          "group w-full rounded-2xl bg-white text-left transition hover:bg-zinc-50 focus:outline-none focus:ring-4 focus:ring-black/5",
-          fieldVariant === "bordered" ? "border border-black/10" : "",
-          size === "sm" ? "h-12 px-3 py-2" : "h-14 p-[10px]",
-        )}
-        aria-label={endLabel}
-      >
-        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-zinc-500">{endLabel}</p>
-        <p className={cn("mt-1 truncate text-sm font-semibold", to ? "text-black" : "text-zinc-500")}>
+      </div>
+    </div>
+  </button>
+
+  {/* END / USERS */}
+  <button
+    type="button"
+    className={cn(
+      "group w-full rounded-2xl bg-white text-left transition hover:bg-zinc-50 focus:outline-none focus:ring-4 focus:ring-black/5",
+      fieldVariant === "bordered" ? "border border-black/10" : "",
+      size === "sm" ? "h-12 px-3 py-2" : "h-14 p-[10px]",
+    )}
+    aria-label={endLabel}
+  >
+    <div className="flex items-start gap-3">
+      <Calendar1 className="h-4 w-4 md:hidden lg:block text-zinc-400 shrink-0" />
+      <div className="min-w-0">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-zinc-500">
+          {endLabel}
+        </p>
+        <p
+          className={cn(
+            "mt-1 truncate text-sm font-semibold",
+            to ? "text-black" : "text-zinc-500",
+          )}
+        >
           {endText}
         </p>
-      </button>
+      </div>
     </div>
+  </button>
+</div>
   );
 
   const calendar = (

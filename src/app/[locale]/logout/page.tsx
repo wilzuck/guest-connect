@@ -19,7 +19,7 @@ export default async function Page() {
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">
             {isEn ? "Log out" : "Déconnexion"}
           </p>
-          <h1 className="mt-4 text-balance text-4xl font-semibold tracking-tight text-black sm:text-5xl">
+          <h1 className="mt-4 text-balance text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-black">
             {isEn ? "See you soon" : "À bientôt"}
           </h1>
           <p className="mt-4 max-w-2xl text-pretty text-base leading-7 text-zinc-600 sm:text-lg">

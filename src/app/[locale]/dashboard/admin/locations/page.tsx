@@ -18,7 +18,7 @@ export default async function Page() {
         { key: "countryCode", label: "Code" },
       ]}
       createHref={`/${locale}/dashboard/admin/locations/new`}
-      editHref={(id) => `/${locale}/dashboard/admin/locations/${id}`}
+      editBaseHref={`/${locale}/dashboard/admin/locations/`}
     />
   );
 }

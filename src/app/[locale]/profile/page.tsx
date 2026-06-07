@@ -38,6 +38,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
           ? "Manage your personal information, security and preferences."
           : "Gérez vos informations personnelles, votre sécurité et vos préférences."
       }
+      activeHref={`/${locale}/profile`}
     >
       <div className="grid gap-6 lg:grid-cols-12">
         <div className="lg:col-span-4">

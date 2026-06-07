@@ -31,12 +31,15 @@ export function Calendar({ className, classNames, showOutsideDays = true, ...pro
         [UI.Day]: "relative h-9 w-9 p-0 text-center text-sm",
         // aria-selected est appliqué par react-day-picker sur le bouton sélectionné
         [UI.DayButton]:
-          "h-9 w-9 rounded-xl p-0 font-medium text-zinc-700 hover:bg-black/5 transition aria-selected:bg-black aria-selected:text-white aria-selected:hover:bg-black aria-selected:rounded-xl",
+          "h-9 w-9 rounded-xl p-0 font-medium text-zinc-700 hover:bg-black/20 transition " +
+          "data-[selected=true]:bg-black data-[selected=true]:text-white " +
+          "data-[selected=true]:hover:bg-black " +
+          "data-[selected=true]:rounded-xl",
 
         // Selected / range (shadcn-like)
-        [SelectionState.selected]: "bg-black !text-white hover:bg-black rounded-xl",
-        [SelectionState.range_start]: "bg-black !text-white hover:bg-black rounded-xl",
-        [SelectionState.range_end]: "bg-black !text-white hover:bg-black rounded-xl",
+        [SelectionState.selected]: "hover:bg-black/20 rounded-none",
+        [SelectionState.range_start]: "bg-black/20 hover:bg-black/20 rounded-l-xl",
+        [SelectionState.range_end]: "bg-black/20  rounded-r-xl hover:bg-black/20",
         [SelectionState.range_middle]: "bg-black/5",
 
         [DayFlag.today]: "ring-2 ring-black/20",

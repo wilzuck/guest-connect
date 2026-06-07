@@ -4,7 +4,6 @@ import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card";
 import Link from "next/link";
 import { MarketingPageLayout } from "@/components/layout/MarketingPageLayout";
-import { AccountShell } from "@/components/account/AccountShell";
 
 export const metadata: Metadata = {
   title: "Paramètres — GuestConnect",
@@ -21,13 +20,12 @@ export default async function Page() {
   };
 
   return (
-    
-            <AccountShell
-                  locale={locale}
-                  title="Paramètres"
-                  subtitle="Consultez et gérez votre compte."
-                  activeHref={`/${locale}/settings`}
-                >
+    <div className="bg-white">
+      <MarketingPageLayout
+            eyebrow="Paramètres"
+            title="Paramètres du compte "
+            description="Consultez et gérez votre compte."
+          >
         <div className="max-w-3xl">
           <div className="grid gap-10">
             {/* User info */}
@@ -117,7 +115,8 @@ export default async function Page() {
           </Section>
         </div>
         </div>
-     </AccountShell>
+      </MarketingPageLayout>
+    </div>
   );
 }
 

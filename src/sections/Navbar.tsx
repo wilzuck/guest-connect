@@ -63,7 +63,6 @@ export function Navbar() {
         <Container className="flex h-16 items-center gap-3">
         <div className="flex items-center gap-8">
           <Logo />
-
           <nav className="hidden items-center gap-6 md:flex">
             {links.map((l) => (
               <Link

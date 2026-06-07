@@ -23,7 +23,7 @@ export default async function CheckoutPage({ searchParams }: { searchParams?: Pr
       <section className="border-b border-black/5 bg-white">
         <Container className="py-10 sm:py-14">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">Paiement</p>
-          <h1 className="mt-4 text-balance text-4xl font-semibold tracking-tight text-black sm:text-5xl">
+          <h1 className="mt-4 text-balance text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-black">
             Finaliser la réservation
           </h1>
           <p className="mt-4 max-w-2xl text-pretty text-base leading-7 text-zinc-600 sm:text-lg">

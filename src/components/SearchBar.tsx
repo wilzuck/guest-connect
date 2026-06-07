@@ -9,6 +9,7 @@ import { useLocale } from "next-intl";
 import { useTranslations } from "next-intl";
 import { DateRangePicker } from "@/components/ui/DateRangePicker";
 import Divider from "@/components/ui/Divider";
+import { Calendar1, Users } from "lucide-react";
 
 type SearchBarProps = {
   onSearch?: (params: SearchParams) => void | Promise<void>;
@@ -16,11 +17,17 @@ type SearchBarProps = {
   variant?: "auto" | "mobile" | "desktop" | "compact";
 };
 
-export function SearchBar({ onSearch, defaultValues, variant = "auto" }: SearchBarProps) {
+export function SearchBar({
+  onSearch,
+  defaultValues,
+  variant = "auto",
+}: SearchBarProps) {
   const router = useRouter();
   const locale = useLocale();
   const t = useTranslations("searchBar");
-  const [destination, setDestination] = useState(defaultValues?.destination ?? "");
+  const [destination, setDestination] = useState(
+    defaultValues?.destination ?? "",
+  );
   const [checkIn, setCheckIn] = useState(defaultValues?.checkIn ?? "");
   const [checkOut, setCheckOut] = useState(defaultValues?.checkOut ?? "");
   const [guests, setGuests] = useState(defaultValues?.guests ?? 2);
@@ -48,15 +55,15 @@ export function SearchBar({ onSearch, defaultValues, variant = "auto" }: SearchB
     if (params.destination) query.set("destination", params.destination);
     if (params.checkIn) query.set("checkIn", params.checkIn);
     if (params.checkOut) query.set("checkOut", params.checkOut);
-    if (typeof params.guests === "number") query.set("guests", String(params.guests));
-    router.push(`/${locale}/search${query.toString() ? `?${query.toString()}` : ""}`);
+    if (typeof params.guests === "number")
+      query.set("guests", String(params.guests));
+    router.push(
+      `/${locale}/search${query.toString() ? `?${query.toString()}` : ""}`,
+    );
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="w-full"
-    >
+    <form onSubmit={handleSubmit} className="w-full">
       {/* Desktop: une seule ligne fluide. Mobile: layout optimisé. Compact: version hero (petite). */}
       <div
         className={[
@@ -76,7 +83,7 @@ export function SearchBar({ onSearch, defaultValues, variant = "auto" }: SearchB
             variant === "mobile" || variant === "compact" ? "hidden" : "",
           ].join(" ")}
         >
-          <div className="group relative flex h-14 flex-1 border border-black/10 items-center gap-2 rounded-xl px-4 transition-all duration-200 flex-[1.7]">
+          <div className="group relative flex h-14 border border-black/10 items-center gap-2 rounded-xl px-4 transition-all duration-200 flex-[1.7]">
             <PinIcon className="h-4 w-4 text-zinc-400" />
             <Input
               value={destination}
@@ -90,14 +97,15 @@ export function SearchBar({ onSearch, defaultValues, variant = "auto" }: SearchB
               onClick={() => setDestination("")}
               className={[
                 "relative z-10 grid h-9 w-9 shrink-0 place-items-center rounded-full text-zinc-500 transition",
-                destination ? "opacity-100 hover:bg-black/5 hover:text-black" : "pointer-events-none opacity-0",
+                destination
+                  ? "opacity-100 hover:bg-black/5 hover:text-black"
+                  : "pointer-events-none opacity-0",
               ].join(" ")}
               aria-label={t("ariaClearDestination")}
             >
               <XIcon className="h-4 w-4" />
             </button>
           </div>
-
 
           <div className=" border border-black/10 my-2 md:my-0 rounded-xl  transition-all duration-200 flex-[1.8]">
             <DateRangePicker
@@ -114,13 +122,17 @@ export function SearchBar({ onSearch, defaultValues, variant = "auto" }: SearchB
             />
           </div>
 
-
           <FieldShell className=" border border-black/10 rounded-xl px-2 transition-all duration-200 flex-[0.85]">
-            <div className="grid">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-zinc-500">
-                {t("guests")}
-              </p>
-              <span className="text-sm font-semibold text-black">{guests}</span>
+            <div className="flex items-start gap-2">
+              <Users className="h-4 w-4 md:hidden lg:block text-zinc-400 shrink-0" />
+              <div className="grid">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-zinc-500">
+                  {t("guests")}
+                </p>
+                <span className="text-sm font-semibold text-black">
+                  {guests}
+                </span>
+              </div>
             </div>
             <div className="ml-auto flex items-center gap-2">
               <button
@@ -131,7 +143,7 @@ export function SearchBar({ onSearch, defaultValues, variant = "auto" }: SearchB
               >
                 −
               </button>
-              
+
               <button
                 type="button"
                 className="grid h-9 w-9 place-items-center rounded-full bg-black/[0.04] text-black transition hover:bg-black/[0.08] active:scale-[0.96]"
@@ -163,7 +175,9 @@ export function SearchBar({ onSearch, defaultValues, variant = "auto" }: SearchB
           <div
             className={[
               "group relative flex items-center gap-2 rounded-2xl transition-all duration-200 hover:bg-zinc-50",
-              variant === "compact" ? "h-12 bg-white px-3" : "h-14 bg-white px-4",
+              variant === "compact"
+                ? "h-12 bg-white px-3"
+                : "h-14 bg-white px-4",
             ].join(" ")}
           >
             <PinIcon className="h-4 w-4 text-zinc-400" />
@@ -179,7 +193,9 @@ export function SearchBar({ onSearch, defaultValues, variant = "auto" }: SearchB
               onClick={() => setDestination("")}
               className={[
                 "relative z-10 grid h-9 w-9 shrink-0 place-items-center rounded-full text-zinc-500 transition",
-                destination ? "opacity-100 hover:bg-black/5 hover:text-black" : "pointer-events-none opacity-0",
+                destination
+                  ? "opacity-100 hover:bg-black/5 hover:text-black"
+                  : "pointer-events-none opacity-0",
               ].join(" ")}
               aria-label={t("ariaClearDestination")}
             >
@@ -201,13 +217,24 @@ export function SearchBar({ onSearch, defaultValues, variant = "auto" }: SearchB
             size={variant === "compact" ? "sm" : "md"}
           />
 
-          <FieldShell className={variant === "compact" ? "h-12 bg-white px-3" : "h-14 bg-white"}>
-            <div className="grid">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-zinc-500">
-                {t("guests")}
-              </p>
-              <span className="text-sm font-semibold text-black">{guests}</span>
+          <FieldShell
+            className={
+              variant === "compact" ? "h-12 bg-white px-3" : "h-14 bg-white"
+            }
+          >
+            <div className="flex items-center gap-2">
+              <Calendar1 className="h-4 w-4 text-zinc-400 shrink-0" />
+
+              <div className="grid">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-zinc-500">
+                  {t("guests")}
+                </p>
+                <span className="text-sm font-semibold text-black">
+                  {guests}
+                </span>
+              </div>
             </div>
+
             <div className="ml-auto flex items-center gap-2">
               <button
                 type="button"
@@ -217,6 +244,7 @@ export function SearchBar({ onSearch, defaultValues, variant = "auto" }: SearchB
               >
                 −
               </button>
+
               <button
                 type="button"
                 className="grid h-9 w-9 place-items-center rounded-full bg-black/[0.04] text-black transition hover:bg-black/[0.08] active:scale-[0.96]"
@@ -227,7 +255,7 @@ export function SearchBar({ onSearch, defaultValues, variant = "auto" }: SearchB
               </button>
             </div>
           </FieldShell>
-          
+
           <Button
             type="submit"
             className={[
@@ -244,7 +272,13 @@ export function SearchBar({ onSearch, defaultValues, variant = "auto" }: SearchB
   );
 }
 
-function FieldShell({ children, className }: { children: React.ReactNode; className?: string }) {
+function FieldShell({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
   return (
     <div
       className={[
@@ -260,7 +294,12 @@ function FieldShell({ children, className }: { children: React.ReactNode; classN
 
 function PinIcon({ className }: { className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      aria-hidden="true"
+    >
       <path
         d="M12 22s7-6.2 7-12A7 7 0 1 0 5 10c0 5.8 7 12 7 12Z"
         stroke="currentColor"
@@ -277,7 +316,12 @@ function PinIcon({ className }: { className?: string }) {
 
 function SearchIcon({ className }: { className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      aria-hidden="true"
+    >
       <path
         d="M11 19a8 8 0 1 1 0-16 8 8 0 0 1 0 16Z"
         stroke="currentColor"
@@ -295,7 +339,12 @@ function SearchIcon({ className }: { className?: string }) {
 
 function XIcon({ className }: { className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      aria-hidden="true"
+    >
       <path
         d="M18 6 6 18M6 6l12 12"
         stroke="currentColor"

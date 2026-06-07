@@ -22,6 +22,7 @@ export default async function Page() {
           ? "Quick overview of your activity, favorites and upcoming reservations."
           : "Un aperçu rapide de vos activités, favoris et réservations à venir."
       }
+      activeHref={`/${locale}/dashboard`}
     >
       <div className="grid gap-4 md:grid-cols-12">
         <Card className="p-6 shadow-none md:col-span-4">

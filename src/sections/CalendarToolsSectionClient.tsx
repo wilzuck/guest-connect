@@ -13,6 +13,7 @@ export function CalendarToolsDemo() {
   const [mode, setMode] = useState<Mode>("calendar");
   const [range, setRange] = useState<DateRange | undefined>(undefined);
   const [flex, setFlex] = useState<string>("weekend");
+
   const [month, setMonth] = useState(() => {
     const now = new Date();
     return new Date(now.getFullYear(), now.getMonth(), 1);
@@ -37,8 +38,9 @@ export function CalendarToolsDemo() {
   );
 
   return (
-    <div className="rounded-3xl border border-black/10 bg-white p-4 shadow-sm shadow-black/10 sm:p-6">
-      <div className="flex items-center justify-between gap-3">
+    <div className="w-full overflow-hidden rounded-3xl border border-black/10 bg-white p-4 shadow-sm shadow-black/10 sm:p-6">
+      {/* Tabs */}
+      <div className="flex items-center justify-between">
         <div className="inline-flex rounded-full bg-zinc-100 p-1">
           {pills.map((p) => (
             <button
@@ -47,7 +49,9 @@ export function CalendarToolsDemo() {
               onClick={() => setMode(p.key)}
               className={cn(
                 "rounded-full px-4 py-2 text-sm font-semibold transition",
-                mode === p.key ? "bg-white text-black shadow-sm shadow-black/10" : "text-zinc-600 hover:text-black",
+                mode === p.key
+                  ? "bg-white text-black shadow-sm shadow-black/10"
+                  : "text-zinc-600 hover:text-black",
               )}
             >
               {p.label}
@@ -56,34 +60,66 @@ export function CalendarToolsDemo() {
         </div>
       </div>
 
+      {/* CALENDAR */}
       {mode === "calendar" ? (
-        <div className="mt-4">
-          <div className="max-w-full overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            <Calendar
-              mode="range"
-              selected={range}
-              onSelect={setRange}
-              numberOfMonths={2}
-              month={month}
-              onMonthChange={setMonth}
-              className="relative bg-white w-max pt-2"
-              classNames={{
-                months: "flex flex-row gap-6",
-                nav: "absolute left-2 right-2 top-2 flex items-center justify-between pointer-events-none",
-                button_previous:
-                  "pointer-events-auto grid h-10 w-10 place-items-center rounded-full border border-black/10 bg-white text-zinc-700 shadow-sm shadow-black/5 transition hover:bg-zinc-50",
-                button_next:
-                  "pointer-events-auto grid h-10 w-10 place-items-center rounded-full border border-black/10 bg-white text-zinc-700 shadow-sm shadow-black/5 transition hover:bg-zinc-50",
-                month_caption: "flex items-center justify-center px-2 pt-1",
-              }}
-            />
+        <div className="mt-4 w-full">
+          <div className="flex justify-center">
+            <div className="max-w-full">
+              <Calendar
+                mode="range"
+                selected={range}
+                onSelect={setRange}
+                numberOfMonths={1}
+                month={month}
+                onMonthChange={setMonth}
+                className="md:hidden bg-white pt-2"
+                classNames={{
+                  months:
+                    "flex flex-col md:flex-row gap-6 items-center justify-center",
+                  nav:
+                    "absolute left-2 right-2 top-2 flex items-center justify-between",
+                  button_previous:
+                    "grid h-10 w-10 place-items-center rounded-full border border-black/10 bg-white text-zinc-700 shadow-sm transition hover:bg-zinc-50",
+                  button_next:
+                    "grid h-10 w-10 place-items-center rounded-full border border-black/10 bg-white text-zinc-700 shadow-sm transition hover:bg-zinc-50",
+                  month_caption:
+                    "flex items-center justify-center px-2 pt-1",
+                }}
+              />
+
+              {/* 2 months uniquement desktop */}
+              <div className="hidden md:block">
+                <Calendar
+                  mode="range"
+                  selected={range}
+                  onSelect={setRange}
+                  numberOfMonths={2}
+                  month={month}
+                  onMonthChange={setMonth}
+                  className="bg-white pt-2"
+                  classNames={{
+                    months: "flex flex-row gap-6",
+                    nav:
+                      "absolute left-2 right-2 top-2 flex items-center justify-between",
+                    button_previous:
+                      "grid h-10 w-10 place-items-center rounded-full border border-black/10 bg-white text-zinc-700 shadow-sm transition hover:bg-zinc-50",
+                    button_next:
+                      "grid h-10 w-10 place-items-center rounded-full border border-black/10 bg-white text-zinc-700 shadow-sm transition hover:bg-zinc-50",
+                    month_caption:
+                      "flex items-center justify-center px-2 pt-1",
+                  }}
+                />
+              </div>
+            </div>
           </div>
+
           <p className="mt-3 text-xs text-zinc-500">{t("hint")}</p>
         </div>
       ) : (
         <div className="mt-5">
           <p className="text-sm font-semibold text-black">{t("flexTitle")}</p>
           <p className="mt-1 text-sm text-zinc-600">{t("flexSubtitle")}</p>
+
           <div className="mt-4 flex flex-wrap gap-2">
             {flexOptions.map((o) => (
               <button
@@ -91,17 +127,24 @@ export function CalendarToolsDemo() {
                 type="button"
                 onClick={() => setFlex(o.key)}
                 className={cn(
-                  "rounded-full border border-black/10 px-4 py-2 text-sm font-semibold shadow-sm shadow-black/5 transition",
-                  flex === o.key ? "bg-black/80 text-white" : "text-zinc-700 hover:bg-zinc-50",
+                  "rounded-full border border-black/10 px-4 py-2 text-sm font-semibold shadow-sm transition",
+                  flex === o.key
+                    ? "bg-black/80 text-white"
+                    : "text-zinc-700 hover:bg-zinc-50",
                 )}
               >
                 {o.label}
               </button>
             ))}
           </div>
+
           <div className="mt-5 rounded-2xl border border-black/10 bg-zinc-50 p-4">
-            <p className="text-sm font-semibold text-black">{t("flexResultTitle")}</p>
-            <p className="mt-2 text-sm text-zinc-600">{t("flexResultBody")}</p>
+            <p className="text-sm font-semibold text-black">
+              {t("flexResultTitle")}
+            </p>
+            <p className="mt-2 text-sm text-zinc-600">
+              {t("flexResultBody")}
+            </p>
           </div>
         </div>
       )}
