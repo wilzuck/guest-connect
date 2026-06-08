@@ -2,18 +2,15 @@ import Link from "next/link";
 import { getLocale } from "next-intl/server";
 import {
   Building2,
-  Filter,
-  FolderTree,
   MapPin,
   MoreVertical,
   Pencil,
   Plus,
   Search,
   Sparkles,
-  Trash2,
 } from "lucide-react";
 import { readDb } from "@/lib/server/db";
-import { Button, ButtonLink } from "@/components/ui/Button";
+import { ButtonLink } from "@/components/ui/Button";
 
 export default async function Page() {
   const locale = await getLocale();
@@ -21,7 +18,7 @@ export default async function Page() {
 
   const stats = [
     { label: "Total logements", value: db.listings?.length ?? 0, delta: "+4.6%" },
-    { label: "Catégories", value: db.categories?.length ?? 0, delta: "+12.3%" },
+    { label: "Types de propriété", value: db.propertyTypes?.length ?? 0, delta: "+12.3%" },
     { label: "Lieux", value: db.locations?.length ?? 0, delta: "+8.9%" },
     { label: "Expériences", value: db.experiences?.length ?? 0, delta: "-1.4%" },
   ];
@@ -34,15 +31,6 @@ export default async function Page() {
       createHref: `/${locale}/dashboard/service-management/listings/new`,
       icon: Building2,
       count: db.listings?.length ?? 0,
-      status: "Actif",
-    },
-    {
-      title: "Catégories",
-      description: "Typologies d’hébergements et segments",
-      href: `/${locale}/dashboard/service-management/categories`,
-      createHref: `/${locale}/dashboard/service-management/categories/new`,
-      icon: FolderTree,
-      count: db.categories?.length ?? 0,
       status: "Actif",
     },
     {
@@ -83,15 +71,6 @@ export default async function Page() {
               className="min-w-0 flex-1 bg-transparent outline-none placeholder:text-[#B1B1B7]"
             />
           </label>
-          <Button
-            type="button"
-            variant="secondary"
-            size="sm"
-            className="inline-flex h-10 items-center gap-2 rounded-lg border border-[#E8E8EC] bg-white px-3 text-sm font-medium text-[#73737A]"
-          >
-            <Filter className="h-4 w-4" aria-hidden="true" />
-            Filtrer
-          </Button>
           <ButtonLink
             href={`/${locale}/dashboard/service-management/listings/new`}
             variant="primary"
@@ -185,13 +164,6 @@ export default async function Page() {
                   >
                     <Pencil className="h-4 w-4" aria-hidden="true" />
                   </Link>
-                  <button
-                    type="button"
-                    className="grid h-9 w-9 place-items-center rounded-lg border border-[#E8E8EC] text-[#E04F5F]"
-                    aria-label="Supprimer"
-                  >
-                    <Trash2 className="h-4 w-4" aria-hidden="true" />
-                  </button>
                 </div>
               </article>
             );

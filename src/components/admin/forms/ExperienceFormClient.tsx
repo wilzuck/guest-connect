@@ -4,12 +4,10 @@ import { useMemo, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { Card } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
+import { Select } from "@/components/ui/Select";
 import { Textarea } from "@/components/ui/Textarea";
 
 type LocationOption = { id: string; city: string; country?: string };
-
-const selectClassName =
-  "mt-2 h-11 w-full rounded-2xl border border-black/10 bg-white px-3 text-sm font-semibold text-black shadow-sm shadow-black/5 focus:outline-none focus:ring-4 focus:ring-black/5";
 
 export function ExperienceFormClient({
   locale,
@@ -107,14 +105,16 @@ export function ExperienceFormClient({
 
           <label className="grid gap-2">
             <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">Lieu</span>
-            <select value={cityId} onChange={(e) => setCityId(e.target.value)} className={selectClassName} required>
-              {locations.map((l) => (
-                <option key={l.id} value={l.id}>
-                  {l.city}
-                  {l.country ? `, ${l.country}` : ""}
-                </option>
-              ))}
-            </select>
+            <Select
+              value={cityId}
+              onChange={(e) => setCityId(e.target.value)}
+              className="font-semibold"
+              required
+              options={locations.map((l) => ({
+                value: l.id,
+                label: `${l.city}${l.country ? `, ${l.country}` : ""}`,
+              }))}
+            />
             <span className="text-xs text-zinc-500">Sélectionné: {locationLabel || "—"}</span>
           </label>
 

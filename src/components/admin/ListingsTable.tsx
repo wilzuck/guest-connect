@@ -7,7 +7,7 @@ const COLUMNS = [
   { key: "title", label: "Titre" },
   { key: "cityId", label: "Lieu", renderKey: "location" },
   { key: "pricePerNight", label: "Prix", renderKey: "price" },
-  { key: "categoryId", label: "Catégorie", renderKey: "category" },
+  { key: "categoryId", label: "Type", renderKey: "category" },
 ];
 
 export function ListingsTable({

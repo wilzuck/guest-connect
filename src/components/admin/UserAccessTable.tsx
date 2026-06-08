@@ -1,5 +1,5 @@
-import { Filter, Pencil, Plus, Search, Trash2 } from "lucide-react";
-import { Button, ButtonLink } from "@/components/ui/Button";
+import { Pencil, Plus, Search, Trash2 } from "lucide-react";
+import { ButtonLink } from "@/components/ui/Button";
 
 type AccessRow = {
   id: string;
@@ -36,10 +36,6 @@ export function UserAccessTable({
               className="min-w-0 flex-1 bg-transparent outline-none placeholder:text-[#B1B1B7]"
             />
           </label>
-          <Button type="button" variant="secondary" size="sm" className="h-10 rounded-lg">
-            <Filter className="h-4 w-4" aria-hidden="true" />
-            Filtrer
-          </Button>
           <ButtonLink href="#" variant="primary" size="sm" className="h-10 rounded-lg">
             <Plus className="h-4 w-4" aria-hidden="true" />
             {addLabel}

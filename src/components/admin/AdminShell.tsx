@@ -8,7 +8,7 @@ import {
   Building2,
   CircleDollarSign,
   FileQuestion,
-  FolderTree,
+  Languages,
   LayoutDashboard,
   LifeBuoy,
   MapPin,
@@ -50,7 +50,6 @@ export function AdminShell({
   const mainNav: NavItem[] = [
     { href: `/${locale}/dashboard/service-management`, label: "Vue d'ensemble", icon: LayoutDashboard, permission: "admin.read" },
     { href: `/${locale}/dashboard/service-management/listings`, label: "Logements", icon: Building2, permission: "listings.manage" },
-    { href: `/${locale}/dashboard/service-management/categories`, label: "Catégories", icon: FolderTree, permission: "categories.manage" },
     { href: `/${locale}/dashboard/service-management/locations`, label: "Lieux", icon: MapPin, permission: "locations.manage" },
     { href: `/${locale}/dashboard/service-management/services`, label: "Services", icon: BriefcaseBusiness, permission: "services.manage" },
     { href: `/${locale}/dashboard/service-management/experiences`, label: "Expériences", icon: Sparkles, permission: "experiences.manage" },
@@ -67,6 +66,7 @@ export function AdminShell({
     { href: `/${locale}/dashboard/service-management/countries`, label: "Pays", icon: MapPin, permission: "locations.manage" },
     { href: `/${locale}/dashboard/service-management/amenities`, label: "Équipements", icon: Wrench, permission: "services.manage" },
     { href: `/${locale}/dashboard/service-management/currencies`, label: "Devises", icon: CircleDollarSign, permission: "admin.read" },
+    { href: `/${locale}/dashboard/service-management/translations`, label: "Traductions", icon: Languages, permission: "admin.read" },
   ];
 
   const docsNav: NavItem[] = [

@@ -11,7 +11,10 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
   const found = (db.listings ?? []).find((x) => x.id === id);
   if (!found) return notFound();
 
-  const categories = (db.categories ?? []).map((c) => ({ id: String(c.id), name: String(c.name ?? c.id) }));
+  const propertyTypes = (db.propertyTypes ?? []).map((type) => ({
+    id: String(type.id),
+    name: String(type.name ?? type.id),
+  }));
   const locations = (db.locations ?? []).map((l) => ({
     id: String(l.id),
     city: String(l.city ?? ""),
@@ -26,7 +29,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
   return (
     <ListingFormClient
       locale={locale}
-      categories={categories}
+      categories={propertyTypes}
       locations={locations}
       services={services}
       redirectTo="/dashboard/service-management/listings"

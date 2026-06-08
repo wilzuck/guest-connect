@@ -7,7 +7,7 @@ export default async function Page() {
   const db = await readDb();
 
   const catById = Object.fromEntries(
-    (db.categories ?? []).map((c) => [String(c.id), String(c.name ?? c.id)]),
+    (db.propertyTypes ?? []).map((type) => [String(type.id), String(type.name ?? type.id)]),
   );
   const locById = Object.fromEntries(
     (db.locations ?? []).map((l) => [

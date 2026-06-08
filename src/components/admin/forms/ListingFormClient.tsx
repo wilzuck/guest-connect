@@ -4,13 +4,11 @@ import { useMemo, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { Card } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
+import { Select } from "@/components/ui/Select";
 import { Textarea } from "@/components/ui/Textarea";
 
 type Option = { id: string; name: string };
 type LocationOption = { id: string; city: string; country?: string };
-
-const selectClassName =
-  "mt-2 h-11 w-full rounded-2xl border border-black/10 bg-white px-3 text-sm font-semibold text-black shadow-sm shadow-black/5 focus:outline-none focus:ring-4 focus:ring-black/5";
 
 export function ListingFormClient({
   locale,
@@ -214,17 +212,12 @@ export function ListingFormClient({
             Localisation
           </p>
 
-          <select
+          <Select
             value={cityId}
             onChange={(e) => setCityId(e.target.value)}
-            className={selectClassName}
-          >
-            {locations.map((l) => (
-              <option key={l.id} value={l.id}>
-                {l.city}
-              </option>
-            ))}
-          </select>
+            className="mt-2 rounded-2xl font-semibold"
+            options={locations.map((l) => ({ value: l.id, label: l.city }))}
+          />
 
           <Input
             value={location}
@@ -272,23 +265,18 @@ export function ListingFormClient({
           </p>
         </Card>
 
-        {/* CATEGORY + PRICE */}
+        {/* PROPERTY TYPE + PRICE */}
         <Card className="p-4 rounded-3xl border border-black/5 space-y-3">
           <p className="text-xs uppercase tracking-[0.2em] text-zinc-400">
-            Catégorie & Tarif
+            Type de propriété & Tarif
           </p>
 
-          <select
+          <Select
             value={categoryId}
             onChange={(e) => setCategoryId(e.target.value)}
-            className={selectClassName}
-          >
-            {categories.map((c) => (
-              <option key={c.id} value={c.id}>
-                {c.name}
-              </option>
-            ))}
-          </select>
+            className="rounded-2xl font-semibold"
+            options={categories.map((c) => ({ value: c.id, label: c.name }))}
+          />
 
           <div className="grid grid-cols-2 gap-2">
             <Input

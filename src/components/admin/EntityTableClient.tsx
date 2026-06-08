@@ -3,15 +3,13 @@
 import Link from "next/link";
 import { useMemo, useState, useTransition, type ReactNode } from "react";
 import {
-  Filter,
   MoreVertical,
   Pencil,
   Plus,
   Search,
-  SlidersHorizontal,
   Trash2,
 } from "lucide-react";
-import { Button, ButtonLink } from "@/components/ui/Button";
+import { ButtonLink } from "@/components/ui/Button";
 
 export type Column = {
   key: string;
@@ -38,7 +36,6 @@ export function EntityTableClient({
 }) {
   const [rows, setRows] = useState(initialRows);
   const [query, setQuery] = useState("");
-  const [filter, setFilter] = useState("all");
   const [pending, startTransition] = useTransition();
   const headerCols = useMemo(() => columns, [columns]);
 
@@ -48,15 +45,10 @@ export function EntityTableClient({
     return rows.filter((row) => {
       const haystack = Object.values(row).join(" ").toLowerCase();
       const matchesQuery = !q || haystack.includes(q);
-      const active = row.active;
-      const matchesFilter =
-        filter === "all" ||
-        (filter === "active" && active !== false) ||
-        (filter === "inactive" && active === false);
 
-      return matchesQuery && matchesFilter;
+      return matchesQuery;
     });
-  }, [filter, query, rows]);
+  }, [query, rows]);
 
   async function onDelete(id: string) {
     if (!confirm("Supprimer cet élément ?")) return;
@@ -89,29 +81,6 @@ export function EntityTableClient({
               className="min-w-0 flex-1 bg-transparent outline-none placeholder:text-[#B1B1B7]"
             />
           </label>
-
-          <label className="flex h-10 items-center gap-2 rounded-lg border border-[#E8E8EC] bg-white px-3 text-sm font-medium text-[#73737A]">
-            <Filter className="h-4 w-4" aria-hidden="true" />
-            <select
-              value={filter}
-              onChange={(event) => setFilter(event.target.value)}
-              className="bg-transparent outline-none"
-            >
-              <option value="all">Tous</option>
-              <option value="active">Actifs</option>
-              <option value="inactive">Inactifs</option>
-            </select>
-          </label>
-
-          <Button
-            type="button"
-            variant="secondary"
-            size="sm"
-            className="inline-flex h-10 items-center gap-2 rounded-lg border border-[#E8E8EC] bg-white px-3 text-sm font-medium text-[#73737A] transition hover:bg-[#F7F7F8]"
-          >
-            <SlidersHorizontal className="h-4 w-4" aria-hidden="true" />
-            Filtrer
-          </Button>
 
           <ButtonLink
             href={createHref}
