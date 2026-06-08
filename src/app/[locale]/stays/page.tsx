@@ -4,6 +4,7 @@ import { Container } from "@/components/ui/Container";
 import { SearchBar } from "@/components/SearchBar";
 import { africaListings } from "@/lib/mock/africa-listings";
 import { ListingCard } from "@/components/listings/ListingCard";
+import { ListingGrid } from "@/components/listings/ListingGrid";
 import { ExploreFiltersBar } from "@/components/explore/ExploreFiltersBar";
 import { FilterSidebarButton } from "@/components/explore/FilterSidebarButton";
 import { CatalogEmptyState } from "@/components/explore/CatalogEmptyState";
@@ -60,11 +61,11 @@ export default async function Page({ searchParams }: PageProps) {
           </p>
 
           {items.length > 0 ? (
-            <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+            <ListingGrid className="mt-6">
               {items.map((listing) => (
                 <ListingCard key={listing.id} locale={locale} listing={listing} variant="outlined" />
               ))}
-            </div>
+            </ListingGrid>
           ) : (
             <CatalogEmptyState
               title="Aucun hébergement ne correspond à ces filtres"

@@ -6,6 +6,7 @@ import {
   BookOpen,
   BriefcaseBusiness,
   Building2,
+  CircleDollarSign,
   FileQuestion,
   FolderTree,
   LayoutDashboard,
@@ -15,7 +16,9 @@ import {
   Search,
   ShieldCheck,
   Sparkles,
+  Tags,
   Users,
+  Wrench,
 } from "lucide-react";
 import { ButtonLink } from "@/components/ui/Button";
 import {
@@ -59,6 +62,13 @@ export function AdminShell({
     { href: `/${locale}/dashboard/service-management/permissions`, label: "Droits", icon: FileQuestion, permission: "permissions.manage" },
   ];
 
+  const settingsNav: NavItem[] = [
+    { href: `/${locale}/dashboard/service-management/property-types`, label: "Types de propriété", icon: Tags, permission: "categories.manage" },
+    { href: `/${locale}/dashboard/service-management/countries`, label: "Pays", icon: MapPin, permission: "locations.manage" },
+    { href: `/${locale}/dashboard/service-management/amenities`, label: "Équipements", icon: Wrench, permission: "services.manage" },
+    { href: `/${locale}/dashboard/service-management/currencies`, label: "Devises", icon: CircleDollarSign, permission: "admin.read" },
+  ];
+
   const docsNav: NavItem[] = [
     { href: `/${locale}/support`, label: "Support", icon: LifeBuoy, permission: "docs.read" },
     { href: `/${locale}/dashboard/service-management/docs/usage`, label: "Documentation", icon: BookOpen, permission: "docs.read" },
@@ -66,13 +76,14 @@ export function AdminShell({
   ];
 
   const visibleMainNav = filterByPermissions(mainNav, currentUser);
+  const visibleSettingsNav = filterByPermissions(settingsNav, currentUser);
   const visibleAccessNav = filterByPermissions(accessNav, currentUser);
   const visibleDocsNav = filterByPermissions(docsNav, currentUser);
-  const visibleMobileNav = [...visibleMainNav, ...visibleAccessNav, ...visibleDocsNav];
+  const visibleMobileNav = [...visibleMainNav, ...visibleSettingsNav, ...visibleAccessNav, ...visibleDocsNav];
 
   return (
-    <div className="min-h-dvh w-full border-t border-black/10 bg-white">
-      <div className="flex min-h-dvh w-full max-w-none border-t border-[#E8E8EC] bg-white">
+    <div className="min-h-dvh w-full border-t border-[#E8E8EC] bg-white">
+      <div className="flex min-h-dvh w-full max-w-none ">
         <aside className="hidden w-[256px] shrink-0 border-r border-[#E8E8EC] bg-[#F7F7F8] lg:flex lg:flex-col">
           {/* Brand 
           <div className="flex h-16 items-center justify-between px-4">
@@ -99,6 +110,7 @@ export function AdminShell({
 
           <nav className="flex-1 overflow-y-auto px-3">
             <NavGroup title="Main menu" items={visibleMainNav} pathname={pathname} />
+            <NavGroup title="Paramétrage logements" items={visibleSettingsNav} pathname={pathname} />
             <NavGroup title="Accès" items={visibleAccessNav} pathname={pathname} />
             <NavGroup title="Support / Documentation" items={visibleDocsNav} pathname={pathname} />
           </nav>

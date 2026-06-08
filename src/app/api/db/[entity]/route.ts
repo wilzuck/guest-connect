@@ -10,6 +10,10 @@ const PREFIX: Record<string, string> = {
   locations: "loc",
   services: "srv",
   experiences: "exp",
+  propertyTypes: "pty",
+  countries: "cty",
+  amenities: "amn",
+  currencies: "cur",
 };
 
 export async function GET(_req: Request, { params }: { params: Promise<{ entity: string }> }) {

@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useLocale } from "next-intl";
 import { africaListings } from "@/lib/mock/africa-listings";
 import { ListingCard } from "@/components/listings/ListingCard";
+import { ListingGrid } from "@/components/listings/ListingGrid";
 import { AccountShell } from "@/components/account/AccountShell";
 import { Card } from "@/components/ui";
 
@@ -35,8 +36,8 @@ export default function Page() {
     [ids],
   );
   const items = useMemo(() => {
-    const base = favorites.length > 0 ? favorites : africaListings.slice(0, 5);
-    return base.slice(0, 5);
+    const base = favorites.length > 0 ? favorites : africaListings.slice(0, 4);
+    return base.slice(0, 4);
   }, [favorites]);
 
   return (
@@ -51,7 +52,7 @@ export default function Page() {
       activeHref={`/${locale}/favorites`}
     >
       <Card className="p-5 xl:p-8">
-        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-5">
+        <ListingGrid className="mt-6">
           {items.map((l) => (
             <ListingCard
               key={l.id}
@@ -60,7 +61,7 @@ export default function Page() {
               variant="outlined"
             />
           ))}
-        </div>
+        </ListingGrid>
       </Card>
     </AccountShell>
   );

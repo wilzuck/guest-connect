@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "updatedAt": "2026-06-07T13:13:46.969Z"
+    "updatedAt": "2026-06-07T23:12:18.843Z"
   },
   "categories": [
     {
@@ -18,6 +18,11 @@
       "id": "cat-villa",
       "name": "Villa",
       "slug": "villa"
+    },
+    {
+      "id": "cat-99b76ffb06ab",
+      "name": "Appartement 1",
+      "slug": "appart"
     }
   ],
   "locations": [
@@ -38,6 +43,12 @@
       "city": "Dakar",
       "country": "Sénégal",
       "countryCode": "SN"
+    },
+    {
+      "id": "loc-f490b606c79b",
+      "city": "hjhjhjjh",
+      "country": "hgghghgh",
+      "countryCode": "HJ"
     }
   ],
   "services": [
@@ -72,6 +83,78 @@
       "reviewCount": 188,
       "imageUrl": "https://images.unsplash.com/photo-1452860606245-08befc0ff44b?auto=format&fit=crop&w=1600&q=80",
       "excerpt": "Découvrez l’artisanat local, rencontrez des créateurs et repartez avec une pièce unique."
+    }
+  ],
+  "propertyTypes": [
+    {
+      "id": "pty-apartment",
+      "name": "Appartement",
+      "slug": "appartement",
+      "icon": "Building2",
+      "description": "Logement entier ou privatif en immeuble.",
+      "active": true
+    },
+    {
+      "id": "pty-villa",
+      "name": "Villa",
+      "slug": "villa",
+      "icon": "Home",
+      "description": "Maison premium avec espaces extérieurs.",
+      "active": true
+    }
+  ],
+  "countries": [
+    {
+      "id": "cty-bj",
+      "name": "Bénin",
+      "code": "BJ",
+      "currency": "XOF",
+      "active": true
+    },
+    {
+      "id": "cty-sn",
+      "name": "Sénégal",
+      "code": "SN",
+      "currency": "XOF",
+      "active": true
+    }
+  ],
+  "amenities": [
+    {
+      "id": "amn-wifi",
+      "name": "WiFi",
+      "slug": "wifi",
+      "icon": "Wifi",
+      "description": "Connexion internet disponible.",
+      "active": true
+    },
+    {
+      "id": "amn-parking",
+      "name": "Parking",
+      "slug": "parking",
+      "icon": "Car",
+      "description": "Stationnement disponible.",
+      "active": true
+    }
+  ],
+  "currencies": [
+    {
+      "id": "cur-xof",
+      "name": "Franc CFA",
+      "code": "XOF",
+      "symbol": "FCFA",
+      "minDiscount": 0,
+      "maxDiscount": 35,
+      "active": true
+    },
+    {
+      "id": "cur-eur",
+      "name": "Euro",
+      "code": "EUR",
+      "symbol": "€",
+      "minDiscount": 0,
+      "maxDiscount": 35,
+      "active": true
     }
   ],
   "listings": [

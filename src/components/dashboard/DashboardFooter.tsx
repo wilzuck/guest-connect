@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
 import { Activity, BookOpen, ShieldCheck, LifeBuoy } from "lucide-react";
-import { Container } from "@/components/ui/Container";
 
 export function DashboardFooter() {
   const locale = useLocale();
@@ -18,7 +17,7 @@ export function DashboardFooter() {
 
   return (
     <footer className="border-t border-black/10 bg-white text-black">
-      <Container className="py-5">
+      <div className="w-full max-w-none px-4 py-5 sm:px-6">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
           <div className="min-w-0">
             <p className="text-sm font-semibold tracking-tight">{t("brand")}</p>
@@ -52,7 +51,7 @@ export function DashboardFooter() {
             {t("status")}
           </p>
         </div>
-      </Container>
+      </div>
     </footer>
   );
 }

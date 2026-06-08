@@ -26,7 +26,7 @@ export function DialogContent({ className, ...props }: DialogPrimitive.DialogCon
       <DialogOverlay />
       <DialogPrimitive.Content
         className={cn(
-          "fixed right-0 top-0 z-50 h-dvh w-[92vw] max-w-sm border-l border-black/10 bg-white p-5 shadow-2xl shadow-black/20 outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right dark:border-white/10 dark:bg-zinc-950",
+          "fixed right-0 top-0 z-50 h-dvh w-[92vw] max-w-sm border-l border-black/10 bg-white shadow-2xl shadow-black/20 outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right dark:border-white/10 dark:bg-zinc-950",
           className,
         )}
         {...props}

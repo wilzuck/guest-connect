@@ -1,48 +1,95 @@
-import { cn } from "@/lib/utils/cn";
-import type { SelectHTMLAttributes } from "react";
+"use client";
 
-export type SelectProps = SelectHTMLAttributes<HTMLSelectElement> & {
+import * as SelectPrimitive from "@radix-ui/react-select";
+import { Check, ChevronDown } from "lucide-react";
+import { cn } from "@/lib/utils/cn";
+
+type SelectChangeEvent = {
+  target: {
+    value: string;
+  };
+};
+
+export type SelectProps = {
   options: Array<{ value: string; label: string }>;
   placeholder?: string;
+  value?: string;
+  defaultValue?: string;
+  name?: string;
+  required?: boolean;
+  disabled?: boolean;
+  className?: string;
+  "aria-label"?: string;
+  onChange?: (event: SelectChangeEvent) => void;
+  onValueChange?: (value: string) => void;
 };
 
 export function Select({
   className,
   options,
   placeholder = "Sélectionner...",
-  ...props
+  value,
+  defaultValue,
+  name,
+  required,
+  disabled,
+  onChange,
+  onValueChange,
+  "aria-label": ariaLabel,
 }: SelectProps) {
-  return (
-    <div className="relative w-full">
-      <select
-        className={cn(
-          "h-11 w-full appearance-none rounded-xl border border-black/10 bg-white px-4 pr-10 text-sm text-black shadow-sm shadow-black/5 outline-none transition focus:border-black/20 focus:ring-4 focus:ring-black/5",
-          className
-        )}
-        {...props}
-      >
-        <option value="">{placeholder}</option>
-        {options.map((opt) => (
-          <option key={opt.value} value={opt.value}>
-            {opt.label}
-          </option>
-        ))}
-      </select>
+  function handleValueChange(nextValue: string) {
+    onValueChange?.(nextValue);
+    onChange?.({ target: { value: nextValue } });
+  }
 
-      {/* custom arrow */}
-      <div className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500">
-        <svg
-          className="h-4 w-4"
-          viewBox="0 0 20 20"
-          fill="currentColor"
+  return (
+    <>
+      {name ? <input type="hidden" name={name} value={value ?? defaultValue ?? ""} /> : null}
+      <SelectPrimitive.Root
+        value={value}
+        defaultValue={defaultValue}
+        disabled={disabled}
+        required={required}
+        onValueChange={handleValueChange}
+      >
+        <SelectPrimitive.Trigger
+          aria-label={ariaLabel ?? placeholder}
+          className={cn(
+            "flex h-11 w-full items-center justify-between rounded-xl border border-black/10 bg-white px-4 text-sm text-black shadow-sm shadow-black/5 outline-none transition placeholder:text-zinc-500 focus:border-black/20 focus:ring-4 focus:ring-black/5 disabled:cursor-not-allowed disabled:opacity-50",
+            className,
+          )}
         >
-          <path
-            fillRule="evenodd"
-            d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z"
-            clipRule="evenodd"
-          />
-        </svg>
-      </div>
-    </div>
+          <SelectPrimitive.Value placeholder={placeholder} />
+          <SelectPrimitive.Icon asChild>
+            <ChevronDown className="h-4 w-4 text-zinc-500" aria-hidden="true" />
+          </SelectPrimitive.Icon>
+        </SelectPrimitive.Trigger>
+
+        <SelectPrimitive.Portal>
+          <SelectPrimitive.Content
+            position="popper"
+            sideOffset={6}
+            className="z-[80] max-h-72 min-w-[var(--radix-select-trigger-width)] overflow-hidden rounded-xl border border-black/10 bg-white p-1 text-black shadow-xl shadow-black/10 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"
+          >
+            <SelectPrimitive.Viewport>
+              {options.map((option) => (
+                <SelectPrimitive.Item
+                  key={option.value}
+                  value={option.value}
+                  className="relative flex h-10 cursor-default select-none items-center rounded-lg py-2 pl-9 pr-3 text-sm outline-none data-[highlighted]:bg-zinc-100 data-[highlighted]:text-black data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                >
+                  <span className="absolute left-3 flex h-4 w-4 items-center justify-center">
+                    <SelectPrimitive.ItemIndicator>
+                      <Check className="h-4 w-4" aria-hidden="true" />
+                    </SelectPrimitive.ItemIndicator>
+                  </span>
+                  <SelectPrimitive.ItemText>{option.label}</SelectPrimitive.ItemText>
+                </SelectPrimitive.Item>
+              ))}
+            </SelectPrimitive.Viewport>
+          </SelectPrimitive.Content>
+        </SelectPrimitive.Portal>
+      </SelectPrimitive.Root>
+    </>
   );
 }

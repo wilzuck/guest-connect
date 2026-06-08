@@ -59,7 +59,7 @@ export function LocationFormClient({
           Un “lieu” sert de référence commune aux logements et aux expériences.
         </p>
 
-        <div className="mt-6 grid gap-4 sm:grid-cols-3">
+        <div className="mt-6 grid items-start gap-4 sm:grid-cols-3">
           <label className="grid gap-2 sm:col-span-1">
             <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">Ville</span>
             <Input value={city} onChange={(e) => setCity(e.target.value)} placeholder="Cotonou" required />

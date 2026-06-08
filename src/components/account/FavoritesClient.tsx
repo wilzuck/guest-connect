@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useLocale } from "next-intl";
 import { africaListings } from "@/lib/mock/africa-listings";
 import { ListingCard } from "@/components/listings/ListingCard";
+import { ListingGrid } from "@/components/listings/ListingGrid";
 import { Card } from "@/components/ui/Card";
 
 const STORAGE_KEY = "guestconnect_favorites";
@@ -31,8 +32,8 @@ export function FavoritesClient() {
 
   const favorites = useMemo(() => africaListings.filter((l) => ids.includes(l.id)), [ids]);
   const items = useMemo(() => {
-    const base = favorites.length > 0 ? favorites : africaListings.slice(0, 5);
-    return base.slice(0, 5);
+    const base = favorites.length > 0 ? favorites : africaListings.slice(0, 4);
+    return base.slice(0, 4);
   }, [favorites]);
 
   return (
@@ -45,11 +46,11 @@ export function FavoritesClient() {
           <p className="mt-1 text-sm text-zinc-600">
             {favorites.length > 0
               ? isEn
-                ? "Showing up to 5 saved listings."
-                : "Affichage de 5 favoris maximum."
+                ? "Showing up to 4 saved listings."
+                : "Affichage de 4 favoris maximum."
               : isEn
-                ? "You don’t have favorites yet — here are 5 picks to start."
-                : "Vous n’avez pas encore de favoris — voici 5 suggestions pour commencer."}
+                ? "You don’t have favorites yet — here are 4 picks to start."
+                : "Vous n’avez pas encore de favoris — voici 4 suggestions pour commencer."}
           </p>
         </div>
         <Link href={`/${locale}/stays`} className="text-sm font-semibold text-black hover:underline">
@@ -57,11 +58,11 @@ export function FavoritesClient() {
         </Link>
       </div>
 
-      <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <ListingGrid className="mt-6">
         {items.map((l) => (
           <ListingCard key={l.id} locale={locale} listing={l} variant="outlined" />
         ))}
-      </div>
+      </ListingGrid>
 
       <Card className="mt-8 p-5 shadow-none">
         <p className="text-xs text-zinc-500">

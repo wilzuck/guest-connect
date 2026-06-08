@@ -84,7 +84,7 @@ export default async function ListingPage({ params }: PageProps) {
 
           {/* Contenu */}
           <div className="grid gap-8 lg:grid-cols-12 lg:items-start">
-            <div className="lg:col-span-7">
+            <div className="lg:col-span-8">
               <h2 className="text-xl font-semibold tracking-tight text-black">
                 À propos de cet hébergement
               </h2>
@@ -101,7 +101,7 @@ export default async function ListingPage({ params }: PageProps) {
                 <InfoCard title="Support" desc="Assistance 24/7 (voyageurs & hôtes)." />
               </div>
             </div>
-            <div className="lg:col-span-5">
+            <div className="lg:col-span-4">
               <Card className="sticky top-24 p-6">
                 <p className="text-sm text-zinc-600">À partir de</p>
                 <p className="mt-2 text-3xl font-semibold tracking-tight text-black">

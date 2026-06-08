@@ -98,7 +98,7 @@ export async function HeroSection() {
         <div className="" style={{ contain: "layout paint" }}>
           <TopSearchCarousel
             locale={locale}
-            items={africaListings.slice(0, 6)}
+            items={africaListings.slice(0, 4)}
           />
         </div>
       </Container>

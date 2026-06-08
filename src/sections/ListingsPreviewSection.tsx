@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { ListingCard } from "@/components/listings/ListingCard";
+import { ListingGrid } from "@/components/listings/ListingGrid";
 import type { Listing } from "@/types/listing";
 
 type ListingsPreviewSectionProps = {
@@ -32,13 +33,13 @@ export async function ListingsPreviewSection({ listings }: ListingsPreviewSectio
           </p>
         </div>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+        <ListingGrid className="mt-10">
           {listings.map((l) => (
             <div key={l.id} className="min-w-0">
               <ListingCard locale={locale} listing={l} variant="plain" />
             </div>
           ))}
-        </div>
+        </ListingGrid>
       </Container>
     </section>
   );

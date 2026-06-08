@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { Card } from "@/components/ui/Card";
 import type { Listing } from "@/types/listing";
-import { useTranslations } from "next-intl";
 import { useCurrency } from "@/components/currency/CurrencyProvider";
 import { useState } from "react";
 import { cn } from "@/lib/utils/cn";
@@ -26,7 +25,6 @@ export function ListingCard({
   linkable?: boolean;
   badge?: string;
 }) {
-  const t = useTranslations("listingCard");
   const { formatFrom } = useCurrency();
   const [imgLoaded, setImgLoaded] = useState(false);
   const normalizedLocale = locale ?? "fr";
@@ -103,13 +101,6 @@ export function ListingCard({
             </p>
           </div>
 
-          {/* Badge annulation (sans distance, icône moderne) */}
-          <div className="mt-3 flex items-center gap-2 text-sm text-zinc-700">
-            <TicketIcon className="h-4 w-4 text-zinc-500" />
-            <span className="truncate" title={t("meta.cancellation")}>
-              {t("meta.cancellation")}
-            </span>
-          </div>
           <div className="mt-3 flex flex-wrap gap-1.5">
             {getFeatureBadges(listing).map((feature) => {
               const Icon = feature.icon;
@@ -160,26 +151,6 @@ function StarIcon({ className }: { className?: string }) {
       <path
         d="M12 2.5l2.9 6.1 6.6.9-4.8 4.7 1.2 6.6L12 17.9 6.1 20.8l1.2-6.6-4.8-4.7 6.6-.9L12 2.5Z"
         fill="currentColor"
-      />
-    </svg>
-  );
-}
-
-function TicketIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path
-        d="M5 7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4V7Z"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M9 8.5v7"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        opacity="0.35"
       />
     </svg>
   );

@@ -6,13 +6,15 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.15",
     "@radix-ui/react-popover": "^1.1.15",
+    "@radix-ui/react-select": "^2.3.0",
     "date-fns": "^4.4.0",
-    "embla-carousel-react": "^8.6.0",
     "lucide-react": "^1.17.0",
     "next": "16.2.6",
     "next-intl": "^4.13.0",
@@ -23,12 +25,14 @@
     "yet-another-react-lightbox": "^3.32.0"
   },
   "devDependencies": {
+    "@storybook/nextjs": "^10.4.2",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
+    "storybook": "^10.4.2",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

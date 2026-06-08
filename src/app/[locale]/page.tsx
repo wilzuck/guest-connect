@@ -17,7 +17,7 @@ export default async function Home() {
 
   try {
     const data = await getListings();
-    if (Array.isArray(data) && data.length > 0) listings = data.slice(0, 6);
+    if (Array.isArray(data) && data.length > 0) listings = data.slice(0, 4);
   } catch {
     // fallback: mock data
   }

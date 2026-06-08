@@ -15,7 +15,6 @@ export function Navbar() {
   const t = useTranslations("nav");
   const pathname = usePathname() || "";
   const hide = /(^|\/)(login|signup)$/.test(pathname);
-  const isDashboard = /(^|\/)dashboard(\/|$)/.test(pathname);
 
   const [visible, setVisible] = useState(true);
   const [elevated, setElevated] = useState(false);
@@ -61,12 +60,7 @@ export function Navbar() {
           elevated ? "shadow-sm shadow-black/10" : "",
         ].join(" ")}
       >
-        <Container
-          className={[
-            "flex h-16 items-center gap-3",
-            isDashboard ? "max-w-none px-4 sm:px-6" : "",
-          ].join(" ")}
-        >
+        <Container className="flex h-16 items-center gap-3">
         <div className="flex items-center gap-8">
           <Logo />
           <nav className="hidden items-center gap-6 md:flex">

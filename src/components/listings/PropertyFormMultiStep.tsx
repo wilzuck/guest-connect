@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useMemo, useState, type FormEvent, type ReactNode } from "react";
 import {
   Building2,
   CalendarDays,
@@ -33,6 +33,7 @@ import { Input } from "@/components/ui/Input";
 import { MarkdownTextarea } from "@/components/ui/MarkdownTextarea";
 import { Select } from "@/components/ui/Select";
 import type { CurrencyCode } from "@/lib/currency/currency";
+import { cn } from "@/lib/utils/cn";
 
 type PropertyFormData = {
   propertyName: string;
@@ -50,6 +51,7 @@ type PropertyFormData = {
   pricePerNight: number;
   currency: CurrencyCode;
   minNights: number;
+  minMonthlyDiscount: number;
   maxMonthlyDiscount: number;
   availableWeekdays: string[];
   unavailableDates: string[];
@@ -104,11 +106,30 @@ const WEEKDAYS = [
   { value: "sun", label: "Dim", longLabel: "Dimanche" },
 ];
 
+const DEFAULT_DISCOUNT_LIMITS = { min: 0, max: 35 };
+
+type CurrencyDiscountRule = {
+  code: CurrencyCode;
+  minDiscount: number;
+  maxDiscount: number;
+};
+
+const WEEKDAY_INDEX: Record<string, number> = {
+  sun: 0,
+  mon: 1,
+  tue: 2,
+  wed: 3,
+  thu: 4,
+  fri: 5,
+  sat: 6,
+};
+
 export function PropertyFormMultiStep({ context = "public" }: { context?: "public" | "admin" }) {
   const [currentStep, setCurrentStep] = useState(0);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [imagePreviews, setImagePreviews] = useState<string[]>([]);
   const [blockedDate, setBlockedDate] = useState("");
+  const [currencyRules, setCurrencyRules] = useState<CurrencyDiscountRule[]>([]);
   const [formData, setFormData] = useState<PropertyFormData>({
     propertyName: "",
     propertyType: "apartment",
@@ -125,11 +146,44 @@ export function PropertyFormMultiStep({ context = "public" }: { context?: "publi
     pricePerNight: 0,
     currency: "XOF",
     minNights: 1,
+    minMonthlyDiscount: 0,
     maxMonthlyDiscount: 0,
     availableWeekdays: WEEKDAYS.map((day) => day.value),
     unavailableDates: [],
     validationStatus: "pending",
   });
+
+  useEffect(() => {
+    let ignore = false;
+    fetch("/api/db/currencies")
+      .then((response) => (response.ok ? response.json() : []))
+      .then((rows: Array<Record<string, unknown>>) => {
+        if (ignore) return;
+        setCurrencyRules(
+          rows
+            .map((row) => ({
+              code: String(row.code ?? "").toUpperCase() as CurrencyCode,
+              minDiscount: normalizeDiscount(row.minDiscount, DEFAULT_DISCOUNT_LIMITS.min),
+              maxDiscount: normalizeDiscount(row.maxDiscount, DEFAULT_DISCOUNT_LIMITS.max),
+            }))
+            .filter((rule) => ["XOF", "EUR", "USD"].includes(rule.code)),
+        );
+      })
+      .catch(() => undefined);
+
+    return () => {
+      ignore = true;
+    };
+  }, []);
+
+  const discountLimits = useMemo(() => {
+    const rule = currencyRules.find((item) => item.code === formData.currency);
+    if (!rule) return DEFAULT_DISCOUNT_LIMITS;
+    return {
+      min: Math.min(rule.minDiscount, rule.maxDiscount),
+      max: Math.max(rule.minDiscount, rule.maxDiscount),
+    };
+  }, [currencyRules, formData.currency]);
 
   const completion = useMemo(() => {
     const checks = [
@@ -184,6 +238,15 @@ export function PropertyFormMultiStep({ context = "public" }: { context?: "publi
     }
     if (step === 4) {
       if (formData.pricePerNight <= 0) nextErrors.pricePerNight = "Doit être supérieur à 0";
+      if (formData.minMonthlyDiscount < discountLimits.min) {
+        nextErrors.minMonthlyDiscount = `Minimum ${discountLimits.min}%`;
+      }
+      if (formData.maxMonthlyDiscount > discountLimits.max) {
+        nextErrors.maxMonthlyDiscount = `Maximum ${discountLimits.max}%`;
+      }
+      if (formData.maxMonthlyDiscount < formData.minMonthlyDiscount) {
+        nextErrors.maxMonthlyDiscount = "La remise max doit être supérieure ou égale à la remise min";
+      }
       if (formData.availableWeekdays.length === 0) {
         nextErrors.availableWeekdays = "Choisir au moins un jour disponible";
       }
@@ -511,18 +574,31 @@ export function PropertyFormMultiStep({ context = "public" }: { context?: "publi
                       />
                       <HelpText>Fixe la durée minimale acceptée pour une réservation.</HelpText>
                     </FormField>
-                    <FormField label="Remise mensuelle (%)">
+                    <FormField label="Remise min (%)" error={errors.minMonthlyDiscount}>
                       <Input
                         type="number"
-                        min="0"
-                        max="100"
+                        min={discountLimits.min}
+                        max={discountLimits.max}
+                        value={formData.minMonthlyDiscount}
+                        onChange={(event) =>
+                          updateField("minMonthlyDiscount", Number.parseInt(event.target.value, 10) || 0)
+                        }
+                        className="rounded-xl"
+                      />
+                      <HelpText>La borne basse de la remise longue durée. Elle est ajustable dans Admin &gt; Devises.</HelpText>
+                    </FormField>
+                    <FormField label="Remise max (%)" error={errors.maxMonthlyDiscount}>
+                      <Input
+                        type="number"
+                        min={discountLimits.min}
+                        max={discountLimits.max}
                         value={formData.maxMonthlyDiscount}
                         onChange={(event) =>
                           updateField("maxMonthlyDiscount", Number.parseInt(event.target.value, 10) || 0)
                         }
                         className="rounded-xl"
                       />
-                      <HelpText>Optionnel. Utile pour attirer les séjours de longue durée.</HelpText>
+                      <HelpText>Maximum autorisé : {discountLimits.max}%. La remise max doit rester supérieure ou égale à la remise min.</HelpText>
                     </FormField>
                   </div>
 
@@ -594,6 +670,10 @@ export function PropertyFormMultiStep({ context = "public" }: { context?: "publi
                         ))}
                       </div>
                     )}
+                    <AvailabilityCalendar
+                      availableWeekdays={formData.availableWeekdays}
+                      unavailableDates={formData.unavailableDates}
+                    />
                     <input type="hidden" name="availableWeekdays" value={formData.availableWeekdays.join(",")} />
                     <input type="hidden" name="unavailableDates" value={formData.unavailableDates.join(",")} />
                   </div>
@@ -797,6 +877,99 @@ function PreviewPanel({
       </div>
     </aside>
   );
+}
+
+function AvailabilityCalendar({
+  availableWeekdays,
+  unavailableDates,
+}: {
+  availableWeekdays: string[];
+  unavailableDates: string[];
+}) {
+  const days = useMemo(() => buildCalendarDays(), []);
+  const blocked = new Set(unavailableDates);
+  const available = new Set(availableWeekdays.map((day) => WEEKDAY_INDEX[day]));
+  const monthLabel = new Intl.DateTimeFormat("fr-FR", { month: "long", year: "numeric" }).format(new Date());
+
+  return (
+    <div className="mt-5 rounded-2xl border border-zinc-200 bg-zinc-50 p-4">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <p className="text-sm font-semibold text-zinc-950">Calendrier des disponibilités</p>
+        <p className="text-xs font-medium text-zinc-500 capitalize">{monthLabel}</p>
+      </div>
+      <div className="mt-4 grid grid-cols-7 gap-1.5">
+        {["D", "L", "M", "M", "J", "V", "S"].map((day, index) => (
+          <span key={`${day}-${index}`} className="text-center text-[10px] font-semibold text-zinc-400">
+            {day}
+          </span>
+        ))}
+        {days.map((day) => {
+          const value = toDateInputValue(day);
+          const isBlocked = blocked.has(value);
+          const isAvailable = available.has(day.getDay());
+          const isCurrentMonth = day.getMonth() === new Date().getMonth();
+
+          return (
+            <span
+              key={value}
+              title={`${value} - ${isBlocked ? "bloqué" : isAvailable ? "libre" : "fermé"}`}
+              className={[
+                "aspect-square rounded-[5px] border text-[10px] font-semibold",
+                isBlocked
+                  ? "border-red-300 bg-red-500 text-white"
+                  : isAvailable
+                    ? "border-emerald-200 bg-emerald-400 text-emerald-950"
+                    : "border-zinc-200 bg-white text-zinc-300",
+                isCurrentMonth ? "" : "opacity-35",
+              ].join(" ")}
+            >
+              <span className="sr-only">{value}</span>
+            </span>
+          );
+        })}
+      </div>
+      <div className="mt-4 flex flex-wrap gap-3 text-xs font-medium text-zinc-500">
+        <LegendDot className="bg-emerald-400" label="Libre" />
+        <LegendDot className="bg-red-500" label="Bloqué" />
+        <LegendDot className="bg-white" label="Fermé" bordered />
+      </div>
+    </div>
+  );
+}
+
+function LegendDot({ className, label, bordered = false }: { className: string; label: string; bordered?: boolean }) {
+  return (
+    <span className="inline-flex items-center gap-2">
+      <span className={cn("h-3 w-3 rounded-[4px]", bordered ? "border border-zinc-200" : "", className)} aria-hidden="true" />
+      {label}
+    </span>
+  );
+}
+
+function buildCalendarDays() {
+  const today = new Date();
+  const firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
+  const start = new Date(firstDay);
+  start.setDate(firstDay.getDate() - firstDay.getDay());
+
+  return Array.from({ length: 42 }, (_, index) => {
+    const date = new Date(start);
+    date.setDate(start.getDate() + index);
+    return date;
+  });
+}
+
+function toDateInputValue(date: Date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+function normalizeDiscount(value: unknown, fallback: number) {
+  const parsed = Number(value);
+  if (!Number.isFinite(parsed)) return fallback;
+  return Math.min(DEFAULT_DISCOUNT_LIMITS.max, Math.max(DEFAULT_DISCOUNT_LIMITS.min, parsed));
 }
 
 function PreviewBadge({ children }: { children: ReactNode }) {

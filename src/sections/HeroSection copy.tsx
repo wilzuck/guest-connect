@@ -40,7 +40,7 @@ export async function HeroSection() {
         <div className="mt-10">
           {/* Section indépendante pour que le scroll horizontal ne perturbe pas le reste */}
           <div className="mt-6 overflow-hidden" style={{ contain: "layout paint" }}>
-            <TopSearchCarousel locale={locale} items={africaListings.slice(0, 6)} />
+            <TopSearchCarousel locale={locale} items={africaListings.slice(0, 4)} />
           </div>
         </div>
       </Container>

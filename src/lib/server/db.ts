@@ -1,7 +1,16 @@
 import { promises as fs } from "fs";
 import path from "path";
 
-export type DbEntity = "listings" | "categories" | "locations" | "services" | "experiences";
+export type DbEntity =
+  | "listings"
+  | "categories"
+  | "locations"
+  | "services"
+  | "experiences"
+  | "propertyTypes"
+  | "countries"
+  | "amenities"
+  | "currencies";
 
 export type DbShape = {
   meta: { version: number; updatedAt: string };
@@ -10,6 +19,10 @@ export type DbShape = {
   locations: Array<Record<string, unknown>>;
   services: Array<Record<string, unknown>>;
   experiences: Array<Record<string, unknown>>;
+  propertyTypes: Array<Record<string, unknown>>;
+  countries: Array<Record<string, unknown>>;
+  amenities: Array<Record<string, unknown>>;
+  currencies: Array<Record<string, unknown>>;
 };
 
 function dbFilePath() {
@@ -40,6 +53,16 @@ export function newId(prefix: string) {
 }
 
 export function assertEntity(entity: string): asserts entity is DbEntity {
-  const ok = ["listings", "categories", "locations", "services", "experiences"].includes(entity);
+  const ok = [
+    "listings",
+    "categories",
+    "locations",
+    "services",
+    "experiences",
+    "propertyTypes",
+    "countries",
+    "amenities",
+    "currencies",
+  ].includes(entity);
   if (!ok) throw new Error("Unknown entity");
 }
