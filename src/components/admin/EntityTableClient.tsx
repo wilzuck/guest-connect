@@ -7,9 +7,11 @@ import {
   Pencil,
   Plus,
   Search,
+  SlidersHorizontal,
   Trash2,
 } from "lucide-react";
 import { ButtonLink } from "@/components/ui/Button";
+import { Select } from "@/components/ui/Select";
 
 export type Column = {
   key: string;
@@ -94,6 +96,43 @@ export function EntityTableClient({
         </div>
       </div>
 
+      <div className="flex flex-wrap items-center gap-2 rounded-xl border border-[#E8E8EC] bg-white px-3 py-2">
+        <Select
+          defaultValue="all"
+          className="h-9 w-[150px] rounded-lg"
+          options={[
+            { value: "all", label: "Toutes les lignes" },
+            { value: "pending", label: "À valider" },
+            { value: "active", label: "Actifs" },
+          ]}
+        />
+        <Select
+          defaultValue="date"
+          className="h-9 w-[170px] rounded-lg"
+          options={[
+            { value: "date", label: "Grouper: Date" },
+            { value: "status", label: "Grouper: Statut" },
+            { value: "type", label: "Grouper: Type" },
+          ]}
+        />
+        <Select
+          defaultValue="priority"
+          className="h-9 w-[170px] rounded-lg"
+          options={[
+            { value: "priority", label: "Tri: Priorité" },
+            { value: "name", label: "Tri: Nom" },
+            { value: "recent", label: "Tri: Récent" },
+          ]}
+        />
+        <button
+          type="button"
+          className="inline-flex h-9 items-center gap-2 rounded-lg border border-[#E8E8EC] bg-white px-3 text-sm font-semibold text-[#73737A] transition hover:bg-[#F7F7F8]"
+        >
+          <SlidersHorizontal className="h-4 w-4" aria-hidden="true" />
+          Display
+        </button>
+      </div>
+
       <div className="overflow-hidden rounded-xl border border-[#E8E8EC] bg-white">
         <div
           className="hidden border-b border-[#E8E8EC] bg-[#FAFAFB] px-4 py-3 text-xs font-medium text-[#8E8E93] lg:grid"
@@ -116,7 +155,7 @@ export function EntityTableClient({
             return (
               <div
                 key={id}
-                className="px-4 py-4"
+                className="px-4 py-3 transition hover:bg-[#FAFAFB]"
               >
                 <div
                   className="block space-y-3 lg:grid lg:space-y-0 lg:items-center"

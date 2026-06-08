@@ -1,5 +1,12 @@
 import type { FilterSidebarSection } from "@/components/explore/FilterSidebarButton";
+import {
+  AMENITY_OPTIONS,
+  LISTING_SORT_OPTIONS,
+  LISTING_TYPE_OPTIONS,
+  WEEKDAY_OPTIONS,
+} from "@/constants/listing-filters";
 import type { ListingWithMeta } from "@/lib/mock/africa-listings";
+import type { FilterControl } from "@/types/filters";
 
 export type ListingFilterParams = {
   type?: string;
@@ -14,17 +21,6 @@ export type ListingFilterParams = {
   sort?: string;
   destination?: string;
 };
-
-const AMENITY_OPTIONS = ["WiFi", "Climatisation", "Cuisine équipée", "Parking", "Piscine", "Jardin"];
-const WEEKDAY_OPTIONS = [
-  { value: "mon", label: "Lundi" },
-  { value: "tue", label: "Mardi" },
-  { value: "wed", label: "Mercredi" },
-  { value: "thu", label: "Jeudi" },
-  { value: "fri", label: "Vendredi" },
-  { value: "sat", label: "Samedi" },
-  { value: "sun", label: "Dimanche" },
-];
 
 export type ListingSpecs = {
   bedrooms: number;
@@ -50,42 +46,39 @@ export function getListingSpecs(listing: ListingWithMeta, index: number): Listin
     listing.pricePerNight > 70 ? "Piscine" : "Cuisine équipée",
     listing.pricePerNight > 55 ? "Parking" : "Petit-déjeuner inclus",
   ];
-  const availableWeekdays = index % 3 === 0
-    ? ["mon", "tue", "wed", "thu", "fri"]
-    : ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
+  const availableWeekdays =
+    index % 3 === 0
+      ? ["mon", "tue", "wed", "thu", "fri"]
+      : ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
 
   return { bedrooms, bathrooms, maxGuests, squareFeet, amenities, availableWeekdays };
 }
 
 export function applyListingFilters(items: ListingWithMeta[], params: ListingFilterParams) {
   const destination = params.destination?.trim().toLowerCase() ?? "";
-  const type = params.type ?? "all";
+  const types = readList(params.type);
   const sort = params.sort ?? "recommended";
   const minPrice = readNumber(params.minPrice);
   const maxPrice = readNumber(params.maxPrice);
   const bedrooms = readNumber(params.bedrooms);
   const bathrooms = readNumber(params.bathrooms);
   const guests = readNumber(params.guests);
+  const amenities = readList(params.amenity);
+  const availableDays = readList(params.availableDay);
 
   let filtered = items
     .map((listing, index) => ({ listing, index, specs: getListingSpecs(listing, index) }))
     .filter(({ listing, specs }) => {
       if (destination && !`${listing.title} ${listing.location}`.toLowerCase().includes(destination)) return false;
-      if (type !== "all" && !matchesType(listing, type)) return false;
+      if (types.length > 0 && !types.some((type) => matchesType(listing, type))) return false;
       if (!matchesLegacyPrice(listing.pricePerNight, params.price ?? "all")) return false;
       if (minPrice !== undefined && listing.pricePerNight < minPrice) return false;
       if (maxPrice !== undefined && listing.pricePerNight > maxPrice) return false;
       if (bedrooms !== undefined && specs.bedrooms < bedrooms) return false;
       if (bathrooms !== undefined && specs.bathrooms < bathrooms) return false;
       if (guests !== undefined && specs.maxGuests < guests) return false;
-      if (params.amenity && params.amenity !== "all" && !specs.amenities.includes(params.amenity)) return false;
-      if (
-        params.availableDay &&
-        params.availableDay !== "all" &&
-        !specs.availableWeekdays.includes(params.availableDay)
-      ) {
-        return false;
-      }
+      if (amenities.length > 0 && !amenities.every((amenity) => specs.amenities.includes(amenity))) return false;
+      if (availableDays.length > 0 && !availableDays.some((day) => specs.availableWeekdays.includes(day))) return false;
       return true;
     });
 
@@ -118,10 +111,12 @@ export function buildListingFilterSections({
           {
             title: "Type de logement",
             options: [
-              { href: href({ type: "all" }), active: (params.type ?? "all") === "all", label: "Tous les hébergements" },
-              { href: href({ type: "guesthouse" }), active: params.type === "guesthouse", label: "Maisons d'hôtes" },
-              { href: href({ type: "hotel" }), active: params.type === "hotel", label: "Hôtels" },
-              { href: href({ type: "apartment" }), active: params.type === "apartment", label: "Appartements" },
+              { href: href({ type: "all" }), active: readList(params.type).length === 0, label: "Tous les hébergements" },
+              ...LISTING_TYPE_OPTIONS.map((option) => ({
+                href: href({ type: option.value }),
+                active: readList(params.type).includes(option.value),
+                label: option.label,
+              })),
             ],
           },
         ]
@@ -151,42 +146,89 @@ export function buildListingFilterSections({
     {
       title: "Équipements",
       options: [
-        { href: href({ amenity: "all" }), active: !params.amenity || params.amenity === "all", label: "Tous les équipements" },
-        ...AMENITY_OPTIONS.map((amenity) => ({
-          href: href({ amenity }),
-          active: params.amenity === amenity,
-          label: amenity,
+        { href: href({ amenity: "all" }), active: readList(params.amenity).length === 0, label: "Tous les équipements" },
+        ...AMENITY_OPTIONS.map((option) => ({
+          href: href({ amenity: option.value }),
+          active: readList(params.amenity).includes(option.value),
+          label: option.label,
         })),
       ],
     },
     {
       title: "Disponibilité",
       options: [
-        { href: href({ availableDay: "all" }), active: !params.availableDay || params.availableDay === "all", label: "Tous les jours" },
+        { href: href({ availableDay: "all" }), active: readList(params.availableDay).length === 0, label: "Tous les jours" },
         ...WEEKDAY_OPTIONS.map((day) => ({
           href: href({ availableDay: day.value }),
-          active: params.availableDay === day.value,
+          active: readList(params.availableDay).includes(day.value),
           label: day.label,
         })),
       ],
     },
     {
       title: "Tri",
-      options: [
-        { href: href({ sort: "recommended" }), active: (params.sort ?? "recommended") === "recommended", label: "Recommandé" },
-        { href: href({ sort: "rating" }), active: params.sort === "rating", label: "Mieux notés" },
-        { href: href({ sort: "price" }), active: params.sort === "price", label: "Prix bas" },
-      ],
+      options: LISTING_SORT_OPTIONS.map((option) => ({
+        href: href({ sort: option.value }),
+        active: (params.sort ?? "recommended") === option.value,
+        label: option.label,
+      })),
     },
+  ];
+}
+
+export function buildListingFilterControls(params: ListingFilterParams): FilterControl[] {
+  return [
+    { type: "multi-select", name: "type", label: "Type de logement", value: params.type, options: LISTING_TYPE_OPTIONS },
+    {
+      type: "range",
+      minName: "minPrice",
+      maxName: "maxPrice",
+      label: "Prix par nuit",
+      min: 0,
+      max: 250,
+      step: 10,
+      minValue: params.minPrice,
+      maxValue: params.maxPrice,
+      suffix: "€",
+    },
+    {
+      type: "range",
+      minName: "bathrooms",
+      maxName: "guests",
+      label: "Capacité",
+      min: 1,
+      max: 12,
+      step: 1,
+      minValue: params.bathrooms,
+      maxValue: params.guests,
+      suffix: "+",
+    },
+    {
+      type: "range",
+      minName: "bedrooms",
+      maxName: "bedrooms",
+      label: "Chambres",
+      min: 1,
+      max: 8,
+      step: 1,
+      minValue: params.bedrooms,
+      maxValue: params.bedrooms,
+      suffix: "+",
+    },
+    { type: "multi-select", name: "amenity", label: "Équipements", value: params.amenity, options: AMENITY_OPTIONS },
+    { type: "multi-select", name: "availableDay", label: "Disponibilité", value: params.availableDay, options: WEEKDAY_OPTIONS },
+    { type: "select", name: "sort", label: "Tri", value: params.sort ?? "recommended", options: LISTING_SORT_OPTIONS },
   ];
 }
 
 export function buildListingChips(locale: string, path: "stays" | "search", params: ListingFilterParams) {
   const href = (next: ListingFilterParams) => buildHref(locale, path, { ...params, ...next });
   return [
-    { href: href({ type: "guesthouse" }), active: params.type === "guesthouse", label: "Maisons d'hôtes" },
-    { href: href({ type: "hotel" }), active: params.type === "hotel", label: "Hôtels" },
-    { href: href({ type: "apartment" }), active: params.type === "apartment", label: "Appartements" },
+    ...LISTING_TYPE_OPTIONS.map((option) => ({
+      href: href({ type: option.value }),
+      active: readList(params.type).includes(option.value),
+      label: option.label,
+    })),
     { divider: true },
     { href: href({ minPrice: "0", maxPrice: "50", price: undefined }), active: params.minPrice === "0" && params.maxPrice === "50", label: "0 - 50" },
     { href: href({ minPrice: "50", maxPrice: "80", price: undefined }), active: params.minPrice === "50" && params.maxPrice === "80", label: "50 - 80" },
@@ -194,9 +236,11 @@ export function buildListingChips(locale: string, path: "stays" | "search", para
     { href: href({ bathrooms: "2" }), active: params.bathrooms === "2", label: "2+ douches" },
     { href: href({ guests: "4" }), active: params.guests === "4", label: "4+ voyageurs" },
     { divider: true },
-    { href: href({ sort: "recommended" }), active: (params.sort ?? "recommended") === "recommended", label: "Recommandé" },
-    { href: href({ sort: "rating" }), active: params.sort === "rating", label: "Mieux notés" },
-    { href: href({ sort: "price" }), active: params.sort === "price", label: "Prix bas" },
+    ...LISTING_SORT_OPTIONS.map((option) => ({
+      href: href({ sort: option.value }),
+      active: (params.sort ?? "recommended") === option.value,
+      label: option.label,
+    })),
   ];
 }
 
@@ -213,6 +257,11 @@ function readNumber(value?: string) {
   if (!value) return undefined;
   const parsed = Number(value);
   return Number.isFinite(parsed) ? parsed : undefined;
+}
+
+function readList(value?: string) {
+  if (!value || value === "all") return [];
+  return value.split(",").map((item) => item.trim()).filter(Boolean);
 }
 
 function matchesType(listing: ListingWithMeta, type: string) {

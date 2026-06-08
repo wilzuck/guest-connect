@@ -3,6 +3,7 @@
 import { Pencil, Plus, Search, Trash2 } from "lucide-react";
 import { useMemo, useState } from "react";
 import { ButtonLink } from "@/components/ui/Button";
+import { Badge } from "@/components/ui/Badge";
 
 type AccessRow = {
   id: string;
@@ -76,9 +77,9 @@ export function UserAccessTable({
               <div className="hidden truncate text-sm text-[#73737A] lg:block">{row.email}</div>
               <div className="text-sm text-[#73737A]">{row.role}</div>
               <div>
-                <span className="rounded-md bg-[#F0F8F6] px-2 py-1 text-xs font-semibold text-[#21A99A]">
+                <Badge className={statusClassName(row.status)}>
                   {row.status}
-                </span>
+                </Badge>
               </div>
               <div className="flex justify-end gap-2">
                 <button
@@ -102,4 +103,15 @@ export function UserAccessTable({
       </div>
     </section>
   );
+}
+
+function statusClassName(status: string) {
+  const lower = status.toLowerCase();
+  if (lower.includes("prioritaire") || lower.includes("attente")) {
+    return "rounded-md border-amber-100 bg-amber-50 text-amber-700 shadow-none";
+  }
+  if (lower.includes("valid") || lower.includes("confirm") || lower.includes("actif") || lower.includes("ouvert")) {
+    return "rounded-md border-emerald-100 bg-emerald-50 text-emerald-700 shadow-none";
+  }
+  return "rounded-md border-zinc-100 bg-zinc-50 text-zinc-700 shadow-none";
 }

@@ -8,48 +8,48 @@ export default function MessagesPage() {
   const selectedThread = messageThreads[0];
 
   return (
-    <Container className="pb-10 sm:pb-14">
-      <div className="overflow-hidden rounded-xl border border-zinc-200 bg-white">
-        <div className="grid h-[calc(100vh-220px)] lg:grid-cols-[360px_1fr_320px]">
-          
-          <ConversationSidebar
-            threads={messageThreads}
-            selectedId={selectedThread.id}
-          />
-
-          <ConversationView
-            thread={selectedThread}
-            messages={threadMessages[selectedThread.id]}
-          />
-
-          <aside className="hidden border-l border-zinc-200 p-6 lg:block">
-            <Image
-              src={selectedThread.coverImage}
-              alt=""
-              width={640}
-              height={416}
-              className="h-52 w-full rounded-2xl object-cover"
+    <div className="border-t border-zinc-200">
+      <Container className="">
+        <div className="overflow-auto rounded-sm border-l border-r border-zinc-200 bg-white">
+          <div className="grid h-dvh lg:grid-cols-[360px_1fr_320px]">
+            <ConversationSidebar
+              threads={messageThreads}
+              selectedId={selectedThread.id}
             />
 
-            <h3 className="mt-5 font-semibold">
-              {selectedThread.listingTitle}
-            </h3>
+            <ConversationView
+              thread={selectedThread}
+              messages={threadMessages[selectedThread.id]}
+            />
 
-            <p className="mt-2 text-sm text-zinc-500">
-              Arrivée prévue • 14 Juin
-            </p>
+            <aside className="hidden border-l border-zinc-200 p-6 lg:block">
+              <Image
+                src={selectedThread.coverImage}
+                alt=""
+                width={640}
+                height={416}
+                className="h-52 w-full rounded-2xl object-cover"
+              />
 
-            <div className="mt-6 rounded-2xl bg-zinc-100 p-4">
-              <p className="font-medium">Conseils sécurité</p>
+              <h3 className="mt-5 font-semibold">
+                {selectedThread.listingTitle}
+              </h3>
 
-              <p className="mt-2 text-sm text-zinc-600">
-                Gardez vos échanges sur la plateforme.
+              <p className="mt-2 text-sm text-zinc-500">
+                Arrivée prévue • 14 Juin
               </p>
-            </div>
-          </aside>
 
+              <div className="mt-6 rounded-2xl bg-zinc-100 p-4">
+                <p className="font-medium">Conseils sécurité</p>
+
+                <p className="mt-2 text-sm text-zinc-600">
+                  Gardez vos échanges sur la plateforme.
+                </p>
+              </div>
+            </aside>
+          </div>
         </div>
-      </div>
-    </Container>
+      </Container>
+    </div>
   );
 }

@@ -13,6 +13,7 @@ import { CatalogEmptyState } from "@/components/explore/CatalogEmptyState";
 import {
   applyListingFilters,
   buildListingChips,
+  buildListingFilterControls,
   buildListingFilterSections,
   type ListingFilterParams,
 } from "@/lib/listings/listing-filters";
@@ -37,6 +38,7 @@ export default async function Page({ searchParams }: PageProps) {
   const guests = sp.guests ? Number(sp.guests) : 2;
   const filtered = applyListingFilters(africaListings, sp);
   const filterSections = buildListingFilterSections({ locale, path: "search", params: sp });
+  const filterControls = buildListingFilterControls(sp);
   const filterChips = buildListingChips(locale, "search", sp);
 
   return (
@@ -75,7 +77,14 @@ export default async function Page({ searchParams }: PageProps) {
 
           <ExploreFiltersBar
             className="mt-5"
-            leading={<FilterSidebarButton sections={filterSections} resetHref={`/${locale}/search`} />}
+            leading={
+              <FilterSidebarButton
+                sections={filterSections}
+                controls={filterControls}
+                actionHref={`/${locale}/search`}
+                resetHref={`/${locale}/search`}
+              />
+            }
             chips={filterChips}
           />
 

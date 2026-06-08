@@ -13,6 +13,7 @@ import {
   LifeBuoy,
   MapPin,
   MessageSquare,
+  PanelsTopLeft,
   Plus,
   ClipboardCheck,
   Search,
@@ -71,6 +72,7 @@ export function AdminShell({
     { href: `/${locale}/dashboard/service-management/countries`, label: "Pays", icon: MapPin, permission: "locations.manage" },
     { href: `/${locale}/dashboard/service-management/amenities`, label: "Équipements", icon: Wrench, permission: "services.manage" },
     { href: `/${locale}/dashboard/service-management/currencies`, label: "Devises", icon: CircleDollarSign, permission: "admin.read" },
+    { href: `/${locale}/dashboard/service-management/pages`, label: "Pages du site", icon: PanelsTopLeft, permission: "admin.read" },
     { href: `/${locale}/dashboard/service-management/translations`, label: "Traductions", icon: Languages, permission: "admin.read" },
   ];
 

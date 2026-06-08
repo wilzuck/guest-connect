@@ -11,6 +11,7 @@ import { CatalogEmptyState } from "@/components/explore/CatalogEmptyState";
 import {
   applyListingFilters,
   buildListingChips,
+  buildListingFilterControls,
   buildListingFilterSections,
   type ListingFilterParams,
 } from "@/lib/listings/listing-filters";
@@ -30,6 +31,7 @@ export default async function Page({ searchParams }: PageProps) {
   const sp = (await searchParams) ?? {};
   const items = applyListingFilters(africaListings, sp);
   const filterSections = buildListingFilterSections({ locale, path: "stays", params: sp });
+  const filterControls = buildListingFilterControls(sp);
   const filterChips = buildListingChips(locale, "stays", sp);
 
   return (
@@ -52,7 +54,14 @@ export default async function Page({ searchParams }: PageProps) {
       <section className="bg-white">
         <Container className="py-12 sm:py-14">
           <ExploreFiltersBar
-            leading={<FilterSidebarButton sections={filterSections} resetHref={`/${locale}/stays`} />}
+            leading={
+              <FilterSidebarButton
+                sections={filterSections}
+                controls={filterControls}
+                actionHref={`/${locale}/stays`}
+                resetHref={`/${locale}/stays`}
+              />
+            }
             chips={filterChips}
           />
 

@@ -10,7 +10,8 @@ export type DbEntity =
   | "propertyTypes"
   | "countries"
   | "amenities"
-  | "currencies";
+  | "currencies"
+  | "sitePages";
 
 export type DbShape = {
   meta: { version: number; updatedAt: string };
@@ -23,6 +24,7 @@ export type DbShape = {
   countries: Array<Record<string, unknown>>;
   amenities: Array<Record<string, unknown>>;
   currencies: Array<Record<string, unknown>>;
+  sitePages?: Array<Record<string, unknown>>;
 };
 
 function dbFilePath() {
@@ -63,6 +65,7 @@ export function assertEntity(entity: string): asserts entity is DbEntity {
     "countries",
     "amenities",
     "currencies",
+    "sitePages",
   ].includes(entity);
   if (!ok) throw new Error("Unknown entity");
 }
