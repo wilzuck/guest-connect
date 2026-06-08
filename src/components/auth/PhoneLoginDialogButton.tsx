@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Dialog, DialogClose, DialogContent, DialogTrigger } from "@/components/ui/Dialog";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
+import { Select } from "@/components/ui/Select";
 import { useTranslations } from "next-intl";
 
 export function PhoneLoginDialogButton({ label }: { label: string }) {
@@ -42,17 +43,18 @@ export function PhoneLoginDialogButton({ label }: { label: string }) {
           <label className="grid gap-2">
             <span className="text-sm font-medium text-black">{t("fields.phone")}</span>
             <div className="flex gap-2">
-              <select
+              <Select
                 value={country}
-                onChange={(e) => setCountry(e.target.value)}
-                className="h-11 rounded-xl border border-black/10 bg-white px-3 text-sm font-semibold text-zinc-800 shadow-sm shadow-black/5 outline-none transition focus:border-black/20 focus:ring-4 focus:ring-black/5"
+                onValueChange={setCountry}
+                className="w-[132px] font-semibold"
                 aria-label={t("phoneDialog.countryCode")}
-              >
-                <option value="+229">BJ +229</option>
-                <option value="+234">NG +234</option>
-                <option value="+233">GH +233</option>
-                <option value="+33">FR +33</option>
-              </select>
+                options={[
+                  { value: "+229", label: "BJ +229" },
+                  { value: "+234", label: "NG +234" },
+                  { value: "+233", label: "GH +233" },
+                  { value: "+33", label: "FR +33" },
+                ]}
+              />
               <Input
                 type="tel"
                 placeholder={t("placeholders.phone")}

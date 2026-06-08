@@ -5,50 +5,91 @@ import { Card } from "@/components/ui/Card";
 
 export const metadata: Metadata = {
   title: "Cookies — GuestConnect",
-  description: "Informations cookies (template) — à adapter.",
+  description: "Gestion des cookies et technologies similaires utilisés par GuestConnect.",
 };
 
 export default async function Page() {
   const locale = await getLocale();
   const isEn = locale === "en";
-
-  const cookies = isEn
-    ? [
-        { t: "Essential", d: "Required to run the site (sessions, security)." },
-        { t: "Performance", d: "Measure usage to improve speed and UX." },
-        { t: "Functional", d: "Remember preferences (language, theme)." },
-        { t: "Marketing", d: "Optional: help measure campaigns (if enabled)." },
-      ]
-    : [
-        { t: "Essentiels", d: "Nécessaires au fonctionnement (session, sécurité)." },
-        { t: "Performance", d: "Mesurer l’usage pour améliorer vitesse et UX." },
-        { t: "Fonctionnels", d: "Mémoriser préférences (langue, thème)." },
-        { t: "Marketing", d: "Optionnels : mesurer campagnes (si activé)." },
-      ];
+  const cookies = isEn ? enCookies : frCookies;
 
   return (
     <MarketingPageLayout
-      eyebrow={isEn ? "Legal" : "Légal"}
-      title={isEn ? "Cookies (template)" : "Cookies (template)"}
+      eyebrow={isEn ? "Preferences" : "Préférences"}
+      title={isEn ? "Cookie policy" : "Politique relative aux cookies"}
       description={
         isEn
-          ? "A simple structure inspired by modern travel sites. Replace with your consent manager if needed."
-          : "Structure simple inspirée des sites de voyage modernes. À relier à votre gestion du consentement si besoin."
+          ? "How GuestConnect uses cookies to keep the platform secure, remember preferences, and improve the booking experience."
+          : "Comment GuestConnect utilise les cookies pour sécuriser la plateforme, mémoriser les préférences et améliorer la réservation."
       }
     >
       <div className="grid gap-4 sm:grid-cols-2">
-        {cookies.map((c) => (
-          <Card key={c.t} className="p-6">
-            <p className="text-sm font-semibold text-black">{c.t}</p>
-            <p className="mt-2 text-sm leading-7 text-zinc-600">{c.d}</p>
+        {cookies.map((cookie) => (
+          <Card key={cookie.title} className="p-6 shadow-none">
+            <div className="flex items-start justify-between gap-4">
+              <p className="text-base font-semibold text-black">{cookie.title}</p>
+              <span className={cookie.required ? "rounded-full bg-black px-3 py-1 text-xs font-semibold text-white" : "rounded-full bg-zinc-100 px-3 py-1 text-xs font-semibold text-zinc-600"}>
+                {cookie.required ? (isEn ? "Required" : "Requis") : (isEn ? "Optional" : "Optionnel")}
+              </span>
+            </div>
+            <p className="mt-3 text-sm leading-7 text-zinc-600">{cookie.body}</p>
           </Card>
         ))}
       </div>
-      <p className="mt-6 text-xs text-zinc-500">
-        {isEn
-          ? "Note: This is a UI template."
-          : "Note : ceci est un template UI."}
-      </p>
+      <Card className="mt-6 p-6 shadow-none">
+        <p className="text-sm font-semibold text-black">{isEn ? "Managing consent" : "Gestion du consentement"}</p>
+        <p className="mt-2 text-sm leading-7 text-zinc-600">
+          {isEn
+            ? "You can change browser settings at any time. When a consent banner is enabled, your choices can be updated from the footer or account settings."
+            : "Vous pouvez modifier les paramètres de votre navigateur à tout moment. Lorsqu'un bandeau de consentement est activé, vos choix peuvent être mis à jour depuis le footer ou les paramètres du compte."}
+        </p>
+      </Card>
     </MarketingPageLayout>
   );
 }
+
+const frCookies = [
+  {
+    title: "Cookies essentiels",
+    required: true,
+    body: "Ils permettent la navigation, la sécurité, la session, la langue et l'accès aux zones compte ou dashboard.",
+  },
+  {
+    title: "Préférences",
+    required: false,
+    body: "Ils mémorisent les choix d'affichage, devise, langue, filtres et préférences utiles à une expérience plus fluide.",
+  },
+  {
+    title: "Mesure d'audience",
+    required: false,
+    body: "Ils aident à comprendre les parcours, les recherches et les performances des pages afin d'améliorer le service.",
+  },
+  {
+    title: "Marketing et campagnes",
+    required: false,
+    body: "Ils peuvent mesurer l'efficacité de campagnes ou recommandations, uniquement si ces outils sont activés.",
+  },
+];
+
+const enCookies = [
+  {
+    title: "Essential cookies",
+    required: true,
+    body: "They enable navigation, security, sessions, language, and access to account or dashboard areas.",
+  },
+  {
+    title: "Preferences",
+    required: false,
+    body: "They remember display choices, currency, language, filters, and useful preferences for a smoother experience.",
+  },
+  {
+    title: "Analytics",
+    required: false,
+    body: "They help understand journeys, searches, and page performance so the service can be improved.",
+  },
+  {
+    title: "Marketing and campaigns",
+    required: false,
+    body: "They may measure campaign or recommendation performance, only when such tools are enabled.",
+  },
+];

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { getLocale, getTranslations } from "next-intl/server";
 import { Camera, Gamepad2, Gift, Leaf, Music, Scissors, Sparkles, Wrench } from "lucide-react";
 import { Container } from "@/components/ui/Container";
@@ -183,7 +184,7 @@ export default async function Page({ searchParams }: PageProps) {
           {services.length > 0 ? (
             <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
               {services.map((service) => (
-                <ServiceCard key={service.id} service={service} />
+                <ServiceCard key={service.id} locale={locale} service={service} />
               ))}
             </div>
           ) : (
@@ -199,18 +200,21 @@ export default async function Page({ searchParams }: PageProps) {
   );
 }
 
-function ServiceCard({ service }: { service: ServiceItem }) {
+function ServiceCard({ locale, service }: { locale: string; service: ServiceItem }) {
   const meta = categoryLabels[service.category] ?? categoryLabels.hospitality;
   const Icon = meta.icon;
 
   return (
-    <article className="overflow-hidden rounded-2xl border border-black/10 bg-white shadow-sm shadow-black/5">
+    <Link
+      href={`/${locale}/services/${service.id}`}
+      className="group block overflow-hidden rounded-2xl border border-black/10 bg-white shadow-sm shadow-black/5 transition hover:-translate-y-0.5 hover:shadow-md hover:shadow-black/10"
+    >
       <div className="relative aspect-[16/11] overflow-hidden bg-zinc-100">
         <Image
           src={service.imageUrl}
           alt={service.title}
           fill
-          className="object-cover transition duration-700 hover:scale-[1.03]"
+          className="object-cover transition duration-700 group-hover:scale-[1.03]"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
         />
         <div className="absolute left-3 top-3 inline-flex items-center gap-2 rounded-full bg-white/95 px-3 py-1.5 text-xs font-semibold text-black shadow-sm shadow-black/10">
@@ -234,7 +238,10 @@ function ServiceCard({ service }: { service: ServiceItem }) {
             ★ {service.rating.toFixed(1)} ({service.reviewCount})
           </p>
         </div>
+        <p className="mt-4 text-sm font-semibold text-black">
+          Voir le service →
+        </p>
       </div>
-    </article>
+    </Link>
   );
 }

@@ -12,7 +12,9 @@ import {
   LayoutDashboard,
   LifeBuoy,
   MapPin,
+  MessageSquare,
   Plus,
+  ClipboardCheck,
   Search,
   ShieldCheck,
   Sparkles,
@@ -49,9 +51,12 @@ export function AdminShell({
 
   const mainNav: NavItem[] = [
     { href: `/${locale}/dashboard/service-management`, label: "Vue d'ensemble", icon: LayoutDashboard, permission: "admin.read" },
+    { href: `/${locale}/dashboard/service-management/approvals`, label: "À valider", icon: ClipboardCheck, permission: "admin.read" },
     { href: `/${locale}/dashboard/service-management/listings`, label: "Logements", icon: Building2, permission: "listings.manage" },
     { href: `/${locale}/dashboard/service-management/locations`, label: "Lieux", icon: MapPin, permission: "locations.manage" },
     { href: `/${locale}/dashboard/service-management/services`, label: "Services", icon: BriefcaseBusiness, permission: "services.manage" },
+    { href: `/${locale}/dashboard/service-management/reservations`, label: "Réservations", icon: BookOpen, permission: "reservations.read" },
+    { href: `/${locale}/dashboard/service-management/messages`, label: "Messages", icon: MessageSquare, permission: "messages.read" },
     { href: `/${locale}/dashboard/service-management/experiences`, label: "Expériences", icon: Sparkles, permission: "experiences.manage" },
   ];
 

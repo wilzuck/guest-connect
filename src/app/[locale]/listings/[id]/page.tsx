@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
-import { Button } from "@/components/ui/Button";
+import { Button, ButtonLink } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { africaListings } from "@/lib/mock/africa-listings";
 import { ListingLightbox } from "@/components/gallery/ListingLightbox";
@@ -22,6 +22,9 @@ export default async function Page({ params }: PageProps) {
   if (!listing) notFound();
 
   const images = listing.images?.length ? listing.images : [listing.imageUrl];
+  const host = buildHost(listing.id);
+  const specs = buildSpecs(listing);
+  const openDays = listing.pricePerNight > 90 ? "7j/7" : "5 jours/semaine";
 
   return (
     <div className="bg-white">
@@ -52,10 +55,10 @@ export default async function Page({ params }: PageProps) {
             {/* Action: favoris (en haut à droite) */}
             <div className="flex items-center justify-end gap-2">
               <Link 
-                href={`/${locale}/blog`} 
+                href={`/${locale}/stays`}
                 className="rounded-2xl  bg-white px-4 py-2 text-sm font-semibold text-zinc-600 transition hover:bg-zinc-50 hover:text-black"
               >
-                ← Retour au blog
+                ← Retour aux hébergements
               </Link>
               <FavoriteButton listingId={listing.id} locale={locale} />
             </div>
@@ -70,7 +73,18 @@ export default async function Page({ params }: PageProps) {
             <div className="order-2 lg:order-1 lg:col-span-7">
               <section className="space-y-3">
                 <h2 className="text-xl font-semibold tracking-tight text-black">{t("aboutTitle")}</h2>
-                <p className="text-sm leading-7 text-zinc-600">{t("aboutBody")}</p>
+                <p className="text-sm leading-7 text-zinc-600">
+                  {listing.shortDescription ?? t("aboutBody")}
+                </p>
+              </section>
+
+              <section className="mt-10">
+                <h2 className="text-xl font-semibold tracking-tight text-black">Ce que propose ce logement</h2>
+                <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                  {specs.map((spec) => (
+                    <InfoTile key={spec.label} label={spec.label} value={spec.value} />
+                  ))}
+                </div>
               </section>
 
               <section className="mt-10">
@@ -87,6 +101,44 @@ export default async function Page({ params }: PageProps) {
                 <h2 className="text-xl font-semibold tracking-tight text-black">{t("locationTitle")}</h2>
                 <div className="mt-5 rounded-3xl border border-black/10 bg-white p-3 shadow-sm shadow-black/5">
                   <MapPlaceholder location={listing.location} subtitle={t("mapSubtitle")} />
+                </div>
+              </section>
+
+              <section className="mt-10">
+                <div className="rounded-3xl border border-black/10 bg-white p-5 shadow-sm shadow-black/5">
+                  <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+                    <div className="flex items-start gap-4">
+                      <div className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-black text-base font-semibold text-white">
+                        {host.initials}
+                      </div>
+                      <div>
+                        <h2 className="text-xl font-semibold tracking-tight text-black">
+                          Hébergé par {host.name}
+                        </h2>
+                        <p className="mt-1 text-sm text-zinc-600">
+                          {host.role} · répond généralement en {host.responseTime}
+                        </p>
+                        <div className="mt-3 flex flex-wrap gap-2">
+                          <Badge>{host.rating} ★ hôte</Badge>
+                          <Badge>{host.years} ans sur GuestConnect</Badge>
+                          <Badge>Identité vérifiée</Badge>
+                        </div>
+                      </div>
+                    </div>
+                    <ButtonLink
+                      href={`/${locale}/messages?listing=${encodeURIComponent(listing.id)}&host=${encodeURIComponent(host.name)}`}
+                      variant="primary"
+                      size="md"
+                      className="rounded-2xl"
+                    >
+                      Discuter avec l&apos;hôte
+                    </ButtonLink>
+                  </div>
+                  <div className="mt-5 grid gap-3 border-t border-black/10 pt-5 sm:grid-cols-3">
+                    <InfoTile label="Disponibilité" value={openDays} compact />
+                    <InfoTile label="Arrivée" value="À partir de 15:00" compact />
+                    <InfoTile label="Validation" value="Annonce vérifiée" compact />
+                  </div>
                 </div>
               </section>
             </div>
@@ -151,6 +203,47 @@ function PlusIcon({ className }: { className?: string }) {
     <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
     </svg>
+  );
+}
+
+function buildHost(id: string) {
+  const hosts = [
+    { name: "Awa K.", role: "Hôte premium", responseTime: "1 heure", rating: "4.9", years: 3 },
+    { name: "Moussa D.", role: "Gestionnaire local", responseTime: "2 heures", rating: "4.8", years: 2 },
+    { name: "Nadia S.", role: "Super hôte", responseTime: "30 min", rating: "5.0", years: 4 },
+  ];
+  const host = hosts[id.length % hosts.length];
+  return {
+    ...host,
+    initials: host.name
+      .split(" ")
+      .map((part) => part[0])
+      .join("")
+      .replace(".", ""),
+  };
+}
+
+function buildSpecs(listing: { title: string; propertyType?: string; pricePerNight: number }) {
+  const text = `${listing.title} ${listing.propertyType ?? ""}`.toLowerCase();
+  const isVilla = text.includes("villa") || listing.pricePerNight > 80;
+  const isStudio = text.includes("studio");
+
+  return [
+    { label: "Type", value: listing.propertyType ?? (isVilla ? "Villa" : isStudio ? "Studio" : "Appartement") },
+    { label: "Chambres", value: isStudio ? "1 chambre" : isVilla ? "3 chambres" : "2 chambres" },
+    { label: "Salles de bain", value: isVilla ? "2 salles de bain" : "1 salle de bain" },
+    { label: "Voyageurs", value: isVilla ? "6 voyageurs" : isStudio ? "2 voyageurs" : "4 voyageurs" },
+    { label: "Surface", value: isVilla ? "120 m²" : isStudio ? "38 m²" : "72 m²" },
+    { label: "Séjour minimum", value: listing.pricePerNight > 90 ? "2 nuits" : "1 nuit" },
+  ];
+}
+
+function InfoTile({ label, value, compact = false }: { label: string; value: string; compact?: boolean }) {
+  return (
+    <div className={compact ? "rounded-2xl bg-zinc-50 p-3" : "rounded-2xl border border-black/10 bg-white p-4"}>
+      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-400">{label}</p>
+      <p className="mt-1 text-sm font-semibold text-black">{value}</p>
+    </div>
   );
 }
 

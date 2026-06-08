@@ -5,6 +5,12 @@ export async function login(payload: LoginRequest) {
   return apiClient.post<LoginResponse>("/api/auth/login", payload);
 }
 
+export async function googleLogin() {
+  return apiClient.post<LoginResponse>("/api/auth/google", {
+    provider: "google",
+  });
+}
+
 /**
  * Endpoint de référence (à adapter à ton backend).
  * Non listé dans les endpoints fournis, mais utile pour la page d'inscription.

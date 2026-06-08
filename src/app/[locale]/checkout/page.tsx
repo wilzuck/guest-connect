@@ -1,21 +1,32 @@
 import Image from "next/image";
 import Link from "next/link";
 import { getLocale } from "next-intl/server";
+import { differenceInCalendarDays, isValid, parseISO } from "date-fns";
 import { Card } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
 import { Container } from "@/components/ui/Container";
 import { readDb } from "@/lib/server/db";
 
-export default async function CheckoutPage({ searchParams }: { searchParams?: Promise<{ listingId?: string }> }) {
+export default async function CheckoutPage({
+  searchParams,
+}: {
+  searchParams?: Promise<{ listingId?: string; checkIn?: string; checkOut?: string }>;
+}) {
   const locale = await getLocale();
   const sp = (await searchParams) ?? {};
 
   const db = await readDb();
   const listingId = sp.listingId;
   const listing = (db.listings ?? []).find((l) => l.id === listingId) ?? (db.listings ?? [])[0];
+  const checkIn = sp.checkIn ? parseISO(sp.checkIn) : undefined;
+  const checkOut = sp.checkOut ? parseISO(sp.checkOut) : undefined;
+  const nights =
+    checkIn && checkOut && isValid(checkIn) && isValid(checkOut)
+      ? Math.max(1, differenceInCalendarDays(checkOut, checkIn))
+      : 1;
 
-  const total = listing ? Number(listing.pricePerNight ?? 0) * 2 : 0;
+  const total = listing ? Number(listing.pricePerNight ?? 0) * nights : 0;
   const currency = listing ? String(listing.currency ?? "EUR") : "EUR";
 
   return (
@@ -65,7 +76,7 @@ export default async function CheckoutPage({ searchParams }: { searchParams?: Pr
 
                 <div className="mt-6 flex flex-wrap gap-3">
                   <Link
-                    href={`/${locale}/checkout/success?ref=GC-${encodeURIComponent(String(listing?.id ?? "demo"))}`}
+                    href={`/${locale}/checkout/success?ref=GC-${encodeURIComponent(String(listing?.id ?? "demo"))}&checkIn=${encodeURIComponent(sp.checkIn ?? "")}&checkOut=${encodeURIComponent(sp.checkOut ?? "")}`}
                     className="inline-flex h-11 items-center justify-center rounded-2xl bg-black px-6 text-sm font-semibold text-white transition"
                   >
                     Confirmer (démo)
@@ -98,7 +109,9 @@ export default async function CheckoutPage({ searchParams }: { searchParams?: Pr
                   <p className="mt-1 text-sm text-zinc-600">{String(listing?.location ?? "—")}</p>
 
                   <div className="mt-5 grid gap-2 text-sm text-zinc-700">
-                    <Row label="Durée" value="2 nuits (démo)" />
+                    <Row label="Arrivée" value={sp.checkIn ?? "À préciser"} />
+                    <Row label="Départ" value={sp.checkOut ?? "À préciser"} />
+                    <Row label="Durée" value={`${nights} nuit${nights > 1 ? "s" : ""}`} />
                     <Row label="Prix/nuit" value={`${String(listing?.pricePerNight ?? "—")} ${currency}`} />
                     <Row label="Frais" value={`0 ${currency}`} />
                     <div className="mt-2 h-px bg-black/5" />

@@ -1,4 +1,7 @@
+"use client";
+
 import { Pencil, Plus, Search, Trash2 } from "lucide-react";
+import { useMemo, useState } from "react";
 import { ButtonLink } from "@/components/ui/Button";
 
 type AccessRow = {
@@ -20,6 +23,12 @@ export function UserAccessTable({
   addLabel: string;
   rows: AccessRow[];
 }) {
+  const [query, setQuery] = useState("");
+  const filteredRows = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    return rows.filter((row) => !q || Object.values(row).join(" ").toLowerCase().includes(q));
+  }, [query, rows]);
+
   return (
     <section className="grid gap-4">
       <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
@@ -32,6 +41,8 @@ export function UserAccessTable({
           <label className="flex h-10 min-w-0 items-center gap-2 rounded-lg border border-[#E8E8EC] bg-white px-3 text-sm text-[#8E8E93] sm:w-72">
             <Search className="h-4 w-4" aria-hidden="true" />
             <input
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
               placeholder="Rechercher..."
               className="min-w-0 flex-1 bg-transparent outline-none placeholder:text-[#B1B1B7]"
             />
@@ -53,7 +64,7 @@ export function UserAccessTable({
         </div>
 
         <div className="divide-y divide-[#EFEFF2]">
-          {rows.map((row) => (
+          {filteredRows.map((row) => (
             <div
               key={row.id}
               className="grid gap-3 px-4 py-4 lg:grid-cols-[1.3fr_1.2fr_1fr_1fr_120px] lg:items-center"

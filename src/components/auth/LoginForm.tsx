@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useState } from "react";
-import { login } from "@/lib/api/auth";
+import { googleLogin, login } from "@/lib/api/auth";
 import { ApiError } from "@/lib/api/api-client";
 import { useAuthToken } from "@/hooks/useAuthToken";
 import { Button } from "@/components/ui/Button";
@@ -41,6 +41,22 @@ export function LoginForm() {
       } else {
         setError(t("errors.genericLogin"));
       }
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  async function onGoogleLogin() {
+    setError(null);
+    setIsLoading(true);
+
+    try {
+      const res = await googleLogin();
+      save(res.token);
+      router.push(`/${locale}`);
+      router.refresh();
+    } catch {
+      setError(t("errors.genericLogin"));
     } finally {
       setIsLoading(false);
     }
@@ -119,7 +135,8 @@ export function LoginForm() {
           variant="outline"
           size="lg"
           className="rounded-2xl bg-white"
-          onClick={() => alert(t("placeholders.googleSoon"))}
+          onClick={onGoogleLogin}
+          disabled={isLoading}
         >
           <GoogleIcon className="h-5 w-5" />
           {t("actions.continueWithGoogle")}

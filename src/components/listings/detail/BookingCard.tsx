@@ -9,6 +9,7 @@ import type { CurrencyCode } from "@/lib/currency/currency";
 
 export function BookingCard({
   locale,
+  listingId,
   pricePerNight,
   currency,
 }: {
@@ -20,8 +21,13 @@ export function BookingCard({
   const t = useTranslations("bookingCard");
   const { formatFrom } = useCurrency();
   const [range, setRange] = useState<{ from?: string; to?: string }>({});
+  const [error, setError] = useState<string | null>(null);
 
   const price = useMemo(() => formatFrom(pricePerNight, currency), [formatFrom, pricePerNight, currency]);
+  const canReserve = Boolean(range.from && range.to);
+  const checkoutHref = `/${locale}/checkout?listingId=${encodeURIComponent(listingId)}&checkIn=${encodeURIComponent(
+    range.from ?? "",
+  )}&checkOut=${encodeURIComponent(range.to ?? "")}`;
 
   return (
     <div className="rounded-3xl border border-black/10 bg-white p-5 shadow-sm shadow-black/10">
@@ -38,7 +44,10 @@ export function BookingCard({
       <div className="mt-6">
         <DateRangePicker
           value={range}
-          onChange={setRange}
+          onChange={(next) => {
+            setRange(next);
+            if (next.from && next.to) setError(null);
+          }}
           startLabel={t("checkIn")}
           endLabel={t("checkOut")}
           fieldVariant="bordered"
@@ -46,10 +55,23 @@ export function BookingCard({
       </div>
 
       <div className="mt-5 grid gap-3">
-        <ButtonLink href={`/${locale}/search`} variant="primary" size="lg" className="w-full">
+        <ButtonLink
+          href={canReserve ? checkoutHref : "#"}
+          variant="primary"
+          size="lg"
+          className="w-full"
+          aria-disabled={!canReserve}
+          onClick={(event) => {
+            if (canReserve) return;
+            event.preventDefault();
+            setError("Choisissez les dates d'arrivée et de départ pour réserver.");
+          }}
+        >
           {t("cta")}
         </ButtonLink>
       </div>
+
+      {error ? <p className="mt-3 text-xs font-medium text-red-600">{error}</p> : null}
 
       <p className="mt-4 text-xs leading-5 text-zinc-500">{t("note")}</p>
     </div>

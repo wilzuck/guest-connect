@@ -8,6 +8,7 @@ const COLUMNS = [
   { key: "cityId", label: "Lieu", renderKey: "location" },
   { key: "pricePerNight", label: "Prix", renderKey: "price" },
   { key: "categoryId", label: "Type", renderKey: "category" },
+  { key: "validationStatus", label: "Validation", renderKey: "validation" },
 ];
 
 export function ListingsTable({
@@ -35,6 +36,19 @@ export function ListingsTable({
     location: (row: Record<string, unknown>) => {
       const id = String(row.cityId ?? "");
       return locById[id] ?? id;
+    },
+    validation: (row: Record<string, unknown>) => {
+      const status = String(row.validationStatus ?? "pending");
+      const label =
+        status === "approved" ? "Validé" : status === "rejected" ? "Refusé" : "À valider";
+      const className =
+        status === "approved"
+          ? "border-emerald-100 bg-emerald-50 text-emerald-700"
+          : status === "rejected"
+            ? "border-red-100 bg-red-50 text-red-700"
+            : "border-amber-100 bg-amber-50 text-amber-700";
+
+      return <Badge className={className}>{label}</Badge>;
     },
     price: (row: Record<string, unknown>) =>
       `${String(row.pricePerNight ?? "—")} ${String(row.currency ?? "EUR")}`,
