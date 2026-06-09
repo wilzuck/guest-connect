@@ -171,7 +171,7 @@ export function DateRangePicker({
       weekStartsOn={1}
       locale={locale === "en" ? enUS : fr}
       numberOfMonths={wide ? 2 : 1}
-      showOutsideDays
+      showOutsideDays={!wide}
       fixedWeeks
       className={cn("bg-white text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50", wide ? "relative w-max pt-2" : "")}
       classNames={
