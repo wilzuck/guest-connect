@@ -94,7 +94,7 @@ export function ApprovalsQueueClient({ initialItems }: { initialItems: ApprovalI
         </label>
       </div>
 
-      <div className="overflow-x-auto border-y border-[#E8E8EC] bg-white dark:border-zinc-800 dark:bg-black">
+      <div className="overflow-x-auto border-y border-black/10 bg-white dark:border-zinc-800 dark:bg-black">
         <div className="min-w-[980px]">
           <div className="grid grid-cols-[1.55fr_132px_116px_116px_150px_132px_116px] gap-3 border-b border-[#E8E8EC] bg-[#FAFAFB] px-4 py-3 text-xs font-medium text-[#8E8E93] dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-400">
             <div>Contenu</div>
@@ -119,7 +119,7 @@ export function ApprovalsQueueClient({ initialItems }: { initialItems: ApprovalI
                   {group.items.map((item) => (
                     <article
                       key={`${item.entity}-${item.id}`}
-                      className="grid grid-cols-[1.55fr_132px_116px_116px_150px_132px_116px] items-center gap-3 px-4 py-3 text-sm transition hover:bg-[#FAFAFB] dark:hover:bg-zinc-950"
+                      className="grid grid-cols-[1.55fr_132px_116px_116px_150px_132px_116px] items-center gap-3 px-4 py-3 text-sm transition hover:bg-zinc-50 dark:hover:bg-zinc-900/70"
                     >
                       <div className="min-w-0">
                         {item.href ? (

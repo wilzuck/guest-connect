@@ -14,9 +14,9 @@ const variants: Record<ButtonVariant, string> = {
   secondary:
     "border border-black/10 bg-white text-black shadow-sm shadow-black/5 hover:bg-zinc-50 dark:border-white/10 dark:bg-zinc-900 dark:text-white dark:hover:bg-zinc-800 dark:shadow-none",
   outline:
-    "border border-black/15 bg-transparent text-black hover:bg-black/[0.04] dark:border-white/15 dark:text-white dark:hover:bg-white/10",
+    "border border-black/15 bg-transparent text-black hover:bg-black/[0.04] dark:border-zinc-800 dark:text-white dark:hover:bg-zinc-900/70",
   ghost:
-    "bg-transparent text-black hover:bg-black/[0.04] dark:text-white dark:hover:bg-white/10",
+    "bg-transparent text-black hover:bg-black/[0.04] dark:text-white dark:hover:bg-zinc-900/70",
 };
 const sizes: Record<ButtonSize, string> = {
   sm: "min-h-9 px-3.5 text-xs sm:px-4 sm:text-sm",

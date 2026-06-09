@@ -109,7 +109,7 @@ export function EntityTableClient({
         </div>
       </div>
 
-      <div className="overflow-x-auto border-y border-zinc-200 bg-white dark:border-zinc-800 dark:bg-black">
+      <div className="overflow-x-auto border-y border-black/10 bg-white dark:border-zinc-800 dark:bg-black">
         <div className="min-w-[760px]">
           <div
             className="grid border-b border-[#E8E8EC] bg-[#FAFAFB] px-4 py-3 text-xs font-medium text-[#8E8E93] dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-400"
@@ -141,7 +141,7 @@ export function EntityTableClient({
                   return (
                     <div
                       key={id}
-                      className="group/row grid items-center px-4 py-2.5 text-sm transition hover:bg-[#FAFAFB] dark:hover:bg-zinc-950"
+                      className="group/row grid items-center px-4 py-2.5 text-sm transition hover:bg-zinc-50 dark:hover:bg-zinc-900/70"
                       style={{ gridTemplateColumns: gridTemplate, gap: "0.75rem" }}
                     >
                       <label
@@ -178,7 +178,7 @@ export function EntityTableClient({
                         {showValidation ? <PriorityBadge row={row} /> : null}
                         <button
                           type="button"
-                          className="grid h-8 w-8 place-items-center rounded-lg border border-[#E8E8EC] text-[#73737A] transition hover:bg-[#F7F7F8] hover:text-[#202024] dark:border-zinc-800 dark:text-zinc-400 dark:hover:bg-zinc-900 dark:hover:text-white"
+                          className="grid h-8 w-8 place-items-center rounded-lg border border-black/10 text-[#73737A] transition hover:bg-zinc-50 hover:text-[#202024] dark:border-zinc-800 dark:text-zinc-400 dark:hover:bg-zinc-900/70 dark:hover:text-white"
                           aria-label="Actions"
                           onClick={() => setOpenMenuId((current) => (current === id ? null : id))}
                         >
@@ -189,7 +189,7 @@ export function EntityTableClient({
                           <div className="absolute right-0 top-9 z-20 w-44 overflow-hidden rounded-xl border border-[#E8E8EC] bg-white p-1 shadow-lg shadow-black/10 dark:border-zinc-800 dark:bg-zinc-950 dark:shadow-black/40">
                             <button
                               type="button"
-                              className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm text-[#202024] hover:bg-[#F7F7F8] dark:text-white dark:hover:bg-zinc-900"
+                              className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm text-[#202024] hover:bg-zinc-50 dark:text-white dark:hover:bg-zinc-900/70"
                               onClick={() => {
                                 setPreviewRow(row);
                                 setOpenMenuId(null);
@@ -200,7 +200,7 @@ export function EntityTableClient({
                             </button>
                             <Link
                               href={`${editBaseHref}/${id}`}
-                              className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-[#202024] hover:bg-[#F7F7F8] dark:text-white dark:hover:bg-zinc-900"
+                              className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-[#202024] hover:bg-zinc-50 dark:text-white dark:hover:bg-zinc-900/70"
                             >
                               <Pencil className="h-4 w-4" aria-hidden="true" />
                               Éditer
