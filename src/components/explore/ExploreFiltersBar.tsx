@@ -135,8 +135,8 @@ export function ExploreFiltersBar({
               aria-current={c.active ? "page" : undefined}
               className={
                 c.active
-                  ? "rounded-full bg-black px-4 py-2 text-sm font-semibold text-white"
-                  : "rounded-full bg-zinc-100 px-4 py-2 text-sm font-semibold text-zinc-700 hover:bg-zinc-200 hover:text-black"
+                  ? "rounded-full bg-black px-4 py-2 text-sm font-semibold text-white dark:bg-white dark:text-black"
+                  : "rounded-full bg-zinc-100 px-4 py-2 text-sm font-semibold text-zinc-700 hover:bg-zinc-200 hover:text-black dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-white"
               }
             >
               {c.label}

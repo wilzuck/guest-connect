@@ -10,7 +10,7 @@ const base =
 
 const variants: Record<ButtonVariant, string> = {
   primary:
-    "bg-white text-black border border-black/10 shadow-sm shadow-black/5 hover:bg-zinc-100 dark:border-white/10 dark:bg-white dark:text-black dark:hover:bg-zinc-200 dark:shadow-none",
+    "border border-black bg-black text-white shadow-sm shadow-black/10 hover:bg-zinc-900 dark:border-white dark:bg-white dark:text-black dark:hover:bg-zinc-200 dark:shadow-none",
   secondary:
     "border border-black/10 bg-white text-black shadow-sm shadow-black/5 hover:bg-zinc-50 dark:border-white/10 dark:bg-zinc-900 dark:text-white dark:hover:bg-zinc-800 dark:shadow-none",
   outline:

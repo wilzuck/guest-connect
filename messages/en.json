@@ -242,7 +242,19 @@
     "description": "Use the search bar to refine your stay.",
     "results": "{count} result(s)",
     "resultsFor": " for “{destination}”",
-    "browseByInterests": "Browse by interests"
+    "browseByInterests": "Browse by interests",
+    "where": "Where",
+    "destinationPlaceholder": "Toronto, Canada",
+    "checkIn": "Check-in",
+    "checkOut": "Check-out",
+    "guests": "Guests",
+    "updateSearch": "Update Search",
+    "foundNear": "Found {count} result(s) near {destination}",
+    "latest": "Latest",
+    "mapView": "Map View",
+    "cardView": "Card View",
+    "emptyTitle": "No results for this search",
+    "emptyDescription": "Try another destination or remove a few capacity, budget, or amenity filters."
   },
   "listingPage": {
     "reviews": "{count} reviews",

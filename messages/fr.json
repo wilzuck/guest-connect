@@ -242,7 +242,19 @@
     "description": "Utilisez la barre de recherche pour affiner votre séjour.",
     "results": "{count} résultat(s)",
     "resultsFor": " pour « {destination} »",
-    "browseByInterests": "Explorer par centres d’intérêt"
+    "browseByInterests": "Explorer par centres d’intérêt",
+    "where": "Où",
+    "destinationPlaceholder": "Toronto, Canada",
+    "checkIn": "Arrivée",
+    "checkOut": "Départ",
+    "guests": "Voyageurs",
+    "updateSearch": "Mettre à jour",
+    "foundNear": "{count} résultat(s) près de {destination}",
+    "latest": "Récent",
+    "mapView": "Vue carte",
+    "cardView": "Vue cartes",
+    "emptyTitle": "Aucun résultat pour cette recherche",
+    "emptyDescription": "Essayez une autre destination ou retirez quelques filtres de capacité, budget ou équipements."
   },
   "listingPage": {
     "reviews": "{count} avis",
