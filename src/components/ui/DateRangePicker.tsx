@@ -211,8 +211,8 @@ export function DateRangePicker({
             </div>
 
             <div className="px-4 pt-4">
-              <div className="rounded-2xl bg-zinc-50 p-3 dark:bg-zinc-900">
-                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">
+              <div className="rounded-2xl bg-zinc-50 p-3 dark:bg-zinc-900 dark:bg-zinc-900">
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">
                   {t("selectedRange")}
                 </p>
                 <p className="mt-1 text-sm font-semibold ">

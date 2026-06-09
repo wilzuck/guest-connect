@@ -71,7 +71,7 @@ export function TranslationManagerClient({ files }: { files: TranslationFile[] }
         <div className="grid gap-4 lg:grid-cols-[320px_minmax(0,1fr)] lg:items-start">
           <div className="grid gap-3">
             <label className="grid gap-2">
-              <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">
+              <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">
                 Fichier
               </span>
               <Select
@@ -104,7 +104,7 @@ export function TranslationManagerClient({ files }: { files: TranslationFile[] }
           </div>
 
           <label className="grid gap-2">
-            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">
+            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">
               Contenu JSON
             </span>
             <textarea

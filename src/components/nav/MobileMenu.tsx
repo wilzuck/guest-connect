@@ -21,7 +21,6 @@ import {
   LogOut,
   MessageCircle,
   Search,
-  ShieldCheck,
   Sparkles,
   UserRoundCog,
   X,
@@ -52,25 +51,21 @@ export function MobileMenu() {
       label: t("accommodations"),
       href: `/${locale}/stays`,
       icon: Home,
-      desc: tm("staysDesc"),
     },
     {
       label: t("services"),
       href: `/${locale}/services`,
       icon: BriefcaseBusiness,
-      desc: tm("servicesDesc"),
     },
     {
       label: t("experiences"),
       href: `/${locale}/experiences`,
       icon: Sparkles,
-      desc: tm("experiencesDesc"),
     },
     {
       label: tm("siteMap"),
       href: `/${locale}/plan-du-site`,
       icon: Compass,
-      desc: tm("siteMapDesc"),
     },
   ];
   const spaceLinks = filterByPermissions<SpaceLink>(
@@ -128,20 +123,17 @@ export function MobileMenu() {
           <DialogClose asChild>
             <Link
               href={`/${locale}/search`}
-              className="inline-flex w-full items-center justify-between rounded-2xl bg-black px-4 py-3 text-left text-white shadow-xl shadow-black/15 transition hover:bg-black/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20"
+              className="inline-flex w-full items-center justify-between rounded-2xl border border-black/10 bg-white px-4 py-3 text-left text-black shadow-sm shadow-black/5 transition hover:bg-zinc-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20 dark:border-zinc-800 dark:bg-zinc-900 dark:text-white dark:shadow-black/30 dark:hover:bg-zinc-800 dark:focus-visible:ring-white/20"
             >
               <span className="flex min-w-0 items-center gap-3">
-                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white text-black">
+                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-zinc-100 text-black dark:bg-zinc-950 dark:text-white">
                   <Search className="h-5 w-5" aria-hidden="true" />
                 </span>
                 <span className="min-w-0">
                   <span className="block truncate text-sm font-semibold">{t("search")}</span>
-                  <span className="block truncate text-xs font-medium text-white/70">
-                    {t("searchHint")}
-                  </span>
                 </span>
               </span>
-              <ChevronRight className="h-5 w-5 shrink-0 text-white/70" aria-hidden="true" />
+              <ChevronRight className="h-5 w-5 shrink-0 text-zinc-400 dark:text-zinc-500" aria-hidden="true" />
             </Link>
           </DialogClose>
 
@@ -159,11 +151,8 @@ export function MobileMenu() {
                       <Icon className="h-5 w-5" aria-hidden="true" />
                     </span>
                     <span className="min-w-0 flex-1">
-                      <span className="block truncate text-sm font-semibold  dark:text-white">
+                      <span className="block truncate text-sm font-semibold text-black dark:text-white">
                         {l.label}
-                      </span>
-                      <span className="mt-0.5 block truncate text-xs text-zinc-500 dark:text-zinc-400">
-                        {l.desc}
                       </span>
                     </span>
                     <ChevronRight className="h-4 w-4 shrink-0 text-zinc-400 transition group-hover:translate-x-0.5 group-hover:text-black dark:group-hover:text-white" aria-hidden="true" />
@@ -179,8 +168,7 @@ export function MobileMenu() {
                 <CircleUserRound className="h-5 w-5" aria-hidden="true" />
               </span>
               <div className="min-w-0">
-                <p className="truncate text-sm font-semibold  dark:text-white">{tm("account")}</p>
-                <p className="truncate text-xs text-zinc-500 dark:text-zinc-400">{tm("tagline")}</p>
+                <p className="truncate text-sm font-semibold text-black dark:text-white">{tm("account")}</p>
               </div>
             </div>
 
@@ -191,7 +179,7 @@ export function MobileMenu() {
                   <DialogClose asChild key={item.href}>
                     <Link
                       href={item.href}
-                      className="flex min-h-11 items-center gap-3 rounded-xl bg-white px-3 py-2 text-sm font-semibold  shadow-sm shadow-black/5 transition hover:bg-zinc-100 dark:bg-zinc-950 dark:text-white dark:shadow-black/30 dark:hover:bg-zinc-800"
+                      className="flex min-h-11 items-center gap-3 rounded-xl bg-white px-3 py-2 text-sm font-semibold text-black shadow-sm shadow-black/5 transition hover:bg-zinc-100 dark:bg-zinc-950 dark:text-white dark:shadow-black/30 dark:hover:bg-zinc-800"
                     >
                       <Icon className="h-4 w-4 text-zinc-500 dark:text-zinc-400" aria-hidden="true" />
                       <span className="min-w-0 truncate">{item.label}</span>
@@ -206,7 +194,7 @@ export function MobileMenu() {
             <DialogClose asChild>
               <Link
                 href={`/${locale}/logout`}
-                className="flex min-h-11 items-center gap-3 rounded-xl bg-white px-3 py-2 text-sm font-semibold  shadow-sm shadow-black/5 transition hover:bg-zinc-100 dark:bg-zinc-950 dark:text-white dark:shadow-black/30 dark:hover:bg-zinc-800"
+                className="flex min-h-11 items-center gap-3 rounded-xl bg-white px-3 py-2 text-sm font-semibold text-black shadow-sm shadow-black/5 transition hover:bg-zinc-100 dark:bg-zinc-950 dark:text-white dark:shadow-black/30 dark:hover:bg-zinc-800"
               >
                 <LogOut className="h-4 w-4 text-zinc-500 dark:text-zinc-400" aria-hidden="true" />
                 <span>{tu("logout")}</span>
@@ -214,10 +202,7 @@ export function MobileMenu() {
             </DialogClose>
           </div>
 
-          <div className="mt-auto flex min-w-0 items-center gap-2 pt-3 text-xs font-medium text-zinc-500 dark:text-zinc-400">
-            <ShieldCheck className="h-4 w-4 text-black dark:text-white" aria-hidden="true" />
-            <span className="truncate">{tm("tagline")}</span>
-          </div>
+          <div className="mt-auto" />
         </div>
       </DialogContent>
     </Dialog>

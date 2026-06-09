@@ -43,19 +43,19 @@ export function SitePageFormClient({ backHref }: { backHref: string }) {
 
       <div className="grid gap-4 rounded-xl border border-[#E8E8EC] bg-white p-5">
         <label className="grid gap-2">
-          <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">Titre</span>
+          <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">Titre</span>
           <Input name="title" maxLength={250} placeholder="Guide voyageur" required />
         </label>
         <label className="grid gap-2">
-          <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">URL</span>
+          <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">URL</span>
           <Input name="path" maxLength={250} placeholder="/guide-voyageur" required />
         </label>
         <label className="grid gap-2">
-          <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">Équipe</span>
+          <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">Équipe</span>
           <Input name="owner" maxLength={250} placeholder="Marketing" />
         </label>
         <label className="grid gap-2">
-          <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">Statut</span>
+          <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">Statut</span>
           <Select
             name="status"
             defaultValue="Brouillon"

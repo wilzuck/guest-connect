@@ -26,17 +26,17 @@ export default async function Page() {
     >
       <div className="grid gap-4 md:grid-cols-12">
         <Card className="p-6 shadow-none md:col-span-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">{isEn ? "Upcoming" : "À venir"}</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">{isEn ? "Upcoming" : "À venir"}</p>
           <p className="mt-2 text-3xl font-semibold tracking-tight">2</p>
           <p className="mt-1 text-sm text-zinc-600">{isEn ? "reservations" : "réservations"}</p>
         </Card>
         <Card className="p-6 shadow-none md:col-span-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">{isEn ? "Saved" : "Enregistrés"}</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">{isEn ? "Saved" : "Enregistrés"}</p>
           <p className="mt-2 text-3xl font-semibold tracking-tight">6</p>
           <p className="mt-1 text-sm text-zinc-600">{isEn ? "favorites" : "favoris"}</p>
         </Card>
         <Card className="p-6 shadow-none md:col-span-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">{isEn ? "Support" : "Support"}</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">{isEn ? "Support" : "Support"}</p>
           <p className="mt-2 text-3xl font-semibold tracking-tight">24/7</p>
           <p className="mt-1 text-sm text-zinc-600">{isEn ? "help center" : "centre d’aide"}</p>
         </Card>
@@ -64,7 +64,7 @@ export default async function Page() {
 function QuickLink({ href, title, desc }: { href: string; title: string; desc: string }) {
   return (
     <Link href={href} className="block">
-      <Card className="h-full p-6 shadow-none transition hover:bg-zinc-50">
+      <Card className="h-full p-6 shadow-none transition hover:bg-zinc-50 dark:hover:bg-zinc-800">
         <p className="text-sm font-semibold ">{title}</p>
         <p className="mt-2 text-sm leading-6 text-zinc-600">{desc}</p>
       </Card>

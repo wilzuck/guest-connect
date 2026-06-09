@@ -53,13 +53,13 @@ export function CategoryFormClient({
 
         <div className="mt-6 grid gap-4 sm:grid-cols-2">
           <label className="grid gap-2">
-            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">Nom</span>
+            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">Nom</span>
             <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="Maison d’hôtes" required />
             <span className="text-xs text-zinc-500 dark:text-zinc-400">{hint}</span>
           </label>
 
           <label className="grid gap-2">
-            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">Slug</span>
+            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">Slug</span>
             <Input value={slug} onChange={(e) => setSlug(e.target.value)} placeholder="maison-dhotes" />
             <span className="text-xs text-zinc-500 dark:text-zinc-400">Optionnel, pour les URLs et filtres.</span>
           </label>

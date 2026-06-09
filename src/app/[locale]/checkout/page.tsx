@@ -83,19 +83,19 @@ export default async function CheckoutPage({
 
                 <div className="mt-6 grid gap-4 sm:grid-cols-2">
                   <label className="grid gap-2">
-                    <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">Nom</span>
+                    <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">Nom</span>
                     <Input placeholder="Camille Dupont" />
                   </label>
                   <label className="grid gap-2">
-                    <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">Email</span>
+                    <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">Email</span>
                     <Input type="email" placeholder="camille@email.com" />
                   </label>
                   <label className="grid gap-2 sm:col-span-2">
-                    <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">Téléphone</span>
+                    <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">Téléphone</span>
                     <Input type="tel" placeholder="+33 6 00 00 00 00" />
                   </label>
                   <label className="grid gap-2 sm:col-span-2">
-                    <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">
+                    <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">
                       Message à l’hôte (optionnel)
                     </span>
                     <Textarea placeholder="Heure d’arrivée estimée, besoin particulier, etc." className="min-h-[120px]" />
@@ -115,7 +115,7 @@ export default async function CheckoutPage({
                       return (
                         <label
                           key={method.id}
-                          className="group flex cursor-pointer gap-3 rounded-2xl border border-black/10 bg-white p-4 transition hover:border-black/25 hover:bg-zinc-50 has-[:checked]:border-black has-[:checked]:bg-zinc-50"
+                          className="group flex cursor-pointer gap-3 rounded-2xl border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950 transition hover:border-black/25 hover:bg-zinc-50 has-[:checked]:border-black has-[:checked]:bg-zinc-50"
                         >
                           <input
                             type="radio"
@@ -140,32 +140,32 @@ export default async function CheckoutPage({
 
                   <div className="mt-5 grid gap-4 sm:grid-cols-2">
                     <label className="grid gap-2">
-                      <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">
+                      <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">
                         Numéro Mobile Money
                       </span>
                       <Input type="tel" placeholder="+229 01 00 00 00 00" />
                     </label>
                     <label className="grid gap-2">
-                      <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">
+                      <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">
                         Nom sur la carte
                       </span>
                       <Input placeholder="Camille Dupont" />
                     </label>
                     <label className="grid gap-2">
-                      <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">
+                      <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">
                         Numéro de carte
                       </span>
                       <Input inputMode="numeric" placeholder="4242 4242 4242 4242" />
                     </label>
                     <div className="grid grid-cols-2 gap-3">
                       <label className="grid gap-2">
-                        <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">
+                        <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">
                           Expiration
                         </span>
                         <Input placeholder="MM/AA" />
                       </label>
                       <label className="grid gap-2">
-                        <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">CVC</span>
+                        <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">CVC</span>
                         <Input inputMode="numeric" placeholder="123" />
                       </label>
                     </div>

@@ -26,7 +26,7 @@ export function ReviewForm() {
 
       <div className="mt-5 grid gap-4 sm:grid-cols-12 sm:items-start">
         <label className="sm:col-span-12">
-          <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">{t("rating")}</span>
+          <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">{t("rating")}</span>
           <select
             value={rating}
             onChange={(e) => setRating(e.target.value)}
@@ -42,7 +42,7 @@ export function ReviewForm() {
         </label>
 
         <label className="sm:col-span-12">
-          <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">{t("comment")}</span>
+          <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">{t("comment")}</span>
           <textarea
             value={message}
             onChange={(e) => setMessage(e.target.value)}

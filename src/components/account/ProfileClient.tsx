@@ -54,12 +54,12 @@ export function ProfileClient({ isEn, user }: { isEn: boolean; user: User }) {
           <div className="mt-6 grid gap-3">
             {rows.map((r) => (
               <div key={r.k} className="flex items-center justify-between gap-4 rounded-2xl bg-zinc-50 px-4 py-3">
-                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">{r.k}</p>
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">{r.k}</p>
                 <p className="truncate text-sm font-semibold ">{r.v}</p>
               </div>
             ))}
             <div className="rounded-2xl bg-zinc-50 px-4 py-3">
-              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">{isEn ? "Bio" : "Bio"}</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">{isEn ? "Bio" : "Bio"}</p>
               <p className="mt-2 text-sm leading-6 text-zinc-700">{user.bio}</p>
             </div>
           </div>
@@ -67,25 +67,25 @@ export function ProfileClient({ isEn, user }: { isEn: boolean; user: User }) {
           <>
             <div className="mt-6 grid gap-4 sm:grid-cols-2">
               <label className="grid gap-2">
-                <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">
+                <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">
                   {isEn ? "Full name" : "Nom complet"}
                 </span>
                 <Input defaultValue={user.name} />
               </label>
               <label className="grid gap-2">
-                <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">
+                <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">
                   {isEn ? "Email" : "Email"}
                 </span>
                 <Input type="email" defaultValue={user.email} />
               </label>
               <label className="grid gap-2">
-                <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">
+                <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">
                   {isEn ? "Phone" : "Téléphone"}
                 </span>
                 <Input defaultValue={user.phone} />
               </label>
               <label className="grid gap-2">
-                <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">
+                <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">
                   {isEn ? "City" : "Ville"}
                 </span>
                 <Input defaultValue={user.location} />
@@ -93,7 +93,7 @@ export function ProfileClient({ isEn, user }: { isEn: boolean; user: User }) {
             </div>
 
             <label className="mt-4 grid gap-2">
-              <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">{isEn ? "Bio" : "Bio"}</span>
+              <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">{isEn ? "Bio" : "Bio"}</span>
               <Textarea defaultValue={user.bio} />
             </label>
 
@@ -124,15 +124,15 @@ export function ProfileClient({ isEn, user }: { isEn: boolean; user: User }) {
 
         <div className="mt-6 grid gap-4 sm:grid-cols-3">
           <label className="grid gap-2">
-            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">{isEn ? "Current" : "Actuel"}</span>
+            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">{isEn ? "Current" : "Actuel"}</span>
             <Input type="password" placeholder={isEn ? "Current password" : "Mot de passe actuel"} />
           </label>
           <label className="grid gap-2">
-            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">{isEn ? "New" : "Nouveau"}</span>
+            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">{isEn ? "New" : "Nouveau"}</span>
             <Input type="password" placeholder={isEn ? "New password" : "Nouveau mot de passe"} />
           </label>
           <label className="grid gap-2">
-            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">
+            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">
               {isEn ? "Confirm" : "Confirmer"}
             </span>
             <Input type="password" placeholder={isEn ? "Confirm password" : "Confirmer"} />

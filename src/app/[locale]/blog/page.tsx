@@ -29,7 +29,7 @@ export default async function BlogIndexPage({
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {items.map((post) => (
           <Link key={post.slug} href={`/${locale}/blog/${post.slug}`} className="block">
-            <Card className="group h-full overflow-hidden p-0 shadow-none transition hover:bg-zinc-50">
+            <Card className="group h-full overflow-hidden p-0 shadow-none transition hover:bg-zinc-50 dark:hover:bg-zinc-800 backdrop-blur-md">
               <div className="relative aspect-[16/10] w-full">
                 <Image
                   src={post.coverImage}

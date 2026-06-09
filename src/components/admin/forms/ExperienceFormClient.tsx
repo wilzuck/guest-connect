@@ -98,13 +98,13 @@ export function ExperienceFormClient({
 
         <div className="mt-6 grid gap-4 sm:grid-cols-2">
           <label className="grid gap-2 sm:col-span-2">
-            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">Titre</span>
+            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">Titre</span>
             <Input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Dakar — street food + coucher de soleil" required />
             <span className="text-xs text-zinc-500 dark:text-zinc-400">Astuce: commencez par la ville, puis la promesse (atelier, visite, etc.).</span>
           </label>
 
           <label className="grid gap-2">
-            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">Lieu</span>
+            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">Lieu</span>
             <Select
               value={cityId}
               onChange={(e) => setCityId(e.target.value)}
@@ -119,39 +119,39 @@ export function ExperienceFormClient({
           </label>
 
           <label className="grid gap-2">
-            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">Tag</span>
+            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">Tag</span>
             <Input value={tag} onChange={(e) => setTag(e.target.value)} placeholder="Culture" />
             <span className="text-xs text-zinc-500 dark:text-zinc-400">Ex: Culture, Nature, Gastronomie…</span>
           </label>
 
           <label className="grid gap-2">
-            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">Prix à partir de</span>
+            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">Prix à partir de</span>
             <Input type="number" value={priceFrom} onChange={(e) => setPriceFrom(e.target.value)} min={0} step={1} />
           </label>
 
           <label className="grid gap-2">
-            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">Devise</span>
+            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">Devise</span>
             <Input value={currency} onChange={(e) => setCurrency(e.target.value)} placeholder="EUR" />
           </label>
 
           <label className="grid gap-2">
-            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">Note</span>
+            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">Note</span>
             <Input type="number" value={rating} onChange={(e) => setRating(e.target.value)} min={0} max={5} step={0.01} />
           </label>
 
           <label className="grid gap-2">
-            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">Avis</span>
+            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">Avis</span>
             <Input type="number" value={reviewCount} onChange={(e) => setReviewCount(e.target.value)} min={0} step={1} />
           </label>
 
           <label className="grid gap-2 sm:col-span-2">
-            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">Image (URL)</span>
+            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">Image (URL)</span>
             <Input value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} placeholder="https://images.unsplash.com/..." />
             <span className="text-xs text-zinc-500 dark:text-zinc-400">Conseil: Unsplash avec auto=format&fit=crop&w=1600&q=80.</span>
           </label>
 
           <label className="grid gap-2 sm:col-span-2">
-            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">Description courte</span>
+            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">Description courte</span>
             <Textarea value={excerpt} onChange={(e) => setExcerpt(e.target.value)} />
             <span className="text-xs text-zinc-500 dark:text-zinc-400">
               1–2 phrases, orientées bénéfice. Exemple: “petit groupe”, “adresses locales”, “accès coupe-file”.

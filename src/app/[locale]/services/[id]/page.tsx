@@ -52,7 +52,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
           <div className="lg:col-span-7">
             <div className="relative aspect-[16/10] overflow-hidden rounded-3xl bg-zinc-100">
               <Image src={service.imageUrl} alt={service.title} fill className="object-cover" priority />
-              <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-white/95 px-3 py-1.5 text-xs font-semibold  shadow-sm shadow-black/10">
+              <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-white/95 px-3 py-1.5 text-xs font-semibold shadow-sm shadow-black/10 backdrop-blur dark:bg-zinc-900/95 dark:text-zinc-100 dark:shadow-black/40">
                 <Icon className="h-4 w-4" aria-hidden="true" />
                 {meta.label}
               </div>
@@ -82,7 +82,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
                     {service.priceFrom} {service.currency}
                   </p>
                 </div>
-                <p className="rounded-full bg-zinc-100 px-3 py-1 text-sm font-semibold ">
+                <p className="rounded-full bg-zinc-100 px-3 py-1 text-sm font-semibold dark:bg-zinc-800 dark:text-zinc-100">
                   ★ {service.rating.toFixed(1)} ({service.reviewCount})
                 </p>
               </div>
@@ -109,8 +109,8 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 
 function Info({ label, value, compact = false }: { label: string; value: string; compact?: boolean }) {
   return (
-    <div className={compact ? "rounded-2xl bg-zinc-50 p-3" : "rounded-2xl border border-black/10 bg-white p-4"}>
-      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-400">{label}</p>
+    <div className={compact ? "rounded-2xl bg-zinc-50 p-3 dark:bg-zinc-900" : "rounded-2xl border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950"}>
+      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-400 dark:text-zinc-500">{label}</p>
       <p className="mt-1 text-sm font-semibold ">{value}</p>
     </div>
   );

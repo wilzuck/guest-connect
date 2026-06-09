@@ -61,17 +61,17 @@ export function LocationFormClient({
 
         <div className="mt-6 grid items-start gap-4 sm:grid-cols-3">
           <label className="grid gap-2 sm:col-span-1">
-            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">Ville</span>
+            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">Ville</span>
             <Input value={city} onChange={(e) => setCity(e.target.value)} placeholder="Cotonou" required />
           </label>
 
           <label className="grid gap-2 sm:col-span-1">
-            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">Pays</span>
+            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">Pays</span>
             <Input value={country} onChange={(e) => setCountry(e.target.value)} placeholder="Bénin" required />
           </label>
 
           <label className="grid gap-2 sm:col-span-1">
-            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">Code pays</span>
+            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">Code pays</span>
             <Input
               value={countryCode}
               onChange={(e) => setCountryCode(e.target.value)}

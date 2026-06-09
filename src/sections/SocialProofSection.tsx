@@ -44,7 +44,7 @@ export async function SocialProofSection() {
               {stats.map((s) => (
                 <div
                   key={s.label}
-                  className="rounded-2xl border border-black/10 bg-white p-4 text-center shadow-sm shadow-black/5"
+                  className="rounded-2xl border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950 text-center shadow-sm shadow-black/5"
                 >
                   <p className="text-2xl font-semibold tracking-tight">{s.value}</p>
                   <p className="mt-1 text-xs font-medium text-zinc-500">{s.label}</p>

@@ -56,7 +56,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
 
             <div className="mt-6 grid grid-cols-3 gap-3">
               {stats.map((s) => (
-                <div key={s.k} className="rounded-2xl bg-zinc-50 p-3 text-center">
+                <div key={s.k} className="rounded-2xl bg-zinc-50 p-3 dark:bg-zinc-900 text-center">
                   <p className="text-lg font-semibold tracking-tight">{s.v}</p>
                   <p className="mt-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-zinc-500">{s.k}</p>
                 </div>

@@ -56,7 +56,7 @@ export function Navbar() {
     <>
       <header
         className={[
-          "fixed left-0 right-0 top-0 z-50 bg-white/80 backdrop-blur transition-transform duration-200 will-change-transform dark:bg-zinc-950/85",
+          "fixed left-0 right-0 top-0 z-50 bg-white/80 backdrop-blur transition-transform duration-200 dark:bg-zinc-950/80will-change-transform dark:bg-zinc-950/85",
           visible ? "translate-y-0" : "-translate-y-full",
           elevated ? "shadow-sm shadow-black/10 dark:shadow-black/50" : "",
         ].join(" ")}

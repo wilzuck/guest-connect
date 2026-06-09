@@ -65,7 +65,7 @@ export function ExploreFiltersBar({
       className={cn("relative -mx-[15px] flex items-center gap-2 px-[15px]", className)}
       aria-label="Filtres rapides"
     >
-      {leading ? <div className="relative z-20 shrink-0 bg-white pr-1">{leading}</div> : null}
+      {leading ? <div className="relative z-20 shrink-0 pr-1">{leading}</div> : null}
 
       {/* Gradients 
       <div className="pointer-events-none scheme-dark:hidden absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-white to-transparent" />

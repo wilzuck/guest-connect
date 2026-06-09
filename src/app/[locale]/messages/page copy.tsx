@@ -15,7 +15,7 @@ export default function MessagesPage() {
       <div className="grid gap-4">
         {messageThreads.map((t) => (
           <Link key={t.id} href={`./${t.id}`} className="block">
-            <Card className="group overflow-hidden p-0 shadow-none transition hover:bg-zinc-50">
+            <Card className="group overflow-hidden p-0 shadow-none transition hover:bg-zinc-50 dark:hover:bg-zinc-800">
               <div className="grid gap-0 sm:grid-cols-12">
                 <div className="relative aspect-[16/10] w-full sm:col-span-4 sm:aspect-[4/3]">
                   <Image

@@ -43,7 +43,7 @@ export default async function Page() {
     >
       <div className="grid gap-4 md:grid-cols-12">
         <Card className="p-6 shadow-none md:col-span-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">{isEn ? "Upcoming" : "À venir"}</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">{isEn ? "Upcoming" : "À venir"}</p>
           <p className="mt-2 text-3xl font-semibold tracking-tight">{upcoming.length}</p>
           <p className="mt-1 text-sm text-zinc-600">{isEn ? "stays" : "séjours"}</p>
         </Card>
