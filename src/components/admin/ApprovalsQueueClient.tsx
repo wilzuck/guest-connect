@@ -75,7 +75,7 @@ export function ApprovalsQueueClient({ initialItems }: { initialItems: ApprovalI
 
   return (
     <section className="grid gap-4">
-      <div className="grid gap-3 px-4 pt-3 lg:px-6 xl:grid-cols-[1fr_auto_1fr] xl:items-end">
+      <div className="flex flex-col gap-3 px-4 pt-3 lg:px-6 xl:flex-row xl:items-end xl:justify-between">
         <div>
           <h1 className="text-xl font-semibold tracking-tight text-[#202024]">À valider</h1>
           <p className="mt-1 text-sm text-[#8E8E93]">
@@ -83,7 +83,7 @@ export function ApprovalsQueueClient({ initialItems }: { initialItems: ApprovalI
           </p>
         </div>
 
-        <label className="flex h-10 min-w-0 items-center gap-2 rounded-lg border border-[#E8E8EC] bg-white px-3 text-sm text-[#8E8E93] shadow-xs shadow-black/5 sm:w-80 xl:justify-self-center">
+        <label className="flex h-10 min-w-0 items-center gap-2 rounded-lg border border-[#E8E8EC] bg-white px-3 text-sm text-[#8E8E93] shadow-xs shadow-black/5 sm:w-80">
           <Search className="h-4 w-4" aria-hidden="true" />
           <input
             value={query}

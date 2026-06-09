@@ -31,13 +31,13 @@ export function ListingCard({
   const content = (
     <Card
         className={cn(
-          "group bg-white border-0 !shadow-none",
+          "group border-0 bg-white !shadow-none dark:bg-black",
           variant === "outlined"
-            ? "rounded-2xl border border-black/10 !shadow-none"
+            ? "rounded-2xl border border-black/10 !shadow-none dark:border-zinc-800"
             : "rounded-2xl hover:!shadow-none",
         )}
       >
-        <div className="relative aspect-[16/10] overflow-hidden rounded-[14px] bg-zinc-100">
+        <div className="relative aspect-[16/10] overflow-hidden rounded-[14px] bg-zinc-100 dark:bg-zinc-900">
           {!imgLoaded ? <ImageLoader /> : null}
           <Image
             src={listing.imageUrl}
@@ -69,7 +69,7 @@ export function ListingCard({
           </div>
         </div>
         {listing.propertyType ? (
-          <p className="mt-3 text-xs uppercase tracking-[0.2em] text-zinc-500">
+          <p className="mt-3 text-xs uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400">
             {listing.propertyType}
           </p>
         ) : null}
@@ -78,25 +78,25 @@ export function ListingCard({
           <div className="flex items-start justify-between gap-4">
             <div className="min-w-0">
               <h3
-                className="truncate text-base font-semibold tracking-tight text-black"
+                className="truncate text-base font-semibold tracking-tight text-black dark:text-white"
                 title={listing.title}
               >
                 {listing.title}
               </h3>
             </div>
-            <div className="inline-flex items-center gap-2 text-sm text-zinc-700">
-              <StarIcon className="h-4 w-4 text-black" />
-              <span className="font-semibold text-black">{listing.rating.toFixed(1)}</span>
-              <span className="text-zinc-500">({listing.reviewCount})</span>
+            <div className="inline-flex items-center gap-2 text-sm text-zinc-700 dark:text-zinc-300">
+              <StarIcon className="h-4 w-4 text-black dark:text-white" />
+              <span className="font-semibold text-black dark:text-white">{listing.rating.toFixed(1)}</span>
+              <span className="text-zinc-500 dark:text-zinc-400">({listing.reviewCount})</span>
             </div>
           </div>
 
           {/* Localisation + prix (style Airbnb) */}
           <div className="mt-1 flex items-start justify-between gap-3">
-            <p className="min-w-0 truncate text-sm text-zinc-600" title={listing.location}>
+            <p className="min-w-0 truncate text-sm text-zinc-600 dark:text-zinc-400" title={listing.location}>
               {listing.location}
             </p>
-            <p className="shrink-0 whitespace-nowrap text-[15px] font-semibold text-black">
+            <p className="shrink-0 whitespace-nowrap text-[15px] font-semibold text-black dark:text-white">
               {formatFrom(listing.pricePerNight, listing.currency)}
             </p>
           </div>
@@ -107,7 +107,7 @@ export function ListingCard({
               return (
                 <span
                   key={feature.label}
-                  className="inline-flex items-center gap-1 rounded-full bg-zinc-100 px-2.5 py-1 text-[11px] font-semibold text-zinc-700"
+                  className="inline-flex items-center gap-1 rounded-full bg-zinc-100 px-2.5 py-1 text-[11px] font-semibold text-zinc-700 dark:bg-zinc-900 dark:text-zinc-300"
                 >
                   <Icon className="h-3.5 w-3.5" aria-hidden="true" />
                   {feature.label}
@@ -158,6 +158,6 @@ function StarIcon({ className }: { className?: string }) {
 
 function ImageLoader() {
   return (
-    <div className="absolute inset-0 animate-pulse bg-[linear-gradient(110deg,#f4f4f5,45%,#e4e4e7,55%,#f4f4f5)] bg-[length:200%_100%]" />
+    <div className="absolute inset-0 animate-pulse bg-[linear-gradient(110deg,#f4f4f5,45%,#e4e4e7,55%,#f4f4f5)] bg-[length:200%_100%] dark:bg-[linear-gradient(110deg,#18181b,45%,#27272a,55%,#18181b)]" />
   );
 }

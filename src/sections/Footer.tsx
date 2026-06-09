@@ -49,12 +49,12 @@ export function Footer() {
   ];
 
   return (
-    <footer className="border-t border-black/5 bg-white">
+    <footer className="border-t border-black/5 bg-white dark:border-zinc-800 dark:bg-zinc-950">
       <Container className="py-12">
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <Logo />
-            <p className="mt-4 max-w-sm text-sm leading-6 text-zinc-600">
+            <p className="mt-4 max-w-sm text-sm leading-6 text-zinc-600 dark:text-zinc-400">
               {t("tagline")}
             </p>
             <div className="mt-5 flex items-center gap-3">
@@ -75,13 +75,13 @@ export function Footer() {
           <div className="grid gap-8 sm:grid-cols-3 lg:col-span-8">
             {columns.map((c) => (
               <div key={c.title}>
-                <p className="text-sm font-semibold text-black">{c.title}</p>
+                <p className="text-sm font-semibold text-black dark:text-white">{c.title}</p>
                 <ul className="mt-4 space-y-3">
                   {c.links.map((l) => (
                     <li key={l.href}>
                       <Link
                         href={l.href}
-                        className="text-sm text-zinc-600 hover:text-black transition-colors"
+                        className="text-sm text-zinc-600 transition-colors hover:text-black dark:text-zinc-400 dark:hover:text-white"
                       >
                         {l.label}
                       </Link>
@@ -93,7 +93,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col gap-2 border-t border-black/5 pt-6 text-xs text-zinc-500 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-10 flex flex-col gap-2 border-t border-black/5 pt-6 text-xs text-zinc-500 dark:border-zinc-800 dark:text-zinc-400 sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {new Date().getFullYear()} GuestConnect. {t("copyright")}
             <span className="hidden sm:inline"> · {t("madeFor")}</span>
@@ -123,7 +123,7 @@ function SocialLink({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-black/10 bg-white shadow-sm shadow-black/5 hover:bg-zinc-50 transition-colors"
+      className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-black/10 bg-white shadow-sm shadow-black/5 transition-colors hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950 dark:text-white dark:hover:bg-zinc-900"
       aria-label={label}
       title={label}
     >

@@ -69,26 +69,25 @@ export function EntityTableClient({
   }
 
   return (
-    <section className="grid gap-4">
-      <div className="grid gap-3 px-4 pt-3 lg:px-6 xl:grid-cols-[1fr_auto_1fr] xl:items-center">
+    <section className="grid gap-4 dark:text-white">
+      <div className="flex flex-col gap-3 px-4 pt-3 lg:px-6 xl:flex-row xl:items-center xl:justify-between">
         <div>
-          <h1 className="text-xl font-semibold tracking-tight text-[#202024]">{title}</h1>
-          <p className="mt-1 text-sm text-[#8E8E93]">
+          <h1 className="text-xl font-semibold tracking-tight text-[#202024] dark:text-white">{title}</h1>
+          <p className="mt-1 text-sm text-[#8E8E93] dark:text-zinc-400">
             {filteredRows.length} élément(s) affiché(s) sur {rows.length}
           </p>
         </div>
 
-        <label className="flex h-10 min-w-0 items-center gap-2 rounded-lg border border-[#E8E8EC] bg-white px-3 text-sm text-[#8E8E93] shadow-xs shadow-black/5 sm:w-80 xl:justify-self-center">
-          <Search className="h-4 w-4" aria-hidden="true" />
-          <input
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            placeholder="Rechercher..."
-            className="min-w-0 flex-1 bg-transparent outline-none placeholder:text-[#B1B1B7]"
-          />
-        </label>
-
-        <div className="flex sm:justify-end">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-end">
+          <label className="flex h-10 min-w-0 items-center gap-2 rounded-lg border border-[#E8E8EC] bg-white px-3 text-sm text-[#8E8E93] shadow-xs shadow-black/5 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-400 dark:shadow-black/30 sm:w-80">
+            <Search className="h-4 w-4" aria-hidden="true" />
+            <input
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder="Rechercher..."
+              className="min-w-0 flex-1 bg-transparent outline-none placeholder:text-[#B1B1B7] dark:placeholder:text-zinc-500"
+            />
+          </label>
           {selectedIds.length > 0 ? (
             <Button
               type="button"
@@ -110,10 +109,10 @@ export function EntityTableClient({
         </div>
       </div>
 
-      <div className="overflow-x-auto border-y border-[#E8E8EC] bg-white">
+      <div className="overflow-x-auto border-y border-[#E8E8EC] bg-white dark:border-zinc-800 dark:bg-black">
         <div className="min-w-[760px]">
           <div
-            className="grid border-b border-[#E8E8EC] bg-[#FAFAFB] px-4 py-3 text-xs font-medium text-[#8E8E93]"
+            className="grid border-b border-[#E8E8EC] bg-[#FAFAFB] px-4 py-3 text-xs font-medium text-[#8E8E93] dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-400"
             style={{ gridTemplateColumns: gridTemplate, gap: "0.75rem" }}
           >
             <div />
@@ -126,13 +125,13 @@ export function EntityTableClient({
 
           {groupedRows.map((group) => (
             <div key={group.title}>
-              <div className="flex items-center gap-2 border-b border-[#EFEFF2] bg-[#F7F7F8] px-4 py-2 text-xs font-semibold text-[#5D5D65]">
+              <div className="flex items-center gap-2 border-b border-[#EFEFF2] bg-[#F7F7F8] px-4 py-2 text-xs font-semibold text-[#5D5D65] dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300">
                 <ChevronDown className="h-3.5 w-3.5" aria-hidden="true" />
                 <span>{group.title}</span>
-                <span className="text-[#A4A4AA]">{group.rows.length}</span>
+                <span className="text-[#A4A4AA] dark:text-zinc-500">{group.rows.length}</span>
               </div>
 
-              <div className="divide-y divide-[#EFEFF2]">
+              <div className="divide-y divide-[#EFEFF2] dark:divide-zinc-800">
                 {group.rows.map((row) => {
                   const id = String(row.id ?? "");
                   if (!id) return null;
@@ -142,7 +141,7 @@ export function EntityTableClient({
                   return (
                     <div
                       key={id}
-                      className="group/row grid items-center px-4 py-2.5 text-sm transition hover:bg-[#FAFAFB]"
+                      className="group/row grid items-center px-4 py-2.5 text-sm transition hover:bg-[#FAFAFB] dark:hover:bg-zinc-950"
                       style={{ gridTemplateColumns: gridTemplate, gap: "0.75rem" }}
                     >
                       <label
@@ -166,20 +165,20 @@ export function EntityTableClient({
                         return (
                           <div
                             key={column.key}
-                            className={index === 0 ? "min-w-0 truncate font-medium text-[#202024]" : "min-w-0 truncate text-[#73737A]"}
+                            className={index === 0 ? "min-w-0 truncate font-medium text-[#202024] dark:text-white" : "min-w-0 truncate text-[#73737A] dark:text-zinc-400"}
                           >
                             {renderer ? renderer(row) : renderCell(row, column.key)}
                           </div>
                         );
                       })}
 
-                      <div className="truncate text-[#73737A]">{getDisplayDate(row)}</div>
+                      <div className="truncate text-[#73737A] dark:text-zinc-400">{getDisplayDate(row)}</div>
 
                       <div className="relative flex items-center justify-end gap-2">
                         {showValidation ? <PriorityBadge row={row} /> : null}
                         <button
                           type="button"
-                          className="grid h-8 w-8 place-items-center rounded-lg border border-[#E8E8EC] text-[#73737A] transition hover:bg-[#F7F7F8] hover:text-[#202024]"
+                          className="grid h-8 w-8 place-items-center rounded-lg border border-[#E8E8EC] text-[#73737A] transition hover:bg-[#F7F7F8] hover:text-[#202024] dark:border-zinc-800 dark:text-zinc-400 dark:hover:bg-zinc-900 dark:hover:text-white"
                           aria-label="Actions"
                           onClick={() => setOpenMenuId((current) => (current === id ? null : id))}
                         >
@@ -187,10 +186,10 @@ export function EntityTableClient({
                         </button>
 
                         {openMenuId === id ? (
-                          <div className="absolute right-0 top-9 z-20 w-44 overflow-hidden rounded-xl border border-[#E8E8EC] bg-white p-1 shadow-lg shadow-black/10">
+                          <div className="absolute right-0 top-9 z-20 w-44 overflow-hidden rounded-xl border border-[#E8E8EC] bg-white p-1 shadow-lg shadow-black/10 dark:border-zinc-800 dark:bg-zinc-950 dark:shadow-black/40">
                             <button
                               type="button"
-                              className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm text-[#202024] hover:bg-[#F7F7F8]"
+                              className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm text-[#202024] hover:bg-[#F7F7F8] dark:text-white dark:hover:bg-zinc-900"
                               onClick={() => {
                                 setPreviewRow(row);
                                 setOpenMenuId(null);
@@ -201,7 +200,7 @@ export function EntityTableClient({
                             </button>
                             <Link
                               href={`${editBaseHref}/${id}`}
-                              className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-[#202024] hover:bg-[#F7F7F8]"
+                              className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-[#202024] hover:bg-[#F7F7F8] dark:text-white dark:hover:bg-zinc-900"
                             >
                               <Pencil className="h-4 w-4" aria-hidden="true" />
                               Éditer
@@ -213,7 +212,7 @@ export function EntityTableClient({
                                 onDelete(id);
                               }}
                               disabled={pending}
-                              className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm text-[#E04F5F] hover:bg-[#FFF3F4] disabled:opacity-50"
+                              className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm text-[#E04F5F] hover:bg-[#FFF3F4] disabled:opacity-50 dark:text-red-300 dark:hover:bg-red-950/40"
                             >
                               <Trash2 className="h-4 w-4" aria-hidden="true" />
                               Supprimer
@@ -231,16 +230,16 @@ export function EntityTableClient({
       </div>
 
       {previewRow ? (
-        <div className="fixed inset-0 z-50 grid place-items-center bg-black/40 px-4 py-8" role="dialog" aria-modal="true">
-          <div className="max-h-[min(720px,90dvh)] w-full max-w-2xl overflow-hidden rounded-2xl bg-white shadow-2xl shadow-black/20">
-            <div className="flex items-center justify-between border-b border-[#E8E8EC] px-5 py-4">
+        <div className="fixed inset-0 z-50 grid place-items-center bg-black/40 px-4 py-8 dark:bg-black/70" role="dialog" aria-modal="true">
+          <div className="max-h-[min(720px,90dvh)] w-full max-w-2xl overflow-hidden rounded-2xl bg-white shadow-2xl shadow-black/20 dark:bg-zinc-950 dark:shadow-black/60">
+            <div className="flex items-center justify-between border-b border-[#E8E8EC] px-5 py-4 dark:border-zinc-800">
               <div>
-                <p className="text-sm font-semibold text-[#202024]">Détail de l'élément</p>
+                <p className="text-sm font-semibold text-[#202024]">{"Détail de l'élément"}</p>
                 <p className="mt-1 text-xs text-[#8E8E93]">{String(previewRow.id ?? "")}</p>
               </div>
               <button
                 type="button"
-                className="grid h-9 w-9 place-items-center rounded-full hover:bg-[#F7F7F8]"
+                className="grid h-9 w-9 place-items-center rounded-full hover:bg-[#F7F7F8] dark:text-white dark:hover:bg-zinc-900"
                 onClick={() => setPreviewRow(null)}
                 aria-label="Fermer"
               >
@@ -250,7 +249,7 @@ export function EntityTableClient({
             <div className="max-h-[calc(min(720px,90dvh)-73px)] overflow-y-auto p-5">
               <dl className="grid gap-3 sm:grid-cols-2">
                 {Object.entries(previewRow).map(([key, value]) => (
-                  <div key={key} className="rounded-xl border border-[#E8E8EC] bg-[#FAFAFB] p-3">
+                  <div key={key} className="rounded-xl border border-[#E8E8EC] bg-[#FAFAFB] p-3 dark:border-zinc-800 dark:bg-zinc-900">
                     <dt className="text-xs font-semibold uppercase tracking-[0.14em] text-[#8E8E93]">{key}</dt>
                     <dd className="mt-2 whitespace-pre-wrap break-words text-sm text-[#202024]">{formatPreviewValue(value)}</dd>
                   </div>

@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { getLocale } from "next-intl/server";
-import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card";
 import Link from "next/link";
-import { MarketingPageLayout } from "@/components/layout/MarketingPageLayout";
 import { AccountShell } from "@/components/account/AccountShell";
 
 export const metadata: Metadata = {

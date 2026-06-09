@@ -72,24 +72,24 @@ export function UserMenu() {
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-black/10 bg-white shadow-sm shadow-black/5 hover:bg-zinc-50 transition-colors"
+        className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-black/10 bg-white shadow-sm shadow-black/5 transition-colors hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950 dark:shadow-black/30 dark:hover:bg-zinc-900"
         aria-haspopup="menu"
         aria-expanded={open}
         aria-label="Menu utilisateur"
       >
-        <CircleUserRound className="h-5 w-5 text-zinc-700" aria-hidden="true" />
+        <CircleUserRound className="h-5 w-5 text-zinc-700 dark:text-zinc-200" aria-hidden="true" />
       </button>
 
       <div
         className={cn(
-          "absolute right-0 mt-2 w-64 overflow-hidden rounded-2xl border border-black/10 bg-white shadow-lg shadow-black/10",
+          "absolute right-0 mt-2 w-64 overflow-hidden rounded-2xl border border-black/10 bg-white shadow-lg shadow-black/10 dark:border-zinc-800 dark:bg-zinc-950 dark:shadow-black/50",
           open ? "block" : "hidden",
         )}
         role="menu"
       >
         <div className="p-2">
           <MenuSection title={t("space")} items={visibleSpace} onSelect={() => setOpen(false)} />
-          <div className="my-2 h-px bg-black/5" />
+          <div className="my-2 h-px bg-black/5 dark:bg-white/10" />
           <MenuSection items={logout} onSelect={() => setOpen(false)} />
         </div>
       </div>
@@ -109,7 +109,7 @@ function MenuSection({
   return (
     <div>
       {title ? (
-        <p className="px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-zinc-500">
+        <p className="px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-zinc-500 dark:text-zinc-400">
           {title}
         </p>
       ) : null}
@@ -122,16 +122,16 @@ function MenuSection({
             <Link
               href={i.href}
               onClick={onSelect}
-              className="group flex items-center justify-between gap-3 rounded-xl px-3 py-2 text-sm text-zinc-700 transition-colors hover:bg-zinc-50 hover:text-black"
+              className="group flex items-center justify-between gap-3 rounded-xl px-3 py-2 text-sm text-zinc-700 transition-colors hover:bg-zinc-50 hover:text-black dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-white"
               role="menuitem"
             >
               <span className="flex min-w-0 items-center gap-3">
-                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-zinc-100 text-zinc-700 transition group-hover:bg-black group-hover:text-white">
+                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-zinc-100 text-zinc-700 transition group-hover:bg-black group-hover:text-white dark:bg-zinc-900 dark:text-zinc-300 dark:group-hover:bg-white dark:group-hover:text-black">
                   <Icon className="h-4 w-4" aria-hidden="true" />
                 </span>
                 <span className="min-w-0 truncate">{i.label}</span>
               </span>
-              <ChevronRight className="h-4 w-4 shrink-0 text-zinc-400 transition group-hover:translate-x-0.5 group-hover:text-black" aria-hidden="true" />
+              <ChevronRight className="h-4 w-4 shrink-0 text-zinc-400 transition group-hover:translate-x-0.5 group-hover:text-black dark:group-hover:text-white" aria-hidden="true" />
             </Link>
           </li>
           );

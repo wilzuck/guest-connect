@@ -45,7 +45,7 @@ export function DialogContent({
         className={cn(
           variant === "modal"
             ? [
-                "fixed left-1/2 top-1/2 z-50 w-[calc(100vw-32px)] -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-black/10 bg-white p-6 shadow-2xl shadow-black/20 outline-none",
+                "fixed left-1/2 top-1/2 z-50 w-[calc(100vw-32px)] -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-black/10 bg-white p-6 shadow-2xl shadow-black/20 outline-none dark:border-zinc-800 dark:bg-zinc-950 dark:text-white",
                 "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
                 modalSizes[size],
               ].join(" ")

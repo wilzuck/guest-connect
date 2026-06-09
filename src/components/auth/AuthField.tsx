@@ -27,7 +27,7 @@ export function AuthField({
 }: AuthFieldProps) {
   return (
     <label className="grid gap-2">
-      <span className="text-sm font-medium text-black">{label}</span>
+      <span className="text-sm font-medium text-black dark:text-white">{label}</span>
       <div className="relative">
         <Input
           name={name}

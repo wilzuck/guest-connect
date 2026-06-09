@@ -38,7 +38,7 @@ export async function AuthShell({
     subtitle: t("illustration.subtitle"),
   };
   return (
-    <div className="min-h-dvh bg-zinc-50">
+    <div className="min-h-dvh bg-zinc-50 dark:bg-black">
       <div className="flex min-h-dvh w-full">
         {/* Left: auth */}
         <div className="flex w-full flex-col px-5 py-2 sm:px-8 sm:py-8 md:w-3/5 lg:w-1/2">
@@ -48,16 +48,16 @@ export async function AuthShell({
                 <Link href={`/${locale}`} className="inline-flex items-center gap-2">
                   <Logo />
                 </Link>
-                <Link href={`/${locale}`} className="text-sm p-2 border border-black/10 rounded-4xl font-medium text-zinc-500 hover:text-zinc-600">
+                <Link href={`/${locale}`} className="rounded-4xl border border-black/10 p-2 text-sm font-medium text-zinc-500 hover:text-zinc-600 dark:border-zinc-800 dark:text-zinc-400 dark:hover:text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                  
                 </Link>
               </header>
               <div className="mb-7">
-                <h1 className="text-xl font-semibold tracking-tight text-black">
+                <h1 className="text-xl font-semibold tracking-tight text-black dark:text-white">
                   {title}
                 </h1>
-                <p className="mt-2 text-sm leading-6 text-zinc-600">
+                <p className="mt-2 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
                   {subtitle}
                 </p>
               </div>
@@ -66,15 +66,15 @@ export async function AuthShell({
             </div>
           </main>
 
-          <footer className="mt-6 flex flex-col gap-3 text-xs text-zinc-500 sm:flex-row sm:items-center sm:justify-between">
+          <footer className="mt-6 flex flex-col gap-3 text-xs text-zinc-500 dark:text-zinc-400 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex flex-wrap gap-x-3 gap-y-1">
-              <Link className="hover:text-black" href={`/${locale}/terms`}>
+              <Link className="hover:text-black dark:hover:text-white" href={`/${locale}/terms`}>
                 {t("footer.terms")}
               </Link>
-              <Link className="hover:text-black" href={`/${locale}/privacy`}>
+              <Link className="hover:text-black dark:hover:text-white" href={`/${locale}/privacy`}>
                 {t("footer.privacy")}
               </Link>
-              <Link className="hover:text-black" href={`/${locale}/cookies`}>
+              <Link className="hover:text-black dark:hover:text-white" href={`/${locale}/cookies`}>
                 {t("footer.cookies")}
               </Link>
             </div>
@@ -82,7 +82,7 @@ export async function AuthShell({
                 <LocaleSwitcher />
             </div>
             {footerHint ? (
-              <div className="text-zinc-500">{footerHint}</div>
+              <div className="text-zinc-500 dark:text-zinc-400">{footerHint}</div>
             ) : null}
           </footer>
         </div>

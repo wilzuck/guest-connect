@@ -29,16 +29,16 @@ export function AccountShell({
 
   return (
     <div >
-      <div className="border-b border-zinc-200">
+      <div className="border-b border-zinc-200 dark:border-zinc-800">
         <Container className="pt-6 sm:pt-8 lg:pt-10">
           {/* Header */}
           <div className="mb-6 sm:mb-8">
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight text-black">
+            <h1 className="text-2xl font-semibold tracking-tight text-black dark:text-white sm:text-3xl lg:text-4xl">
               {title}
             </h1>
 
             {subtitle && (
-              <p className="mt-2 text-xs sm:text-sm text-zinc-600 max-w-2xl">
+              <p className="mt-2 max-w-2xl text-xs text-zinc-600 dark:text-zinc-400 sm:text-sm">
                 {subtitle}
               </p>
             )}
@@ -60,8 +60,8 @@ export function AccountShell({
                     className={cn(
                       "pb-2 sm:pb-3 text-sm whitespace-nowrap transition-colors relative",
                       isActive
-                        ? "text-black font-semibold border-b-2 border-black"
-                        : "text-zinc-600 hover:text-zinc-900"
+                        ? "border-b-2 border-black font-semibold text-black dark:border-white dark:text-white"
+                        : "text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white"
                     )}
                   >
                     {item.label}
@@ -73,7 +73,7 @@ export function AccountShell({
         </Container>
       </div>
 
-      <div className="bg-zinc-50 min-h-[max(calc(100vh-400px),350px)]">
+      <div className="min-h-[max(calc(100vh-400px),350px)] bg-zinc-50 dark:bg-black">
         <Container className="py-6 sm:py-8 lg:py-10">
           <div className="space-y-6 sm:space-y-8">{children}</div>
         </Container>

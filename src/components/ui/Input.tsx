@@ -13,7 +13,7 @@ export function Input({ className, type, maxLength, ...props }: InputProps) {
       type={type}
       maxLength={maxLength ?? (shouldLimit ? 250 : undefined)}
       className={cn(
-        "h-11 w-full rounded-md border border-black/10 bg-white px-4 text-sm text-black placeholder:text-zinc-500 shadow-xs shadow-black/5 outline-none transition focus:border-black/20 focus:ring-4 focus:ring-black/5",
+        "h-11 w-full rounded-md border border-black/10 bg-white px-4 text-sm text-black placeholder:text-zinc-500 shadow-xs shadow-black/5 outline-none transition focus:border-black/20 focus:ring-4 focus:ring-black/5 dark:border-zinc-800 dark:bg-zinc-950 dark:text-white dark:placeholder:text-zinc-500 dark:shadow-black/30 dark:focus:border-zinc-600 dark:focus:ring-white/10",
         className,
       )}
       {...props}

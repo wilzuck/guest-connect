@@ -98,15 +98,15 @@ export function MobileMenu() {
       <DialogTrigger asChild>
         <button
           type="button"
-          className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-black transition hover:bg-zinc-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20 md:hidden"
+          className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-black transition hover:bg-zinc-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20 dark:bg-zinc-950 dark:text-white dark:hover:bg-zinc-900 dark:focus-visible:ring-white/20 md:hidden"
           aria-label={tm("openMenu")}
         >
           <Kanban className="h-5 w-5 rotate-90" aria-hidden="true" />
         </button>
       </DialogTrigger>
 
-      <DialogContent className="flex w-[calc(100vw-32px)] max-w-[360px] flex-col overflow-hidden bg-white p-0">
-        <div className="flex items-center justify-between border-b border-black/5 px-4 py-4">
+      <DialogContent className="flex w-[calc(100vw-32px)] max-w-[360px] flex-col overflow-hidden bg-white p-0 dark:bg-zinc-950">
+        <div className="flex items-center justify-between border-b border-black/5 px-4 py-4 dark:border-zinc-800">
           <DialogClose asChild>
             <Link href={`/${locale}`} className="inline-flex">
               <Logo />
@@ -116,7 +116,7 @@ export function MobileMenu() {
           <DialogClose asChild>
             <button
               type="button"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-black/10 bg-white text-black shadow-sm shadow-black/5 transition hover:bg-zinc-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-black/10 bg-white text-black shadow-sm shadow-black/5 transition hover:bg-zinc-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20 dark:border-zinc-800 dark:bg-zinc-900 dark:text-white dark:shadow-black/30 dark:hover:bg-zinc-800 dark:focus-visible:ring-white/20"
               aria-label="Fermer le menu"
             >
               <X className="h-5 w-5" aria-hidden="true" />
@@ -153,34 +153,34 @@ export function MobileMenu() {
                 <DialogClose asChild key={l.href}>
                   <Link
                     href={l.href}
-                    className="group flex min-h-14 items-center gap-3 rounded-2xl border border-black/5 bg-white px-3 py-2 text-left shadow-sm shadow-black/[0.03] transition hover:border-black/10 hover:bg-zinc-50"
+              className="group flex min-h-14 items-center gap-3 rounded-2xl border border-black/5 bg-white px-3 py-2 text-left shadow-sm shadow-black/[0.03] transition hover:border-black/10 hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950 dark:shadow-black/30 dark:hover:border-zinc-700 dark:hover:bg-zinc-900"
                   >
-                    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-zinc-100 text-black transition group-hover:bg-black group-hover:text-white">
+                    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-zinc-100 text-black transition group-hover:bg-black group-hover:text-white dark:bg-zinc-900 dark:text-white dark:group-hover:bg-white dark:group-hover:text-black">
                       <Icon className="h-5 w-5" aria-hidden="true" />
                     </span>
                     <span className="min-w-0 flex-1">
-                      <span className="block truncate text-sm font-semibold text-black">
+                      <span className="block truncate text-sm font-semibold text-black dark:text-white">
                         {l.label}
                       </span>
-                      <span className="mt-0.5 block truncate text-xs text-zinc-500">
+                      <span className="mt-0.5 block truncate text-xs text-zinc-500 dark:text-zinc-400">
                         {l.desc}
                       </span>
                     </span>
-                    <ChevronRight className="h-4 w-4 shrink-0 text-zinc-400 transition group-hover:translate-x-0.5 group-hover:text-black" aria-hidden="true" />
+                    <ChevronRight className="h-4 w-4 shrink-0 text-zinc-400 transition group-hover:translate-x-0.5 group-hover:text-black dark:group-hover:text-white" aria-hidden="true" />
                   </Link>
                 </DialogClose>
               );
             })}
           </nav>
 
-          <div className="mt-3 rounded-2xl border border-black/10 bg-zinc-50 p-2.5">
+          <div className="mt-3 rounded-2xl border border-black/10 bg-zinc-50 p-2.5 dark:border-zinc-800 dark:bg-zinc-900">
             <div className="flex items-center gap-3 px-1 pb-2.5">
-              <span className="grid h-9 w-9 place-items-center rounded-xl bg-white text-black shadow-sm shadow-black/5">
+              <span className="grid h-9 w-9 place-items-center rounded-xl bg-white text-black shadow-sm shadow-black/5 dark:bg-zinc-950 dark:text-white dark:shadow-black/30">
                 <CircleUserRound className="h-5 w-5" aria-hidden="true" />
               </span>
               <div className="min-w-0">
-                <p className="truncate text-sm font-semibold text-black">{tm("account")}</p>
-                <p className="truncate text-xs text-zinc-500">{tm("tagline")}</p>
+                <p className="truncate text-sm font-semibold text-black dark:text-white">{tm("account")}</p>
+                <p className="truncate text-xs text-zinc-500 dark:text-zinc-400">{tm("tagline")}</p>
               </div>
             </div>
 
@@ -191,9 +191,9 @@ export function MobileMenu() {
                   <DialogClose asChild key={item.href}>
                     <Link
                       href={item.href}
-                      className="flex min-h-11 items-center gap-3 rounded-xl bg-white px-3 py-2 text-sm font-semibold text-black shadow-sm shadow-black/5 transition hover:bg-zinc-100"
+                      className="flex min-h-11 items-center gap-3 rounded-xl bg-white px-3 py-2 text-sm font-semibold text-black shadow-sm shadow-black/5 transition hover:bg-zinc-100 dark:bg-zinc-950 dark:text-white dark:shadow-black/30 dark:hover:bg-zinc-800"
                     >
-                      <Icon className="h-4 w-4 text-zinc-500" aria-hidden="true" />
+                      <Icon className="h-4 w-4 text-zinc-500 dark:text-zinc-400" aria-hidden="true" />
                       <span className="min-w-0 truncate">{item.label}</span>
                     </Link>
                   </DialogClose>
@@ -201,21 +201,21 @@ export function MobileMenu() {
               })}
             </div>
 
-            <div className="my-2 h-px bg-black/10" />
+            <div className="my-2 h-px bg-black/10 dark:bg-white/10" />
 
             <DialogClose asChild>
               <Link
                 href={`/${locale}/logout`}
-                className="flex min-h-11 items-center gap-3 rounded-xl bg-white px-3 py-2 text-sm font-semibold text-black shadow-sm shadow-black/5 transition hover:bg-zinc-100"
+                className="flex min-h-11 items-center gap-3 rounded-xl bg-white px-3 py-2 text-sm font-semibold text-black shadow-sm shadow-black/5 transition hover:bg-zinc-100 dark:bg-zinc-950 dark:text-white dark:shadow-black/30 dark:hover:bg-zinc-800"
               >
-                <LogOut className="h-4 w-4 text-zinc-500" aria-hidden="true" />
+                <LogOut className="h-4 w-4 text-zinc-500 dark:text-zinc-400" aria-hidden="true" />
                 <span>{tu("logout")}</span>
               </Link>
             </DialogClose>
           </div>
 
-          <div className="mt-auto flex min-w-0 items-center gap-2 pt-3 text-xs font-medium text-zinc-500">
-            <ShieldCheck className="h-4 w-4 text-black" aria-hidden="true" />
+          <div className="mt-auto flex min-w-0 items-center gap-2 pt-3 text-xs font-medium text-zinc-500 dark:text-zinc-400">
+            <ShieldCheck className="h-4 w-4 text-black dark:text-white" aria-hidden="true" />
             <span className="truncate">{tm("tagline")}</span>
           </div>
         </div>

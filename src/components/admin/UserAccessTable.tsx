@@ -33,22 +33,22 @@ export function UserAccessTable({
 
   return (
     <section className="grid gap-4">
-      <div className="grid gap-3 px-4 pt-3 lg:px-6 xl:grid-cols-[1fr_auto_1fr] xl:items-center">
+      <div className="flex flex-col gap-3 px-4 pt-3 lg:px-6 xl:flex-row xl:items-center xl:justify-between">
         <div>
           <h1 className="text-xl font-semibold tracking-tight text-[#202024]">{title}</h1>
           <p className="mt-1 text-sm text-[#8E8E93]">{description}</p>
         </div>
 
-        <label className="flex h-10 min-w-0 items-center gap-2 rounded-lg border border-[#E8E8EC] bg-white px-3 text-sm text-[#8E8E93] shadow-xs shadow-black/5 sm:w-80 xl:justify-self-center">
-          <Search className="h-4 w-4" aria-hidden="true" />
-          <input
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            placeholder="Rechercher..."
-            className="min-w-0 flex-1 bg-transparent outline-none placeholder:text-[#B1B1B7]"
-          />
-        </label>
-        <div className="flex sm:justify-end">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-end">
+          <label className="flex h-10 min-w-0 items-center gap-2 rounded-lg border border-[#E8E8EC] bg-white px-3 text-sm text-[#8E8E93] shadow-xs shadow-black/5 sm:w-80">
+            <Search className="h-4 w-4" aria-hidden="true" />
+            <input
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder="Rechercher..."
+              className="min-w-0 flex-1 bg-transparent outline-none placeholder:text-[#B1B1B7]"
+            />
+          </label>
           <ButtonLink href="#" variant="primary" size="sm" className="h-10 rounded-lg">
             <Plus className="h-4 w-4" aria-hidden="true" />
             {addLabel}

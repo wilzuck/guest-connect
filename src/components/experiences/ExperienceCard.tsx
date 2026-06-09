@@ -11,8 +11,8 @@ export function ExperienceCard({ experience }: { experience: Experience }) {
   const [loaded, setLoaded] = useState(false);
 
   return (
-    <Card className="overflow-hidden rounded-2xl border border-black/10 bg-white">
-      <div className="relative aspect-[16/10] overflow-hidden bg-zinc-100">
+    <Card className="overflow-hidden rounded-2xl border border-black/10 bg-white dark:border-zinc-800 dark:bg-zinc-950">
+      <div className="relative aspect-[16/10] overflow-hidden bg-zinc-100 dark:bg-zinc-900">
         {!loaded ? <ImageLoader /> : null}
         <Image
           src={experience.imageUrl}
@@ -24,25 +24,25 @@ export function ExperienceCard({ experience }: { experience: Experience }) {
         />
       </div>
       <div className="p-3">
-        <p className="truncate text-sm font-semibold text-black" title={experience.title}>
+        <p className="truncate text-sm font-semibold text-black dark:text-white" title={experience.title}>
           {experience.title}
         </p>
         <div className="mt-1 flex items-start justify-between gap-3">
-          <p className="min-w-0 truncate text-sm text-zinc-600" title={experience.location}>
+          <p className="min-w-0 truncate text-sm text-zinc-600 dark:text-zinc-400" title={experience.location}>
             {experience.location}
           </p>
-          <p className="shrink-0 whitespace-nowrap text-[15px] font-semibold text-black">
+          <p className="shrink-0 whitespace-nowrap text-[15px] font-semibold text-black dark:text-white">
             {formatFrom(experience.priceFrom, experience.currency)}
           </p>
         </div>
-        <div className="mt-2 flex items-center gap-2 text-xs text-zinc-600">
-          <span className="inline-flex items-center gap-1 font-semibold text-black">
+        <div className="mt-2 flex items-center gap-2 text-xs text-zinc-600 dark:text-zinc-400">
+          <span className="inline-flex items-center gap-1 font-semibold text-black dark:text-white">
             <StarIcon className="h-4 w-4" />
             {experience.rating.toFixed(1)}
           </span>
           <span className="text-zinc-300">•</span>
           <span>({experience.reviewCount})</span>
-          <span className="ml-auto rounded-full bg-zinc-100 px-2 py-1 text-[11px] font-semibold text-zinc-700">
+          <span className="ml-auto rounded-full bg-zinc-100 px-2 py-1 text-[11px] font-semibold text-zinc-700 dark:bg-zinc-900 dark:text-zinc-300">
             {experience.tag}
           </span>
         </div>
@@ -53,7 +53,7 @@ export function ExperienceCard({ experience }: { experience: Experience }) {
 
 function ImageLoader() {
   return (
-    <div className="absolute inset-0 animate-pulse bg-[linear-gradient(110deg,#f4f4f5,45%,#e4e4e7,55%,#f4f4f5)] bg-[length:200%_100%]" />
+    <div className="absolute inset-0 animate-pulse bg-[linear-gradient(110deg,#f4f4f5,45%,#e4e4e7,55%,#f4f4f5)] bg-[length:200%_100%] dark:bg-[linear-gradient(110deg,#18181b,45%,#27272a,55%,#18181b)]" />
   );
 }
 
@@ -64,4 +64,3 @@ function StarIcon({ className }: { className?: string }) {
     </svg>
   );
 }
-

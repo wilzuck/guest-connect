@@ -56,9 +56,9 @@ export function Navbar() {
     <>
       <header
         className={[
-          "fixed left-0 right-0 top-0 z-50 bg-white/80 backdrop-blur transition-transform duration-200 will-change-transform",
+          "fixed left-0 right-0 top-0 z-50 bg-white/80 backdrop-blur transition-transform duration-200 will-change-transform dark:bg-zinc-950/85",
           visible ? "translate-y-0" : "-translate-y-full",
-          elevated ? "shadow-sm shadow-black/10" : "",
+          elevated ? "shadow-sm shadow-black/10 dark:shadow-black/50" : "",
         ].join(" ")}
       >
         <Container
@@ -74,7 +74,7 @@ export function Navbar() {
               <Link
                 key={l.href}
                 href={l.href}
-                className="text-sm font-medium text-zinc-600 hover:text-black transition-colors"
+                className="text-sm font-medium text-zinc-600 transition-colors hover:text-black dark:text-zinc-300 dark:hover:text-white"
               >
                 {l.label}
               </Link>
@@ -88,12 +88,12 @@ export function Navbar() {
             href={`/${locale}/search`}
             variant="outline"
             size="md"
-            className="w-full justify-start gap-3 rounded-2xl border border-black/10 bg-white px-4 py-3 shadow-sm shadow-black/5"
+            className="w-full justify-start gap-3 rounded-2xl border border-black/10 bg-white px-4 py-3 shadow-sm shadow-black/5 dark:border-zinc-800 dark:bg-zinc-950 dark:shadow-black/30"
           >
             <SearchIcon className="h-4 w-4" />
             <div className="min-w-0 text-left">
-              <p className="truncate text-sm font-semibold text-black">{t("search")}</p>
-              <p className="truncate text-xs text-zinc-500">
+              <p className="truncate text-sm font-semibold text-black dark:text-white">{t("search")}</p>
+              <p className="truncate text-xs text-zinc-500 dark:text-zinc-400">
                 {t("searchHint")}
               </p>
             </div>

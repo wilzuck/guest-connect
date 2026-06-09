@@ -6,16 +6,16 @@ type ButtonVariant = "primary" | "secondary" | "ghost" | "outline";
 type ButtonSize = "sm" | "md" | "lg";
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-full font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20 disabled:pointer-events-none disabled:opacity-50";
+  "inline-flex items-center justify-center gap-2 rounded-full font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20 disabled:pointer-events-none disabled:opacity-50 dark:focus-visible:ring-white/25";
 
 const variants: Record<ButtonVariant, string> = {
   primary:
-    "bg-black text-white hover:bg-black/90 shadow-sm shadow-black/10",
+    "bg-black text-white hover:bg-black/90 shadow-sm shadow-black/10 dark:bg-white dark:text-black dark:hover:bg-zinc-200 dark:shadow-black/40",
   secondary:
-    "bg-white text-black hover:bg-zinc-50 border border-black/10 shadow-sm",
+    "bg-white text-black hover:bg-zinc-50 border border-black/10 shadow-sm dark:border-zinc-800 dark:bg-zinc-950 dark:text-white dark:hover:bg-zinc-900",
   outline:
-    "border border-black/15 bg-transparent text-black hover:bg-black/[0.04]",
-  ghost: "bg-transparent text-black hover:bg-black/[0.04]",
+    "border border-black/15 bg-transparent text-black hover:bg-black/[0.04] dark:border-zinc-800 dark:text-white dark:hover:bg-white/10",
+  ghost: "bg-transparent text-black hover:bg-black/[0.04] dark:text-white dark:hover:bg-white/10",
 };
 
 const sizes: Record<ButtonSize, string> = {

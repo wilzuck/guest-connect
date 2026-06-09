@@ -55,13 +55,13 @@ export function Select({
         <SelectPrimitive.Trigger
           aria-label={ariaLabel ?? placeholder}
           className={cn(
-            "flex h-11 w-full items-center justify-between rounded-xl border border-black/10 bg-white px-4 text-sm text-black shadow-sm shadow-black/5 outline-none transition placeholder:text-zinc-500 focus:border-black/20 focus:ring-4 focus:ring-black/5 disabled:cursor-not-allowed disabled:opacity-50",
+            "flex h-11 w-full items-center justify-between rounded-xl border border-black/10 bg-white px-4 text-sm text-black shadow-sm shadow-black/5 outline-none transition placeholder:text-zinc-500 focus:border-black/20 focus:ring-4 focus:ring-black/5 disabled:cursor-not-allowed disabled:opacity-50 dark:border-zinc-800 dark:bg-zinc-950 dark:text-white dark:shadow-black/30 dark:focus:border-zinc-600 dark:focus:ring-white/10",
             className,
           )}
         >
           <SelectPrimitive.Value placeholder={placeholder} />
           <SelectPrimitive.Icon asChild>
-            <ChevronDown className="h-4 w-4 text-zinc-500" aria-hidden="true" />
+            <ChevronDown className="h-4 w-4 text-zinc-500 dark:text-zinc-400" aria-hidden="true" />
           </SelectPrimitive.Icon>
         </SelectPrimitive.Trigger>
 
@@ -69,14 +69,14 @@ export function Select({
           <SelectPrimitive.Content
             position="popper"
             sideOffset={6}
-            className="z-[80] max-h-72 min-w-[var(--radix-select-trigger-width)] overflow-hidden rounded-xl border border-black/10 bg-white p-1 text-black shadow-xl shadow-black/10 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"
+            className="z-[80] max-h-72 min-w-[var(--radix-select-trigger-width)] overflow-hidden rounded-xl border border-black/10 bg-white p-1 text-black shadow-xl shadow-black/10 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 dark:border-zinc-800 dark:bg-zinc-950 dark:text-white dark:shadow-black/50"
           >
             <SelectPrimitive.Viewport>
               {options.map((option) => (
                 <SelectPrimitive.Item
                   key={option.value}
                   value={option.value}
-                  className="relative flex h-10 cursor-default select-none items-center rounded-lg py-2 pl-9 pr-3 text-sm outline-none data-[highlighted]:bg-zinc-100 data-[highlighted]:text-black data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                  className="relative flex h-10 cursor-default select-none items-center rounded-lg py-2 pl-9 pr-3 text-sm outline-none data-[highlighted]:bg-zinc-100 data-[highlighted]:text-black data-[disabled]:pointer-events-none data-[disabled]:opacity-50 dark:data-[highlighted]:bg-zinc-900 dark:data-[highlighted]:text-white"
                 >
                   <span className="absolute left-3 flex h-4 w-4 items-center justify-center">
                     <SelectPrimitive.ItemIndicator>
