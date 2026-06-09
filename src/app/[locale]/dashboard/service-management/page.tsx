@@ -54,7 +54,7 @@ export default async function Page() {
   ];
 
   return (
-    <div className="grid gap-6">
+    <div className="grid gap-6 px-4 py-4 lg:px-6">
       <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
         <div>
           <h1 className="text-xl font-semibold tracking-tight text-[#202024]">Overview</h1>
