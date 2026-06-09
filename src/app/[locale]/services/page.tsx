@@ -2,9 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { getLocale, getTranslations } from "next-intl/server";
-import { Camera, Gamepad2, Gift, Leaf, Music, Scissors, Sparkles, Wrench } from "lucide-react";
+import { Camera, Gamepad2, Gift, Leaf, Music, Scissors, Search, Sparkles, Wrench } from "lucide-react";
 import { Container } from "@/components/ui/Container";
-import { SearchBar } from "@/components/SearchBar";
 import { FilterSidebarButton } from "@/components/explore/FilterSidebarButton";
 import { ExploreFiltersBar } from "@/components/explore/ExploreFiltersBar";
 import { CatalogEmptyState } from "@/components/explore/CatalogEmptyState";
@@ -26,6 +25,7 @@ type ServiceItem = {
 type PageProps = {
   searchParams?: Promise<{
     category?: string;
+    q?: string;
     price?: string;
     sort?: string;
   }>;
@@ -65,6 +65,7 @@ export default async function Page({ searchParams }: PageProps) {
   const t = await getTranslations("servicesPage");
   const sp = (await searchParams) ?? {};
   const category = sp.category ?? "all";
+  const query = sp.q?.trim() ?? "";
   const price = sp.price ?? "all";
   const sort = sp.sort ?? "recommended";
 
@@ -72,6 +73,13 @@ export default async function Page({ searchParams }: PageProps) {
 
   if (category !== "all") {
     services = services.filter((service) => service.category === category);
+  }
+
+  if (query) {
+    const q = query.toLowerCase();
+    services = services.filter((service) =>
+      `${service.title} ${service.category} ${service.location} ${service.description}`.toLowerCase().includes(q),
+    );
   }
 
   if (price !== "all") {
@@ -160,9 +168,29 @@ export default async function Page({ searchParams }: PageProps) {
             Trouvez des services locaux inspirés des meilleures marketplaces : photographie,
             couture, réparation, jeux, distraction, accueil et préparation de logement.
           </p>
-          <div className="mt-8">
-            <SearchBar />
-          </div>
+          <form action={`/${locale}/services`} className="mt-8">
+            <div className="flex flex-col gap-2 rounded-2xl border border-black/10 bg-white/80 p-2 backdrop-blur-sm sm:flex-row">
+              <label className="flex h-14 min-w-0 flex-1 items-center gap-3 rounded-xl bg-white px-4">
+                <Search className="h-4 w-4 shrink-0 text-zinc-400" aria-hidden="true" />
+                <input
+                  name="q"
+                  defaultValue={query}
+                  placeholder="Rechercher un service, une ville, une catégorie..."
+                  className="min-w-0 flex-1 bg-transparent text-sm text-black outline-none placeholder:text-zinc-500"
+                />
+              </label>
+              {category !== "all" ? <input type="hidden" name="category" value={category} /> : null}
+              {price !== "all" ? <input type="hidden" name="price" value={price} /> : null}
+              {sort !== "recommended" ? <input type="hidden" name="sort" value={sort} /> : null}
+              <button
+                type="submit"
+                className="inline-flex h-14 items-center justify-center gap-2 rounded-xl bg-black px-6 text-sm font-semibold text-white transition hover:bg-black/90"
+              >
+                <Search className="h-4 w-4" aria-hidden="true" />
+                Rechercher
+              </button>
+            </div>
+          </form>
         </Container>
       </section>
 

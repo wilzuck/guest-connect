@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getLocale, getTranslations } from "next-intl/server";
+import { Search } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { experiences } from "@/lib/mock/experiences";
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
 };
 
 type PageProps = {
-  searchParams: Promise<{ tag?: string }>;
+  searchParams: Promise<{ tag?: string; q?: string }>;
 };
 
 export default async function Page({ searchParams }: PageProps) {
@@ -23,6 +24,7 @@ export default async function Page({ searchParams }: PageProps) {
   const t = await getTranslations("experiencesPage");
   const sp = await searchParams;
   const activeTag = sp.tag?.trim() || "all";
+  const query = sp.q?.trim() ?? "";
 
   const tags: Array<{ key: string; label: string }> = [
     { key: "all", label: t("all") },
@@ -33,13 +35,41 @@ export default async function Page({ searchParams }: PageProps) {
     { key: "Business", label: t("tagBusiness") },
   ];
 
-  const filtered = activeTag === "all" ? experiences : experiences.filter((experience) => experience.tag === activeTag);
+  const filteredByTag = activeTag === "all" ? experiences : experiences.filter((experience) => experience.tag === activeTag);
+  const filtered = query
+    ? filteredByTag.filter((experience) =>
+        `${experience.title} ${experience.location} ${experience.tag}`
+          .toLowerCase()
+          .includes(query.toLowerCase()),
+      )
+    : filteredByTag;
 
   return (
     <div className="bg-white">
       <section className="border-b border-black/5 bg-white">
         <Container className="py-10 sm:py-14">
           <SectionHeading eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
+          <form action={`/${locale}/experiences`} className="mt-8">
+            <div className="flex flex-col gap-2 rounded-2xl border border-black/10 bg-white/80 p-2 backdrop-blur-sm sm:flex-row">
+              <label className="flex h-14 min-w-0 flex-1 items-center gap-3 rounded-xl bg-white px-4">
+                <Search className="h-4 w-4 shrink-0 text-zinc-400" aria-hidden="true" />
+                <input
+                  name="q"
+                  defaultValue={query}
+                  placeholder="Rechercher une expérience, une ville, une ambiance..."
+                  className="min-w-0 flex-1 bg-transparent text-sm text-black outline-none placeholder:text-zinc-500"
+                />
+              </label>
+              {activeTag !== "all" ? <input type="hidden" name="tag" value={activeTag} /> : null}
+              <button
+                type="submit"
+                className="inline-flex h-14 items-center justify-center gap-2 rounded-xl bg-black px-6 text-sm font-semibold text-white transition hover:bg-black/90"
+              >
+                <Search className="h-4 w-4" aria-hidden="true" />
+                Rechercher
+              </button>
+            </div>
+          </form>
           <ExploreFiltersBar
             className="mt-8"
             leading={

@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import { useMemo, useState, useTransition, type ReactNode } from "react";
-import { ChevronDown, Pencil, Plus, Search, Trash2 } from "lucide-react";
+import { ChevronDown, Ellipsis, Eye, Pencil, Plus, Search, Trash2, X } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
-import { ButtonLink } from "@/components/ui/Button";
+import { Button, ButtonLink } from "@/components/ui/Button";
 
 export type Column = {
   key: string;
@@ -31,7 +31,13 @@ export function EntityTableClient({
 }) {
   const [rows, setRows] = useState(initialRows);
   const [query, setQuery] = useState("");
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const [openMenuId, setOpenMenuId] = useState<string | null>(null);
+  const [previewRow, setPreviewRow] = useState<Record<string, unknown> | null>(null);
   const [pending, startTransition] = useTransition();
+
+  const visibleColumns = columns.slice(0, 2);
+  const gridTemplate = "40px minmax(220px,1.55fr) minmax(140px,1fr) minmax(132px,.8fr) 104px";
 
   const filteredRows = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -39,12 +45,27 @@ export function EntityTableClient({
   }, [query, rows]);
 
   const groupedRows = useMemo(() => groupRows(filteredRows), [filteredRows]);
-  const gridTemplate = `minmax(240px,1.5fr) repeat(${Math.max(columns.length - 1, 0)}, minmax(120px,1fr)) minmax(108px,.7fr) minmax(132px,.8fr) 104px`;
 
   async function onDelete(id: string) {
     if (!confirm("Supprimer cet élément ?")) return;
     await fetch(`/api/db/${entity}/${encodeURIComponent(id)}`, { method: "DELETE" });
-    startTransition(() => setRows((current) => current.filter((row) => row.id !== id)));
+    startTransition(() => setRows((current) => current.filter((row) => String(row.id ?? "") !== id)));
+    setSelectedIds((current) => current.filter((selectedId) => selectedId !== id));
+  }
+
+  async function onBulkDelete() {
+    if (selectedIds.length === 0) return;
+    if (!confirm(`Supprimer ${selectedIds.length} élément(s) ?`)) return;
+
+    await Promise.all(
+      selectedIds.map((id) => fetch(`/api/db/${entity}/${encodeURIComponent(id)}`, { method: "DELETE" })),
+    );
+    startTransition(() => setRows((current) => current.filter((row) => !selectedIds.includes(String(row.id ?? "")))));
+    setSelectedIds([]);
+  }
+
+  function toggleSelected(id: string) {
+    setSelectedIds((current) => (current.includes(id) ? current.filter((item) => item !== id) : [...current, id]));
   }
 
   return (
@@ -68,23 +89,37 @@ export function EntityTableClient({
         </label>
 
         <div className="flex sm:justify-end">
-          <ButtonLink href={createHref} variant="primary" size="sm" className="h-10 rounded-lg">
-            <Plus className="h-4 w-4" aria-hidden="true" />
-            Ajouter
-          </ButtonLink>
+          {selectedIds.length > 0 ? (
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              className="h-10 rounded-lg text-[#E04F5F]"
+              disabled={pending}
+              onClick={onBulkDelete}
+            >
+              <Trash2 className="h-4 w-4" aria-hidden="true" />
+              Supprimer ({selectedIds.length})
+            </Button>
+          ) : (
+            <ButtonLink href={createHref} variant="primary" size="sm" className="h-10 rounded-lg">
+              <Plus className="h-4 w-4" aria-hidden="true" />
+              Ajouter
+            </ButtonLink>
+          )}
         </div>
       </div>
 
       <div className="overflow-x-auto border-y border-[#E8E8EC] bg-white">
-        <div className="min-w-[920px]">
+        <div className="min-w-[760px]">
           <div
             className="grid border-b border-[#E8E8EC] bg-[#FAFAFB] px-4 py-3 text-xs font-medium text-[#8E8E93]"
             style={{ gridTemplateColumns: gridTemplate, gap: "0.75rem" }}
           >
-            {columns.map((column) => (
+            <div />
+            {visibleColumns.map((column) => (
               <div key={column.key}>{column.label}</div>
             ))}
-            <div>Priorité</div>
             <div>Date</div>
             <div className="text-right">Actions</div>
           </div>
@@ -101,14 +136,31 @@ export function EntityTableClient({
                 {group.rows.map((row) => {
                   const id = String(row.id ?? "");
                   if (!id) return null;
+                  const selected = selectedIds.includes(id);
+                  const showValidation = String(row.validationStatus ?? row.status ?? "").toLowerCase().includes("pending");
 
                   return (
                     <div
                       key={id}
-                      className="grid px-4 py-2.5 text-sm transition hover:bg-[#FAFAFB]"
+                      className="group/row grid items-center px-4 py-2.5 text-sm transition hover:bg-[#FAFAFB]"
                       style={{ gridTemplateColumns: gridTemplate, gap: "0.75rem" }}
                     >
-                      {columns.map((column, index) => {
+                      <label
+                        className={[
+                          "grid h-8 w-8 place-items-center rounded-lg transition",
+                          selected ? "opacity-100" : "opacity-0 group-hover/row:opacity-100 focus-within:opacity-100",
+                        ].join(" ")}
+                        aria-label="Sélectionner la ligne"
+                      >
+                        <input
+                          type="checkbox"
+                          checked={selected}
+                          onChange={() => toggleSelected(id)}
+                          className="h-4 w-4 accent-black"
+                        />
+                      </label>
+
+                      {visibleColumns.map((column, index) => {
                         const renderer = column.renderKey ? renderers[column.renderKey] : undefined;
 
                         return (
@@ -120,29 +172,54 @@ export function EntityTableClient({
                           </div>
                         );
                       })}
-                      <div>
-                        <PriorityBadge row={row} />
-                      </div>
+
                       <div className="truncate text-[#73737A]">{getDisplayDate(row)}</div>
-                      <div className="flex items-center justify-end gap-2">
-                        <Link
-                          href={`${editBaseHref}/${id}`}
-                          className="grid h-8 w-8 place-items-center rounded-lg border border-[#E8E8EC] text-[#73737A] transition hover:bg-[#F7F7F8] hover:text-[#202024]"
-                          aria-label="Modifier"
-                          title="Modifier"
-                        >
-                          <Pencil className="h-4 w-4" aria-hidden="true" />
-                        </Link>
+
+                      <div className="relative flex items-center justify-end gap-2">
+                        {showValidation ? <PriorityBadge row={row} /> : null}
                         <button
                           type="button"
-                          onClick={() => onDelete(id)}
-                          disabled={pending}
-                          className="grid h-8 w-8 place-items-center rounded-lg border border-[#E8E8EC] text-[#E04F5F] transition hover:bg-[#FFF3F4] disabled:opacity-50"
-                          aria-label="Supprimer"
-                          title="Supprimer"
+                          className="grid h-8 w-8 place-items-center rounded-lg border border-[#E8E8EC] text-[#73737A] transition hover:bg-[#F7F7F8] hover:text-[#202024]"
+                          aria-label="Actions"
+                          onClick={() => setOpenMenuId((current) => (current === id ? null : id))}
                         >
-                          <Trash2 className="h-4 w-4" aria-hidden="true" />
+                          <Ellipsis className="h-4 w-4" aria-hidden="true" />
                         </button>
+
+                        {openMenuId === id ? (
+                          <div className="absolute right-0 top-9 z-20 w-44 overflow-hidden rounded-xl border border-[#E8E8EC] bg-white p-1 shadow-lg shadow-black/10">
+                            <button
+                              type="button"
+                              className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm text-[#202024] hover:bg-[#F7F7F8]"
+                              onClick={() => {
+                                setPreviewRow(row);
+                                setOpenMenuId(null);
+                              }}
+                            >
+                              <Eye className="h-4 w-4" aria-hidden="true" />
+                              Visualiser
+                            </button>
+                            <Link
+                              href={`${editBaseHref}/${id}`}
+                              className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-[#202024] hover:bg-[#F7F7F8]"
+                            >
+                              <Pencil className="h-4 w-4" aria-hidden="true" />
+                              Éditer
+                            </Link>
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setOpenMenuId(null);
+                                onDelete(id);
+                              }}
+                              disabled={pending}
+                              className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm text-[#E04F5F] hover:bg-[#FFF3F4] disabled:opacity-50"
+                            >
+                              <Trash2 className="h-4 w-4" aria-hidden="true" />
+                              Supprimer
+                            </button>
+                          </div>
+                        ) : null}
                       </div>
                     </div>
                   );
@@ -152,6 +229,37 @@ export function EntityTableClient({
           ))}
         </div>
       </div>
+
+      {previewRow ? (
+        <div className="fixed inset-0 z-50 grid place-items-center bg-black/40 px-4 py-8" role="dialog" aria-modal="true">
+          <div className="max-h-[min(720px,90dvh)] w-full max-w-2xl overflow-hidden rounded-2xl bg-white shadow-2xl shadow-black/20">
+            <div className="flex items-center justify-between border-b border-[#E8E8EC] px-5 py-4">
+              <div>
+                <p className="text-sm font-semibold text-[#202024]">Détail de l'élément</p>
+                <p className="mt-1 text-xs text-[#8E8E93]">{String(previewRow.id ?? "")}</p>
+              </div>
+              <button
+                type="button"
+                className="grid h-9 w-9 place-items-center rounded-full hover:bg-[#F7F7F8]"
+                onClick={() => setPreviewRow(null)}
+                aria-label="Fermer"
+              >
+                <X className="h-4 w-4" aria-hidden="true" />
+              </button>
+            </div>
+            <div className="max-h-[calc(min(720px,90dvh)-73px)] overflow-y-auto p-5">
+              <dl className="grid gap-3 sm:grid-cols-2">
+                {Object.entries(previewRow).map(([key, value]) => (
+                  <div key={key} className="rounded-xl border border-[#E8E8EC] bg-[#FAFAFB] p-3">
+                    <dt className="text-xs font-semibold uppercase tracking-[0.14em] text-[#8E8E93]">{key}</dt>
+                    <dd className="mt-2 whitespace-pre-wrap break-words text-sm text-[#202024]">{formatPreviewValue(value)}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </section>
   );
 }
@@ -160,7 +268,7 @@ function renderCell(row: Record<string, unknown>, key: string) {
   const value = row[key];
   if (key === "validationStatus" || key === "status") return <StatusBadge value={value} />;
   if (key === "active") return <StatusBadge value={value ? "active" : "inactive"} />;
-  return String(value ?? "—");
+  return String(value ?? "-");
 }
 
 function StatusBadge({ value }: { value: unknown }) {
@@ -179,7 +287,7 @@ function StatusBadge({ value }: { value: unknown }) {
 
 function PriorityBadge({ row }: { row: Record<string, unknown> }) {
   const group = getRowGroup(row);
-  const label = group === "pending" ? "High" : group === "active" ? "Medium" : "Low";
+  const label = group === "pending" ? "Valider" : group === "active" ? "Moyen" : "OK";
   const className =
     group === "pending"
       ? "rounded-md border-red-100 bg-red-50 text-red-700 shadow-none"
@@ -213,4 +321,10 @@ function getDisplayDate(row: Record<string, unknown>) {
   const value = row.updatedAt ?? row.createdAt ?? row.validationUpdatedAt ?? row.submittedAt;
   if (typeof value === "string" && value.length > 0) return value.slice(0, 16);
   return "Aujourd'hui";
+}
+
+function formatPreviewValue(value: unknown) {
+  if (value == null || value === "") return "-";
+  if (typeof value === "object") return JSON.stringify(value, null, 2);
+  return String(value);
 }

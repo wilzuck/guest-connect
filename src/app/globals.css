@@ -19,6 +19,67 @@ body {
   overflow-y: scroll;
 }
 
+.dark {
+  color-scheme: dark;
+}
+
+.dark body {
+  background: #09090b;
+  color: #f4f4f5;
+}
+
+.dark .bg-white,
+.dark .bg-white\/80,
+.dark .bg-white\/95 {
+  background-color: #09090b !important;
+}
+
+.dark .bg-zinc-50,
+.dark .bg-zinc-100,
+.dark .bg-\[\#F7F7F8\],
+.dark .bg-\[\#FAFAFB\] {
+  background-color: #18181b !important;
+}
+
+.dark .text-black,
+.dark .text-\[\#202024\] {
+  color: #fafafa !important;
+}
+
+.dark .text-zinc-600,
+.dark .text-zinc-700,
+.dark .text-\[\#5F5F66\],
+.dark .text-\[\#73737A\] {
+  color: #d4d4d8 !important;
+}
+
+.dark .text-zinc-500,
+.dark .text-\[\#8E8E93\],
+.dark .text-\[\#A4A4AA\],
+.dark .text-\[\#B1B1B7\] {
+  color: #a1a1aa !important;
+}
+
+.dark .border-black\/5,
+.dark .border-black\/10,
+.dark .border-black\/15,
+.dark .border-\[\#E8E8EC\],
+.dark .border-\[\#EFEFF2\] {
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+.dark .placeholder\:text-zinc-500::placeholder,
+.dark .placeholder\:text-\[\#B1B1B7\]::placeholder {
+  color: #71717a !important;
+}
+
+.dark .shadow-black\/5,
+.dark .shadow-black\/10,
+.dark .shadow-black\/15,
+.dark .shadow-black\/20 {
+  --tw-shadow-color: rgba(0, 0, 0, 0.45) !important;
+}
+
 /* react-day-picker minimal reset (shadcn-like) */
 .rdp {
   --rdp-cell-size: 2.25rem;

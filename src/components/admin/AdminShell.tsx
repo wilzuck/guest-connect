@@ -54,6 +54,7 @@ export function AdminShell({
     { href: `/${locale}/dashboard/service-management`, label: "Vue d'ensemble", icon: LayoutDashboard, permission: "admin.read" },
     { href: `/${locale}/dashboard/service-management/approvals`, label: "À valider", icon: ClipboardCheck, permission: "admin.read" },
     { href: `/${locale}/dashboard/service-management/listings`, label: "Logements", icon: Building2, permission: "listings.manage" },
+    { href: `/${locale}/dashboard/service-management/host-listings`, label: "Gestion hôtes", icon: Users, permission: "listings.manage" },
     { href: `/${locale}/dashboard/service-management/locations`, label: "Lieux", icon: MapPin, permission: "locations.manage" },
     { href: `/${locale}/dashboard/service-management/services`, label: "Services", icon: BriefcaseBusiness, permission: "services.manage" },
     { href: `/${locale}/dashboard/service-management/reservations`, label: "Réservations", icon: BookOpen, permission: "reservations.read" },
@@ -130,18 +131,18 @@ export function AdminShell({
           </div>
         </aside>
 
-        <div className="flex min-w-0 flex-1 flex-col h-dvh overflow-auto pb-10 xl:pb-12 ">
-          <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-[#E8E8EC] bg-white/95 px-4 backdrop-blur lg:px-6">
+        <div className="flex min-w-0 flex-1 flex-col h-dvh overflow-auto">
+          <header className="sticky py-4 top-0 z-30 flex h-16 items-center justify-between border-b border-[#E8E8EC] bg-white/95 px-4 backdrop-blur lg:px-6">
             <p className="text-lg font-semibold tracking-tight text-[#202024]">Dashboard</p>
             <div className="flex items-center gap-2">
               <ButtonLink
                 href={`/${locale}/dashboard/service-management/listings/new`}
-                variant="primary"
+                variant="outline"
                 size="sm"
                 className="h-10 rounded-lg"
               >
                 <Plus className="h-4 w-4" aria-hidden="true" />
-                Ajouter
+                Nouveau
               </ButtonLink>
             </div>
           </header>

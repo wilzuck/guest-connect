@@ -37,7 +37,7 @@ export function UserMenu() {
 
   const space: UserMenuItem[] = [
     { label: t("messages"), href: `/${locale}/messages`, icon: MessageCircle, permission: "messages.read" },
-    { label: labels.manageAccount, href: `/${locale}/profile`, icon: UserRoundCog },
+    { label: labels.manageAccount, href: `/${locale}/dashboard`, icon: UserRoundCog },
     {
       label: labels.manageServices,
       href: `/${locale}/dashboard/service-management`,

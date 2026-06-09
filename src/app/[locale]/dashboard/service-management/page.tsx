@@ -54,8 +54,8 @@ export default async function Page() {
   ];
 
   return (
-    <div className="grid gap-6 px-4 py-4 lg:px-6">
-      <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
+    <div className="grid min-w-0 gap-6 px-4 py-4 lg:px-6">
+      <div className="grid min-w-0 gap-3 xl:grid-cols-[1fr_auto] xl:items-center">
         <div>
           <h1 className="text-xl font-semibold tracking-tight text-[#202024]">Overview</h1>
           <p className="mt-1 text-sm text-[#8E8E93]">
@@ -63,8 +63,8 @@ export default async function Page() {
           </p>
         </div>
 
-        <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
-          <label className="flex h-10 min-w-0 items-center gap-2 rounded-lg border border-[#E8E8EC] bg-white px-3 text-sm text-[#8E8E93] sm:w-72">
+        <div className="grid min-w-0 gap-2 sm:grid-cols-[minmax(0,18rem)_auto] sm:items-center">
+          <label className="flex h-10 min-w-0 items-center gap-2 rounded-lg border border-[#E8E8EC] bg-white px-3 text-sm text-[#8E8E93]">
             <Search className="h-4 w-4" aria-hidden="true" />
             <input
               placeholder="Rechercher..."
@@ -83,9 +83,9 @@ export default async function Page() {
         </div>
       </div>
 
-      <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+      <section className="grid min-w-0 gap-4 sm:grid-cols-2 2xl:grid-cols-4">
         {stats.map((stat) => (
-          <div key={stat.label} className="rounded-xl border border-[#E8E8EC] bg-white p-4">
+          <div key={stat.label} className="min-w-0 rounded-xl border border-[#E8E8EC] bg-white p-4">
             <p className="text-sm font-medium text-[#5D5D65]">{stat.label}</p>
             <div className="mt-2 flex items-end justify-between gap-3">
               <p className="text-2xl font-semibold tracking-tight text-[#202024]">{stat.value}</p>
@@ -105,7 +105,7 @@ export default async function Page() {
       </section>
 
       <section>
-        <div className="mb-4 flex items-center justify-between">
+        <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <h2 className="text-lg font-semibold tracking-tight text-[#202024]">Active views</h2>
           <Link
             href={`/${locale}/dashboard/service-management/listings`}
@@ -115,20 +115,20 @@ export default async function Page() {
           </Link>
         </div>
 
-        <div className="grid gap-4 xl:grid-cols-2 2xl:grid-cols-3">
+        <div className="grid min-w-0 gap-4 lg:grid-cols-2 2xl:grid-cols-3">
           {collections.map((item) => {
             const Icon = item.icon;
 
             return (
-              <article key={item.title} className="rounded-xl border border-[#E8E8EC] bg-white p-4">
-                <div className="flex items-start justify-between gap-4">
+              <article key={item.title} className="min-w-0 rounded-xl border border-[#E8E8EC] bg-white p-4">
+                <div className="flex min-w-0 items-start justify-between gap-4">
                   <div className="flex min-w-0 items-center gap-3">
                     <span className="grid h-10 w-10 place-items-center rounded-full bg-[#F7F7F8] text-[#202024]">
                       <Icon className="h-5 w-5" aria-hidden="true" />
                     </span>
                     <div className="min-w-0">
-                      <h3 className="truncate text-sm font-semibold text-[#202024]">{item.title}</h3>
-                      <p className="mt-1 truncate text-sm text-[#8E8E93]">{item.description}</p>
+                      <h3 className="text-sm font-semibold text-[#202024]">{item.title}</h3>
+                      <p className="mt-1 text-sm leading-5 text-[#8E8E93]">{item.description}</p>
                     </div>
                   </div>
                   <MoreVertical className="h-5 w-5 text-[#8E8E93]" aria-hidden="true" />
@@ -149,17 +149,17 @@ export default async function Page() {
                   </div>
                 </div>
 
-                <div className="mt-4 flex justify-end gap-2">
+                <div className="mt-4 grid grid-cols-2 gap-2 sm:flex sm:justify-end">
                   <Link
                     href={item.createHref}
-                    className="grid h-9 w-9 place-items-center rounded-lg border border-[#E8E8EC] text-[#6D4AFF]"
+                    className="grid h-9 place-items-center rounded-lg border border-[#E8E8EC] text-[#6D4AFF] sm:w-9"
                     aria-label="Ajouter"
                   >
                     <Plus className="h-4 w-4" aria-hidden="true" />
                   </Link>
                   <Link
                     href={item.href}
-                    className="grid h-9 w-9 place-items-center rounded-lg border border-[#E8E8EC] text-[#73737A]"
+                    className="grid h-9 place-items-center rounded-lg border border-[#E8E8EC] text-[#73737A] sm:w-9"
                     aria-label="Modifier"
                   >
                     <Pencil className="h-4 w-4" aria-hidden="true" />

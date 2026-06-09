@@ -14,7 +14,13 @@ const fallbackPages = [
 export default async function Page() {
   const locale = await getLocale();
   const db = await readDb();
-  const rows = db.sitePages?.length ? db.sitePages : fallbackPages;
+  const rows = (db.sitePages?.length ? db.sitePages : fallbackPages).map((page) => ({
+    ...page,
+    title: sanitizeText(page.title),
+    path: sanitizeText(page.path),
+    owner: sanitizeText(page.owner),
+    status: sanitizeText(page.status),
+  }));
 
   return (
     <EntityTableClient
@@ -38,4 +44,11 @@ export default async function Page() {
       }}
     />
   );
+}
+
+function sanitizeText(value: unknown) {
+  return String(value ?? "")
+    .replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi, "")
+    .replace(/<[^>]*>/g, "")
+    .trim();
 }
