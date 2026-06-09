@@ -16,13 +16,13 @@ export function MarketingPageLayout({
   children,
 }: MarketingPageLayoutProps) {
   return (
-    <div className="bg-white">
-      <section className="border-b border-black/5 bg-white">
+    <div >
+      <section className="border-b border-zinc-200 dark:border-zinc-800">
         <Container className="py-10 sm:py-14">
           <SectionHeading eyebrow={eyebrow} title={title} description={description} />
         </Container>
       </section>
-      <section className="bg-white">
+      <section >
         <Container className="py-12 sm:py-14">{children}</Container>
       </section>
     </div>

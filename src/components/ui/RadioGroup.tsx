@@ -34,7 +34,7 @@ export function RadioGroup({ name, options, defaultValue, className, onChange }:
             className="mt-0.5 h-4 w-4 accent-black dark:accent-white"
           />
           <span>
-            <span className="block font-semibold text-black dark:text-white">{option.label}</span>
+            <span className="block font-semibold  dark:text-white">{option.label}</span>
             {option.description ? <span className="mt-1 block text-xs text-zinc-500 dark:text-zinc-400">{option.description}</span> : null}
           </span>
         </label>

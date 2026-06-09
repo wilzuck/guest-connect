@@ -17,7 +17,7 @@ export function Calendar({ className, classNames, showOutsideDays = true, ...pro
         [UI.Months]: "flex flex-col gap-6 lg:flex-row lg:gap-6",
         [UI.Month]: "space-y-4",
         [UI.MonthCaption]: "flex items-center justify-between px-2 pt-1",
-        [UI.CaptionLabel]: "text-sm font-semibold text-black",
+        [UI.CaptionLabel]: "text-sm font-semibold ",
         [UI.Nav]: "flex items-center gap-2",
         [UI.PreviousMonthButton]:
           "h-9 w-9 rounded-xl border border-black/10 bg-white text-zinc-700 shadow-sm shadow-black/5 hover:bg-zinc-50 transition",

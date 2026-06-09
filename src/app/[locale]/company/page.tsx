@@ -49,7 +49,7 @@ export default async function Page() {
           <div className="mt-8 grid gap-4 sm:grid-cols-2">
             {values.map((v) => (
               <Card key={v.t} className="p-6">
-                <p className="text-sm font-semibold text-black">{v.t}</p>
+                <p className="text-sm font-semibold ">{v.t}</p>
                 <p className="mt-2 text-sm leading-6 text-zinc-600">{v.d}</p>
               </Card>
             ))}
@@ -58,7 +58,7 @@ export default async function Page() {
 
         <div className="lg:col-span-5">
           <Card className="p-6">
-            <p className="text-sm font-semibold text-black">{isEn ? "What we verify" : "Ce que l’on vérifie"}</p>
+            <p className="text-sm font-semibold ">{isEn ? "What we verify" : "Ce que l’on vérifie"}</p>
             <ul className="mt-3 grid gap-2 text-sm text-zinc-600">
               <li>• {isEn ? "Host identity & contact details" : "Identité de l’hôte & coordonnées"}</li>
               <li>• {isEn ? "Photo accuracy & listing clarity" : "Exactitude des photos & clarté de l’annonce"}</li>

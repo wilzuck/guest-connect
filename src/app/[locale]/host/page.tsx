@@ -9,8 +9,8 @@ export default async function Page() {
   const t = await getTranslations("hostPage");
 
   return (
-    <div className="bg-white">
-      <section className="border-b border-black/5 bg-white">
+    <div >
+      <section className="border-b border-zinc-200 dark:border-zinc-800">
         <Container className="py-12 sm:py-16">
           <SectionHeading eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
           <div className="mt-8 flex flex-wrap gap-3">
@@ -24,9 +24,9 @@ export default async function Page() {
         </Container>
       </section>
       
-      <section className="bg-white">
+      <section >
         <Container className="py-12 sm:py-14">
-          <h2 className="text-xl font-semibold tracking-tight text-black">{t("stepsTitle")}</h2>
+          <h2 className="text-xl font-semibold tracking-tight">{t("stepsTitle")}</h2>
           <div className="mt-6 grid gap-4 md:grid-cols-3">
             <Step title={t("steps.oneTitle")} desc={t("steps.oneDesc")} />
             <Step title={t("steps.twoTitle")} desc={t("steps.twoDesc")} />
@@ -35,9 +35,9 @@ export default async function Page() {
         </Container>
       </section>
 
-      <section id="benefits" className="bg-white">
+      <section id="benefits" >
         <Container className="py-12 sm:py-14">
-          <h2 className="text-xl font-semibold tracking-tight text-black">{t("benefitsTitle")}</h2>
+          <h2 className="text-xl font-semibold tracking-tight">{t("benefitsTitle")}</h2>
           <div className="mt-6 grid gap-4 md:grid-cols-3">
             <Step title={t("benefits.trustTitle")} desc={t("benefits.trustDesc")} />
             <Step title={t("benefits.toolsTitle")} desc={t("benefits.toolsDesc")} />
@@ -52,7 +52,7 @@ export default async function Page() {
 function Step({ title, desc }: { title: string; desc: string }) {
   return (
     <div className="rounded-2xl border border-black/10 bg-white p-6 shadow-none">
-      <p className="text-sm font-semibold text-black">{title}</p>
+      <p className="text-sm font-semibold ">{title}</p>
       <p className="mt-2 text-sm leading-6 text-zinc-600">{desc}</p>
     </div>
   );

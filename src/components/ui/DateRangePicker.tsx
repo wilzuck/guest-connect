@@ -108,8 +108,8 @@ export function DateRangePicker({
   <button
     type="button"
     className={cn(
-      "group w-full rounded-2xl bg-white text-left transition hover:bg-zinc-50 focus:outline-none focus:ring-4 focus:ring-black/5",
-      fieldVariant === "bordered" ? "border border-black/10" : "",
+      "group w-full rounded-2xl bg-white text-left transition hover:bg-zinc-50 focus:outline-none focus:ring-4 focus:ring-black/5 dark:bg-zinc-900 dark:hover:bg-zinc-800 dark:focus:ring-white/10",
+      fieldVariant === "bordered" ? "border border-zinc-200 dark:border-zinc-800" : "",
       size === "sm" ? "h-12 px-3 py-2" : "h-14 p-[10px]",
     )}
     aria-label={startLabel}
@@ -124,7 +124,7 @@ export function DateRangePicker({
         <p
           className={cn(
             "mt-1 truncate text-sm font-semibold",
-            from ? "text-black" : "text-zinc-500",
+            from ? "text-zinc-950 dark:text-zinc-50" : "text-zinc-500 dark:text-zinc-400",
           )}
         >
           {startText}
@@ -137,8 +137,8 @@ export function DateRangePicker({
   <button
     type="button"
     className={cn(
-      "group w-full rounded-2xl bg-white text-left transition hover:bg-zinc-50 focus:outline-none focus:ring-4 focus:ring-black/5",
-      fieldVariant === "bordered" ? "border border-black/10" : "",
+      "group w-full rounded-2xl bg-white text-left transition hover:bg-zinc-50 focus:outline-none focus:ring-4 focus:ring-black/5 dark:bg-zinc-900 dark:hover:bg-zinc-800 dark:focus:ring-white/10",
+      fieldVariant === "bordered" ? "border border-zinc-200 dark:border-zinc-800" : "",
       size === "sm" ? "h-12 px-3 py-2" : "h-14 p-[10px]",
     )}
     aria-label={endLabel}
@@ -152,7 +152,7 @@ export function DateRangePicker({
         <p
           className={cn(
             "mt-1 truncate text-sm font-semibold",
-            to ? "text-black" : "text-zinc-500",
+            to ? "text-zinc-950 dark:text-zinc-50" : "text-zinc-500 dark:text-zinc-400",
           )}
         >
           {endText}
@@ -173,16 +173,16 @@ export function DateRangePicker({
       numberOfMonths={wide ? 2 : 1}
       showOutsideDays
       fixedWeeks
-      className={cn("bg-white", wide ? "relative w-max pt-2" : "")}
+      className={cn("bg-white text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50", wide ? "relative w-max pt-2" : "")}
       classNames={
         wide
           ? {
               months: "flex flex-row gap-6",
               nav: "absolute left-2 right-2 top-2 flex items-center justify-between pointer-events-none",
               button_previous:
-                "pointer-events-auto grid h-10 w-10 place-items-center rounded-full border border-black/10 bg-white text-zinc-700 shadow-sm shadow-black/5 transition hover:bg-zinc-50",
+                "pointer-events-auto grid h-10 w-10 place-items-center rounded-full border border-zinc-200 bg-white text-zinc-700 shadow-sm shadow-black/5 transition hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-200 dark:shadow-none dark:hover:bg-zinc-800",
               button_next:
-                "pointer-events-auto grid h-10 w-10 place-items-center rounded-full border border-black/10 bg-white text-zinc-700 shadow-sm shadow-black/5 transition hover:bg-zinc-50",
+                "pointer-events-auto grid h-10 w-10 place-items-center rounded-full border border-zinc-200 bg-white text-zinc-700 shadow-sm shadow-black/5 transition hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-200 dark:shadow-none dark:hover:bg-zinc-800",
               month_caption: "flex items-center justify-center px-2 pt-1",
             }
           : undefined
@@ -196,9 +196,9 @@ export function DateRangePicker({
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>{Trigger}</DialogTrigger>
         <DialogContent className="inset-0 h-dvh w-screen max-w-none border-0 p-0 shadow-none data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom">
-          <div className="flex h-dvh flex-col bg-white">
-            <div className="flex items-center justify-between border-b border-black/5 px-4 py-3">
-              <p className="text-sm font-semibold text-black">{t("title")}</p>
+          <div className="flex h-dvh flex-col bg-white text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50">
+            <div className="flex items-center justify-between border-b border-zinc-200 px-4 py-3 dark:border-zinc-800">
+              <p className="text-sm font-semibold ">{t("title")}</p>
               <DialogClose asChild>
                 <button
                   type="button"
@@ -211,11 +211,11 @@ export function DateRangePicker({
             </div>
 
             <div className="px-4 pt-4">
-              <div className="rounded-2xl bg-zinc-50 p-3">
+              <div className="rounded-2xl bg-zinc-50 p-3 dark:bg-zinc-900">
                 <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">
                   {t("selectedRange")}
                 </p>
-                <p className="mt-1 text-sm font-semibold text-black">
+                <p className="mt-1 text-sm font-semibold ">
                   {from ? startText : t("placeholder")}{" "}
                   <span className="text-zinc-400">→</span>{" "}
                   {to ? endText : t("placeholder")}
@@ -225,10 +225,10 @@ export function DateRangePicker({
 
             <div className="flex-1 overflow-auto px-3 py-4">{calendar}</div>
 
-            <div className="flex items-center justify-between gap-3 border-t border-black/5 p-4">
+            <div className="flex items-center justify-between gap-3 border-t border-zinc-200 p-4 dark:border-zinc-800">
               <button
                 type="button"
-                className="rounded-xl px-4 py-3 text-sm font-semibold text-zinc-600 hover:text-black hover:bg-zinc-50 transition"
+                className="rounded-xl px-4 py-3 text-sm font-semibold text-zinc-600 transition hover:bg-zinc-50 hover:text-zinc-950 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-white"
                 onClick={clear}
               >
                 {t("clear")}
@@ -236,7 +236,7 @@ export function DateRangePicker({
               <DialogClose asChild>
                 <button
                   type="button"
-                  className="rounded-2xl bg-black px-5 py-3 text-sm font-semibold text-white transition active:scale-[0.99]"
+                  className="rounded-2xl bg-black px-5 py-3 text-sm font-semibold text-white transition active:scale-[0.99] dark:bg-white dark:text-black"
                 >
                   {t("done")}
                 </button>
@@ -252,7 +252,7 @@ export function DateRangePicker({
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>{Trigger}</PopoverTrigger>
-      <PopoverContent side="top" align="start" className="p-3">
+      <PopoverContent side="top" align="start" className="bg-white p-3 text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50">
         {calendar}
         <div className="mt-3 flex items-center justify-between">
           <p className="text-xs font-semibold text-zinc-500">

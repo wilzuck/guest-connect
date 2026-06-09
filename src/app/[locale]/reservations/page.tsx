@@ -44,11 +44,11 @@ export default async function Page() {
       <div className="grid gap-4 md:grid-cols-12">
         <Card className="p-6 shadow-none md:col-span-4">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">{isEn ? "Upcoming" : "À venir"}</p>
-          <p className="mt-2 text-3xl font-semibold tracking-tight text-black">{upcoming.length}</p>
+          <p className="mt-2 text-3xl font-semibold tracking-tight">{upcoming.length}</p>
           <p className="mt-1 text-sm text-zinc-600">{isEn ? "stays" : "séjours"}</p>
         </Card>
         <Card className="p-6 shadow-none md:col-span-8">
-          <p className="text-sm font-semibold text-black">{isEn ? "Quick actions" : "Actions rapides"}</p>
+          <p className="text-sm font-semibold ">{isEn ? "Quick actions" : "Actions rapides"}</p>
           <p className="mt-2 text-sm leading-6 text-zinc-600">
             {isEn ? "Need ideas? Browse stays or check your saved listings." : "Besoin d’inspiration ? Parcourez les hébergements ou consultez vos favoris."}
           </p>
@@ -56,7 +56,7 @@ export default async function Page() {
             <Link href={`/${locale}/stays`} className="inline-flex items-center justify-center rounded-2xl bg-black px-6 py-3 text-sm font-semibold text-white transition">
               {isEn ? "Browse stays" : "Voir les hébergements"}
             </Link>
-            <Link href={`/${locale}/favorites`} className="inline-flex items-center justify-center rounded-2xl border border-black/10 bg-white px-6 py-3 text-sm font-semibold text-black hover:bg-zinc-50 transition">
+            <Link href={`/${locale}/favorites`} className="inline-flex items-center justify-center rounded-2xl border border-black/10 bg-white px-6 py-3 text-sm font-semibold  hover:bg-zinc-50 transition">
               {isEn ? "Favorites" : "Favoris"}
             </Link>
           </div>
@@ -64,7 +64,7 @@ export default async function Page() {
       </div>
 
       <div className="mt-10">
-        <p className="text-sm font-semibold text-black">{isEn ? "Upcoming reservations" : "Réservations à venir"}</p>
+        <p className="text-sm font-semibold ">{isEn ? "Upcoming reservations" : "Réservations à venir"}</p>
         <div className="mt-4 grid gap-3">
           {upcoming.map((r) => (
             <Card key={r.id} className="p-6 shadow-none">
@@ -77,9 +77,9 @@ export default async function Page() {
                   </div>
 
                   <div className="min-w-0">
-                    <p className="truncate text-base font-semibold text-black">{r.title}</p>
+                    <p className="truncate text-base font-semibold ">{r.title}</p>
                     <p className="mt-1 text-sm text-zinc-600">{r.location}</p>
-                    <p className="mt-2 text-sm font-semibold text-black">{r.dates}</p>
+                    <p className="mt-2 text-sm font-semibold ">{r.dates}</p>
                   </div>
                 </div>
                 <span

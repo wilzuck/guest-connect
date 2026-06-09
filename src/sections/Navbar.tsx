@@ -92,7 +92,7 @@ export function Navbar() {
           >
             <SearchIcon className="h-4 w-4" />
             <div className="min-w-0 text-left">
-              <p className="truncate text-sm font-semibold text-black dark:text-white">{t("search")}</p>
+              <p className="truncate text-sm font-semibold  dark:text-white">{t("search")}</p>
               <p className="truncate text-xs text-zinc-500 dark:text-zinc-400">
                 {t("searchHint")}
               </p>
@@ -110,6 +110,7 @@ export function Navbar() {
             <HostIcon className="h-4 w-4" />
             {t("becomeHost")}
           </ButtonLink>
+
           <ButtonLink
             href={`/${locale}/search`}
             variant="outline"

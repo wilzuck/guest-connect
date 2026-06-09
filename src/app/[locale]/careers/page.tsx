@@ -41,7 +41,7 @@ export default async function Page() {
           <Badge>{isEn ? "How we work" : "Notre façon de travailler"}</Badge>
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
             <Card className="p-6">
-              <p className="text-sm font-semibold text-black">{isEn ? "High standards" : "Standards élevés"}</p>
+              <p className="text-sm font-semibold ">{isEn ? "High standards" : "Standards élevés"}</p>
               <p className="mt-2 text-sm leading-6 text-zinc-600">
                 {isEn
                   ? "We ship premium experiences: design, performance, and reliability."
@@ -49,7 +49,7 @@ export default async function Page() {
               </p>
             </Card>
             <Card className="p-6">
-              <p className="text-sm font-semibold text-black">{isEn ? "Ownership" : "Ownership"}</p>
+              <p className="text-sm font-semibold ">{isEn ? "Ownership" : "Ownership"}</p>
               <p className="mt-2 text-sm leading-6 text-zinc-600">
                 {isEn
                   ? "Small team, big impact. You own outcomes, not just tasks."
@@ -57,7 +57,7 @@ export default async function Page() {
               </p>
             </Card>
             <Card className="p-6">
-              <p className="text-sm font-semibold text-black">{isEn ? "Remote-friendly" : "Remote-friendly"}</p>
+              <p className="text-sm font-semibold ">{isEn ? "Remote-friendly" : "Remote-friendly"}</p>
               <p className="mt-2 text-sm leading-6 text-zinc-600">
                 {isEn
                   ? "Async by default, documentation-driven, clean processes."
@@ -65,7 +65,7 @@ export default async function Page() {
               </p>
             </Card>
             <Card className="p-6">
-              <p className="text-sm font-semibold text-black">{isEn ? "Customer empathy" : "Empathie client"}</p>
+              <p className="text-sm font-semibold ">{isEn ? "Customer empathy" : "Empathie client"}</p>
               <p className="mt-2 text-sm leading-6 text-zinc-600">
                 {isEn
                   ? "We design for real trips, real hosts, real constraints."
@@ -77,11 +77,11 @@ export default async function Page() {
 
         <div className="lg:col-span-5">
           <Card className="p-6">
-            <p className="text-sm font-semibold text-black">{isEn ? "Open roles" : "Postes ouverts"}</p>
+            <p className="text-sm font-semibold ">{isEn ? "Open roles" : "Postes ouverts"}</p>
             <div className="mt-4 grid gap-3">
               {roles.map((r) => (
                 <div key={r.t} className="rounded-2xl border border-black/10 bg-white p-4">
-                  <p className="text-sm font-semibold text-black">{r.t}</p>
+                  <p className="text-sm font-semibold ">{r.t}</p>
                   <p className="mt-1 text-sm text-zinc-600">{r.d}</p>
                 </div>
               ))}

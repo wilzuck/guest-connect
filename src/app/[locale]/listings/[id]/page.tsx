@@ -27,7 +27,7 @@ export default async function Page({ params }: PageProps) {
   const openDays = listing.pricePerNight > 90 ? "7j/7" : "5 jours/semaine";
 
   return (
-    <div className="bg-white">
+    <div >
       <Container className="py-5 sm:py-8">
         <div className="flex flex-col gap-10">
           {/* Header */}
@@ -35,13 +35,13 @@ export default async function Page({ params }: PageProps) {
             <div className="min-w-0">
               <Badge>{listing.location}</Badge>
               <h1
-                className="mt-4 text-balance text-3xl font-semibold tracking-tight text-black sm:text-4xl"
+                className="mt-4 text-balance text-3xl font-semibold tracking-tight sm:text-4xl"
                 title={listing.title}
               >
                 {listing.title}
               </h1>
               <div className="mt-3 flex flex-wrap items-center gap-2 text-sm text-zinc-600">
-                <span className="inline-flex items-center gap-1 font-semibold text-black">
+                <span className="inline-flex items-center gap-1 font-semibold ">
                   <Star className="h-4 w-4" />
                   {listing.rating.toFixed(2)}
                 </span>
@@ -72,14 +72,14 @@ export default async function Page({ params }: PageProps) {
             {/* Main */}
             <div className="order-2 lg:order-1 lg:col-span-7">
               <section className="space-y-3">
-                <h2 className="text-xl font-semibold tracking-tight text-black">{t("aboutTitle")}</h2>
+                <h2 className="text-xl font-semibold tracking-tight">{t("aboutTitle")}</h2>
                 <p className="text-sm leading-7 text-zinc-600">
                   {listing.shortDescription ?? t("aboutBody")}
                 </p>
               </section>
 
               <section className="mt-10">
-                <h2 className="text-xl font-semibold tracking-tight text-black">Ce que propose ce logement</h2>
+                <h2 className="text-xl font-semibold tracking-tight">Ce que propose ce logement</h2>
                 <div className="mt-5 grid gap-3 sm:grid-cols-2">
                   {specs.map((spec) => (
                     <InfoTile key={spec.label} label={spec.label} value={spec.value} />
@@ -88,7 +88,7 @@ export default async function Page({ params }: PageProps) {
               </section>
 
               <section className="mt-10">
-                <h2 className="text-xl font-semibold tracking-tight text-black">{t("amenitiesTitle")}</h2>
+                <h2 className="text-xl font-semibold tracking-tight">{t("amenitiesTitle")}</h2>
                 <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                   <Amenity icon={<WifiIcon className="h-5 w-5" />} title={t("amenities.wifi")} />
                   <Amenity icon={<BreakfastIcon className="h-5 w-5" />} title={t("amenities.breakfast")} />
@@ -98,7 +98,7 @@ export default async function Page({ params }: PageProps) {
               </section>
 
               <section className="mt-10">
-                <h2 className="text-xl font-semibold tracking-tight text-black">{t("locationTitle")}</h2>
+                <h2 className="text-xl font-semibold tracking-tight">{t("locationTitle")}</h2>
                 <div className="mt-5 rounded-3xl border border-black/10 bg-white p-3 shadow-sm shadow-black/5">
                   <MapPlaceholder location={listing.location} subtitle={t("mapSubtitle")} />
                 </div>
@@ -112,7 +112,7 @@ export default async function Page({ params }: PageProps) {
                         {host.initials}
                       </div>
                       <div>
-                        <h2 className="text-xl font-semibold tracking-tight text-black">
+                        <h2 className="text-xl font-semibold tracking-tight">
                           Hébergé par {host.name}
                         </h2>
                         <p className="mt-1 text-sm text-zinc-600">
@@ -161,7 +161,7 @@ export default async function Page({ params }: PageProps) {
       {/* Avis: fond plein largeur (comme Features), contenu aligné sur Container */}
       <section className="bg-zinc-50 py-10">
         <Container>
-          <h2 className="text-xl font-semibold tracking-tight text-black">{t("reviewsTitle")}</h2>
+          <h2 className="text-xl font-semibold tracking-tight">{t("reviewsTitle")}</h2>
           <div className="mt-5 grid gap-4 lg:grid-cols-2">
             <ReviewCard
               rating={listing.rating}
@@ -242,7 +242,7 @@ function InfoTile({ label, value, compact = false }: { label: string; value: str
   return (
     <div className={compact ? "rounded-2xl bg-zinc-50 p-3" : "rounded-2xl border border-black/10 bg-white p-4"}>
       <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-400">{label}</p>
-      <p className="mt-1 text-sm font-semibold text-black">{value}</p>
+      <p className="mt-1 text-sm font-semibold ">{value}</p>
     </div>
   );
 }
@@ -251,7 +251,7 @@ function Amenity({ icon, title }: { icon: React.ReactNode; title: string }) {
   return (
     <div className="flex items-center gap-3 rounded-2xl border border-black/10 bg-white p-4 shadow-none">
       <div className="grid h-10 w-10 place-items-center rounded-2xl bg-zinc-50 text-black">{icon}</div>
-      <p className="text-sm font-semibold text-black">{title}</p>
+      <p className="text-sm font-semibold ">{title}</p>
     </div>
   );
 }
@@ -265,7 +265,7 @@ function MapPlaceholder({ location, subtitle }: { location: string; subtitle: st
           <div className="grid h-14 w-14 place-items-center rounded-2xl bg-white shadow-sm shadow-black/10">
             <PinIcon className="h-6 w-6 text-black" />
           </div>
-          <p className="text-sm font-semibold text-black">{location}</p>
+          <p className="text-sm font-semibold ">{location}</p>
           <p className="text-xs text-zinc-600">{subtitle}</p>
         </div>
       </div>
@@ -284,17 +284,17 @@ function ReviewCard({ rating, name, date, body }: { rating: number; name: string
     <div className="rounded-2xl border border-black/10 bg-white p-5 shadow-none">
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="grid h-11 w-11 place-items-center rounded-2xl bg-zinc-100 text-sm font-semibold text-black">
+          <div className="grid h-11 w-11 place-items-center rounded-2xl bg-zinc-100 text-sm font-semibold ">
             {initials}
           </div>
           <div className="min-w-0">
-            <p className="truncate text-sm font-semibold text-black" title={name}>
+            <p className="truncate text-sm font-semibold " title={name}>
               {name}
             </p>
             <p className="text-xs text-zinc-600">{date}</p>
           </div>
         </div>
-        <div className="inline-flex items-center gap-1 text-sm font-semibold text-black">
+        <div className="inline-flex items-center gap-1 text-sm font-semibold ">
           <Star className="h-4 w-4" />
           {rating.toFixed(1)}
         </div>

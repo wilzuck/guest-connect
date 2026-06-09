@@ -24,8 +24,8 @@ export default function AboutPage() {
               />
             </div>
             <div className="p-6">
-              <p className="text-sm font-semibold text-black">Notre mission</p>
-              <p className="mt-2 text-sm leading-7 text-zinc-600">
+              <p className="text-sm font-semibold ">Notre mission</p>
+              <p className="mt-2 text-sm leading-7 text-zinc-600 dark:text-zinc-400">
                 Élever le standard de la maison d’hôtes: des annonces claires, des photos cohérentes, des services
                 essentiels, et une communication fiable. Pour le voyageur, c’est moins de stress. Pour l’hôte, c’est
                 plus de confiance — donc plus de réservations.
@@ -55,8 +55,8 @@ export default function AboutPage() {
 
         <div className="lg:col-span-5">
           <Card className="p-6 shadow-none">
-            <p className="text-sm font-semibold text-black">Ce que vous trouverez sur GuestConnect</p>
-            <p className="mt-2 text-sm leading-7 text-zinc-600">
+            <p className="text-sm font-semibold ">Ce que vous trouverez sur GuestConnect</p>
+            <p className="mt-2 text-sm leading-7 text-zinc-600 dark:text-zinc-400">
               Une sélection d’adresses avec un niveau de détails élevé: emplacement, services, et un pitch orienté
               bénéfice. Notre objectif est simple: vous permettre de réserver rapidement, sans devoir “deviner”.
             </p>
@@ -90,8 +90,8 @@ export default function AboutPage() {
 function ValueCard({ title, desc }: { title: string; desc: string }) {
   return (
     <Card className="p-6 shadow-none">
-      <p className="text-sm font-semibold text-black">{title}</p>
-      <p className="mt-2 text-sm leading-7 text-zinc-600">{desc}</p>
+      <p className="text-sm font-semibold ">{title}</p>
+      <p className="mt-2 text-sm leading-7 text-zinc-600 dark:text-zinc-400">{desc}</p>
     </Card>
   );
 }
@@ -103,7 +103,7 @@ function SideImage({ title, desc, src }: { title: string; desc: string; src: str
         <Image src={src} alt={title} fill className="object-cover" sizes="(max-width: 1024px) 100vw, 32vw" />
       </div>
       <div>
-        <p className="text-sm font-semibold text-black">{title}</p>
+        <p className="text-sm font-semibold ">{title}</p>
         <p className="mt-1 text-sm leading-7 text-zinc-600">{desc}</p>
       </div>
     </div>

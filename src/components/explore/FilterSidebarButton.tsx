@@ -60,7 +60,7 @@ export function FilterSidebarButton({
           type="button"
           aria-haspopup="dialog"
           aria-label="Ouvrir les filtres"
-          className="inline-flex h-10 shrink-0 items-center gap-2 rounded-full border border-black/10 bg-white px-4 text-sm font-semibold text-black shadow-sm shadow-black/5 transition hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950 dark:text-white dark:shadow-black/30 dark:hover:bg-zinc-900"
+          className="inline-flex h-10 shrink-0 items-center gap-2 rounded-full border border-black/10 bg-white px-4 text-sm font-semibold  shadow-sm shadow-black/5 transition hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950 dark:text-white dark:shadow-black/30 dark:hover:bg-zinc-900"
         >
           <Funnel className="h-4 w-4" aria-hidden="true" />
           {label}
@@ -70,7 +70,7 @@ export function FilterSidebarButton({
       <DialogContent className="flex h-[min(780px,calc(100dvh-24px))] w-[calc(100vw-24px)] max-w-lg flex-col overflow-hidden bg-white p-0 dark:bg-zinc-950">
         <div className="flex items-center justify-between border-b border-black/10 px-5 py-4 dark:border-zinc-800">
           <div>
-            <p className="text-base font-semibold text-black dark:text-white">{label}</p>
+            <p className="text-base font-semibold  dark:text-white">{label}</p>
             <p className="mt-1 text-xs text-zinc-500">Prix, capacité, équipements et disponibilités</p>
           </div>
           <DialogClose asChild>
@@ -219,7 +219,7 @@ function FilterControlField({ control }: { control: FilterControl }) {
         {control.options.map((option) => (
           <label
             key={option.value}
-            className="flex min-h-11 items-center gap-3 rounded-xl border border-black/10 bg-white px-3 py-2 text-sm font-semibold text-black dark:border-zinc-800 dark:bg-zinc-950 dark:text-white"
+            className="flex min-h-11 items-center gap-3 rounded-xl border border-black/10 bg-white px-3 py-2 text-sm font-semibold  dark:border-zinc-800 dark:bg-zinc-950 dark:text-white"
           >
             <input
               type="checkbox"

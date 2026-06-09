@@ -20,23 +20,23 @@ export function ExperienceCard({ experience }: { experience: Experience }) {
           fill
           className="object-cover"
           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-          onLoadingComplete={() => setLoaded(true)}
+          onLoad={() => setLoaded(true)}
         />
       </div>
       <div className="p-3">
-        <p className="truncate text-sm font-semibold text-black dark:text-white" title={experience.title}>
+        <p className="truncate text-sm font-semibold  dark:text-white" title={experience.title}>
           {experience.title}
         </p>
         <div className="mt-1 flex items-start justify-between gap-3">
           <p className="min-w-0 truncate text-sm text-zinc-600 dark:text-zinc-400" title={experience.location}>
             {experience.location}
           </p>
-          <p className="shrink-0 whitespace-nowrap text-[15px] font-semibold text-black dark:text-white">
+          <p className="shrink-0 whitespace-nowrap text-[15px] font-semibold  dark:text-white">
             {formatFrom(experience.priceFrom, experience.currency)}
           </p>
         </div>
         <div className="mt-2 flex items-center gap-2 text-xs text-zinc-600 dark:text-zinc-400">
-          <span className="inline-flex items-center gap-1 font-semibold text-black dark:text-white">
+          <span className="inline-flex items-center gap-1 font-semibold  dark:text-white">
             <StarIcon className="h-4 w-4" />
             {experience.rating.toFixed(1)}
           </span>

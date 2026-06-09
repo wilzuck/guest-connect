@@ -46,7 +46,7 @@ export function Stepper({ steps, currentStep, onStepClick }: StepperProps) {
               <p
                 className={cn(
                   "text-sm font-medium truncate leading-5",
-                  isActive && "font-semibold text-black"
+                  isActive && "font-semibold "
                 )}
                 title={step.title}
               >

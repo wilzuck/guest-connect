@@ -252,7 +252,7 @@ export async function FeaturesSection() {
               className="p-6 transition hover:-translate-y-0.5 hover:shadow-md hover:shadow-black/10"
             >
               {f.icon}
-              <h3 className="mt-4 text-lg font-semibold tracking-tight text-black">{f.title}</h3>
+              <h3 className="mt-4 text-lg font-semibold tracking-tight">{f.title}</h3>
               <p className="mt-2 text-sm leading-6 text-zinc-600">{f.description}</p>
             </Card>
           ))}

@@ -17,7 +17,13 @@ export function Providers({
   children: ReactNode;
 }) {
   return (
-    <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="system"
+      enableSystem
+      enableColorScheme
+      disableTransitionOnChange
+    >
       <NextIntlClientProvider locale={locale} messages={messages}>
         <CurrencyProvider>{children}</CurrencyProvider>
       </NextIntlClientProvider>

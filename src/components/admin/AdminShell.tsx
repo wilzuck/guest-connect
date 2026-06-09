@@ -99,7 +99,7 @@ export function AdminShell({
               <span className="grid h-8 w-8 place-items-center rounded-lg bg-black text-sm font-bold text-white shadow-sm shadow-black/10">
                 G
               </span>
-              <span className="text-sm font-semibold text-[#202024]">GuestConnect</span>
+              <span className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">GuestConnect</span>
             </Link>
             <ChevronDown className="h-4 w-4 text-[#9B9BA1]" aria-hidden="true" />
           </div>
@@ -134,7 +134,7 @@ export function AdminShell({
         <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden">
           <header className="sticky py-4 top-0 z-30 flex h-16 items-center justify-between border-b border-[#E8E8EC] bg-white/95 px-4 backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/95 lg:px-6">
             <p className="text-lg font-semibold tracking-tight text-[#202024] dark:text-white">Dashboard</p>
-            <div className="flex items-center gap-2">
+            <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center">
               <ButtonLink
                 href={`/${locale}/dashboard/service-management/listings/new`}
                 variant="outline"
@@ -165,7 +165,7 @@ export function AdminShell({
             </div>
           </div>
 
-          <main className="min-h-0 min-w-0 flex-1 overflow-y-auto bg-white pb-10 dark:bg-black xl:pb-12">{children}</main>
+          <main className="min-h-0 min-w-0 flex-1 overflow-y-auto bg-white dark:bg-black">{children}</main>
         </div>
       </div>
     </div>

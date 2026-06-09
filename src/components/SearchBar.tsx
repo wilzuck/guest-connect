@@ -70,13 +70,13 @@ export function SearchBar({
           variant === "compact"
             ? "rounded-2xl border border-black/10 bg-white/80 p-4 backdrop-blur"
             : // Full width : pas de shadow, radius plus petit
-              "rounded-2xl border border-black/10 bg-white/80 p-2 backdrop-blur-sm",
+              "rounded-2xl border border-zinc-200 bg-white/80 p-2 backdrop-blur-sm dark:border-zinc-800 dark:bg-zinc-900/80",
         ].join(" ")}
       >
         {/* Desktop */}
         <div
           className={[
-            "items-stretch gap-2 rounded-2xl bg-white p-1",
+            "items-stretch gap-2 rounded-2xl md:flex",
             variant === "desktop" ? "flex" : "",
             variant === "auto" ? "md:flex" : "",
             variant === "mobile" || variant === "compact" ? "hidden" : "",
@@ -128,7 +128,7 @@ export function SearchBar({
                 <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-zinc-500">
                   {t("guests")}
                 </p>
-                <span className="text-sm font-semibold text-black">
+                <span className="text-sm font-semibold ">
                   {guests}
                 </span>
               </div>
@@ -221,14 +221,14 @@ export function SearchBar({
               variant === "compact" ? "h-12 bg-white px-3" : "h-14 bg-white"
             }
           >
-            <div className="flex items-center gap-2">
+            <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center">
               <Calendar1 className="h-4 w-4 text-zinc-400 shrink-0" />
 
               <div className="grid">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-zinc-500">
                   {t("guests")}
                 </p>
-                <span className="text-sm font-semibold text-black">
+                <span className="text-sm font-semibold ">
                   {guests}
                 </span>
               </div>

@@ -313,7 +313,7 @@ export function PropertyFormMultiStep({ context = "public" }: { context?: "publi
   return (
     <Container className="py-8 sm:py-12">
       <div className="mb-6">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 dark:text-white/80">
           {context === "admin" ? "Administration" : "Devenir hôte"}
         </p>
         <h1 className="mt-3 text-balance text-3xl font-semibold tracking-tight text-zinc-950 sm:text-4xl">
@@ -328,9 +328,9 @@ export function PropertyFormMultiStep({ context = "public" }: { context?: "publi
         <div className="grid gap-4">
           <StepperTabs currentStep={currentStep} onStepClick={goToStep} />
 
-          <div className="overflow-hidden rounded-2xl border border-zinc-200 bg-white">
-            <div className="border-b border-zinc-100 px-5 py-5 sm:px-7">
-              <h2 className="text-xl font-semibold tracking-tight text-zinc-950">
+          <div className="overflow-hidden rounded-2xl border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-950">
+            <div className="border-b border-zinc-100 px-5 py-5 dark:border-zinc-800 sm:px-7">
+              <h2 className="text-xl font-semibold tracking-tight text-zinc-950 dark:text-zinc-50">
                 {STEPS[currentStep].label === "Détails" ? "Détails du logement" : STEPS[currentStep].label}
               </h2>
               <p className="mt-1 text-sm text-zinc-500">{STEPS[currentStep].sub}</p>
@@ -363,10 +363,12 @@ export function PropertyFormMultiStep({ context = "public" }: { context?: "publi
                             onClick={() => updateField("propertyType", type.value)}
                             className={[
                               "flex min-h-16 items-center gap-3 rounded-xl border px-3 py-3 text-left transition",
-                              active ? "border-zinc-950 bg-zinc-50 shadow-sm" : "border-zinc-200 hover:bg-zinc-50",
+                              active
+  ? "border-zinc-950 bg-zinc-50 shadow-sm dark:border-zinc-200 dark:bg-zinc-900"
+  : "border-zinc-200 hover:bg-zinc-50 dark:border-zinc-800 dark:hover:bg-zinc-900",
                             ].join(" ")}
                           >
-                            <span className="grid h-9 w-9 place-items-center rounded-xl bg-zinc-100 text-zinc-900">
+                            <span className="grid h-9 w-9 place-items-center rounded-xl bg-zinc-100 text-zinc-900 dark:bg-zinc-800 dark:text-zinc-100">
                               <Icon className="h-4 w-4" aria-hidden="true" />
                             </span>
                             <span className="text-sm font-semibold text-zinc-800">{type.label}</span>
@@ -503,10 +505,10 @@ export function PropertyFormMultiStep({ context = "public" }: { context?: "publi
                             onClick={() => toggleAmenity(amenity.value)}
                             className={[
                               "flex min-h-16 items-center gap-3 rounded-xl border px-3 py-3 text-left transition",
-                              active ? "border-zinc-950 bg-zinc-50 shadow-sm" : "border-zinc-200 bg-white hover:bg-zinc-50",
+                              active ? "border-zinc-950 bg-zinc-50 shadow-sm" : "border-black/10 bg-white hover:bg-zinc-50",
                             ].join(" ")}
                           >
-                            <span className="grid h-9 w-9 place-items-center rounded-xl bg-zinc-100 text-zinc-900">
+                            <span className="grid h-9 w-9 place-items-center rounded-xl bg-zinc-100 text-zinc-900 dark:bg-zinc-800 dark:text-zinc-100">
                               <Icon className="h-4 w-4" aria-hidden="true" />
                             </span>
                             <span className="text-sm font-semibold text-zinc-800">{amenity.label}</span>
@@ -602,9 +604,9 @@ export function PropertyFormMultiStep({ context = "public" }: { context?: "publi
                     </FormField>
                   </div>
 
-                  <div className="rounded-2xl border border-zinc-200 bg-white p-4">
+                  <div className="rounded-2xl border border-black/10 bg-white p-4">
                     <div className="flex items-start gap-3">
-                      <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-zinc-100 text-zinc-900">
+                      <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-zinc-100 text-zinc-900 dark:bg-zinc-800 dark:text-zinc-100">
                         <CalendarDays className="h-5 w-5" aria-hidden="true" />
                       </span>
                       <div>
@@ -629,9 +631,9 @@ export function PropertyFormMultiStep({ context = "public" }: { context?: "publi
                             className={[
                               "h-11 rounded-xl border text-sm font-semibold transition",
                               active
-                                ? "border-zinc-950 bg-zinc-950 text-white"
-                                : "border-zinc-200 bg-white text-zinc-500 hover:bg-zinc-50",
-                            ].join(" ")}
+                                ? "border-zinc-950 bg-zinc-950 text-white dark:border-white dark:bg-white dark:text-black"
+                                : "border-zinc-200 bg-white text-zinc-500 hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-400 dark:hover:bg-zinc-900"
+                                ].join(" ")}
                           >
                             {day.label}
                           </button>
@@ -695,7 +697,7 @@ export function PropertyFormMultiStep({ context = "public" }: { context?: "publi
                 Sauvegarder le brouillon
               </Button>
 
-              <div className="flex items-center gap-2">
+              <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center">
                 <Button type="button" variant="secondary" size="sm" onClick={goPrev} disabled={currentStep === 0}>
                   <ChevronLeft className="h-4 w-4" aria-hidden="true" />
                   Retour
@@ -733,8 +735,8 @@ function StepperTabs({
   onStepClick: (step: number) => void;
 }) {
   return (
-    <div className="overflow-hidden rounded-2xl border border-zinc-200 bg-white">
-      <div className="grid grid-cols-5">
+    <div className="overflow-hidden rounded-2xl border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-950">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
         {STEPS.map((step, index) => {
           const active = currentStep === index;
           const done = currentStep > index;
@@ -796,8 +798,8 @@ function PreviewPanel({
   ];
 
   return (
-    <aside className="lg:sticky lg:top-24 lg:self-start">
-      <div className="overflow-hidden rounded-2xl border border-zinc-200 bg-white">
+    <aside className="order-first lg:order-none lg:sticky lg:top-24 lg:self-start">
+      <div className="overflow-hidden rounded-2xl border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-950">
         <div className="flex items-center justify-between border-b border-zinc-100 px-4 py-3">
           <span className="text-sm text-zinc-500">Complétion</span>
           <span className="text-sm font-semibold text-zinc-950">{completion}%</span>
@@ -892,7 +894,7 @@ function AvailabilityCalendar({
   const monthLabel = new Intl.DateTimeFormat("fr-FR", { month: "long", year: "numeric" }).format(new Date());
 
   return (
-    <div className="mt-5 rounded-2xl border border-zinc-200 bg-zinc-50 p-4">
+    <div className="mt-5 rounded-2xl border border-zinc-200 bg-zinc-50 p-4 dark:border-zinc-800 dark:bg-zinc-900">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <p className="text-sm font-semibold text-zinc-950">Calendrier des disponibilités</p>
         <p className="text-xs font-medium text-zinc-500 capitalize">{monthLabel}</p>
@@ -919,7 +921,7 @@ function AvailabilityCalendar({
                   ? "border-red-300 bg-red-500 text-white"
                   : isAvailable
                     ? "border-emerald-200 bg-emerald-400 text-emerald-950"
-                    : "border-zinc-200 bg-white text-zinc-300",
+                    : "border-black/10 bg-white text-zinc-300",
                 isCurrentMonth ? "" : "opacity-35",
               ].join(" ")}
             >
@@ -931,7 +933,7 @@ function AvailabilityCalendar({
       <div className="mt-4 flex flex-wrap gap-3 text-xs font-medium text-zinc-500">
         <LegendDot className="bg-emerald-400" label="Libre" />
         <LegendDot className="bg-red-500" label="Bloqué" />
-        <LegendDot className="bg-white" label="Fermé" bordered />
+        <LegendDot  label="Fermé" bordered />
       </div>
     </div>
   );
@@ -940,7 +942,7 @@ function AvailabilityCalendar({
 function LegendDot({ className, label, bordered = false }: { className: string; label: string; bordered?: boolean }) {
   return (
     <span className="inline-flex items-center gap-2">
-      <span className={cn("h-3 w-3 rounded-[4px]", bordered ? "border border-zinc-200" : "", className)} aria-hidden="true" />
+      <span className={cn("h-3 w-3 rounded-[4px]", bordered ? "border border-black/10" : "", className)} aria-hidden="true" />
       {label}
     </span>
   );
@@ -974,7 +976,7 @@ function normalizeDiscount(value: unknown, fallback: number) {
 
 function PreviewBadge({ children }: { children: ReactNode }) {
   return (
-    <span className="rounded-full bg-zinc-100 px-2.5 py-1 text-[11px] font-medium text-zinc-500">
+    <span className="rounded-full bg-zinc-100 px-2.5 py-1 text-[11px] font-medium text-zinc-500 dark:bg-zinc-800 dark:text-zinc-300">
       {children}
     </span>
   );
@@ -982,7 +984,7 @@ function PreviewBadge({ children }: { children: ReactNode }) {
 
 function HelpText({ children }: { children: ReactNode }) {
   return (
-    <p className="mt-2 rounded-xl bg-zinc-50 px-3 py-2 text-xs leading-5 text-zinc-500">
+    <p className="mt-2 rounded-xl bg-zinc-50 px-3 py-2 text-xs leading-5 text-zinc-500 dark:bg-zinc-900 dark:text-zinc-400">
       {children}
     </p>
   );

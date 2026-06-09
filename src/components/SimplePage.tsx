@@ -12,10 +12,10 @@ export function SimplePage({ title, description }: SimplePageProps) {
     <div className="bg-zinc-50">
       <Container className="py-10 sm:py-12">
         <div className="rounded-3xl border border-black/10 bg-white p-8 shadow-sm shadow-black/5">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 dark:text-white/80">
             Page temporaire
           </p>
-          <h1 className="mt-4 text-3xl font-semibold tracking-tight text-black">{title}</h1>
+          <h1 className="mt-4 text-3xl font-semibold tracking-tight">{title}</h1>
           {description ? (
             <p className="mt-3 max-w-2xl text-base leading-7 text-zinc-600">{description}</p>
           ) : null}

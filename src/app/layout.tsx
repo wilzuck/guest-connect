@@ -32,7 +32,7 @@ export default function RootLayout({
       className={`${sans.variable} ${display.variable} h-full scroll-smooth antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-full bg-white text-black flex flex-col font-[var(--font-sans)]">
+      <body className="flex min-h-full flex-col bg-white text-black font-[var(--font-sans)] dark:bg-zinc-950 dark:text-white" suppressHydrationWarning>
         {children}
       </body>
     </html>

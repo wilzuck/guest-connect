@@ -47,7 +47,7 @@ export function ListingLightbox({
             className="object-cover transition duration-500 group-hover:scale-[1.02]"
             sizes="(max-width: 1024px) 100vw, 66vw"
             priority
-            onLoadingComplete={() => setLoaded((p) => ({ ...p, [images[0]]: true }))}
+            onLoad={() => setLoaded((p) => ({ ...p, [images[0]]: true }))}
           />
         </button>
 
@@ -69,7 +69,7 @@ export function ListingLightbox({
                 fill
                 className="object-cover transition duration-500 group-hover:scale-[1.02]"
                 sizes="(max-width: 1024px) 50vw, 33vw"
-                onLoadingComplete={() => setLoaded((p) => ({ ...p, [src]: true }))}
+                onLoad={() => setLoaded((p) => ({ ...p, [src]: true }))}
               />
               {/* Sur la 3e photo (index 1 de la colonne), affiche +N si on a plus d'images */}
               {idx === 1 && remaining > 0 ? (

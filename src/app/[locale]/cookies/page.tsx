@@ -27,7 +27,7 @@ export default async function Page() {
         {cookies.map((cookie) => (
           <Card key={cookie.title} className="p-6 shadow-none">
             <div className="flex items-start justify-between gap-4">
-              <p className="text-base font-semibold text-black">{cookie.title}</p>
+              <p className="text-base font-semibold ">{cookie.title}</p>
               <span className={cookie.required ? "rounded-full bg-black px-3 py-1 text-xs font-semibold text-white" : "rounded-full bg-zinc-100 px-3 py-1 text-xs font-semibold text-zinc-600"}>
                 {cookie.required ? (isEn ? "Required" : "Requis") : (isEn ? "Optional" : "Optionnel")}
               </span>
@@ -37,8 +37,8 @@ export default async function Page() {
         ))}
       </div>
       <Card className="mt-6 p-6 shadow-none">
-        <p className="text-sm font-semibold text-black">{isEn ? "Managing consent" : "Gestion du consentement"}</p>
-        <p className="mt-2 text-sm leading-7 text-zinc-600">
+        <p className="text-sm font-semibold ">{isEn ? "Managing consent" : "Gestion du consentement"}</p>
+        <p className="mt-2 text-sm leading-7 text-zinc-600 dark:text-zinc-400">
           {isEn
             ? "You can change browser settings at any time. When a consent banner is enabled, your choices can be updated from the footer or account settings."
             : "Vous pouvez modifier les paramètres de votre navigateur à tout moment. Lorsqu'un bandeau de consentement est activé, vos choix peuvent être mis à jour depuis le footer ou les paramètres du compte."}

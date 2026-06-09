@@ -52,25 +52,8 @@ export function TestimonialsCarousel({ items }: TestimonialsCarouselProps) {
 
   return (
     <div className="relative">
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-zinc-50 to-transparent" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-zinc-50 to-transparent" />
-
-      <div className="flex items-center justify-between gap-3">
-        <div className="ml-auto flex items-center gap-1">
-          {items.map((_, idx) => (
-            <button
-              key={idx}
-              type="button"
-              onClick={() => scrollToIndex(idx)}
-              className={cn(
-                "h-2 w-2 rounded-full transition",
-                idx === active ? "bg-black" : "bg-black/20 hover:bg-black/35",
-              )}
-              aria-label={`Aller à l’avis ${idx + 1}`}
-            />
-          ))}
-        </div>
-      </div>
+     
+      
 
       <div
         ref={scrollerRef}
@@ -111,13 +94,29 @@ export function TestimonialsCarousel({ items }: TestimonialsCarouselProps) {
                 <span className="text-sm font-semibold">{t.name.slice(0, 1)}</span>
               </div>
               <div>
-                <p className="text-sm font-semibold text-black">{t.name}</p>
-                <p className="text-xs text-zinc-500">{t.role}</p>
+                <p className="text-sm font-semibold ">{t.name}</p>
+                <p className="text-xs text-zinc-500 dark:text-zinc-400">{t.role}</p>
               </div>
             </div>
             <p className="mt-4 text-sm leading-6 text-zinc-600">“{t.quote}”</p>
           </Card>
         ))}
+      </div>
+      <div className="flex items-center justify-center p-2 gap-3">
+        <div className="ml-auto flex items-center gap-1">
+          {items.map((_, idx) => (
+            <button
+              key={idx}
+              type="button"
+              onClick={() => scrollToIndex(idx)}
+              className={cn(
+                "h-2 w-2 rounded-full transition",
+                idx === active ? "bg-black" : "bg-black/20 hover:bg-black/35",
+              )}
+              aria-label={`Aller à l’avis ${idx + 1}`}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

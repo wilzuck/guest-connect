@@ -26,14 +26,14 @@ export default async function Page() {
       <div className="grid gap-4 lg:grid-cols-2">
         {items.map((item) => (
           <Card key={item.title} className="p-6 shadow-none">
-            <p className="text-base font-semibold text-black">{item.title}</p>
+            <p className="text-base font-semibold ">{item.title}</p>
             <p className="mt-3 text-sm leading-7 text-zinc-600">{item.body}</p>
           </Card>
         ))}
       </div>
       <Card className="mt-6 p-6 shadow-none">
-        <p className="text-sm font-semibold text-black">{isEn ? "Contact" : "Contact"}</p>
-        <p className="mt-2 text-sm leading-7 text-zinc-600">
+        <p className="text-sm font-semibold ">{isEn ? "Contact" : "Contact"}</p>
+        <p className="mt-2 text-sm leading-7 text-zinc-600 dark:text-zinc-400">
           {isEn
             ? "For access, correction, export, or deletion requests, contact GuestConnect support from your account or the support page."
             : "Pour toute demande d'accès, correction, export ou suppression, contactez le support GuestConnect depuis votre compte ou la page d'aide."}

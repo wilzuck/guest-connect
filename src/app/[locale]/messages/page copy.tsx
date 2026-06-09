@@ -29,16 +29,16 @@ export default function MessagesPage() {
                 <div className="p-6 sm:col-span-8">
                   <div className="flex flex-wrap items-start justify-between gap-3">
                     <div className="min-w-0">
-                      <p className="truncate text-sm font-semibold text-black">{t.subject}</p>
+                      <p className="truncate text-sm font-semibold ">{t.subject}</p>
                       <p className="mt-1 text-sm text-zinc-600">{t.listingTitle}</p>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs text-zinc-500">{t.updatedAt}</span>
+                    <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center">
+                      <span className="text-xs text-zinc-500 dark:text-zinc-400">{t.updatedAt}</span>
                       {t.unread ? <Badge className="text-black">{t.unread} non lu</Badge> : null}
                     </div>
                   </div>
                   <p className="mt-3 line-clamp-2 text-sm leading-7 text-zinc-600">{t.lastMessage}</p>
-                  <p className="mt-4 text-sm font-semibold text-black">Ouvrir</p>
+                  <p className="mt-4 text-sm font-semibold ">Ouvrir</p>
                 </div>
               </div>
             </Card>

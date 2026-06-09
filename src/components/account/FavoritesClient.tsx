@@ -40,7 +40,7 @@ export function FavoritesClient() {
     <div>
       <div className="flex items-end justify-between gap-4">
         <div>
-          <p className="text-sm font-semibold text-black">
+          <p className="text-sm font-semibold ">
             {favorites.length > 0 ? (isEn ? "Your saved stays" : "Vos favoris") : isEn ? "Recommended for you" : "Suggestions"}
           </p>
           <p className="mt-1 text-sm text-zinc-600">
@@ -53,7 +53,7 @@ export function FavoritesClient() {
                 : "Vous n’avez pas encore de favoris — voici 4 suggestions pour commencer."}
           </p>
         </div>
-        <Link href={`/${locale}/stays`} className="text-sm font-semibold text-black hover:underline">
+        <Link href={`/${locale}/stays`} className="text-sm font-semibold  hover:underline">
           {isEn ? "Browse stays" : "Voir les hébergements"}
         </Link>
       </div>
@@ -65,7 +65,7 @@ export function FavoritesClient() {
       </ListingGrid>
 
       <Card className="mt-8 p-5 shadow-none">
-        <p className="text-xs text-zinc-500">
+        <p className="text-xs text-zinc-500 dark:text-zinc-400">
           {isEn
             ? "Favorites are stored in your browser for now (localStorage)."
             : "Les favoris sont stockés dans ton navigateur pour l’instant (localStorage)."}

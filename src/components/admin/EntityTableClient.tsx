@@ -109,7 +109,7 @@ export function EntityTableClient({
         </div>
       </div>
 
-      <div className="overflow-x-auto border-y border-[#E8E8EC] bg-white dark:border-zinc-800 dark:bg-black">
+      <div className="overflow-x-auto border-y border-zinc-200 bg-white dark:border-zinc-800 dark:bg-black">
         <div className="min-w-[760px]">
           <div
             className="grid border-b border-[#E8E8EC] bg-[#FAFAFB] px-4 py-3 text-xs font-medium text-[#8E8E93] dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-400"
@@ -231,10 +231,10 @@ export function EntityTableClient({
 
       {previewRow ? (
         <div className="fixed inset-0 z-50 grid place-items-center bg-black/40 px-4 py-8 dark:bg-black/70" role="dialog" aria-modal="true">
-          <div className="max-h-[min(720px,90dvh)] w-full max-w-2xl overflow-hidden rounded-2xl bg-white shadow-2xl shadow-black/20 dark:bg-zinc-950 dark:shadow-black/60">
+          <div className="max-h-[min(720px,90dvh)] w-full max-w-2xl border border-black/10 dark:border-zinc-800 overflow-hidden rounded-2xl bg-white shadow-2xl shadow-black/20 dark:bg-zinc-950 dark:shadow-black/60">
             <div className="flex items-center justify-between border-b border-[#E8E8EC] px-5 py-4 dark:border-zinc-800">
               <div>
-                <p className="text-sm font-semibold text-[#202024]">{"Détail de l'élément"}</p>
+                <p className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">{"Détail de l'élément"}</p>
                 <p className="mt-1 text-xs text-[#8E8E93]">{String(previewRow.id ?? "")}</p>
               </div>
               <button
@@ -249,9 +249,9 @@ export function EntityTableClient({
             <div className="max-h-[calc(min(720px,90dvh)-73px)] overflow-y-auto p-5">
               <dl className="grid gap-3 sm:grid-cols-2">
                 {Object.entries(previewRow).map(([key, value]) => (
-                  <div key={key} className="rounded-xl border border-[#E8E8EC] bg-[#FAFAFB] p-3 dark:border-zinc-800 dark:bg-zinc-900">
+                  <div key={key} className="rounded-xl border border-zinc-200 bg-zinc-50 p-3 dark:border-zinc-800 dark:bg-zinc-900">
                     <dt className="text-xs font-semibold uppercase tracking-[0.14em] text-[#8E8E93]">{key}</dt>
-                    <dd className="mt-2 whitespace-pre-wrap break-words text-sm text-[#202024]">{formatPreviewValue(value)}</dd>
+                    <dd className="mt-2 whitespace-pre-wrap break-words text-sm text-zinc-900 dark:text-zinc-100">{formatPreviewValue(value)}</dd>
                   </div>
                 ))}
               </dl>

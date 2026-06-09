@@ -61,7 +61,7 @@ export async function HowItWorksSection() {
                 <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-black text-sm font-semibold text-white">
                   {idx + 1}
                 </span>
-                <h3 className="text-lg font-semibold tracking-tight text-black">{s.title}</h3>
+                <h3 className="text-lg font-semibold tracking-tight">{s.title}</h3>
               </div>
               <p className="mt-3 text-sm leading-6 text-zinc-600">{s.description}</p>
             </Card>

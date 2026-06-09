@@ -109,7 +109,7 @@ export default async function Page() {
           <h2 className="text-lg font-semibold tracking-tight text-[#202024]">Active views</h2>
           <Link
             href={`/${locale}/dashboard/service-management/listings`}
-            className="rounded-lg border border-[#E8E8EC] px-3 py-2 text-sm font-semibold text-[#202024]"
+            className="rounded-lg border border-[#E8E8EC] px-3 py-2 text-sm font-semibold text-zinc-900 dark:text-zinc-100"
           >
             View All
           </Link>
@@ -127,7 +127,7 @@ export default async function Page() {
                       <Icon className="h-5 w-5" aria-hidden="true" />
                     </span>
                     <div className="min-w-0">
-                      <h3 className="text-sm font-semibold text-[#202024]">{item.title}</h3>
+                      <h3 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">{item.title}</h3>
                       <p className="mt-1 text-sm leading-5 text-[#8E8E93]">{item.description}</p>
                     </div>
                   </div>

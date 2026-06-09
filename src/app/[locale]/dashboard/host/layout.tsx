@@ -13,11 +13,11 @@ export default async function Layout({ children }: { children: ReactNode }) {
   ];
 
   return (
-    <div className="bg-white">
-      <section className="border-b border-black/5 bg-white">
+    <div >
+      <section className="border-b border-zinc-200 dark:border-zinc-800">
         <Container className="py-8 sm:py-10">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">Espace hôte</p>
-          <h1 className="mt-3 text-balance text-3xl font-semibold tracking-tight text-black sm:text-4xl">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 dark:text-white/80">Espace hôte</p>
+          <h1 className="mt-3 text-balance text-3xl font-semibold tracking-tight  sm:text-4xl">
             Gestion des annonces
           </h1>
           <p className="mt-3 max-w-2xl text-sm leading-7 text-zinc-600">
@@ -26,7 +26,7 @@ export default async function Layout({ children }: { children: ReactNode }) {
         </Container>
       </section>
 
-      <section className="bg-white">
+      <section >
         <Container className="py-8 sm:py-10">
           <div className="grid gap-8 lg:grid-cols-12">
             <aside className="lg:col-span-3">
@@ -37,7 +37,7 @@ export default async function Layout({ children }: { children: ReactNode }) {
                       key={item.href}
                       href={item.href}
                       className={cn(
-                        "rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-semibold text-black hover:bg-zinc-50 transition",
+                        "rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-semibold  hover:bg-zinc-50 transition",
                       )}
                     >
                       {item.label}

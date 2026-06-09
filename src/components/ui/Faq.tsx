@@ -14,7 +14,7 @@ export function Faq({ items, className }: { items: FaqItem[]; className?: string
           className="group rounded-2xl border border-black/10 bg-white p-5 shadow-sm shadow-black/5 open:shadow-md open:shadow-black/10"
         >
           <summary className="flex cursor-pointer list-none items-center justify-between gap-4">
-            <span className="text-sm font-semibold text-black">{item.q}</span>
+            <span className="text-sm font-semibold ">{item.q}</span>
             <span className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-black/10 bg-white text-zinc-700 transition group-open:rotate-45">
               +
             </span>

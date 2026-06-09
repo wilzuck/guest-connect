@@ -20,7 +20,7 @@ export function ReviewForm() {
   return (
     <form onSubmit={onSubmit} className="rounded-3xl border border-black/10 bg-white p-5 xl:p-8">
       <div className="flex flex-col gap-1">
-        <h3 className="text-lg font-semibold tracking-tight text-black">{t("title")}</h3>
+        <h3 className="text-lg font-semibold tracking-tight">{t("title")}</h3>
         <p className="text-sm text-zinc-600">{t("subtitle")}</p>
       </div>
 
@@ -30,7 +30,7 @@ export function ReviewForm() {
           <select
             value={rating}
             onChange={(e) => setRating(e.target.value)}
-            className="mt-2 h-11 w-full rounded-2xl border max-w-sm border-black/10 bg-white px-3 text-sm font-semibold text-black shadow-sm shadow-black/5 focus:outline-none focus:ring-4 focus:ring-black/5"
+            className="mt-2 h-11 w-full rounded-2xl border max-w-sm border-black/10 bg-white px-3 text-sm font-semibold  shadow-sm shadow-black/5 focus:outline-none focus:ring-4 focus:ring-black/5"
             aria-label={t("rating")}
           >
             <option value="5">5</option>
@@ -53,10 +53,10 @@ export function ReviewForm() {
       </div>
 
       <div className="mt-4 flex items-center justify-between gap-3">
-        <p className="text-xs text-zinc-500">{t("note")}</p>
+        <p className="text-xs text-zinc-500 dark:text-zinc-400">{t("note")}</p>
         <button
           type="submit"
-          className="rounded-2xl bg-black px-5 py-3 text-sm font-semibold text-white transition active:scale-[0.99]"
+          className="rounded-2xl bg-black px-5 py-3 text-sm font-semibold text-white transition active:scale-[0.99] dark:bg-white dark:text-black"
         >
           {t("submit")}
         </button>

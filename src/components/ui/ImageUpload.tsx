@@ -170,10 +170,10 @@ export function ImageUpload({
               d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
             />
           </svg>
-          <p className="text-sm font-semibold text-black">
+          <p className="text-sm font-semibold ">
             Glissez vos images ici ou cliquez
           </p>
-          <p className="text-xs text-zinc-500">
+          <p className="text-xs text-zinc-500 dark:text-zinc-400">
             PNG, JPG ou GIF (max {maxSizeInMB}MB). Jusqu&apos;à {maxFiles} images.
           </p>
         </div>
@@ -202,7 +202,7 @@ export function ImageUpload({
                 <button
                   type="button"
                   onClick={() => openReplacePicker(index)}
-                  className="rounded-lg bg-white px-2 py-2 text-xs font-semibold text-black shadow-sm"
+                  className="rounded-lg bg-white px-2 py-2 text-xs font-semibold  shadow-sm"
                 >
                   Remplacer
                 </button>
@@ -224,7 +224,7 @@ export function ImageUpload({
 
       {/* Indicateur de limite */}
       {previews.length > 0 && (
-        <p className="text-xs text-zinc-500">
+        <p className="text-xs text-zinc-500 dark:text-zinc-400">
           {previews.length} / {maxFiles} images
         </p>
       )}

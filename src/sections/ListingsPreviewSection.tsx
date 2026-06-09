@@ -14,12 +14,12 @@ export async function ListingsPreviewSection({ listings }: ListingsPreviewSectio
   const locale = await getLocale();
   const t = await getTranslations("homeListings");
   return (
-    <section id="listings" className="bg-white">
+    <section id="listings" >
       <Container className="py-16 sm:py-20">
         <div className="text-left">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">{t("eyebrow")}</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 dark:text-white/80">{t("eyebrow")}</p>
           <div className="mt-3 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <h2 className="text-balance text-3xl font-semibold tracking-tight text-black sm:text-4xl">
+            <h2 className="text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
               {t("title")}
             </h2>
             <div className="flex justify-center sm:justify-end">
@@ -28,7 +28,7 @@ export async function ListingsPreviewSection({ listings }: ListingsPreviewSectio
               </ButtonLink>
             </div>
           </div>
-          <p className="mt-4 max-w-2xl text-pretty text-base leading-7 text-zinc-600 sm:text-lg">
+          <p className="mt-3 max-w-xl text-balance text-sm leading-6 text-zinc-600 dark:text-zinc-300 sm:mt-4 sm:max-w-2xl sm:text-base sm:leading-7 lg:text-lg">
             {t("description")}
           </p>
         </div>

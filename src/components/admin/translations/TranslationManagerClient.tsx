@@ -84,10 +84,10 @@ export function TranslationManagerClient({ files }: { files: TranslationFile[] }
             {selectedFile ? (
               <div className="rounded-xl border border-black/10 bg-zinc-50 p-3 text-xs leading-5 text-zinc-600">
                 <p>
-                  Locale : <span className="font-semibold text-black">{selectedFile.locale}</span>
+                  Locale : <span className="font-semibold ">{selectedFile.locale}</span>
                 </p>
                 <p>
-                  Fichier : <span className="font-semibold text-black">{selectedFile.file}</span>
+                  Fichier : <span className="font-semibold ">{selectedFile.file}</span>
                 </p>
               </div>
             ) : null}

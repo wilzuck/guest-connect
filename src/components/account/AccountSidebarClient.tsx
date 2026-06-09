@@ -19,7 +19,7 @@ export function AccountSidebarClient({
     <aside className="lg:col-span-3">
       <div className="sticky top-24">
         <div className="rounded-3xl border border-black/10 bg-white p-3 shadow-sm shadow-black/5">
-          <p className="px-3 pb-2 pt-1 text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">{title}</p>
+          <p className="px-3 pb-2 pt-1 text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 dark:text-white/80">{title}</p>
           <nav className="grid gap-1">
             {items.map((it) => {
               const active = pathname === it.href || pathname.startsWith(it.href + "/");

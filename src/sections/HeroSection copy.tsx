@@ -21,7 +21,7 @@ export async function HeroSection() {
         <div className="grid gap-8">
           <div className="max-w-3xl">
             <Badge>{t("badge")}</Badge>
-            <h1 className="mt-5 text-balance text-3xl font-semibold tracking-tight text-black sm:text-5xl lg:text-6xl">
+            <h1 className="mt-5 text-balance text-3xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">
               {t("title")}
             </h1>
             <p className="mt-5 max-w-xl text-pretty text-base leading-7 text-zinc-600 sm:block sm:text-lg">

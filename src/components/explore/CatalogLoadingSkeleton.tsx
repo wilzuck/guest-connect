@@ -2,8 +2,8 @@ import { Container } from "@/components/ui/Container";
 
 export function CatalogLoadingSkeleton() {
   return (
-    <div className="bg-white">
-      <section className="border-b border-black/5 bg-white">
+    <div >
+      <section className="border-b border-zinc-200 dark:border-zinc-800">
         <Container className="py-10 sm:py-14">
           <div className="h-3 w-32 animate-pulse rounded-full bg-zinc-100" />
           <div className="mt-5 h-10 w-full max-w-xl animate-pulse rounded-2xl bg-zinc-100 sm:h-12" />
@@ -13,7 +13,7 @@ export function CatalogLoadingSkeleton() {
         </Container>
       </section>
 
-      <section className="bg-white">
+      <section >
         <Container className="py-12 sm:py-14">
           <div className="flex gap-2 overflow-hidden">
             <div className="h-10 w-24 shrink-0 animate-pulse rounded-full bg-zinc-100" />

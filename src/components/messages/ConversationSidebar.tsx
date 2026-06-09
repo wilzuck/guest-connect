@@ -18,7 +18,7 @@ export function ConversationSidebar({
   selectedId: string | null;
 }) {
   return (
-    <aside className="border-r border-zinc-200">
+    <aside className="border-r border-black/10">
       
       <div className="border-b border-gray-200 p-4">
         <div className="flex items-center rounded-2xl border border-gray-200 px-4 py-3">
@@ -76,7 +76,7 @@ export function ConversationSidebar({
                   {thread.subject}
                 </p>
 
-                <span className="text-xs text-zinc-500">
+                <span className="text-xs text-zinc-500 dark:text-zinc-400">
                   {thread.updatedAt}
                 </span>
               </div>

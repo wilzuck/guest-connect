@@ -6,8 +6,8 @@ function SkeletonBlock({ className = "" }: { className?: string }) {
 
 export function HomeLoadingSkeleton() {
   return (
-    <div className="bg-white">
-      <section className="min-h-[620px] border-b border-black/5 bg-white">
+    <div >
+      <section className="min-h-[620px] border-b border-black/5">
         <Container className="grid gap-8 py-10 lg:grid-cols-12 lg:items-center lg:py-16">
           <div className="lg:col-span-6">
             <SkeletonBlock className="h-3 w-28 rounded-full" />

@@ -46,7 +46,7 @@ export async function SocialProofSection() {
                   key={s.label}
                   className="rounded-2xl border border-black/10 bg-white p-4 text-center shadow-sm shadow-black/5"
                 >
-                  <p className="text-2xl font-semibold tracking-tight text-black">{s.value}</p>
+                  <p className="text-2xl font-semibold tracking-tight">{s.value}</p>
                   <p className="mt-1 text-xs font-medium text-zinc-500">{s.label}</p>
                 </div>
               ))}

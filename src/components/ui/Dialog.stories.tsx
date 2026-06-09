@@ -21,7 +21,7 @@ export function Panel() {
       </DialogTrigger>
       <DialogContent className="max-w-md p-6">
         <div className="space-y-3">
-          <p className="text-lg font-semibold text-black">Confirmer l&apos;action</p>
+          <p className="text-lg font-semibold ">Confirmer l&apos;action</p>
           <p className="text-sm leading-6 text-zinc-600">
             Utilise ce panneau pour les confirmations, les filtres mobiles et
             les formulaires rapides.

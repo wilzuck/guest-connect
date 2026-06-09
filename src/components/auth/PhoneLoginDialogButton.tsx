@@ -23,7 +23,7 @@ export function PhoneLoginDialogButton({ label }: { label: string }) {
 
       <DialogContent className="p-6">
         <div className="flex items-center justify-between">
-          <p className="text-sm font-semibold text-black">{t("phoneDialog.title")}</p>
+          <p className="text-sm font-semibold ">{t("phoneDialog.title")}</p>
           <DialogClose asChild>
             <button
               type="button"

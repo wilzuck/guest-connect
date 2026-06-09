@@ -42,7 +42,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
   const Icon = meta.icon;
 
   return (
-    <div className="bg-white">
+    <div >
       <Container className="py-8 sm:py-12">
         <Link href={`/${locale}/services`} className="text-sm font-semibold text-zinc-600 hover:text-black">
           ← Retour aux services
@@ -52,14 +52,14 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
           <div className="lg:col-span-7">
             <div className="relative aspect-[16/10] overflow-hidden rounded-3xl bg-zinc-100">
               <Image src={service.imageUrl} alt={service.title} fill className="object-cover" priority />
-              <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-white/95 px-3 py-1.5 text-xs font-semibold text-black shadow-sm shadow-black/10">
+              <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-white/95 px-3 py-1.5 text-xs font-semibold  shadow-sm shadow-black/10">
                 <Icon className="h-4 w-4" aria-hidden="true" />
                 {meta.label}
               </div>
             </div>
 
             <section className="mt-8">
-              <h1 className="text-balance text-3xl font-semibold tracking-tight text-black sm:text-4xl">
+              <h1 className="text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
                 {service.title}
               </h1>
               <p className="mt-3 text-sm font-medium text-zinc-500">{service.location}</p>
@@ -78,11 +78,11 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <p className="text-sm text-zinc-500">À partir de</p>
-                  <p className="mt-1 text-2xl font-semibold tracking-tight text-black">
+                  <p className="mt-1 text-2xl font-semibold tracking-tight">
                     {service.priceFrom} {service.currency}
                   </p>
                 </div>
-                <p className="rounded-full bg-zinc-100 px-3 py-1 text-sm font-semibold text-black">
+                <p className="rounded-full bg-zinc-100 px-3 py-1 text-sm font-semibold ">
                   ★ {service.rating.toFixed(1)} ({service.reviewCount})
                 </p>
               </div>
@@ -111,7 +111,7 @@ function Info({ label, value, compact = false }: { label: string; value: string;
   return (
     <div className={compact ? "rounded-2xl bg-zinc-50 p-3" : "rounded-2xl border border-black/10 bg-white p-4"}>
       <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-400">{label}</p>
-      <p className="mt-1 text-sm font-semibold text-black">{value}</p>
+      <p className="mt-1 text-sm font-semibold ">{value}</p>
     </div>
   );
 }

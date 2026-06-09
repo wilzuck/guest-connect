@@ -17,7 +17,7 @@ export function CatalogEmptyState({
       <div className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-white text-zinc-500 shadow-sm shadow-black/5">
         <SearchX className="h-5 w-5" aria-hidden="true" />
       </div>
-      <h2 className="mt-4 text-lg font-semibold text-black">{title}</h2>
+      <h2 className="mt-4 text-lg font-semibold ">{title}</h2>
       <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-zinc-600">{description}</p>
       <Link
         href={resetHref}

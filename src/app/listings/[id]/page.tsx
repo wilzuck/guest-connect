@@ -21,13 +21,13 @@ export default async function ListingPage({ params }: PageProps) {
   const images = listing.images?.length ? listing.images : [listing.imageUrl];
 
   return (
-    <div className="bg-white">
+    <div >
       <Container className="py-10 sm:py-14">
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <Badge>{listing.location}</Badge>
-              <h1 className="mt-4 text-balance text-3xl font-semibold tracking-tight text-black sm:text-4xl">
+              <h1 className="mt-4 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
                 {listing.title}
               </h1>
               <div className="mt-3 flex flex-wrap items-center gap-2 text-sm text-zinc-600">
@@ -42,7 +42,7 @@ export default async function ListingPage({ params }: PageProps) {
               </div>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center">
               <ButtonLink href={`/${locale}/stays`} variant="outline" size="sm">
                 Retour
               </ButtonLink>
@@ -85,7 +85,7 @@ export default async function ListingPage({ params }: PageProps) {
           {/* Contenu */}
           <div className="grid gap-8 lg:grid-cols-12 lg:items-start">
             <div className="lg:col-span-8">
-              <h2 className="text-xl font-semibold tracking-tight text-black">
+              <h2 className="text-xl font-semibold tracking-tight">
                 À propos de cet hébergement
               </h2>
               <p className="mt-3 text-sm leading-7 text-zinc-600">
@@ -104,7 +104,7 @@ export default async function ListingPage({ params }: PageProps) {
             <div className="lg:col-span-4">
               <Card className="sticky top-24 p-6">
                 <p className="text-sm text-zinc-600">À partir de</p>
-                <p className="mt-2 text-3xl font-semibold tracking-tight text-black">
+                <p className="mt-2 text-3xl font-semibold tracking-tight">
                   {listing.pricePerNight} {listing.currency}
                   <span className="text-sm font-medium text-zinc-500"> / nuit</span>
                 </p>
@@ -131,7 +131,7 @@ export default async function ListingPage({ params }: PageProps) {
 function InfoCard({ title, desc }: { title: string; desc: string }) {
   return (
     <div className="rounded-2xl border border-black/10 bg-white p-5 shadow-sm shadow-black/5">
-      <p className="text-sm font-semibold text-black">{title}</p>
+      <p className="text-sm font-semibold ">{title}</p>
       <p className="mt-2 text-sm leading-6 text-zinc-600">{desc}</p>
     </div>
   );

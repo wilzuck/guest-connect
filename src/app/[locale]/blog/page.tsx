@@ -44,13 +44,13 @@ export default async function BlogIndexPage({
                   {post.tags.slice(0, 2).map((tag) => (
                     <Badge key={tag}>{tag}</Badge>
                   ))}
-                  <span className="text-xs text-zinc-500">
+                  <span className="text-xs text-zinc-500 dark:text-zinc-400">
                     {formatDate(post.date)} • {post.readingTime}
                   </span>
                 </div>
-                <p className="mt-3 text-lg font-semibold tracking-tight text-black">{post.title}</p>
-                <p className="mt-2 text-sm leading-7 text-zinc-600">{post.excerpt}</p>
-                <p className="mt-4 text-sm font-semibold text-black">Voir l’article</p>
+                <p className="mt-3 text-lg font-semibold tracking-tight">{post.title}</p>
+                <p className="mt-2 text-sm leading-7 text-zinc-600 dark:text-zinc-400">{post.excerpt}</p>
+                <p className="mt-4 text-sm font-semibold ">Voir l’article</p>
               </div>
             </Card>
           </Link>
@@ -62,11 +62,11 @@ export default async function BlogIndexPage({
         <p className="text-sm text-zinc-600">
           Page {safePage} / {totalPages}
         </p>
-        <div className="flex items-center gap-2">
+        <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center">
           <Link
             aria-disabled={safePage <= 1}
             className={[
-              "rounded-2xl border border-black/10 bg-white px-4 py-2 text-sm font-semibold text-black hover:bg-zinc-50 transition",
+              "rounded-2xl border border-black/10 bg-white px-4 py-2 text-sm font-semibold  hover:bg-zinc-50 transition",
               safePage <= 1 ? "pointer-events-none opacity-50" : "",
             ].join(" ")}
             href={`/${locale}/blog?page=${Math.max(1, safePage - 1)}`}
@@ -76,7 +76,7 @@ export default async function BlogIndexPage({
           <Link
             aria-disabled={safePage >= totalPages}
             className={[
-              "rounded-2xl border border-black/10 bg-white px-4 py-2 text-sm font-semibold text-black hover:bg-zinc-50 transition",
+              "rounded-2xl border border-black/10 bg-white px-4 py-2 text-sm font-semibold  hover:bg-zinc-50 transition",
               safePage >= totalPages ? "pointer-events-none opacity-50" : "",
             ].join(" ")}
             href={`/${locale}/blog?page=${Math.min(totalPages, safePage + 1)}`}

@@ -124,7 +124,7 @@ export function ListingFormClient({
         {/* HEADER */}
         <div>
 
-          <h1 className="mt-2 text-xl font-semibold text-black">
+          <h1 className="mt-2 text-xl font-semibold ">
             {title || titleLabel || "Décrivez votre logement"}
           </h1>
 

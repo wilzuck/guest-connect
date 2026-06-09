@@ -5,7 +5,7 @@ import { getLocale } from "next-intl/server";
 export async function BecomeHostSection() {
   const locale = await getLocale();
   return (
-    <section id="host" className="bg-white">
+    <section id="host" >
       <Container className="py-16 sm:py-20">
         <div className="relative overflow-hidden rounded-3xl border border-black/10 bg-gradient-to-br from-black to-zinc-900 px-6 py-12 text-white shadow-sm shadow-black/10 sm:px-10">
           <div className="absolute -left-24 -top-24 h-64 w-64 rounded-full bg-white/10 blur-3xl" />

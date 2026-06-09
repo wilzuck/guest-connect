@@ -63,7 +63,7 @@ export default async function Page() {
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {pillars.map((p) => (
           <Card key={p.t} className="p-6">
-            <p className="text-sm font-semibold text-black">{p.t}</p>
+            <p className="text-sm font-semibold ">{p.t}</p>
             <p className="mt-2 text-sm leading-6 text-zinc-600">{p.d}</p>
           </Card>
         ))}
@@ -71,12 +71,12 @@ export default async function Page() {
 
       <div className="mt-12 grid gap-10 lg:grid-cols-12">
         <div className="lg:col-span-7">
-          <p className="text-sm font-semibold text-black">{isEn ? "FAQ" : "FAQ"}</p>
+          <p className="text-sm font-semibold ">{isEn ? "FAQ" : "FAQ"}</p>
           <Faq items={faq} className="mt-4" />
         </div>
         <div className="lg:col-span-5">
           <Card className="p-6">
-            <p className="text-sm font-semibold text-black">{isEn ? "Need help now?" : "Besoin d’aide ?"}</p>
+            <p className="text-sm font-semibold ">{isEn ? "Need help now?" : "Besoin d’aide ?"}</p>
             <p className="mt-2 text-sm leading-6 text-zinc-600">
               {isEn
                 ? "If something feels wrong, contact us. We prioritize safety-related requests."
@@ -85,7 +85,7 @@ export default async function Page() {
             <div className="mt-4 grid gap-2">
               <Link
                 href={`/${locale}/contact`}
-                className="rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-semibold text-black hover:bg-zinc-50 transition"
+                className="rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-semibold  hover:bg-zinc-50 transition"
               >
                 {isEn ? "Contact support" : "Contacter le support"} →
               </Link>

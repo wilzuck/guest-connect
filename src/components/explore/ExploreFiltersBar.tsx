@@ -67,17 +67,17 @@ export function ExploreFiltersBar({
     >
       {leading ? <div className="relative z-20 shrink-0 bg-white pr-1">{leading}</div> : null}
 
-      {/* Gradients */}
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-white to-transparent" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-white to-transparent" />
-
+      {/* Gradients 
+      <div className="pointer-events-none scheme-dark:hidden absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-white to-transparent" />
+      <div className="pointer-events-none scheme-dark:hidden absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-white to-transparent" />
+      */}
       {/* Desktop arrows */}
       <button
         type="button"
         onClick={() => scrollBy(-320)}
         className={cn(
           "hidden md:grid absolute top-1/2 -translate-y-1/2 z-10 h-10 w-10 place-items-center rounded-full bg-white shadow-sm shadow-black/10 transition",
-          leading ? "left-32" : "left-2",
+          leading ? "left-30" : "left-2",
           canLeft ? "opacity-100" : "opacity-0 pointer-events-none",
         )}
         aria-label={t("scrollLeft")}

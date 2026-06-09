@@ -64,7 +64,7 @@ export function ActivitiesTable({ isEn }: { isEn: boolean }) {
             <div key={r.id} className="grid grid-cols-12 items-center gap-3 px-4 py-3">
               <div className="col-span-3 sm:col-span-2 text-sm text-zinc-600">{r.date}</div>
               <div className="col-span-6 sm:col-span-7 min-w-0">
-                <p className="truncate text-sm font-semibold text-black">{r.title}</p>
+                <p className="truncate text-sm font-semibold ">{r.title}</p>
                 <p className="mt-1 truncate text-sm text-zinc-600">{r.detail}</p>
               </div>
               <div className="col-span-3 sm:col-span-3 flex justify-end">
@@ -100,12 +100,12 @@ export function ActivitiesTable({ isEn }: { isEn: boolean }) {
         <p className="text-sm text-zinc-600">
           {isEn ? "Page" : "Page"} {page} / {pageCount}
         </p>
-        <div className="flex items-center gap-2">
+        <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center">
           <button
             type="button"
             onClick={() => setPage((p) => Math.max(1, p - 1))}
             disabled={page === 1}
-            className="rounded-2xl border border-black/10 bg-white px-4 py-2 text-sm font-semibold text-black hover:bg-zinc-50 transition disabled:opacity-50"
+            className="rounded-2xl border border-black/10 bg-white px-4 py-2 text-sm font-semibold  hover:bg-zinc-50 transition disabled:opacity-50"
           >
             {isEn ? "Prev" : "Préc."}
           </button>
@@ -113,7 +113,7 @@ export function ActivitiesTable({ isEn }: { isEn: boolean }) {
             type="button"
             onClick={() => setPage((p) => Math.min(pageCount, p + 1))}
             disabled={page === pageCount}
-            className="rounded-2xl border border-black/10 bg-white px-4 py-2 text-sm font-semibold text-black hover:bg-zinc-50 transition disabled:opacity-50"
+            className="rounded-2xl border border-black/10 bg-white px-4 py-2 text-sm font-semibold  hover:bg-zinc-50 transition disabled:opacity-50"
           >
             {isEn ? "Next" : "Suiv."}
           </button>

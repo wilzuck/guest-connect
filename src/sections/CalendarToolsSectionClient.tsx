@@ -117,7 +117,7 @@ export function CalendarToolsDemo() {
         </div>
       ) : (
         <div className="mt-5">
-          <p className="text-sm font-semibold text-black">{t("flexTitle")}</p>
+          <p className="text-sm font-semibold ">{t("flexTitle")}</p>
           <p className="mt-1 text-sm text-zinc-600">{t("flexSubtitle")}</p>
 
           <div className="mt-4 flex flex-wrap gap-2">
@@ -138,8 +138,8 @@ export function CalendarToolsDemo() {
             ))}
           </div>
 
-          <div className="mt-5 rounded-2xl border border-black/10 bg-zinc-50 p-4">
-            <p className="text-sm font-semibold text-black">
+          <div className="mt-5 rounded-2xl border border-zinc-200 bg-zinc-50 p-4 dark:border-zinc-800 dark:bg-zinc-900">
+            <p className="text-sm font-semibold ">
               {t("flexResultTitle")}
             </p>
             <p className="mt-2 text-sm text-zinc-600">

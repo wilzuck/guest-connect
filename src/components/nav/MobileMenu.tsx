@@ -159,7 +159,7 @@ export function MobileMenu() {
                       <Icon className="h-5 w-5" aria-hidden="true" />
                     </span>
                     <span className="min-w-0 flex-1">
-                      <span className="block truncate text-sm font-semibold text-black dark:text-white">
+                      <span className="block truncate text-sm font-semibold  dark:text-white">
                         {l.label}
                       </span>
                       <span className="mt-0.5 block truncate text-xs text-zinc-500 dark:text-zinc-400">
@@ -179,7 +179,7 @@ export function MobileMenu() {
                 <CircleUserRound className="h-5 w-5" aria-hidden="true" />
               </span>
               <div className="min-w-0">
-                <p className="truncate text-sm font-semibold text-black dark:text-white">{tm("account")}</p>
+                <p className="truncate text-sm font-semibold  dark:text-white">{tm("account")}</p>
                 <p className="truncate text-xs text-zinc-500 dark:text-zinc-400">{tm("tagline")}</p>
               </div>
             </div>
@@ -191,7 +191,7 @@ export function MobileMenu() {
                   <DialogClose asChild key={item.href}>
                     <Link
                       href={item.href}
-                      className="flex min-h-11 items-center gap-3 rounded-xl bg-white px-3 py-2 text-sm font-semibold text-black shadow-sm shadow-black/5 transition hover:bg-zinc-100 dark:bg-zinc-950 dark:text-white dark:shadow-black/30 dark:hover:bg-zinc-800"
+                      className="flex min-h-11 items-center gap-3 rounded-xl bg-white px-3 py-2 text-sm font-semibold  shadow-sm shadow-black/5 transition hover:bg-zinc-100 dark:bg-zinc-950 dark:text-white dark:shadow-black/30 dark:hover:bg-zinc-800"
                     >
                       <Icon className="h-4 w-4 text-zinc-500 dark:text-zinc-400" aria-hidden="true" />
                       <span className="min-w-0 truncate">{item.label}</span>
@@ -206,7 +206,7 @@ export function MobileMenu() {
             <DialogClose asChild>
               <Link
                 href={`/${locale}/logout`}
-                className="flex min-h-11 items-center gap-3 rounded-xl bg-white px-3 py-2 text-sm font-semibold text-black shadow-sm shadow-black/5 transition hover:bg-zinc-100 dark:bg-zinc-950 dark:text-white dark:shadow-black/30 dark:hover:bg-zinc-800"
+                className="flex min-h-11 items-center gap-3 rounded-xl bg-white px-3 py-2 text-sm font-semibold  shadow-sm shadow-black/5 transition hover:bg-zinc-100 dark:bg-zinc-950 dark:text-white dark:shadow-black/30 dark:hover:bg-zinc-800"
               >
                 <LogOut className="h-4 w-4 text-zinc-500 dark:text-zinc-400" aria-hidden="true" />
                 <span>{tu("logout")}</span>

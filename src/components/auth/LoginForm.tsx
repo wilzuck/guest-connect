@@ -105,7 +105,7 @@ export function LoginForm() {
           />
           {t("actions.rememberMe")}
         </label>
-        <Link href={`/${locale}/support`} className="text-sm font-semibold text-black hover:underline">
+        <Link href={`/${locale}/support`} className="text-sm font-semibold  hover:underline">
           {t("actions.forgotPassword")}
         </Link>
       </div>

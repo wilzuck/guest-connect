@@ -54,7 +54,7 @@ export async function AuthShell({
                 </Link>
               </header>
               <div className="mb-7">
-                <h1 className="text-xl font-semibold tracking-tight text-black dark:text-white">
+                <h1 className="text-xl font-semibold tracking-tight dark:text-white">
                   {title}
                 </h1>
                 <p className="mt-2 text-sm leading-6 text-zinc-600 dark:text-zinc-400">

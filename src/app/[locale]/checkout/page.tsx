@@ -58,25 +58,25 @@ export default async function CheckoutPage({
   const currency = listing ? String(listing.currency ?? "EUR") : "EUR";
 
   return (
-    <div className="bg-white">
-      <section className="border-b border-black/5 bg-white">
+    <div >
+      <section className="border-b border-zinc-200 dark:border-zinc-800">
         <Container className="py-10 sm:py-14">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">Paiement</p>
-          <h1 className="mt-4 text-balance text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-black">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 dark:text-white/80 dark:text-white/5">Paiement</p>
+          <h1 className="mt-4 text-balance text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight">
             Finaliser la réservation
           </h1>
-          <p className="mt-4 max-w-2xl text-pretty text-base leading-7 text-zinc-600 sm:text-lg">
+          <p className="mt-3 max-w-xl text-balance text-sm leading-6 text-zinc-600 dark:text-zinc-300 sm:mt-4 sm:max-w-2xl sm:text-base sm:leading-7 lg:text-lg">
             Démo: aucun paiement réel. Cette page illustre le flux checkout + confirmation.
           </p>
         </Container>
       </section>
 
-      <section className="bg-white">
+      <section >
         <Container className="py-12 sm:py-14">
           <div className="grid gap-6 lg:grid-cols-12 lg:items-start">
             <div className="lg:col-span-7 xl:col-span-8">
               <Card className="p-6 shadow-none">
-                <p className="text-sm font-semibold text-black">Vos informations</p>
+                <p className="text-sm font-semibold ">Vos informations</p>
                 <p className="mt-2 text-sm text-zinc-600">
                   Nous les utilisons uniquement pour confirmer la réservation et partager les détails d’arrivée.
                 </p>
@@ -103,7 +103,7 @@ export default async function CheckoutPage({
                 </div>
 
                 <div className="mt-8 border-t border-black/10 pt-6">
-                  <p className="text-sm font-semibold text-black">Moyen de paiement</p>
+                  <p className="text-sm font-semibold ">Moyen de paiement</p>
                   <p className="mt-2 text-sm text-zinc-600">
                     Choisissez comment vous souhaitez payer cette réservation. Le paiement reste en mode démo.
                   </p>
@@ -125,7 +125,7 @@ export default async function CheckoutPage({
                             className="mt-1 h-4 w-4 accent-black"
                           />
                           <span className="grid min-w-0 gap-2">
-                            <span className="flex items-center gap-2 text-sm font-semibold text-black">
+                            <span className="flex items-center gap-2 text-sm font-semibold ">
                               <span className="grid h-9 w-9 place-items-center rounded-xl border border-black/10 bg-zinc-100 text-black transition group-has-[:checked]:bg-white">
                                 <Icon className="h-4 w-4" aria-hidden="true" />
                               </span>
@@ -181,7 +181,7 @@ export default async function CheckoutPage({
                   </Link>
                   <Link
                     href={`/${locale}/stays`}
-                    className="inline-flex h-11 items-center justify-center rounded-2xl border border-black/10 bg-white px-6 text-sm font-semibold text-black hover:bg-zinc-50 transition"
+                    className="inline-flex h-11 items-center justify-center rounded-2xl border border-black/10 bg-white px-6 text-sm font-semibold  hover:bg-zinc-50 transition"
                   >
                     Continuer à explorer
                   </Link>
@@ -203,7 +203,7 @@ export default async function CheckoutPage({
                   ) : null}
                 </div>
                 <div className="p-6">
-                  <p className="text-sm font-semibold text-black">{String(listing?.title ?? "Logement")}</p>
+                  <p className="text-sm font-semibold ">{String(listing?.title ?? "Logement")}</p>
                   <p className="mt-1 text-sm text-zinc-600">{String(listing?.location ?? "—")}</p>
 
                   <div className="mt-5 grid gap-2 text-sm text-zinc-700">
@@ -233,7 +233,7 @@ function Row({ label, value, strong }: { label: string; value: string; strong?: 
   return (
     <div className="flex items-center justify-between gap-4">
       <span className="text-zinc-500">{label}</span>
-      <span className={strong ? "font-semibold text-black" : "font-semibold"}>{value}</span>
+      <span className={strong ? "font-semibold " : "font-semibold"}>{value}</span>
     </div>
   );
 }

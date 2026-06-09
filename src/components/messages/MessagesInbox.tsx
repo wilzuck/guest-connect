@@ -115,7 +115,7 @@ export function MessagesInbox({
       >
         <div className="text-center">
           <span className="mx-auto block h-10 w-10 animate-spin rounded-full border-2 border-[#E8E8EC] border-t-[#05A6D6]" />
-          <p className="mt-4 text-sm font-semibold text-[#202024] dark:text-white">Chargement des conversations...</p>
+          <p className="mt-4 text-sm font-semibold text-zinc-900 dark:text-zinc-100 dark:text-white">Chargement des conversations...</p>
         </div>
       </section>
     );
@@ -280,7 +280,7 @@ export function MessagesInbox({
                   <Avatar name={conversation.participantName} group={conversation.group} />
                   <span className="min-w-0 flex-1">
                     <span className="flex items-center gap-2">
-                      <span className="truncate text-sm font-semibold text-[#202024] dark:text-white">
+                      <span className="truncate text-sm font-semibold text-zinc-900 dark:text-zinc-100 dark:text-white">
                         {conversation.participantName}
                       </span>
                       {conversation.group ? <Users className="h-3.5 w-3.5 text-[#0789C8]" aria-hidden="true" /> : null}
@@ -320,7 +320,7 @@ export function MessagesInbox({
                 </button>
                 <Avatar name={selected.participantName} group={selected.group} />
                 <div className="min-w-0 flex-1">
-                  <p className="truncate text-sm font-semibold text-[#202024] dark:text-white">{selected.title}</p>
+                  <p className="truncate text-sm font-semibold text-zinc-900 dark:text-zinc-100 dark:text-white">{selected.title}</p>
                   <p className="truncate text-xs text-[#8E8E93] dark:text-zinc-400">
                     {selected.group ? selected.groupName : selected.participantName} • {selected.subtitle}
                   </p>
@@ -605,7 +605,7 @@ function EmptyState({ label }: { label: string }) {
         <div className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-[#F7F7F8] text-[#8E8E93] dark:bg-zinc-900 dark:text-zinc-400">
           <Mail className="h-5 w-5" aria-hidden="true" />
         </div>
-        <p className="mt-3 text-sm font-semibold text-[#202024] dark:text-white">{label}</p>
+        <p className="mt-3 text-sm font-semibold text-zinc-900 dark:text-zinc-100 dark:text-white">{label}</p>
         <p className="mt-1 text-sm text-[#8E8E93]">Les nouveaux échanges apparaîtront ici.</p>
       </div>
     </div>

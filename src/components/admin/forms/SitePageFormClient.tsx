@@ -74,7 +74,7 @@ export function SitePageFormClient({ backHref }: { backHref: string }) {
         </Button>
         <Link
           href={backHref}
-          className="inline-flex h-11 items-center justify-center rounded-xl border border-black/10 bg-white px-5 text-sm font-semibold text-black"
+          className="inline-flex h-11 items-center justify-center rounded-xl border border-black/10 bg-white px-5 text-sm font-semibold "
         >
           Annuler
         </Link>

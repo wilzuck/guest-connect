@@ -89,7 +89,7 @@ export function ExperienceFormClient({
   return (
     <form onSubmit={onSubmit} className="grid gap-4">
       <Card className="p-6 shadow-none">
-        <p className="text-sm font-semibold text-black">
+        <p className="text-sm font-semibold ">
           {isEdit ? "Modifier une expérience" : "Créer une expérience"}
         </p>
         <p className="mt-2 text-sm text-zinc-600">
@@ -100,7 +100,7 @@ export function ExperienceFormClient({
           <label className="grid gap-2 sm:col-span-2">
             <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">Titre</span>
             <Input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Dakar — street food + coucher de soleil" required />
-            <span className="text-xs text-zinc-500">Astuce: commencez par la ville, puis la promesse (atelier, visite, etc.).</span>
+            <span className="text-xs text-zinc-500 dark:text-zinc-400">Astuce: commencez par la ville, puis la promesse (atelier, visite, etc.).</span>
           </label>
 
           <label className="grid gap-2">
@@ -115,13 +115,13 @@ export function ExperienceFormClient({
                 label: `${l.city}${l.country ? `, ${l.country}` : ""}`,
               }))}
             />
-            <span className="text-xs text-zinc-500">Sélectionné: {locationLabel || "—"}</span>
+            <span className="text-xs text-zinc-500 dark:text-zinc-400">Sélectionné: {locationLabel || "—"}</span>
           </label>
 
           <label className="grid gap-2">
             <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">Tag</span>
             <Input value={tag} onChange={(e) => setTag(e.target.value)} placeholder="Culture" />
-            <span className="text-xs text-zinc-500">Ex: Culture, Nature, Gastronomie…</span>
+            <span className="text-xs text-zinc-500 dark:text-zinc-400">Ex: Culture, Nature, Gastronomie…</span>
           </label>
 
           <label className="grid gap-2">
@@ -147,13 +147,13 @@ export function ExperienceFormClient({
           <label className="grid gap-2 sm:col-span-2">
             <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">Image (URL)</span>
             <Input value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} placeholder="https://images.unsplash.com/..." />
-            <span className="text-xs text-zinc-500">Conseil: Unsplash avec auto=format&fit=crop&w=1600&q=80.</span>
+            <span className="text-xs text-zinc-500 dark:text-zinc-400">Conseil: Unsplash avec auto=format&fit=crop&w=1600&q=80.</span>
           </label>
 
           <label className="grid gap-2 sm:col-span-2">
             <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">Description courte</span>
             <Textarea value={excerpt} onChange={(e) => setExcerpt(e.target.value)} />
-            <span className="text-xs text-zinc-500">
+            <span className="text-xs text-zinc-500 dark:text-zinc-400">
               1–2 phrases, orientées bénéfice. Exemple: “petit groupe”, “adresses locales”, “accès coupe-file”.
             </span>
           </label>
@@ -170,7 +170,7 @@ export function ExperienceFormClient({
           <button
             type="button"
             onClick={() => router.push(`/${locale}/dashboard/service-management/experiences`)}
-            className="inline-flex h-11 items-center justify-center rounded-2xl border border-black/10 bg-white px-6 text-sm font-semibold text-black hover:bg-zinc-50 transition"
+            className="inline-flex h-11 items-center justify-center rounded-2xl border border-black/10 bg-white px-6 text-sm font-semibold  hover:bg-zinc-50 transition"
           >
             Annuler
           </button>

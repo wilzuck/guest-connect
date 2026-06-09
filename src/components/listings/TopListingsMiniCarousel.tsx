@@ -140,7 +140,7 @@ export function TopListingsMiniCarousel({ locale, items, title }: TopListingsMin
                   />
                 </div>
                 <div className="py-2">
-                  <p className="truncate text-xs font-semibold text-black dark:text-white">{l.title}</p>
+                  <p className="truncate text-xs font-semibold  dark:text-white">{l.title}</p>
                  <div className="flex items-center justify-between gap-2">
                   <p className="truncate text-xs text-zinc-600 dark:text-zinc-400">{l.location}</p>
                   <div className="flex items-center">

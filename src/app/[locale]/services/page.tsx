@@ -155,13 +155,13 @@ export default async function Page({ searchParams }: PageProps) {
   ];
 
   return (
-    <div className="bg-white">
-      <section className="border-b border-black/5 bg-white">
+    <div >
+      <section className="border-b border-zinc-200 dark:border-zinc-800">
         <Container className="py-10 sm:py-14">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 dark:text-white/80">
             {t("eyebrow")}
           </p>
-          <h1 className="mt-4 max-w-4xl text-balance text-3xl font-semibold tracking-tight text-black sm:text-5xl">
+          <h1 className="mt-4 max-w-4xl text-balance text-3xl font-semibold tracking-tight sm:text-5xl">
             Services pour voyageurs et hôtes
           </h1>
           <p className="mt-5 max-w-2xl text-pretty text-base leading-7 text-zinc-600 sm:text-lg">
@@ -169,7 +169,7 @@ export default async function Page({ searchParams }: PageProps) {
             couture, réparation, jeux, distraction, accueil et préparation de logement.
           </p>
           <form action={`/${locale}/services`} className="mt-8">
-            <div className="flex flex-col gap-2 rounded-2xl border border-black/10 bg-white/80 p-2 backdrop-blur-sm sm:flex-row">
+            <div className="flex flex-col gap-2 rounded-2xl border border-zinc-200 bg-white/80 p-2 backdrop-blur-sm dark:border-zinc-800 dark:bg-zinc-900/80 sm:flex-row">
               <label className="flex h-14 min-w-0 flex-1 items-center gap-3 rounded-xl bg-white px-4">
                 <Search className="h-4 w-4 shrink-0 text-zinc-400" aria-hidden="true" />
                 <input
@@ -194,7 +194,7 @@ export default async function Page({ searchParams }: PageProps) {
         </Container>
       </section>
 
-      <section className="bg-white">
+      <section >
         <Container className="py-12 sm:py-14">
           <p className="text-sm font-medium text-zinc-600">
             {services.length} service(s) disponible(s)
@@ -246,28 +246,28 @@ function ServiceCard({ locale, service }: { locale: string; service: ServiceItem
           className="object-cover transition duration-700 group-hover:scale-[1.03]"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
         />
-        <div className="absolute left-3 top-3 inline-flex items-center gap-2 rounded-full bg-white/95 px-3 py-1.5 text-xs font-semibold text-black shadow-sm shadow-black/10">
+        <div className="absolute left-3 top-3 inline-flex items-center gap-2 rounded-full bg-white/95 px-3 py-1.5 text-xs font-semibold  shadow-sm shadow-black/10">
           <Icon className="h-3.5 w-3.5" aria-hidden="true" />
           {meta.label}
         </div>
       </div>
 
       <div className="p-4">
-        <p className="truncate text-sm font-semibold text-black" title={service.title}>
+        <p className="truncate text-sm font-semibold " title={service.title}>
           {service.title}
         </p>
         <p className="mt-1 truncate text-sm text-zinc-600">{service.location}</p>
         <p className="mt-3 line-clamp-2 text-sm leading-6 text-zinc-600">{service.description}</p>
 
         <div className="mt-4 flex items-center justify-between gap-3">
-          <p className="text-sm font-semibold text-black">
+          <p className="text-sm font-semibold ">
             Dès {service.priceFrom} {service.currency}
           </p>
           <p className="text-xs font-semibold text-zinc-600">
             ★ {service.rating.toFixed(1)} ({service.reviewCount})
           </p>
         </div>
-        <p className="mt-4 text-sm font-semibold text-black">
+        <p className="mt-4 text-sm font-semibold ">
           Voir le service →
         </p>
       </div>

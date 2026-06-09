@@ -277,7 +277,7 @@ export function PropertyForm() {
         </FormField>
 
         <div>
-          <label className="mb-3 block text-sm font-semibold text-black">
+          <label className="mb-3 block text-sm font-semibold ">
             Photos
           </label>
           <ImageUpload maxFiles={5} />

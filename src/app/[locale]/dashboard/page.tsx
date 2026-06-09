@@ -27,17 +27,17 @@ export default async function Page() {
       <div className="grid gap-4 md:grid-cols-12">
         <Card className="p-6 shadow-none md:col-span-4">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">{isEn ? "Upcoming" : "À venir"}</p>
-          <p className="mt-2 text-3xl font-semibold tracking-tight text-black">2</p>
+          <p className="mt-2 text-3xl font-semibold tracking-tight">2</p>
           <p className="mt-1 text-sm text-zinc-600">{isEn ? "reservations" : "réservations"}</p>
         </Card>
         <Card className="p-6 shadow-none md:col-span-4">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">{isEn ? "Saved" : "Enregistrés"}</p>
-          <p className="mt-2 text-3xl font-semibold tracking-tight text-black">6</p>
+          <p className="mt-2 text-3xl font-semibold tracking-tight">6</p>
           <p className="mt-1 text-sm text-zinc-600">{isEn ? "favorites" : "favoris"}</p>
         </Card>
         <Card className="p-6 shadow-none md:col-span-4">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">{isEn ? "Support" : "Support"}</p>
-          <p className="mt-2 text-3xl font-semibold tracking-tight text-black">24/7</p>
+          <p className="mt-2 text-3xl font-semibold tracking-tight">24/7</p>
           <p className="mt-1 text-sm text-zinc-600">{isEn ? "help center" : "centre d’aide"}</p>
         </Card>
       </div>
@@ -50,7 +50,7 @@ export default async function Page() {
       </div>
 
       <div className="mt-10">
-        <p className="text-sm font-semibold text-black">{isEn ? "Management" : "Gestion"}</p>
+        <p className="text-sm font-semibold ">{isEn ? "Management" : "Gestion"}</p>
         <p className="mt-2 text-sm text-zinc-600">{isEn ? "Host and admin dashboards (demo)." : "Accès aux espaces Hôte et Admin (démo)."}</p>
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
           <QuickLink href={`/${locale}/dashboard/host`} title={isEn ? "Host dashboard" : "Espace hôte"} desc={isEn ? "Create and manage your listings" : "Créer et gérer vos logements"} />
@@ -65,7 +65,7 @@ function QuickLink({ href, title, desc }: { href: string; title: string; desc: s
   return (
     <Link href={href} className="block">
       <Card className="h-full p-6 shadow-none transition hover:bg-zinc-50">
-        <p className="text-sm font-semibold text-black">{title}</p>
+        <p className="text-sm font-semibold ">{title}</p>
         <p className="mt-2 text-sm leading-6 text-zinc-600">{desc}</p>
       </Card>
     </Link>

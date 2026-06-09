@@ -30,17 +30,17 @@ export default async function Page() {
           <Card className="p-6">
             <form className="grid gap-4">
               <div className="grid gap-2">
-                <label className="text-sm font-semibold text-black">
+                <label className="text-sm font-semibold ">
                   {isEn ? "Full name" : "Nom complet"}
                 </label>
                 <Input placeholder={isEn ? "Your name" : "Votre nom"} />
               </div>
               <div className="grid gap-2">
-                <label className="text-sm font-semibold text-black">Email</label>
+                <label className="text-sm font-semibold ">Email</label>
                 <Input placeholder={isEn ? "you@email.com" : "vous@email.com"} />
               </div>
               <div className="grid gap-2">
-                <label className="text-sm font-semibold text-black">
+                <label className="text-sm font-semibold ">
                   {isEn ? "Message" : "Message"}
                 </label>
                 <Textarea
@@ -68,7 +68,7 @@ export default async function Page() {
 
         <div className="lg:col-span-5">
           <Card className="p-6">
-            <p className="text-sm font-semibold text-black">{isEn ? "What to include" : "À inclure"}</p>
+            <p className="text-sm font-semibold ">{isEn ? "What to include" : "À inclure"}</p>
             <ul className="mt-3 grid gap-2 text-sm text-zinc-600">
               <li>• {isEn ? "Booking ID (if any)" : "ID de réservation (si dispo)"}</li>
               <li>• {isEn ? "Listing name / city" : "Nom du logement / ville"}</li>

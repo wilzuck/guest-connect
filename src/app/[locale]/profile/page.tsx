@@ -48,7 +48,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                 <span className="text-lg font-semibold">{user.name.split(" ").map((s) => s[0]).slice(0, 2).join("")}</span>
               </div>
               <div className="min-w-0">
-                <p className="truncate text-base font-semibold text-black">{user.name}</p>
+                <p className="truncate text-base font-semibold ">{user.name}</p>
                 <p className="truncate text-sm text-zinc-600">{user.email}</p>
                 <p className="truncate text-xs text-zinc-500">{user.location}</p>
               </div>
@@ -57,7 +57,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
             <div className="mt-6 grid grid-cols-3 gap-3">
               {stats.map((s) => (
                 <div key={s.k} className="rounded-2xl bg-zinc-50 p-3 text-center">
-                  <p className="text-lg font-semibold tracking-tight text-black">{s.v}</p>
+                  <p className="text-lg font-semibold tracking-tight">{s.v}</p>
                   <p className="mt-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-zinc-500">{s.k}</p>
                 </div>
               ))}

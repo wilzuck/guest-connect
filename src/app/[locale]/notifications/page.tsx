@@ -23,10 +23,10 @@ export default async function NotificationsPage() {
                 </div>
                 <div className="min-w-0">
                   <div className="flex flex-wrap items-center gap-2">
-                    <p className="text-sm font-semibold text-black">{n.title}</p>
+                    <p className="text-sm font-semibold ">{n.title}</p>
                     {!n.read ? <Badge className="text-black">Nouveau</Badge> : null}
                   </div>
-                  <p className="mt-2 text-sm leading-7 text-zinc-600">{n.description}</p>
+                  <p className="mt-2 text-sm leading-7 text-zinc-600 dark:text-zinc-400">{n.description}</p>
                   <p className="mt-2 text-xs text-zinc-500">{n.time}</p>
                 </div>
               </div>

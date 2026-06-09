@@ -68,7 +68,7 @@ export function ListingsCarousel({
     <section id={id}>
       <div className="flex items-end justify-between gap-4">
         <div>
-          <h3 className="text-balance text-2xl font-semibold tracking-tight text-black">{title}</h3>
+          <h3 className="text-balance text-2xl font-semibold tracking-tight">{title}</h3>
           {description ? <p className="mt-2 text-sm text-zinc-600">{description}</p> : null}
         </div>
         {viewAllHref ? (
@@ -170,7 +170,7 @@ export function ListingsCarousel({
                 <div className="p-4">
                   <div className="flex items-start justify-between gap-4">
                     <div>
-                      <p className="truncate text-base font-semibold tracking-tight text-black" title={l.title}>
+                      <p className="truncate text-base font-semibold tracking-tight" title={l.title}>
                         {l.title}
                       </p>
                       <p className="mt-1 truncate text-sm text-zinc-600" title={l.location}>
@@ -178,10 +178,10 @@ export function ListingsCarousel({
                       </p>
                     </div>
                     <div className="text-right">
-                      <p className="text-sm font-semibold text-black whitespace-nowrap">
+                      <p className="text-sm font-semibold  whitespace-nowrap">
                         {formatFrom(l.pricePerNight, l.currency)}
                       </p>
-                      <p className="text-xs text-zinc-500">{t("perNight")}</p>
+                      <p className="text-xs text-zinc-500 dark:text-zinc-400">{t("perNight")}</p>
                     </div>
                   </div>
                   <div className="mt-4 flex items-center gap-2 text-sm text-zinc-700">

@@ -55,12 +55,12 @@ const roles = [
 
 export default function CareersPage() {
   return (
-    <div className="bg-white">
+    <div >
       {/* Hero */}
-      <section className="border-b border-black/5 bg-white">
+      <section className="border-b border-zinc-200 dark:border-zinc-800">
         <Container className="py-14 sm:py-18">
           <Badge>GuestConnect · Carrières</Badge>
-          <h1 className="mt-5 max-w-3xl text-balance text-4xl font-semibold tracking-tight text-black sm:text-5xl">
+          <h1 className="mt-5 max-w-3xl text-balance text-4xl font-semibold tracking-tight sm:text-5xl">
             Rejoignez l’équipe GuestConnect
           </h1>
           <p className="mt-5 max-w-2xl text-pretty text-base leading-7 text-zinc-600 sm:text-lg">
@@ -85,7 +85,7 @@ export default function CareersPage() {
                 key={c.title}
                 className="p-6 transition hover:-translate-y-0.5 hover:shadow-md hover:shadow-black/10"
               >
-                <h3 className="text-lg font-semibold tracking-tight text-black">{c.title}</h3>
+                <h3 className="text-lg font-semibold tracking-tight">{c.title}</h3>
                 <p className="mt-2 text-sm leading-6 text-zinc-600">{c.description}</p>
               </Card>
             ))}
@@ -94,7 +94,7 @@ export default function CareersPage() {
       </section>
 
       {/* Roles */}
-      <section className="bg-white">
+      <section >
         <Container className="py-16 sm:py-20">
           <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
             <SectionHeading
@@ -118,10 +118,10 @@ export default function CareersPage() {
               >
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 dark:text-white/80">
                       {r.team}
                     </p>
-                    <h3 className="mt-2 text-lg font-semibold tracking-tight text-black">
+                    <h3 className="mt-2 text-lg font-semibold tracking-tight">
                       {r.title}
                     </h3>
                   </div>
@@ -145,7 +145,7 @@ export default function CareersPage() {
           <div id="apply" className="mt-12 rounded-3xl border border-black/10 bg-zinc-50 p-8 sm:p-10">
             <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <h2 className="text-2xl font-semibold tracking-tight text-black">
+                <h2 className="text-2xl font-semibold tracking-tight">
                   Envoyez votre candidature
                 </h2>
                 <p className="mt-2 max-w-xl text-sm leading-6 text-zinc-600">

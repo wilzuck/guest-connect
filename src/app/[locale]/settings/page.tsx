@@ -76,10 +76,10 @@ export default async function Page() {
                 Mot de passe et préférences de session.
               </p>
               <div className="mt-6 grid gap-2 sm:max-w-md">
-                <button className="rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-semibold text-black hover:bg-zinc-50 transition">
+                <button className="rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-semibold  hover:bg-zinc-50 transition">
                   Changer le mot de passe
                 </button>
-                <button className="rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-semibold text-black hover:bg-zinc-50 transition">
+                <button className="rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-semibold  hover:bg-zinc-50 transition">
                   Gérer les sessions
                 </button>
               </div>
@@ -91,7 +91,7 @@ export default async function Page() {
             <Card className="border border-black/10 bg-white p-6 shadow-none">
               <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div>
-                  <p className="text-sm font-semibold text-black">
+                  <p className="text-sm font-semibold ">
                     Déconnecter le compte actuel
                   </p>
                   <p className="mt-1 text-sm text-zinc-600">
@@ -113,7 +113,7 @@ export default async function Page() {
             <Card className="border border-black/10 bg-white p-6 shadow-none">
               <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div>
-                  <p className="text-sm font-semibold text-black">
+                  <p className="text-sm font-semibold ">
                     Supprimer le compte
                   </p>
                   <p className="mt-1 text-sm text-zinc-600">
@@ -141,7 +141,7 @@ function Section({
 }) {
   return (
     <section>
-      <p className="text-sm font-semibold text-black">{title}</p>
+      <p className="text-sm font-semibold ">{title}</p>
       <div className="mt-4">{children}</div>
     </section>
   );
@@ -163,7 +163,7 @@ function Row({
   return (
     <div className="flex items-center justify-between gap-4 px-6 py-4">
       <div className="min-w-0">
-        <p className="text-sm font-semibold text-black">{title}</p>
+        <p className="text-sm font-semibold ">{title}</p>
         <p className="mt-1 text-xs text-zinc-600">{subtitle}</p>
       </div>
       <div className="shrink-0 text-sm font-semibold text-zinc-900">

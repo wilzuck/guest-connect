@@ -74,7 +74,7 @@ export default async function Page() {
             <div className="grid h-11 w-11 place-items-center rounded-2xl border border-black/10 bg-white">
               {c.icon}
             </div>
-            <p className="mt-4 text-sm font-semibold text-black">{c.t}</p>
+            <p className="mt-4 text-sm font-semibold ">{c.t}</p>
             <p className="mt-2 text-sm leading-6 text-zinc-600">{c.d}</p>
           </Card>
         ))}
@@ -82,12 +82,12 @@ export default async function Page() {
 
       <div className="mt-12 grid gap-10 lg:grid-cols-12">
         <div className="lg:col-span-7">
-          <p className="text-sm font-semibold text-black">{isEn ? "Top questions" : "Questions fréquentes"}</p>
+          <p className="text-sm font-semibold ">{isEn ? "Top questions" : "Questions fréquentes"}</p>
           <Faq items={faq} className="mt-4" />
         </div>
         <div className="lg:col-span-5">
           <Card className="p-6">
-            <p className="text-sm font-semibold text-black">{isEn ? "Need more help?" : "Besoin d’aide ?"}</p>
+            <p className="text-sm font-semibold ">{isEn ? "Need more help?" : "Besoin d’aide ?"}</p>
             <p className="mt-2 text-sm leading-6 text-zinc-600">
               {isEn
                 ? "Contact our team and include your booking ID if relevant."
@@ -96,13 +96,13 @@ export default async function Page() {
             <div className="mt-4 grid gap-2">
               <Link
                 href={`/${locale}/contact`}
-                className="rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-semibold text-black hover:bg-zinc-50 transition"
+                className="rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-semibold  hover:bg-zinc-50 transition"
               >
                 {isEn ? "Contact support" : "Contacter le support"} →
               </Link>
               <Link
                 href={`/${locale}/safety`}
-                className="rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-semibold text-black hover:bg-zinc-50 transition"
+                className="rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-semibold  hover:bg-zinc-50 transition"
               >
                 {isEn ? "Trust & safety" : "Confiance & sécurité"} →
               </Link>

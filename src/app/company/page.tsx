@@ -43,12 +43,12 @@ const impact = [
 
 export default function CompanyPage() {
   return (
-    <div className="bg-white">
+    <div >
       {/* Hero */}
-      <section className="border-b border-black/5 bg-white">
+      <section className="border-b border-zinc-200 dark:border-zinc-800">
         <Container className="py-14 sm:py-18">
           <Badge>GuestConnect · Entreprise</Badge>
-          <h1 className="mt-5 max-w-3xl text-balance text-4xl font-semibold tracking-tight text-black sm:text-5xl">
+          <h1 className="mt-5 max-w-3xl text-balance text-4xl font-semibold tracking-tight sm:text-5xl">
             Pensé pour les maisons d’hôtes. Conçu pour la confiance.
           </h1>
           <p className="mt-5 max-w-2xl text-pretty text-base leading-7 text-zinc-600 sm:text-lg">
@@ -69,7 +69,7 @@ export default function CompanyPage() {
       </section>
 
       {/* Story */}
-      <section id="story" className="bg-white">
+      <section id="story" >
         <Container className="py-16 sm:py-20">
           <div className="grid gap-10 lg:grid-cols-12 lg:items-start">
             <div className="lg:col-span-5">
@@ -116,7 +116,7 @@ export default function CompanyPage() {
                 key={v.title}
                 className="p-6 transition hover:-translate-y-0.5 hover:shadow-md hover:shadow-black/10"
               >
-                <h3 className="text-lg font-semibold tracking-tight text-black">{v.title}</h3>
+                <h3 className="text-lg font-semibold tracking-tight">{v.title}</h3>
                 <p className="mt-2 text-sm leading-6 text-zinc-600">{v.description}</p>
               </Card>
             ))}
@@ -125,7 +125,7 @@ export default function CompanyPage() {
       </section>
 
       {/* Impact */}
-      <section className="bg-white">
+      <section >
         <Container className="py-16 sm:py-20">
           <div className="grid gap-10 lg:grid-cols-12 lg:items-center">
             <div className="lg:col-span-5">
@@ -142,7 +142,7 @@ export default function CompanyPage() {
                     key={s.label}
                     className="rounded-2xl border border-black/10 bg-white p-5 shadow-sm shadow-black/5"
                   >
-                    <p className="text-2xl font-semibold tracking-tight text-black">{s.value}</p>
+                    <p className="text-2xl font-semibold tracking-tight">{s.value}</p>
                     <p className="mt-1 text-xs font-medium text-zinc-500">{s.label}</p>
                   </div>
                 ))}
@@ -158,7 +158,7 @@ export default function CompanyPage() {
           <div className="rounded-3xl border border-black/10 bg-white p-8 shadow-sm shadow-black/5 sm:p-10">
             <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <h2 className="text-2xl font-semibold tracking-tight text-black">
+                <h2 className="text-2xl font-semibold tracking-tight">
                   Prêt à rejoindre GuestConnect ?
                 </h2>
                 <p className="mt-2 max-w-xl text-sm leading-6 text-zinc-600">

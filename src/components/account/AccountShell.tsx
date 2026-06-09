@@ -29,11 +29,11 @@ export function AccountShell({
 
   return (
     <div >
-      <div className="border-b border-zinc-200 dark:border-zinc-800">
+      <div className="border-b border-black/10 dark:border-zinc-800">
         <Container className="pt-6 sm:pt-8 lg:pt-10">
           {/* Header */}
           <div className="mb-6 sm:mb-8">
-            <h1 className="text-2xl font-semibold tracking-tight text-black dark:text-white sm:text-3xl lg:text-4xl">
+            <h1 className="text-2xl font-semibold tracking-tight dark:text-white sm:text-3xl lg:text-4xl">
               {title}
             </h1>
 
@@ -60,7 +60,7 @@ export function AccountShell({
                     className={cn(
                       "pb-2 sm:pb-3 text-sm whitespace-nowrap transition-colors relative",
                       isActive
-                        ? "border-b-2 border-black font-semibold text-black dark:border-white dark:text-white"
+                        ? "border-b-2 border-black font-semibold  dark:border-white dark:text-white"
                         : "text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white"
                     )}
                   >

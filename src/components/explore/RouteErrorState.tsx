@@ -20,7 +20,7 @@ export function RouteErrorState({
         <div className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-red-50 text-red-600">
           <AlertTriangle className="h-5 w-5" aria-hidden="true" />
         </div>
-        <h1 className="mt-4 text-xl font-semibold text-black">Impossible de charger cette page</h1>
+        <h1 className="mt-4 text-xl font-semibold ">Impossible de charger cette page</h1>
         <p className="mt-2 text-sm leading-6 text-zinc-600">
           Une erreur temporaire a interrompu l’affichage. Vous pouvez réessayer sans perdre votre navigation.
         </p>

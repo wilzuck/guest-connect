@@ -46,7 +46,7 @@ export function ListingCard({
             className="object-cover transition duration-700 group-hover:scale-[1.04]"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
             quality={75}
-            onLoadingComplete={() => setImgLoaded(true)}
+            onLoad={() => setImgLoaded(true)}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-black/0 to-black/0 opacity-80" />
 
@@ -78,7 +78,7 @@ export function ListingCard({
           <div className="flex items-start justify-between gap-4">
             <div className="min-w-0">
               <h3
-                className="truncate text-base font-semibold tracking-tight text-black dark:text-white"
+                className="truncate text-base font-semibold tracking-tight dark:text-white"
                 title={listing.title}
               >
                 {listing.title}
@@ -86,7 +86,7 @@ export function ListingCard({
             </div>
             <div className="inline-flex items-center gap-2 text-sm text-zinc-700 dark:text-zinc-300">
               <StarIcon className="h-4 w-4 text-black dark:text-white" />
-              <span className="font-semibold text-black dark:text-white">{listing.rating.toFixed(1)}</span>
+              <span className="font-semibold  dark:text-white">{listing.rating.toFixed(1)}</span>
               <span className="text-zinc-500 dark:text-zinc-400">({listing.reviewCount})</span>
             </div>
           </div>
@@ -96,7 +96,7 @@ export function ListingCard({
             <p className="min-w-0 truncate text-sm text-zinc-600 dark:text-zinc-400" title={listing.location}>
               {listing.location}
             </p>
-            <p className="shrink-0 whitespace-nowrap text-[15px] font-semibold text-black dark:text-white">
+            <p className="shrink-0 whitespace-nowrap text-[15px] font-semibold  dark:text-white">
               {formatFrom(listing.pricePerNight, listing.currency)}
             </p>
           </div>

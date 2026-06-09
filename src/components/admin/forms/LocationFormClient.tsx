@@ -54,7 +54,7 @@ export function LocationFormClient({
   return (
     <form onSubmit={onSubmit} className="grid gap-4">
       <Card className="p-6 shadow-none">
-        <p className="text-sm font-semibold text-black">{isEdit ? "Modifier un lieu" : "Créer un lieu"}</p>
+        <p className="text-sm font-semibold ">{isEdit ? "Modifier un lieu" : "Créer un lieu"}</p>
         <p className="mt-2 text-sm text-zinc-600">
           Un “lieu” sert de référence commune aux logements et aux expériences.
         </p>
@@ -78,7 +78,7 @@ export function LocationFormClient({
               placeholder="BJ"
               maxLength={2}
             />
-            <span className="text-xs text-zinc-500">ISO 2 lettres (optionnel).</span>
+            <span className="text-xs text-zinc-500 dark:text-zinc-400">ISO 2 lettres (optionnel).</span>
           </label>
         </div>
 
@@ -95,7 +95,7 @@ export function LocationFormClient({
           <button
             type="button"
             onClick={() => router.push(`/${locale}/dashboard/service-management/locations`)}
-            className="inline-flex h-11 items-center justify-center rounded-2xl border border-black/10 bg-white px-6 text-sm font-semibold text-black hover:bg-zinc-50 transition"
+            className="inline-flex h-11 items-center justify-center rounded-2xl border border-black/10 bg-white px-6 text-sm font-semibold  hover:bg-zinc-50 transition"
           >
             Annuler
           </button>

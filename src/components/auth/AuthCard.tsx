@@ -18,7 +18,7 @@ export function AuthCard({ title, subtitle, footer, className, children }: AuthC
   return (
     <Card className={cn("p-7 sm:p-8", className)}>
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight text-black dark:text-white">{title}</h1>
+        <h1 className="text-2xl font-semibold tracking-tight dark:text-white">{title}</h1>
         {subtitle ? (
           <p className="mt-2 text-sm leading-6 text-zinc-600 dark:text-zinc-400">{subtitle}</p>
         ) : null}

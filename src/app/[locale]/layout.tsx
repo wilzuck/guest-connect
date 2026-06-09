@@ -5,6 +5,7 @@ import type { ReactNode } from "react";
 import { CurrencyProvider } from "@/components/currency/CurrencyProvider";
 import { ScrollToTopButton } from "@/components/ui/ScrollToTopButton";
 import { getMessages } from "@/lib/i18n/getMessages";
+import { Providers } from "@/components/Providers/Providers";
 
 const locales = ["fr", "en"] as const;
 
@@ -23,17 +24,13 @@ export default async function LocaleLayout({
   const messages = await getMessages(safeLocale);
 
   return (
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-      <NextIntlClientProvider locale={safeLocale} messages={messages}>
-        <CurrencyProvider>
-          <div className="min-h-dvh overflow-x-hidden flex flex-col">
-            <Navbar />
-            <main className="flex-1 overflow-x-hidden">{children}</main>
-            <ScrollToTopButton />
-            <Footer />
-          </div>
-        </CurrencyProvider>
-      </NextIntlClientProvider>
-    </ThemeProvider>
+    <Providers locale={safeLocale} messages={messages}>
+        <div className="min-h-dvh overflow-x-hidden flex flex-col">
+          <Navbar />
+          <main className="flex-1 overflow-x-hidden">{children}</main>
+          <ScrollToTopButton />
+          <Footer />
+        </div>
+    </Providers>
   );
 }

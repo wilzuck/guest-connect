@@ -91,7 +91,7 @@ export function ListingOptionFormClient({
   return (
     <form onSubmit={onSubmit} className="grid gap-4">
       <Card className="p-6 shadow-none">
-        <p className="text-sm font-semibold text-black">
+        <p className="text-sm font-semibold ">
           {isEdit ? "Modifier" : "Créer"} un {meta.singular}
         </p>
         <p className="mt-2 text-sm text-zinc-600">
@@ -158,7 +158,7 @@ export function ListingOptionFormClient({
             onChange={(event) => setActive(event.target.checked)}
             className="h-5 w-5 rounded border border-black/10 accent-black"
           />
-          <span className="text-sm font-semibold text-black">Actif</span>
+          <span className="text-sm font-semibold ">Actif</span>
         </label>
 
         <div className="mt-6 flex flex-wrap gap-3">
@@ -172,7 +172,7 @@ export function ListingOptionFormClient({
           <button
             type="button"
             onClick={() => router.push(listHref)}
-            className="inline-flex h-11 items-center justify-center rounded-2xl border border-black/10 bg-white px-6 text-sm font-semibold text-black transition hover:bg-zinc-50"
+            className="inline-flex h-11 items-center justify-center rounded-2xl border border-black/10 bg-white px-6 text-sm font-semibold  transition hover:bg-zinc-50"
           >
             Annuler
           </button>
@@ -187,7 +187,7 @@ function Field({ label, hint, children }: { label: string; hint?: string; childr
     <label className="grid gap-2">
       <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">{label}</span>
       {children}
-      {hint ? <span className="text-xs text-zinc-500">{hint}</span> : null}
+      {hint ? <span className="text-xs text-zinc-500 dark:text-zinc-400">{hint}</span> : null}
     </label>
   );
 }

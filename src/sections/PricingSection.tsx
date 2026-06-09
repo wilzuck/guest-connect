@@ -7,7 +7,7 @@ import { pricingPlans } from "@/lib/mock/landing";
 
 export function PricingSection() {
   return (
-    <section id="pricing" className="bg-white">
+    <section id="pricing" >
       <Container className="py-16 sm:py-20">
         <SectionHeading
           eyebrow="Tarifs"
@@ -35,8 +35,8 @@ export function PricingSection() {
               ) : null}
 
               <div className="flex items-baseline justify-between">
-                <h3 className="text-lg font-semibold tracking-tight text-black">{p.name}</h3>
-                <p className="text-3xl font-semibold tracking-tight text-black">
+                <h3 className="text-lg font-semibold tracking-tight">{p.name}</h3>
+                <p className="text-3xl font-semibold tracking-tight">
                   {p.price}
                   <span className="text-sm font-medium text-zinc-500">/mois</span>
                 </p>

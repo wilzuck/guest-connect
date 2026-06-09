@@ -15,7 +15,7 @@ export default async function Page() {
       footerHint={
         <span>
           {t("footerText")}{" "}
-          <Link href={`/${locale}/signup`} className="font-semibold text-black hover:underline">
+          <Link href={`/${locale}/signup`} className="font-semibold  hover:underline">
             {t("footerLink")}
           </Link>
         </span>

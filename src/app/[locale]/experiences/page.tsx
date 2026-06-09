@@ -45,12 +45,12 @@ export default async function Page({ searchParams }: PageProps) {
     : filteredByTag;
 
   return (
-    <div className="bg-white">
-      <section className="border-b border-black/5 bg-white">
+    <div >
+      <section className="border-b border-zinc-200 dark:border-zinc-800">
         <Container className="py-10 sm:py-14">
           <SectionHeading eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
           <form action={`/${locale}/experiences`} className="mt-8">
-            <div className="flex flex-col gap-2 rounded-2xl border border-black/10 bg-white/80 p-2 backdrop-blur-sm sm:flex-row">
+            <div className="flex flex-col gap-2 rounded-2xl border border-zinc-200 bg-white/80 p-2 backdrop-blur-sm dark:border-zinc-800 dark:bg-zinc-900/80 sm:flex-row">
               <label className="flex h-14 min-w-0 flex-1 items-center gap-3 rounded-xl bg-white px-4">
                 <Search className="h-4 w-4 shrink-0 text-zinc-400" aria-hidden="true" />
                 <input
@@ -101,11 +101,11 @@ export default async function Page({ searchParams }: PageProps) {
         </Container>
       </section>
 
-      <section className="bg-white">
+      <section >
         <Container className="py-12 sm:py-14">
           <div className="flex items-end justify-between gap-4">
             <p className="text-sm text-zinc-600">{t("results", { count: filtered.length })}</p>
-            <Link href={`/${locale}/stays`} className="text-sm font-semibold text-black hover:underline">
+            <Link href={`/${locale}/stays`} className="text-sm font-semibold  hover:underline">
               {t("browseStays")}
             </Link>
           </div>
@@ -126,7 +126,7 @@ export default async function Page({ searchParams }: PageProps) {
 
           <div className="mt-14 grid gap-8 lg:grid-cols-12 lg:items-center">
             <div className="lg:col-span-6">
-              <h2 className="text-2xl font-semibold tracking-tight text-black">{t("promoTitle")}</h2>
+              <h2 className="text-2xl font-semibold tracking-tight">{t("promoTitle")}</h2>
               <p className="mt-4 text-sm leading-7 text-zinc-600">{t("promoBody")}</p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <Link
@@ -137,7 +137,7 @@ export default async function Page({ searchParams }: PageProps) {
                 </Link>
                 <Link
                   href={`/${locale}/stays`}
-                  className="inline-flex items-center rounded-2xl border border-black/10 bg-white px-5 py-3 text-sm font-semibold text-black hover:bg-zinc-50"
+                  className="inline-flex items-center rounded-2xl border border-black/10 bg-white px-5 py-3 text-sm font-semibold  hover:bg-zinc-50"
                 >
                   {t("promoSecondary")}
                 </Link>

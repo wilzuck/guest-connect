@@ -81,7 +81,7 @@ export default function TeamSettingsClient({ isEn }: { isEn: boolean }) {
                   className="w-9 h-9 rounded-full object-cover"
                 />
                 <div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center">
                     <p className="font-medium">{member.name}</p>
                     {member.online && <div className="w-2 h-2 bg-green-500 rounded-full" />}
                   </div>

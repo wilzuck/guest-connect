@@ -34,7 +34,7 @@ export function BookingCard({
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="text-sm font-semibold text-zinc-600">{t("from")}</p>
-          <p className="mt-2 text-3xl font-semibold tracking-tight text-black">
+          <p className="mt-2 text-3xl font-semibold tracking-tight">
             {price}
           </p>
           <p className="mt-1 text-sm text-zinc-600">{t("perNight")}</p>

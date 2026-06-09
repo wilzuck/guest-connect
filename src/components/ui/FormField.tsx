@@ -13,13 +13,13 @@ export function FormField({ label, error, hint, required = false, className, chi
   return (
     <div className={cn("flex flex-col gap-2", className)}>
       {label && (
-        <label className="text-sm font-semibold text-black">
+        <label className="text-sm font-semibold ">
           {label}
           {required && <span className="ml-1 text-red-500">*</span>}
         </label>
       )}
       {children}
-      {hint && <p className="text-xs text-zinc-500">{hint}</p>}
+      {hint && <p className="text-xs text-zinc-500 dark:text-zinc-400">{hint}</p>}
       {error && <p className="text-xs text-red-500">{error}</p>}
     </div>
   );

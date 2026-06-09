@@ -26,7 +26,7 @@ export default async function Page() {
     >
       <div className="grid gap-6 lg:grid-cols-12">
         <Card className="p-6 shadow-none lg:sticky lg:top-24 lg:col-span-4 lg:self-start">
-          <p className="text-sm font-semibold text-black">{isEn ? "Contents" : "Sommaire"}</p>
+          <p className="text-sm font-semibold ">{isEn ? "Contents" : "Sommaire"}</p>
           <nav className="mt-4 grid gap-2 text-sm">
             {sections.map((section) => (
               <a key={section.id} href={`#${section.id}`} className="text-zinc-600 transition hover:text-black">
@@ -44,7 +44,7 @@ export default async function Page() {
         <div className="grid gap-4 lg:col-span-8">
           {sections.map((section) => (
             <Card key={section.id} className="p-6 shadow-none">
-              <h2 id={section.id} className="text-lg font-semibold tracking-tight text-black">
+              <h2 id={section.id} className="text-lg font-semibold tracking-tight">
                 {section.title}
               </h2>
               <div className="mt-4 grid gap-3">

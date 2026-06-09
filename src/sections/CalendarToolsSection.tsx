@@ -7,7 +7,7 @@ export async function CalendarToolsSection() {
   const t = await getTranslations("calendarTools");
 
   return (
-    <section className="bg-white">
+    <section >
       <Container className="py-16 sm:py-20">
         <div className="grid gap-10 lg:grid-cols-12 lg:items-start">
           <div className="lg:col-span-6">

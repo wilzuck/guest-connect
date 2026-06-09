@@ -10,14 +10,14 @@ export default function ComponentsShowcasePage() {
   return (
     <Container className="py-10 sm:py-14">
       <div className="mb-10 space-y-2">
-        <h1 className="text-4xl font-semibold text-black">Composants UI</h1>
+        <h1 className="text-4xl font-semibold ">Composants UI</h1>
         <p className="text-zinc-600">Galerie de tous les composants réutilisables</p>
       </div>
 
       <div className="space-y-12">
         {/* Inputs */}
         <div>
-          <h2 className="mb-4 text-2xl font-semibold text-black">Inputs</h2>
+          <h2 className="mb-4 text-2xl font-semibold ">Inputs</h2>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             <Card className="p-4">
               <FormField label="Texte simple">
@@ -59,7 +59,7 @@ export default function ComponentsShowcasePage() {
 
         {/* Textarea */}
         <div>
-          <h2 className="mb-4 text-2xl font-semibold text-black">Textarea</h2>
+          <h2 className="mb-4 text-2xl font-semibold ">Textarea</h2>
           <div className="grid gap-6 sm:grid-cols-2">
             <Card className="p-4">
               <FormField label="Description simple">
@@ -77,7 +77,7 @@ export default function ComponentsShowcasePage() {
 
         {/* Select */}
         <div>
-          <h2 className="mb-4 text-2xl font-semibold text-black">Select</h2>
+          <h2 className="mb-4 text-2xl font-semibold ">Select</h2>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             <Card className="p-4">
               <FormField label="Type de propriété">
@@ -119,7 +119,7 @@ export default function ComponentsShowcasePage() {
 
         {/* Buttons */}
         <div>
-          <h2 className="mb-4 text-2xl font-semibold text-black">Buttons</h2>
+          <h2 className="mb-4 text-2xl font-semibold ">Buttons</h2>
           <div className="space-y-4">
             <div className="flex flex-wrap gap-3">
               <Button>Primary</Button>
@@ -138,10 +138,10 @@ export default function ComponentsShowcasePage() {
 
         {/* Cards */}
         <div>
-          <h2 className="mb-4 text-2xl font-semibold text-black">Cards</h2>
+          <h2 className="mb-4 text-2xl font-semibold ">Cards</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Card className="p-6">
-              <p className="text-sm font-semibold text-black">Card Default</p>
+              <p className="text-sm font-semibold ">Card Default</p>
               <p className="mt-2 text-xs text-zinc-600">
                 Avec bordure légère et ombre subtile
               </p>

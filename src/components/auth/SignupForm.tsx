@@ -142,11 +142,11 @@ export function SignupForm() {
         />
         <span className="leading-6">
           {t("actions.acceptTerms")}{" "}
-          <Link href={`/${locale}/terms`} className="font-semibold text-black hover:underline">
+          <Link href={`/${locale}/terms`} className="font-semibold  hover:underline">
             {tShell("terms")}
           </Link>
           {" · "}
-          <Link href={`/${locale}/privacy`} className="font-semibold text-black hover:underline">
+          <Link href={`/${locale}/privacy`} className="font-semibold  hover:underline">
             {tShell("privacy")}
           </Link>
         </span>

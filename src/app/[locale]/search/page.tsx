@@ -42,8 +42,8 @@ export default async function Page({ searchParams }: PageProps) {
   const filterChips = buildListingChips(locale, "search", sp);
 
   return (
-    <div className="bg-white">
-      <section className="border-b border-black/5 bg-white">
+    <div >
+      <section className="border-b border-zinc-200 dark:border-zinc-800">
         <Container className="py-10 sm:py-14">
           <SectionHeading
             eyebrow={t("eyebrow")}
@@ -63,7 +63,7 @@ export default async function Page({ searchParams }: PageProps) {
         </Container>
       </section>
 
-      <section className="bg-white">
+      <section >
         <Container className="py-12 sm:py-14">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <p className="text-sm font-medium text-zinc-600">

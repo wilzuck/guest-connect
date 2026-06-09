@@ -92,7 +92,7 @@ export function DatePicker({ value, onChange, label, placeholder, className }: D
         [UI.Months]: "flex flex-col gap-4",
         [UI.Month]: "space-y-4",
         [UI.MonthCaption]: "flex items-center justify-between px-2",
-        [UI.CaptionLabel]: "text-sm font-semibold text-black dark:text-white",
+        [UI.CaptionLabel]: "text-sm font-semibold  dark:text-white",
         [UI.Dropdowns]: "flex items-center gap-2",
         [UI.Dropdown]:
           "h-10 rounded-xl border border-black/10 bg-white px-2 text-sm font-semibold text-zinc-800 shadow-sm shadow-black/5 dark:border-white/10 dark:bg-zinc-950 dark:text-zinc-200",
@@ -138,9 +138,9 @@ export function DatePicker({ value, onChange, label, placeholder, className }: D
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>{Trigger}</DialogTrigger>
         <DialogContent className="inset-0 h-dvh w-screen max-w-none border-0 p-0 shadow-none data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom">
-          <div className="flex h-dvh flex-col bg-white">
-            <div className="flex items-center justify-between border-b border-black/5 px-4 py-3">
-              <p className="text-sm font-semibold text-black">{label}</p>
+          <div className="flex h-dvh flex-col bg-white text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50">
+            <div className="flex items-center justify-between border-b border-zinc-200 px-4 py-3 dark:border-zinc-800">
+              <p className="text-sm font-semibold ">{label}</p>
               <DialogClose asChild>
                 <button
                   type="button"
@@ -156,10 +156,10 @@ export function DatePicker({ value, onChange, label, placeholder, className }: D
               {calendar}
             </div>
 
-            <div className="flex items-center justify-between gap-3 border-t border-black/5 p-4">
+            <div className="flex items-center justify-between gap-3 border-t border-zinc-200 p-4 dark:border-zinc-800">
               <button
                 type="button"
-                className="rounded-xl px-4 py-3 text-sm font-semibold text-zinc-600 hover:text-black hover:bg-zinc-50 transition"
+                className="rounded-xl px-4 py-3 text-sm font-semibold text-zinc-600 transition hover:bg-zinc-50 hover:text-zinc-950 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-white"
                 onClick={() => onChange(undefined)}
               >
                 {t("clear")}
@@ -167,7 +167,7 @@ export function DatePicker({ value, onChange, label, placeholder, className }: D
               <DialogClose asChild>
                 <button
                   type="button"
-                  className="rounded-2xl bg-black px-5 py-3 text-sm font-semibold text-white transition active:scale-[0.99]"
+                  className="rounded-2xl bg-black px-5 py-3 text-sm font-semibold text-white transition active:scale-[0.99] dark:bg-white dark:text-black"
                 >
                   {t("done")}
                 </button>

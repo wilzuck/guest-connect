@@ -73,16 +73,16 @@ export default async function Page() {
   ];
 
   return (
-    <div className="bg-white">
-      <section className="border-b border-black/5 bg-white">
+    <div >
+      <section className="border-b border-zinc-200 dark:border-zinc-800">
         <Container className="py-10 sm:py-14">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 dark:text-white/80">
             {isEn ? "Navigation" : "Navigation"}
           </p>
-          <h1 className="mt-4 text-balance text-3xl font-semibold tracking-tight text-black sm:text-4xl lg:text-5xl">
+          <h1 className="mt-4 text-balance text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl">
             {isEn ? "Sitemap" : "Plan du site"}
           </h1>
-          <p className="mt-4 max-w-2xl text-pretty text-base leading-7 text-zinc-600 sm:text-lg">
+          <p className="mt-3 max-w-xl text-balance text-sm leading-6 text-zinc-600 dark:text-zinc-300 sm:mt-4 sm:max-w-2xl sm:text-base sm:leading-7 lg:text-lg">
             {isEn
               ? "Quick access to the main GuestConnect pages, from discovery to account management and legal information."
               : "Accès rapide aux principales pages GuestConnect, de la découverte aux espaces compte, hôte et légal."}
@@ -90,12 +90,12 @@ export default async function Page() {
         </Container>
       </section>
 
-      <section className="bg-white">
+      <section >
         <Container className="py-12 sm:py-14">
           <div className="grid gap-4 lg:grid-cols-12">
             {groups.map((group) => (
               <Card key={group.title} className="p-6 shadow-none lg:col-span-6">
-                <p className="text-base font-semibold tracking-tight text-black">{group.title}</p>
+                <p className="text-base font-semibold tracking-tight">{group.title}</p>
                 <p className="mt-2 text-sm leading-6 text-zinc-500">{group.desc}</p>
                 <ul className="mt-5 grid gap-2">
                   {group.items.map((item) => (

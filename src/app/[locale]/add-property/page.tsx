@@ -2,7 +2,7 @@ import { PropertyFormMultiStep } from "@/components/listings/PropertyFormMultiSt
 
 export default function AddPropertyPage() {
   return (
-    <div className="bg-white">
+    <div >
       <PropertyFormMultiStep />
     </div>
   );

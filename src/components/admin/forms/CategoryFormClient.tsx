@@ -48,20 +48,20 @@ export function CategoryFormClient({
   return (
     <form onSubmit={onSubmit} className="grid gap-4">
       <Card className="p-6 shadow-none">
-        <p className="text-sm font-semibold text-black">{isEdit ? "Modifier une catégorie" : "Créer une catégorie"}</p>
+        <p className="text-sm font-semibold ">{isEdit ? "Modifier une catégorie" : "Créer une catégorie"}</p>
         <p className="mt-2 text-sm text-zinc-600">Nommez clairement la catégorie pour éviter les doublons.</p>
 
         <div className="mt-6 grid gap-4 sm:grid-cols-2">
           <label className="grid gap-2">
             <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">Nom</span>
             <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="Maison d’hôtes" required />
-            <span className="text-xs text-zinc-500">{hint}</span>
+            <span className="text-xs text-zinc-500 dark:text-zinc-400">{hint}</span>
           </label>
 
           <label className="grid gap-2">
             <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">Slug</span>
             <Input value={slug} onChange={(e) => setSlug(e.target.value)} placeholder="maison-dhotes" />
-            <span className="text-xs text-zinc-500">Optionnel, pour les URLs et filtres.</span>
+            <span className="text-xs text-zinc-500 dark:text-zinc-400">Optionnel, pour les URLs et filtres.</span>
           </label>
         </div>
 
@@ -76,7 +76,7 @@ export function CategoryFormClient({
           <button
             type="button"
             onClick={() => router.push(`/${locale}/dashboard/service-management/categories`)}
-            className="inline-flex h-11 items-center justify-center rounded-2xl border border-black/10 bg-white px-6 text-sm font-semibold text-black hover:bg-zinc-50 transition"
+            className="inline-flex h-11 items-center justify-center rounded-2xl border border-black/10 bg-white px-6 text-sm font-semibold  hover:bg-zinc-50 transition"
           >
             Annuler
           </button>
