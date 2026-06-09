@@ -14,15 +14,16 @@ import {
   ChevronRight,
   CircleUserRound,
   Compass,
+  CalendarDays,
   Home,
+  Kanban,
+  LayoutDashboard,
   LogOut,
-  Menu,
-  MessageSquare,
+  MessageCircle,
   Search,
-  Settings,
   ShieldCheck,
   Sparkles,
-  CalendarCheck,
+  UserRoundCog,
   X,
 } from "lucide-react";
 import {
@@ -34,7 +35,7 @@ import {
 type SpaceLink = {
   label: string;
   href: string;
-  icon: typeof MessageSquare;
+  icon: typeof MessageCircle;
   permission?: Permission;
 };
 
@@ -74,18 +75,18 @@ export function MobileMenu() {
   ];
   const spaceLinks = filterByPermissions<SpaceLink>(
     [
-      { label: tu("messages"), href: `/${locale}/messages`, icon: MessageSquare, permission: "messages.read" },
-      { label: labels.manageAccount, href: `/${locale}/profile`, icon: CircleUserRound },
+      { label: tu("messages"), href: `/${locale}/messages`, icon: MessageCircle, permission: "messages.read" },
+      { label: labels.manageAccount, href: `/${locale}/profile`, icon: UserRoundCog },
       {
         label: labels.manageServices,
         href: `/${locale}/dashboard/service-management`,
-        icon: Settings,
+        icon: LayoutDashboard,
         permission: "admin.read",
       },
       {
         label: labels.manageReservations,
         href: `/${locale}/reservations`,
-        icon: CalendarCheck,
+        icon: CalendarDays,
         permission: "reservations.read",
       },
     ],
@@ -97,10 +98,10 @@ export function MobileMenu() {
       <DialogTrigger asChild>
         <button
           type="button"
-          className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-black/10 bg-white text-black shadow-sm shadow-black/10 transition hover:-translate-y-0.5 hover:bg-zinc-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20 md:hidden"
+          className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-black transition hover:bg-zinc-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20 md:hidden"
           aria-label={tm("openMenu")}
         >
-          <Menu className="h-5 w-5" aria-hidden="true" />
+          <Kanban className="h-5 w-5 rotate-90" aria-hidden="true" />
         </button>
       </DialogTrigger>
 

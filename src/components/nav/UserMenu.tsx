@@ -2,6 +2,15 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import {
+  CalendarDays,
+  ChevronRight,
+  CircleUserRound,
+  LayoutDashboard,
+  LogOut,
+  MessageCircle,
+  UserRoundCog,
+} from "lucide-react";
 import { cn } from "@/lib/utils/cn";
 import { useLocale, useTranslations } from "next-intl";
 import {
@@ -10,7 +19,12 @@ import {
   type Permission,
 } from "@/lib/auth/access-control";
 
-type UserMenuItem = { label: string; href: string; permission?: Permission };
+type UserMenuItem = {
+  label: string;
+  href: string;
+  icon: typeof MessageCircle;
+  permission?: Permission;
+};
 
 export function UserMenu() {
   const locale = useLocale();
@@ -22,12 +36,22 @@ export function UserMenu() {
   const labels = getMenuLabels(locale);
 
   const space: UserMenuItem[] = [
-    { label: t("messages"), href: `/${locale}/messages`, permission: "messages.read" },
-    { label: labels.manageAccount, href: `/${locale}/profile` },
-    { label: labels.manageServices, href: `/${locale}/dashboard/service-management`, permission: "admin.read" },
-    { label: labels.manageReservations, href: `/${locale}/reservations`, permission: "reservations.read" },
+    { label: t("messages"), href: `/${locale}/messages`, icon: MessageCircle, permission: "messages.read" },
+    { label: labels.manageAccount, href: `/${locale}/profile`, icon: UserRoundCog },
+    {
+      label: labels.manageServices,
+      href: `/${locale}/dashboard/service-management`,
+      icon: LayoutDashboard,
+      permission: "admin.read",
+    },
+    {
+      label: labels.manageReservations,
+      href: `/${locale}/reservations`,
+      icon: CalendarDays,
+      permission: "reservations.read",
+    },
   ];
-  const logout: UserMenuItem[] = [{ label: t("logout"), href: `/${locale}/logout` }];
+  const logout: UserMenuItem[] = [{ label: t("logout"), href: `/${locale}/logout`, icon: LogOut }];
 
   const visibleSpace = filterByPermissions(space, currentUser);
 
@@ -53,7 +77,7 @@ export function UserMenu() {
         aria-expanded={open}
         aria-label="Menu utilisateur"
       >
-        <UserIcon className="h-5 w-5 text-zinc-700" />
+        <CircleUserRound className="h-5 w-5 text-zinc-700" aria-hidden="true" />
       </button>
 
       <div
@@ -90,19 +114,28 @@ function MenuSection({
         </p>
       ) : null}
       <ul className="mt-1">
-        {items.map((i) => (
+        {items.map((i) => {
+          const Icon = i.icon;
+
+          return (
           <li key={i.href}>
             <Link
               href={i.href}
               onClick={onSelect}
-              className="flex items-center justify-between rounded-xl px-3 py-2 text-sm text-zinc-700 hover:bg-zinc-50 hover:text-black transition-colors"
+              className="group flex items-center justify-between gap-3 rounded-xl px-3 py-2 text-sm text-zinc-700 transition-colors hover:bg-zinc-50 hover:text-black"
               role="menuitem"
             >
-              <span>{i.label}</span>
-              <ChevronRight className="h-4 w-4 text-zinc-400" />
+              <span className="flex min-w-0 items-center gap-3">
+                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-zinc-100 text-zinc-700 transition group-hover:bg-black group-hover:text-white">
+                  <Icon className="h-4 w-4" aria-hidden="true" />
+                </span>
+                <span className="min-w-0 truncate">{i.label}</span>
+              </span>
+              <ChevronRight className="h-4 w-4 shrink-0 text-zinc-400 transition group-hover:translate-x-0.5 group-hover:text-black" aria-hidden="true" />
             </Link>
           </li>
-        ))}
+          );
+        })}
       </ul>
     </div>
   );
@@ -117,34 +150,3 @@ function getMenuLabels(locale: string) {
   };
 }
 
-function UserIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path
-        d="M20 21a8 8 0 0 0-16 0"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-      />
-      <path
-        d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"
-        stroke="currentColor"
-        strokeWidth="1.8"
-      />
-    </svg>
-  );
-}
-
-function ChevronRight({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path
-        d="m10 17 5-5-5-5"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}

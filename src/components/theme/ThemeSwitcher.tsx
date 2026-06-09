@@ -5,9 +5,9 @@ import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils/cn";
 
 const themes = [
-  { value: "light", label: "Light", icon: Sun },
-  { value: "system", label: "System", icon: Monitor },
-  { value: "dark", label: "Dark", icon: Moon },
+  { value: "light", icon: Sun },
+  { value: "system", icon: Monitor },
+  { value: "dark", icon: Moon },
 ] as const;
 
 export function ThemeSwitcher({ className }: { className?: string }) {
@@ -36,10 +36,8 @@ export function ThemeSwitcher({ className }: { className?: string }) {
               active ? "bg-black text-white" : "text-zinc-600 hover:text-black",
             )}
             aria-pressed={active}
-            title={item.label}
           >
             <Icon className="h-3.5 w-3.5" aria-hidden="true" />
-            <span className="hidden sm:inline">{item.label}</span>
           </button>
         );
       })}

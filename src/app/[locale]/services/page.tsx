@@ -207,6 +207,7 @@ function ServiceCard({ locale, service }: { locale: string; service: ServiceItem
   return (
     <Link
       href={`/${locale}/services/${service.id}`}
+      aria-label={`Voir le service ${service.title}`}
       className="group block overflow-hidden rounded-2xl border border-black/10 bg-white shadow-sm shadow-black/5 transition hover:-translate-y-0.5 hover:shadow-md hover:shadow-black/10"
     >
       <div className="relative aspect-[16/11] overflow-hidden bg-zinc-100">
