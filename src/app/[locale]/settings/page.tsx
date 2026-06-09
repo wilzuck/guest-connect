@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { getLocale } from "next-intl/server";
+import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card";
 import Link from "next/link";
+import { MarketingPageLayout } from "@/components/layout/MarketingPageLayout";
 import { AccountShell } from "@/components/account/AccountShell";
 
 export const metadata: Metadata = {
@@ -19,17 +21,16 @@ export default async function Page() {
   };
 
   return (
-    
-            <AccountShell
-                  locale={locale}
-                  title="Paramètres"
-                  subtitle="Consultez et gérez votre compte."
-                  activeHref={`/${locale}/settings`}
-                >
-        <div className="max-w-3xl">
-          <div className="grid gap-10">
-            {/* User info */}
-            <Section title="Infos utilisateur">
+    <AccountShell
+      locale={locale}
+      title="Paramètres"
+      subtitle="Consultez et gérez votre compte."
+      activeHref={`/${locale}/settings`}
+    >
+      <div className="max-w-3xl">
+        <div className="grid gap-10">
+          {/* User info */}
+          <Section title="Infos utilisateur">
             <Card className="overflow-hidden border border-black/10 bg-white p-0 shadow-none">
               <Row
                 title="Avatar"
@@ -42,9 +43,17 @@ export default async function Page() {
                 }
               />
               <Divider />
-              <Row title="Nom" subtitle="Votre nom de profil" right={user.name} />
+              <Row
+                title="Nom"
+                subtitle="Votre nom de profil"
+                right={user.name}
+              />
               <Divider />
-              <Row title={user.provider} subtitle="Votre méthode de connexion" right={user.email} />
+              <Row
+                title={user.provider}
+                subtitle="Votre méthode de connexion"
+                right={user.email}
+              />
             </Card>
           </Section>
 
@@ -84,8 +93,12 @@ export default async function Page() {
             <Card className="border border-black/10 bg-white p-6 shadow-none">
               <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div>
-                  <p className="text-sm font-semibold text-black">Déconnecter le compte actuel</p>
-                  <p className="mt-1 text-sm text-zinc-600">Terminer votre session actuelle.</p>
+                  <p className="text-sm font-semibold text-black">
+                    Déconnecter le compte actuel
+                  </p>
+                  <p className="mt-1 text-sm text-zinc-600">
+                    Terminer votre session actuelle.
+                  </p>
                 </div>
                 <Link
                   href={`/${locale}/logout`}
@@ -102,7 +115,9 @@ export default async function Page() {
             <Card className="border border-black/10 bg-white p-6 shadow-none">
               <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div>
-                  <p className="text-sm font-semibold text-black">Supprimer le compte</p>
+                  <p className="text-sm font-semibold text-black">
+                    Supprimer le compte
+                  </p>
                   <p className="mt-1 text-sm text-zinc-600">
                     Supprimer définitivement votre compte.
                   </p>
@@ -114,12 +129,18 @@ export default async function Page() {
             </Card>
           </Section>
         </div>
-        </div>
-     </AccountShell>
+      </div>
+    </AccountShell>
   );
 }
 
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
+function Section({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) {
   return (
     <section>
       <p className="text-sm font-semibold text-black">{title}</p>
@@ -147,12 +168,20 @@ function Row({
         <p className="text-sm font-semibold text-black">{title}</p>
         <p className="mt-1 text-xs text-zinc-600">{subtitle}</p>
       </div>
-      <div className="shrink-0 text-sm font-semibold text-zinc-900">{right}</div>
+      <div className="shrink-0 text-sm font-semibold text-zinc-900">
+        {right}
+      </div>
     </div>
   );
 }
 
-function Toggle({ label, defaultChecked }: { label: string; defaultChecked?: boolean }) {
+function Toggle({
+  label,
+  defaultChecked,
+}: {
+  label: string;
+  defaultChecked?: boolean;
+}) {
   return (
     <label className="flex items-center justify-between gap-4 rounded-2xl border border-black/10 bg-white px-4 py-3">
       <span className="text-sm text-zinc-900">{label}</span>

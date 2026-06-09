@@ -130,7 +130,7 @@ export function AdminShell({
           </div>
         </aside>
 
-        <div className="flex min-w-0 flex-1 flex-col">
+        <div className="flex min-w-0 flex-1 flex-col h-dvh overflow-auto pb-10 xl:pb-12 ">
           <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-[#E8E8EC] bg-white/95 px-4 backdrop-blur lg:px-6">
             <p className="text-lg font-semibold tracking-tight text-[#202024]">Dashboard</p>
             <div className="flex items-center gap-2">
@@ -159,7 +159,7 @@ export function AdminShell({
             </div>
           </div>
 
-          <main className="min-w-0 flex-1 bg-white">{children}</main>
+          <main className="min-w-0 flex-1 bg-white ">{children}</main>
         </div>
       </div>
     </div>

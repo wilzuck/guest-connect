@@ -74,7 +74,7 @@ export default async function CheckoutPage({
       <section className="bg-white">
         <Container className="py-12 sm:py-14">
           <div className="grid gap-6 lg:grid-cols-12 lg:items-start">
-            <div className="lg:col-span-7">
+            <div className="lg:col-span-7 xl:col-span-8">
               <Card className="p-6 shadow-none">
                 <p className="text-sm font-semibold text-black">Vos informations</p>
                 <p className="mt-2 text-sm text-zinc-600">
@@ -189,7 +189,7 @@ export default async function CheckoutPage({
               </Card>
             </div>
 
-            <div className="lg:col-span-5">
+            <div className="lg:col-span-5 xl:col-span-4">
               <Card className="overflow-hidden p-0 shadow-none">
                 <div className="relative aspect-[16/10] w-full bg-zinc-100">
                   {listing?.imageUrl ? (
