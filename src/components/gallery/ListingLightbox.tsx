@@ -7,89 +7,168 @@ import "yet-another-react-lightbox/styles.css";
 import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
+import { ChevronLeft, ChevronRight, Copy, Heart, ImageIcon, LayoutTemplate, Phone } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { cn } from "@/lib/utils/cn";
+import type { ReactNode } from "react";
 
-export function ListingLightbox({
-  title,
-  images,
-}: {
+type GalleryMode = "photos" | "plans";
+
+type ListingLightboxProps = {
   title: string;
   images: string[];
-}) {
+  floorPlanImages?: string[];
+};
+
+export function ListingLightbox({ title, images, floorPlanImages = [] }: ListingLightboxProps) {
   const t = useTranslations("listingGallery");
   const [open, setOpen] = useState(false);
   const [index, setIndex] = useState(0);
+  const [mode, setMode] = useState<GalleryMode>("photos");
   const [loaded, setLoaded] = useState<Record<string, boolean>>({});
 
-  const slides = useMemo(() => images.map((src) => ({ src, alt: title })), [images, title]);
-  const remaining = Math.max(0, images.length - 2); // 3 images affichées (1 + 2)
+  const activeImages = mode === "plans" && floorPlanImages.length > 0 ? floorPlanImages : images;
+  const slides = useMemo(() => activeImages.map((src) => ({ src, alt: title })), [activeImages, title]);
+  const currentImage = activeImages[index] ?? activeImages[0];
+  const safeIndex = activeImages.length > 0 ? Math.min(index, activeImages.length - 1) : 0;
 
-  function openAt(i: number) {
-    setIndex(i);
+  function setGalleryMode(nextMode: GalleryMode) {
+    setMode(nextMode);
+    setIndex(0);
+  }
+
+  function openAt(nextIndex: number) {
+    setIndex(nextIndex);
     setOpen(true);
   }
 
+  function go(offset: number) {
+    setIndex((current) => {
+      if (activeImages.length <= 1) return 0;
+      return (current + offset + activeImages.length) % activeImages.length;
+    });
+  }
+
+  if (!currentImage) return null;
+
   return (
     <>
-      <div className="grid gap-3 lg:grid-cols-12">
-        <button
-          type="button"
-          onClick={() => openAt(0)}
-          className="group relative aspect-[4/3] overflow-hidden rounded-3xl bg-zinc-100 sm:aspect-[16/10] lg:col-span-8 cursor-pointer"
-          aria-label={t("openPhotos")}
-          title={t("openPhotos")}
-        >
-          {!loaded[images[0]] ? <ImageLoader /> : null}
-          <Image
-            src={images[0]}
-            alt={`${title} — main`}
-            fill
-            className="object-cover transition duration-500 group-hover:scale-[1.02]"
-            sizes="(max-width: 1024px) 100vw, 66vw"
-            priority
-            onLoad={() => setLoaded((p) => ({ ...p, [images[0]]: true }))}
-          />
-        </button>
-
-        {/* Mobile: 2 vignettes côte à côte (Airbnb-like). Desktop: colonne à droite */}
-        <div className="grid grid-cols-2 gap-3 lg:col-span-4 lg:grid-cols-1">
-          {images.slice(1, 3).map((src, idx) => (
+      <section className="overflow-hidden border border-black/10 bg-white dark:bg-black dark:text-white">
+        <div className="flex items-center justify-between gap-3 border-b border-black/10 px-4 py-3 dark:border-black/10 lg:px-6">
+          <div className="flex min-w-0 items-center gap-2">
             <button
-              key={src}
               type="button"
-              onClick={() => openAt(idx + 1)}
-              className="group relative aspect-[4/3] overflow-hidden rounded-3xl bg-zinc-100 sm:aspect-[16/10] cursor-pointer"
-              aria-label={t("openPhoto", { index: idx + 2 })}
-              title={t("openPhoto", { index: idx + 2 })}
+              className="hidden items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold text-zinc-800 transition hover:bg-zinc-100 dark:text-white dark:hover:bg-white/10 sm:inline-flex"
             >
-              {!loaded[src] ? <ImageLoader /> : null}
+              <ChevronLeft className="h-4 w-4" aria-hidden="true" />
+              {t("backToListing")}
+            </button>
+            <SegmentButton active={mode === "photos"} onClick={() => setGalleryMode("photos")}>
+              <ImageIcon className="h-4 w-4" aria-hidden="true" />
+              {t("photos")}
+            </SegmentButton>
+            {floorPlanImages.length > 0 ? (
+              <SegmentButton active={mode === "plans"} onClick={() => setGalleryMode("plans")}>
+                <LayoutTemplate className="h-4 w-4" aria-hidden="true" />
+                {t("floorPlans")}
+              </SegmentButton>
+            ) : null}
+          </div>
+
+          <div className="hidden items-center gap-2 md:flex">
+            <button
+              type="button"
+              className="inline-flex h-10 items-center gap-2 rounded-full border border-black/10 px-4 text-sm font-semibold text-zinc-900 transition hover:bg-zinc-50 dark:text-white dark:hover:bg-white/10"
+            >
+              <Phone className="h-4 w-4" aria-hidden="true" />
+              {t("showNumber")}
+            </button>
+            <button
+              type="button"
+              className="inline-flex h-10 items-center gap-2 rounded-full bg-red-600 px-4 text-sm font-semibold text-white transition hover:bg-red-700"
+            >
+              {t("contactHost")}
+            </button>
+            <IconAction label={t("copyLink")}>
+              <Copy className="h-5 w-5" aria-hidden="true" />
+            </IconAction>
+            <IconAction label={t("save")}>
+              <Heart className="h-5 w-5" aria-hidden="true" />
+            </IconAction>
+          </div>
+        </div>
+
+        <div className="grid gap-4 px-4 py-6 dark:bg-black sm:py-8 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-8 lg:px-8 xl:grid-cols-[260px_minmax(0,1fr)]">
+          <aside className="order-2 lg:order-1 lg:flex lg:flex-col lg:justify-center">
+            <p className="text-sm font-medium text-zinc-900 dark:text-white">
+              {safeIndex + 1} / {activeImages.length}
+            </p>
+            <div className="mt-4 grid grid-flow-col auto-cols-[72px] gap-3 overflow-x-auto pb-2 lg:grid-flow-row lg:grid-cols-3 lg:overflow-visible lg:pb-0">
+              {activeImages.map((src, thumbIndex) => (
+                <button
+                  key={`${src}-${thumbIndex}`}
+                  type="button"
+                  onClick={() => setIndex(thumbIndex)}
+                  className={cn(
+                    "relative aspect-square overflow-hidden rounded-lg border bg-zinc-100 transition dark:bg-zinc-900",
+                    thumbIndex === safeIndex
+                      ? "border-black ring-2 ring-black/20 dark:border-white dark:ring-white/20"
+                      : "border-transparent opacity-80 hover:opacity-100",
+                  )}
+                  aria-label={t(mode === "plans" ? "openFloorPlan" : "openPhoto", { index: thumbIndex + 1 })}
+                >
+                  <Image
+                    src={src}
+                    alt={`${title} - ${mode === "plans" ? t("floorPlan") : t("photo")} ${thumbIndex + 1}`}
+                    fill
+                    className="object-cover"
+                    sizes="84px"
+                  />
+                </button>
+              ))}
+            </div>
+          </aside>
+
+          <div className="order-1 lg:order-2">
+            <div className="relative mx-auto aspect-[16/9] w-full overflow-hidden rounded-2xl bg-zinc-100 dark:bg-zinc-900 lg:rounded-3xl">
+              {!loaded[currentImage] ? <ImageLoader /> : null}
               <Image
-                src={src}
-                alt={`${title} — photo ${idx + 2}`}
+                src={currentImage}
+                alt={`${title} - ${mode === "plans" ? t("floorPlan") : t("photo")} ${safeIndex + 1}`}
                 fill
-                className="object-cover transition duration-500 group-hover:scale-[1.02]"
-                sizes="(max-width: 1024px) 50vw, 33vw"
-                onLoad={() => setLoaded((p) => ({ ...p, [src]: true }))}
+                className={cn("object-cover", mode === "plans" ? "bg-white object-contain" : "")}
+                sizes="(max-width: 1024px) 100vw, 72vw"
+                priority
+                onLoad={() => setLoaded((current) => ({ ...current, [currentImage]: true }))}
+                onClick={() => openAt(safeIndex)}
               />
-              {/* Sur la 3e photo (index 1 de la colonne), affiche +N si on a plus d'images */}
-              {idx === 1 && remaining > 0 ? (
-                <div className="absolute inset-0 grid place-items-center">
-                  <div className="absolute inset-0 bg-black/25" />
-                  <div className="relative inline-flex items-center gap-2 rounded-full bg-black/10 px-4 py-2 text-white backdrop-blur-[2px]">
-                    <span className="text-lg font-semibold">+{remaining}</span>
-                    <ImageIcon className="h-6 w-6" />
-                  </div>
+
+              {activeImages.length > 1 ? (
+                <>
+                  <GalleryArrow label={t("previous")} side="left" onClick={() => go(-1)} />
+                  <GalleryArrow label={t("next")} side="right" onClick={() => go(1)} />
+                </>
+              ) : null}
+
+              {mode === "plans" ? (
+                <div className="absolute bottom-4 left-4 inline-flex items-center gap-2 rounded-full bg-black px-4 py-2 text-sm font-semibold text-white">
+                  <LayoutTemplate className="h-4 w-4" aria-hidden="true" />
+                  {t("floorPlans")}
                 </div>
               ) : null}
-            </button>
-          ))}
+
+              <div className="absolute bottom-4 right-4 rounded-full bg-black px-4 py-2 text-sm font-semibold text-white">
+                {safeIndex + 1} / {activeImages.length}
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
 
       <Lightbox
         open={open}
         close={() => setOpen(false)}
-        index={index}
+        index={safeIndex}
         slides={slides}
         plugins={[Thumbnails, Zoom]}
         carousel={{ finite: false }}
@@ -101,31 +180,71 @@ export function ListingLightbox({
   );
 }
 
-function ImageLoader() {
+function SegmentButton({
+  active,
+  children,
+  onClick,
+}: {
+  active: boolean;
+  children: ReactNode;
+  onClick: () => void;
+}) {
   return (
-    <div className="absolute inset-0 animate-pulse bg-[linear-gradient(110deg,#f4f4f5,45%,#e4e4e7,55%,#f4f4f5)] bg-[length:200%_100%]" />
+    <button
+      type="button"
+      onClick={onClick}
+      className={cn(
+        "inline-flex h-10 items-center gap-2 rounded-full px-4 text-sm font-semibold transition",
+        active
+          ? "bg-zinc-900 text-white dark:bg-white dark:text-black"
+          : "bg-zinc-100 text-zinc-800 hover:bg-zinc-200 dark:bg-white/10 dark:text-white dark:hover:bg-white/15",
+      )}
+    >
+      {children}
+    </button>
   );
 }
 
-function ImageIcon({ className }: { className?: string }) {
+function IconAction({ label, children }: { label: string; children: ReactNode }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path
-        d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v11A2.5 2.5 0 0 1 17.5 20h-11A2.5 2.5 0 0 1 4 17.5v-11Z"
-        stroke="currentColor"
-        strokeWidth="1.8"
-      />
-      <path
-        d="M9 10.2a1.2 1.2 0 1 0 0-2.4 1.2 1.2 0 0 0 0 2.4Z"
-        fill="currentColor"
-      />
-      <path
-        d="M20 15.5l-4.8-4.8a1.2 1.2 0 0 0-1.7 0L6 18"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
+    <button
+      type="button"
+      className="grid h-10 w-10 place-items-center rounded-full text-zinc-900 transition hover:bg-zinc-100 dark:text-white dark:hover:bg-white/10"
+      aria-label={label}
+      title={label}
+    >
+      {children}
+    </button>
+  );
+}
+
+function GalleryArrow({
+  label,
+  side,
+  onClick,
+}: {
+  label: string;
+  side: "left" | "right";
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={cn(
+        "absolute top-1/2 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full bg-white text-black shadow-lg shadow-black/10 transition hover:scale-105 dark:bg-zinc-950 dark:text-white dark:shadow-black/40",
+        side === "left" ? "left-4" : "right-4",
+      )}
+      aria-label={label}
+      title={label}
+    >
+      {side === "left" ? <ChevronLeft className="h-6 w-6" /> : <ChevronRight className="h-6 w-6" />}
+    </button>
+  );
+}
+
+function ImageLoader() {
+  return (
+    <div className="absolute inset-0 animate-pulse bg-[linear-gradient(110deg,#f4f4f5,45%,#e4e4e7,55%,#f4f4f5)] bg-[length:200%_100%] dark:bg-[linear-gradient(110deg,#18181b,45%,#27272a,55%,#18181b)]" />
   );
 }

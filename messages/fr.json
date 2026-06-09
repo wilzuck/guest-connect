@@ -340,7 +340,19 @@
   },
   "listingGallery": {
     "openPhotos": "Ouvrir les photos",
-    "openPhoto": "Ouvrir la photo {index}"
+    "openPhoto": "Ouvrir la photo {index}",
+    "openFloorPlan": "Ouvrir le plan {index}",
+    "backToListing": "Retour à l'annonce",
+    "photos": "Photos",
+    "photo": "photo",
+    "floorPlans": "Plans du bien",
+    "floorPlan": "plan",
+    "showNumber": "Afficher le numéro",
+    "contactHost": "Contacter l'hôte",
+    "copyLink": "Copier le lien",
+    "save": "Enregistrer",
+    "previous": "Précédent",
+    "next": "Suivant"
   },
   "listingsCarousel": {
     "viewAll": "Voir tout →",

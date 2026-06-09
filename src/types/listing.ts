@@ -11,6 +11,7 @@ export type Listing = {
   reviewCount: number;
   imageUrl: string;
   images?: string[];
+  floorPlanImages?: string[];
   propertyType?: "Guest house" | "Hotel" | "Apartment" | "Villa" | "Lodge" | string;
   shortDescription?: string;
   badges?: Array<"Nouveau" | "Populaire" | "Recommandé" | string>;

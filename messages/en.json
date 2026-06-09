@@ -340,7 +340,19 @@
   },
   "listingGallery": {
     "openPhotos": "Open photos",
-    "openPhoto": "Open photo {index}"
+    "openPhoto": "Open photo {index}",
+    "openFloorPlan": "Open floor plan {index}",
+    "backToListing": "Back to listing",
+    "photos": "Photos",
+    "photo": "photo",
+    "floorPlans": "Floor plans",
+    "floorPlan": "floor plan",
+    "showNumber": "Show number",
+    "contactHost": "Contact host",
+    "copyLink": "Copy link",
+    "save": "Save",
+    "previous": "Previous",
+    "next": "Next"
   },
   "listingsCarousel": {
     "viewAll": "View all →",

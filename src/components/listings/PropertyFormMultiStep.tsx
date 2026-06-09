@@ -48,6 +48,7 @@ type PropertyFormData = {
   maxGuests: number;
   squareFeet: number;
   amenities: string[];
+  floorPlanImages: string[];
   pricePerNight: number;
   currency: CurrencyCode;
   minNights: number;
@@ -128,6 +129,7 @@ export function PropertyFormMultiStep({ context = "public" }: { context?: "publi
   const [currentStep, setCurrentStep] = useState(0);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [imagePreviews, setImagePreviews] = useState<string[]>([]);
+  const [floorPlanPreviews, setFloorPlanPreviews] = useState<string[]>([]);
   const [blockedDate, setBlockedDate] = useState("");
   const [currencyRules, setCurrencyRules] = useState<CurrencyDiscountRule[]>([]);
   const [formData, setFormData] = useState<PropertyFormData>({
@@ -143,6 +145,7 @@ export function PropertyFormMultiStep({ context = "public" }: { context?: "publi
     maxGuests: 2,
     squareFeet: 0,
     amenities: [],
+    floorPlanImages: [],
     pricePerNight: 0,
     currency: "XOF",
     minNights: 1,
@@ -538,6 +541,26 @@ export function PropertyFormMultiStep({ context = "public" }: { context?: "publi
                     </HelpText>
                     {errors.imageUrls && <p className="mt-2 text-xs text-red-500">{errors.imageUrls}</p>}
                   </div>
+
+                  <div>
+                    <p className="text-sm font-semibold text-zinc-900 dark:text-zinc-50">
+                      Plans du bien
+                    </p>
+                    <div className="mt-3">
+                      <ImageUpload
+                        onPreviewsChange={(previews) => {
+                          setFloorPlanPreviews(previews);
+                          updateField("floorPlanImages", previews);
+                        }}
+                        onFilesSelected={() => undefined}
+                        maxFiles={3}
+                        maxSizeInMB={10}
+                      />
+                    </div>
+                    <HelpText>
+                      Ajoutez 1 à 3 images du plan du logement si disponible. Elles aident les voyageurs à comprendre la disposition des pièces.
+                    </HelpText>
+                  </div>
                 </>
               )}
 
@@ -719,6 +742,7 @@ export function PropertyFormMultiStep({ context = "public" }: { context?: "publi
           completion={completion}
           formData={formData}
           imagePreviews={imagePreviews}
+          floorPlanPreviews={floorPlanPreviews}
           previewLocation={previewLocation}
           selectedType={selectedType?.label ?? "Appartement"}
         />
@@ -778,12 +802,14 @@ function PreviewPanel({
   completion,
   formData,
   imagePreviews,
+  floorPlanPreviews,
   previewLocation,
   selectedType,
 }: {
   completion: number;
   formData: PropertyFormData;
   imagePreviews: string[];
+  floorPlanPreviews: string[];
   previewLocation: string;
   selectedType: string;
 }) {
@@ -793,6 +819,7 @@ function PreviewPanel({
     { label: "Description", done: formData.description.length > 20 },
     { label: "Localisation", done: !!formData.city && !!formData.country },
     { label: "Photos", done: imagePreviews.length > 0 },
+    { label: "Plans du bien", done: floorPlanPreviews.length > 0 },
     { label: "Prix", done: formData.pricePerNight > 0 },
     { label: "Disponibilités", done: formData.availableWeekdays.length > 0 },
   ];
@@ -818,6 +845,11 @@ function PreviewPanel({
           <div className="absolute left-3 top-3 rounded-full bg-black/70 px-2 py-1 text-[10px] font-semibold text-white">
             {imagePreviews.length} / 5
           </div>
+          {floorPlanPreviews.length > 0 ? (
+            <div className="absolute bottom-3 left-3 rounded-full bg-white/90 px-2 py-1 text-[10px] font-semibold text-zinc-800 shadow-sm">
+              {floorPlanPreviews.length} plan(s)
+            </div>
+          ) : null}
           <div className="absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-full bg-white text-zinc-700 shadow-sm">
             <Upload className="h-4 w-4" aria-hidden="true" />
           </div>

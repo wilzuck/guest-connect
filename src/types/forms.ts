@@ -24,6 +24,7 @@ export interface PropertyFormData {
   // Étape 4: Équipements & Photos
   amenities: string[];
   imageUrls: string[];
+  floorPlanImages: string[];
 
   // Étape 5: Tarification & Politique
   pricePerNight: number;
