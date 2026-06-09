@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
 import { Activity, BookOpen, ShieldCheck, LifeBuoy } from "lucide-react";
+import { ThemeSwitcher } from "@/components/theme/ThemeSwitcher";
 
 export function DashboardFooter() {
   const locale = useLocale();
@@ -46,10 +47,13 @@ export function DashboardFooter() {
           <p>
             © {new Date().getFullYear()} GuestConnect. {t("copyright")}
           </p>
-          <p className="inline-flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-emerald-400" aria-hidden="true" />
-            {t("status")}
-          </p>
+          <div className="flex items-center gap-3">
+            <p className="inline-flex items-center gap-2">
+              <span className="h-2 w-2 rounded-full bg-emerald-400" aria-hidden="true" />
+              {t("status")}
+            </p>
+            <ThemeSwitcher />
+          </div>
         </div>
       </div>
     </footer>

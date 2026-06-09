@@ -19,26 +19,17 @@ export function UserMenu() {
   const rootRef = useRef<HTMLDivElement | null>(null);
   const currentUser = getCurrentUserAccess();
 
-  const primary: UserMenuItem[] = [
-    { label: t("login"), href: `/${locale}/login` },
-    { label: t("signup"), href: `/${locale}/signup` },
-  ];
+  const labels = getMenuLabels(locale);
 
-  const account: UserMenuItem[] = [
-    { label: t("dashboard"), href: `/${locale}/dashboard`, permission: "dashboard.read" },
-    { label: "Administration", href: `/${locale}/dashboard/service-management`, permission: "admin.read" },
-    { label: "Gestion de mes services", href: `/${locale}/dashboard/service-management/services`, permission: "services.manage" },
-    { label: t("profile"), href: `/${locale}/profile` },
-    { label: t("reservations"), href: `/${locale}/reservations`, permission: "reservations.read" },
-    { label: t("favorites"), href: `/${locale}/favorites`, permission: "favorites.read" },
-    { label: t("activities"), href: `/${locale}/activities` },
+  const space: UserMenuItem[] = [
     { label: t("messages"), href: `/${locale}/messages`, permission: "messages.read" },
-    { label: t("notifications"), href: `/${locale}/notifications` },
-    { label: t("settings"), href: `/${locale}/settings` },
-    { label: t("logout"), href: `/${locale}/logout` },
+    { label: labels.manageAccount, href: `/${locale}/profile` },
+    { label: labels.manageServices, href: `/${locale}/dashboard/service-management`, permission: "admin.read" },
+    { label: labels.manageReservations, href: `/${locale}/reservations`, permission: "reservations.read" },
   ];
+  const logout: UserMenuItem[] = [{ label: t("logout"), href: `/${locale}/logout` }];
 
-  const visibleAccount = filterByPermissions(account, currentUser);
+  const visibleSpace = filterByPermissions(space, currentUser);
 
   useEffect(() => {
     function onDocClick(e: MouseEvent) {
@@ -73,9 +64,9 @@ export function UserMenu() {
         role="menu"
       >
         <div className="p-2">
-          <MenuSection title={t("account")} items={primary} onSelect={() => setOpen(false)} />
+          <MenuSection title={t("space")} items={visibleSpace} onSelect={() => setOpen(false)} />
           <div className="my-2 h-px bg-black/5" />
-          <MenuSection title={t("space")} items={visibleAccount} onSelect={() => setOpen(false)} />
+          <MenuSection items={logout} onSelect={() => setOpen(false)} />
         </div>
       </div>
     </div>
@@ -87,15 +78,17 @@ function MenuSection({
   items,
   onSelect,
 }: {
-  title: string;
+  title?: string;
   items: UserMenuItem[];
   onSelect: () => void;
 }) {
   return (
     <div>
-      <p className="px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-zinc-500">
-        {title}
-      </p>
+      {title ? (
+        <p className="px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-zinc-500">
+          {title}
+        </p>
+      ) : null}
       <ul className="mt-1">
         {items.map((i) => (
           <li key={i.href}>
@@ -113,6 +106,15 @@ function MenuSection({
       </ul>
     </div>
   );
+}
+
+function getMenuLabels(locale: string) {
+  const isEn = locale === "en";
+  return {
+    manageAccount: isEn ? "Manage my account" : "Gérer mon compte",
+    manageServices: isEn ? "Manage my services" : "Gérer mes services",
+    manageReservations: isEn ? "Manage my reservations" : "Gérer mes réservations",
+  };
 }
 
 function UserIcon({ className }: { className?: string }) {

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState, useTransition } from "react";
-import { Check, Clock3, Search, X } from "lucide-react";
+import { Check, ChevronDown, Search, X } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 
@@ -17,6 +17,11 @@ export type ApprovalItem = {
   status: "pending" | "approved" | "rejected";
   href?: string;
   canPersist?: boolean;
+};
+
+type ApprovalGroup = {
+  label: string;
+  items: ApprovalItem[];
 };
 
 export function ApprovalsQueueClient({ initialItems }: { initialItems: ApprovalItem[] }) {
@@ -34,6 +39,18 @@ export function ApprovalsQueueClient({ initialItems }: { initialItems: ApprovalI
             .includes(q),
     );
   }, [items, query]);
+
+  const groups = useMemo<ApprovalGroup[]>(() => {
+    const pendingItems = filteredItems.filter((item) => item.status === "pending");
+    const approvedItems = filteredItems.filter((item) => item.status === "approved");
+    const rejectedItems = filteredItems.filter((item) => item.status === "rejected");
+
+    return [
+      { label: "À traiter", items: pendingItems },
+      { label: "Validés", items: approvedItems },
+      { label: "Refusés", items: rejectedItems },
+    ].filter((group) => group.items.length > 0);
+  }, [filteredItems]);
 
   const pendingCount = items.filter((item) => item.status === "pending").length;
 
@@ -58,7 +75,7 @@ export function ApprovalsQueueClient({ initialItems }: { initialItems: ApprovalI
 
   return (
     <section className="grid gap-4">
-      <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
+      <div className="flex flex-col gap-3 px-4 lg:px-6 xl:flex-row xl:items-end xl:justify-between">
         <div>
           <h1 className="text-xl font-semibold tracking-tight text-[#202024]">À valider</h1>
           <p className="mt-1 text-sm text-[#8E8E93]">
@@ -66,7 +83,7 @@ export function ApprovalsQueueClient({ initialItems }: { initialItems: ApprovalI
           </p>
         </div>
 
-        <label className="flex h-10 min-w-0 items-center gap-2 rounded-lg border border-[#E8E8EC] bg-white px-3 text-sm text-[#8E8E93] sm:w-80">
+        <label className="flex h-10 min-w-0 items-center gap-2 rounded-lg border border-[#E8E8EC] bg-white px-3 text-sm text-[#8E8E93] shadow-xs shadow-black/5 sm:w-80">
           <Search className="h-4 w-4" aria-hidden="true" />
           <input
             value={query}
@@ -77,83 +94,117 @@ export function ApprovalsQueueClient({ initialItems }: { initialItems: ApprovalI
         </label>
       </div>
 
-      <div className="overflow-hidden rounded-xl border border-[#E8E8EC] bg-white">
-        <div className="grid grid-cols-[1.4fr_140px_160px_148px] gap-3 border-b border-[#E8E8EC] bg-[#FAFAFB] px-4 py-3 text-xs font-medium text-[#8E8E93] max-lg:hidden">
-          <div>Contenu</div>
-          <div>Type</div>
-          <div>Soumis par</div>
-          <div className="text-right">Décision</div>
-        </div>
+      <div className="overflow-x-auto border-y border-[#E8E8EC] bg-white">
+        <div className="min-w-[980px]">
+          <div className="grid grid-cols-[1.55fr_132px_116px_116px_150px_132px_116px] gap-3 border-b border-[#E8E8EC] bg-[#FAFAFB] px-4 py-3 text-xs font-medium text-[#8E8E93]">
+            <div>Contenu</div>
+            <div>Type</div>
+            <div>Statut</div>
+            <div>Priorité</div>
+            <div>Soumis par</div>
+            <div>Date</div>
+            <div className="text-right">Actions</div>
+          </div>
 
-        <div className="divide-y divide-[#EFEFF2]">
-          {filteredItems.map((item) => (
-            <article
-              key={`${item.entity}-${item.id}`}
-              className="grid gap-3 px-4 py-4 lg:grid-cols-[1.4fr_140px_160px_148px] lg:items-center"
-            >
-              <div className="min-w-0">
-                <div className="flex items-center gap-2">
-                  <StatusDot status={item.status} />
-                  {item.href ? (
-                    <Link href={item.href} className="truncate text-sm font-semibold text-[#202024] hover:underline">
-                      {item.title}
-                    </Link>
-                  ) : (
-                    <p className="truncate text-sm font-semibold text-[#202024]">{item.title}</p>
-                  )}
+          {groups.length > 0 ? (
+            groups.map((group) => (
+              <section key={group.label}>
+                <div className="flex items-center gap-2 border-b border-[#EFEFF2] bg-[#F7F7F8] px-4 py-2 text-xs font-medium text-[#5F5F66]">
+                  <ChevronDown className="h-3.5 w-3.5" aria-hidden="true" />
+                  <span>{group.label}</span>
+                  <span className="text-[#B1B1B7]">{group.items.length}</span>
                 </div>
-                <p className="mt-1 truncate text-sm text-[#73737A]">{item.subtitle}</p>
-              </div>
 
-              <div>
-                <Badge className="rounded-md bg-[#F7F7F8] shadow-none">{item.entityLabel}</Badge>
-              </div>
+                <div className="divide-y divide-[#EFEFF2]">
+                  {group.items.map((item) => (
+                    <article
+                      key={`${item.entity}-${item.id}`}
+                      className="grid grid-cols-[1.55fr_132px_116px_116px_150px_132px_116px] items-center gap-3 px-4 py-3 text-sm transition hover:bg-[#FAFAFB]"
+                    >
+                      <div className="min-w-0">
+                        {item.href ? (
+                          <Link href={item.href} className="truncate font-medium text-[#202024] hover:underline">
+                            {item.title}
+                          </Link>
+                        ) : (
+                          <p className="truncate font-medium text-[#202024]">{item.title}</p>
+                        )}
+                        <p className="mt-1 truncate text-xs text-[#8E8E93]">{item.subtitle}</p>
+                      </div>
 
-              <div className="text-sm text-[#73737A]">
-                <p className="truncate font-medium text-[#202024]">{item.submittedBy}</p>
-                <p className="mt-1 text-xs text-[#8E8E93]">{item.submittedAt}</p>
-              </div>
+                      <div>
+                        <Badge className="rounded-md bg-[#F7F7F8] text-[#5F5F66] shadow-none">
+                          {item.entityLabel}
+                        </Badge>
+                      </div>
 
-              <div className="flex justify-end gap-2">
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="sm"
-                  disabled={pending || item.status === "rejected"}
-                  className="h-9 rounded-lg px-3 text-[#E04F5F]"
-                  onClick={() => updateStatus(item, "rejected")}
-                >
-                  <X className="h-4 w-4" aria-hidden="true" />
-                </Button>
-                <Button
-                  type="button"
-                  size="sm"
-                  disabled={pending || item.status === "approved"}
-                  className="h-9 rounded-lg px-3"
-                  onClick={() => updateStatus(item, "approved")}
-                >
-                  <Check className="h-4 w-4" aria-hidden="true" />
-                </Button>
-              </div>
-            </article>
-          ))}
+                      <ApprovalStatusBadge status={item.status} />
+                      <PriorityBadge status={item.status} />
+
+                      <p className="truncate text-sm font-medium text-[#5F5F66]">{item.submittedBy}</p>
+                      <p className="truncate text-sm text-[#73737A]">{item.submittedAt}</p>
+
+                      <div className="flex justify-end gap-2">
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          disabled={pending || item.status === "rejected"}
+                          className="h-8 w-8 rounded-lg p-0 text-[#E04F5F]"
+                          aria-label="Refuser"
+                          onClick={() => updateStatus(item, "rejected")}
+                        >
+                          <X className="h-4 w-4" aria-hidden="true" />
+                        </Button>
+                        <Button
+                          type="button"
+                          size="sm"
+                          disabled={pending || item.status === "approved"}
+                          className="h-8 w-8 rounded-lg p-0"
+                          aria-label="Valider"
+                          onClick={() => updateStatus(item, "approved")}
+                        >
+                          <Check className="h-4 w-4" aria-hidden="true" />
+                        </Button>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </section>
+            ))
+          ) : (
+            <div className="px-4 py-10 text-center text-sm text-[#8E8E93]">Aucun contenu trouvé.</div>
+          )}
         </div>
       </div>
     </section>
   );
 }
 
-function StatusDot({ status }: { status: ApprovalItem["status"] }) {
-  const classes =
-    status === "approved"
-      ? "bg-[#37B7A8]"
-      : status === "rejected"
-        ? "bg-[#E04F5F]"
-        : "bg-[#F6B44B]";
+function ApprovalStatusBadge({ status }: { status: ApprovalItem["status"] }) {
+  const config = {
+    pending: "bg-[#FFF7E8] text-[#A86600]",
+    approved: "bg-[#EAF8F6] text-[#188C7F]",
+    rejected: "bg-[#FDECEF] text-[#B42336]",
+  } satisfies Record<ApprovalItem["status"], string>;
 
-  return (
-    <span className={`grid h-5 w-5 place-items-center rounded-full ${classes}`}>
-      <Clock3 className="h-3 w-3 text-white" aria-hidden="true" />
-    </span>
-  );
+  const label = {
+    pending: "En attente",
+    approved: "Validé",
+    rejected: "Refusé",
+  } satisfies Record<ApprovalItem["status"], string>;
+
+  return <Badge className={`rounded-md shadow-none ${config[status]}`}>{label[status]}</Badge>;
+}
+
+function PriorityBadge({ status }: { status: ApprovalItem["status"] }) {
+  const label = status === "pending" ? "Haute" : status === "rejected" ? "Moyenne" : "Basse";
+  const className =
+    status === "pending"
+      ? "bg-[#FDECEF] text-[#B42336]"
+      : status === "rejected"
+        ? "bg-[#FFF7E8] text-[#A86600]"
+        : "bg-[#EAF8F6] text-[#188C7F]";
+
+  return <Badge className={`rounded-md shadow-none ${className}`}>{label}</Badge>;
 }

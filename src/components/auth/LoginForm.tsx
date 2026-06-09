@@ -63,13 +63,13 @@ export function LoginForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="grid gap-4">
+    <form onSubmit={onSubmit} autoComplete="off" className="grid gap-4">
       <AuthField
         label={t("fields.email")}
         name="email"
         type="email"
         placeholder={t("placeholders.email")}
-        autoComplete="email"
+        autoComplete="off"
         required
         value={email}
         onChange={setEmail}
@@ -79,7 +79,7 @@ export function LoginForm() {
         name="password"
         type={showPassword ? "text" : "password"}
         placeholder={t("placeholders.password")}
-        autoComplete="current-password"
+        autoComplete="off"
         required
         value={password}
         onChange={setPassword}

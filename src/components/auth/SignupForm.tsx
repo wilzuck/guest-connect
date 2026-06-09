@@ -62,12 +62,12 @@ export function SignupForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="grid gap-4">
+    <form onSubmit={onSubmit} autoComplete="off" className="grid gap-4">
       <AuthField
         label={t("fields.fullName")}
         name="name"
         placeholder={t("placeholders.fullName")}
-        autoComplete="name"
+        autoComplete="off"
         required
         value={name}
         onChange={setName}
@@ -77,7 +77,7 @@ export function SignupForm() {
         name="email"
         type="email"
         placeholder={t("placeholders.email")}
-        autoComplete="email"
+        autoComplete="off"
         required
         value={email}
         onChange={setEmail}
@@ -87,7 +87,7 @@ export function SignupForm() {
         name="phone"
         type="tel"
         placeholder={t("placeholders.phone")}
-        autoComplete="tel"
+        autoComplete="off"
         required
         value={phone}
         onChange={setPhone}
@@ -97,7 +97,7 @@ export function SignupForm() {
         name="password"
         type={showPassword ? "text" : "password"}
         placeholder={t("placeholders.password")}
-        autoComplete="new-password"
+        autoComplete="off"
         required
         value={password}
         onChange={setPassword}
@@ -117,7 +117,7 @@ export function SignupForm() {
         name="confirmPassword"
         type={showConfirm ? "text" : "password"}
         placeholder={t("placeholders.password")}
-        autoComplete="new-password"
+        autoComplete="off"
         required
         value={confirm}
         onChange={setConfirm}

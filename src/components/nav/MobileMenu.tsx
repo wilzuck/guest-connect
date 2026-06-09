@@ -15,17 +15,36 @@ import {
   CircleUserRound,
   Compass,
   Home,
+  LogOut,
   Menu,
+  MessageSquare,
   Search,
+  Settings,
   ShieldCheck,
   Sparkles,
+  CalendarCheck,
   X,
 } from "lucide-react";
+import {
+  filterByPermissions,
+  getCurrentUserAccess,
+  type Permission,
+} from "@/lib/auth/access-control";
+
+type SpaceLink = {
+  label: string;
+  href: string;
+  icon: typeof MessageSquare;
+  permission?: Permission;
+};
 
 export function MobileMenu() {
   const locale = useLocale();
   const t = useTranslations("nav");
+  const tu = useTranslations("userMenu");
   const tm = useTranslations("mobileMenu");
+  const currentUser = getCurrentUserAccess();
+  const labels = getMobileSpaceLabels(locale);
 
   const links = [
     {
@@ -53,6 +72,25 @@ export function MobileMenu() {
       desc: tm("siteMapDesc"),
     },
   ];
+  const spaceLinks = filterByPermissions<SpaceLink>(
+    [
+      { label: tu("messages"), href: `/${locale}/messages`, icon: MessageSquare, permission: "messages.read" },
+      { label: labels.manageAccount, href: `/${locale}/profile`, icon: CircleUserRound },
+      {
+        label: labels.manageServices,
+        href: `/${locale}/dashboard/service-management`,
+        icon: Settings,
+        permission: "admin.read",
+      },
+      {
+        label: labels.manageReservations,
+        href: `/${locale}/reservations`,
+        icon: CalendarCheck,
+        permission: "reservations.read",
+      },
+    ],
+    currentUser,
+  );
 
   return (
     <Dialog>
@@ -145,25 +183,34 @@ export function MobileMenu() {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-2">
-              <DialogClose asChild>
-                <Link
-                  href={`/${locale}/login`}
-                  className="inline-flex h-10 items-center justify-center rounded-xl border border-black/10 bg-white px-4 text-sm font-semibold text-black shadow-sm shadow-black/5 transition hover:bg-zinc-100"
-                >
-                  {tm("login")}
-                </Link>
-              </DialogClose>
-
-              <DialogClose asChild>
-                <Link
-                  href={`/${locale}/signup`}
-                  className="inline-flex h-10 items-center justify-center rounded-xl bg-black px-4 text-sm font-semibold text-white shadow-sm shadow-black/10 transition hover:bg-black/90"
-                >
-                  {tm("signup")}
-                </Link>
-              </DialogClose>
+            <div className="grid gap-2">
+              {spaceLinks.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <DialogClose asChild key={item.href}>
+                    <Link
+                      href={item.href}
+                      className="flex min-h-11 items-center gap-3 rounded-xl bg-white px-3 py-2 text-sm font-semibold text-black shadow-sm shadow-black/5 transition hover:bg-zinc-100"
+                    >
+                      <Icon className="h-4 w-4 text-zinc-500" aria-hidden="true" />
+                      <span className="min-w-0 truncate">{item.label}</span>
+                    </Link>
+                  </DialogClose>
+                );
+              })}
             </div>
+
+            <div className="my-2 h-px bg-black/10" />
+
+            <DialogClose asChild>
+              <Link
+                href={`/${locale}/logout`}
+                className="flex min-h-11 items-center gap-3 rounded-xl bg-white px-3 py-2 text-sm font-semibold text-black shadow-sm shadow-black/5 transition hover:bg-zinc-100"
+              >
+                <LogOut className="h-4 w-4 text-zinc-500" aria-hidden="true" />
+                <span>{tu("logout")}</span>
+              </Link>
+            </DialogClose>
           </div>
 
           <div className="mt-auto flex min-w-0 items-center gap-2 pt-3 text-xs font-medium text-zinc-500">
@@ -174,4 +221,13 @@ export function MobileMenu() {
       </DialogContent>
     </Dialog>
   );
+}
+
+function getMobileSpaceLabels(locale: string) {
+  const isEn = locale === "en";
+  return {
+    manageAccount: isEn ? "Manage my account" : "Gérer mon compte",
+    manageServices: isEn ? "Manage my services" : "Gérer mes services",
+    manageReservations: isEn ? "Manage my reservations" : "Gérer mes réservations",
+  };
 }

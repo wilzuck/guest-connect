@@ -2,11 +2,39 @@ import Image from "next/image";
 import Link from "next/link";
 import { getLocale } from "next-intl/server";
 import { differenceInCalendarDays, isValid, parseISO } from "date-fns";
+import { CreditCard, Landmark, Smartphone, WalletCards } from "lucide-react";
 import { Card } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
 import { Container } from "@/components/ui/Container";
 import { readDb } from "@/lib/server/db";
+
+const paymentMethods = [
+  {
+    id: "mobile-money",
+    label: "Mobile Money",
+    description: "MTN, Moov, Orange Money ou portefeuille local compatible.",
+    icon: Smartphone,
+  },
+  {
+    id: "card",
+    label: "Carte bancaire",
+    description: "Visa, Mastercard ou carte bancaire internationale.",
+    icon: CreditCard,
+  },
+  {
+    id: "paypal",
+    label: "PayPal",
+    description: "Paiement rapide avec votre compte PayPal.",
+    icon: WalletCards,
+  },
+  {
+    id: "bank-transfer",
+    label: "Virement / paiement sur place",
+    description: "Option manuelle selon validation de l'hôte.",
+    icon: Landmark,
+  },
+];
 
 export default async function CheckoutPage({
   searchParams,
@@ -72,6 +100,76 @@ export default async function CheckoutPage({
                     </span>
                     <Textarea placeholder="Heure d’arrivée estimée, besoin particulier, etc." className="min-h-[120px]" />
                   </label>
+                </div>
+
+                <div className="mt-8 border-t border-black/10 pt-6">
+                  <p className="text-sm font-semibold text-black">Moyen de paiement</p>
+                  <p className="mt-2 text-sm text-zinc-600">
+                    Choisissez comment vous souhaitez payer cette réservation. Le paiement reste en mode démo.
+                  </p>
+
+                  <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                    {paymentMethods.map((method, index) => {
+                      const Icon = method.icon;
+
+                      return (
+                        <label
+                          key={method.id}
+                          className="group flex cursor-pointer gap-3 rounded-2xl border border-black/10 bg-white p-4 transition hover:border-black/25 hover:bg-zinc-50 has-[:checked]:border-black has-[:checked]:bg-zinc-50"
+                        >
+                          <input
+                            type="radio"
+                            name="paymentMethod"
+                            value={method.id}
+                            defaultChecked={index === 0}
+                            className="mt-1 h-4 w-4 accent-black"
+                          />
+                          <span className="grid min-w-0 gap-2">
+                            <span className="flex items-center gap-2 text-sm font-semibold text-black">
+                              <span className="grid h-9 w-9 place-items-center rounded-xl border border-black/10 bg-zinc-100 text-black transition group-has-[:checked]:bg-white">
+                                <Icon className="h-4 w-4" aria-hidden="true" />
+                              </span>
+                              {method.label}
+                            </span>
+                            <span className="text-sm leading-5 text-zinc-600">{method.description}</span>
+                          </span>
+                        </label>
+                      );
+                    })}
+                  </div>
+
+                  <div className="mt-5 grid gap-4 sm:grid-cols-2">
+                    <label className="grid gap-2">
+                      <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">
+                        Numéro Mobile Money
+                      </span>
+                      <Input type="tel" placeholder="+229 01 00 00 00 00" />
+                    </label>
+                    <label className="grid gap-2">
+                      <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">
+                        Nom sur la carte
+                      </span>
+                      <Input placeholder="Camille Dupont" />
+                    </label>
+                    <label className="grid gap-2">
+                      <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">
+                        Numéro de carte
+                      </span>
+                      <Input inputMode="numeric" placeholder="4242 4242 4242 4242" />
+                    </label>
+                    <div className="grid grid-cols-2 gap-3">
+                      <label className="grid gap-2">
+                        <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">
+                          Expiration
+                        </span>
+                        <Input placeholder="MM/AA" />
+                      </label>
+                      <label className="grid gap-2">
+                        <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500">CVC</span>
+                        <Input inputMode="numeric" placeholder="123" />
+                      </label>
+                    </div>
+                  </div>
                 </div>
 
                 <div className="mt-6 flex flex-wrap gap-3">

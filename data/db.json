@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "updatedAt": "2026-06-07T23:12:18.843Z"
+    "updatedAt": "2026-06-08T23:15:23.968Z"
   },
   "categories": [
     {
@@ -56,7 +56,9 @@
       "id": "srv-airport",
       "name": "Transfert aéroport",
       "slug": "transfert-aeroport",
-      "active": true
+      "active": true,
+      "validationStatus": "approved",
+      "validationUpdatedAt": "2026-06-08T23:15:01.193Z"
     },
     {
       "id": "srv-chef",
@@ -82,7 +84,9 @@
       "rating": 4.84,
       "reviewCount": 188,
       "imageUrl": "https://images.unsplash.com/photo-1452860606245-08befc0ff44b?auto=format&fit=crop&w=1600&q=80",
-      "excerpt": "Découvrez l’artisanat local, rencontrez des créateurs et repartez avec une pièce unique."
+      "excerpt": "Découvrez l’artisanat local, rencontrez des créateurs et repartez avec une pièce unique.",
+      "validationStatus": "approved",
+      "validationUpdatedAt": "2026-06-08T23:15:11.371Z"
     }
   ],
   "propertyTypes": [
@@ -173,7 +177,8 @@
       "serviceIds": [
         "srv-airport",
         "srv-cleaning"
-      ]
+      ],
+      "validationStatus": "approved"
     },
     {
       "id": "lst-16ed1f0cced9",
@@ -190,7 +195,8 @@
       "serviceIds": [
         "srv-chef",
         "srv-airport"
-      ]
+      ],
+      "validationStatus": "approved"
     }
   ]
 }

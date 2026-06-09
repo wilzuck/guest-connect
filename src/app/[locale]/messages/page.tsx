@@ -1,55 +1,119 @@
-import Image from "next/image";
-import { ConversationSidebar } from "@/components/messages/ConversationSidebar";
-import { ConversationView } from "@/components/messages/ConversationView";
-import { Container } from "@/components/ui/Container";
-import { messageThreads, threadMessages } from "@/lib/mock/messages";
+import { MessagesInbox, type InboxConversation } from "@/components/messages/MessagesInbox";
+
+const conversations: InboxConversation[] = [
+  {
+    id: "user-msg-001",
+    title: "Arrivée tardive à la maison d'hôtes",
+    subtitle: "Maison d'hôtes premium • Réservation GC-102",
+    participantName: "Amelia Bohold",
+    participantRole: "Hôte",
+    lastMessage: "Oui, aucun souci. Je vous envoie le code et le plan d'accès.",
+    updatedAt: "10:12",
+    unreadCount: 2,
+    active: true,
+    status: "open",
+    messages: [
+      {
+        id: "m1",
+        author: "Vous",
+        role: "Voyageur",
+        body: "Bonjour, notre vol arrive tard. Pouvons-nous arriver vers 23h30 ?",
+        time: "09:58",
+        mine: true,
+      },
+      {
+        id: "m2",
+        author: "Amelia Bohold",
+        role: "Hôte",
+        body: "Oui, aucun souci. Je vous enverrai le code d'entrée et le plan d'accès. Vous préférez WhatsApp ou SMS ?",
+        time: "10:03",
+      },
+      {
+        id: "m3",
+        author: "Vous",
+        role: "Voyageur",
+        body: "WhatsApp idéal, merci. Nous serons deux, avec un bagage cabine chacun.",
+        time: "10:06",
+        mine: true,
+      },
+      {
+        id: "m4",
+        author: "Amelia Bohold",
+        role: "Hôte",
+        body: "Parfait. Je vous envoie tout dans l'après-midi. Bon voyage !",
+        time: "10:12",
+        attachments: [{ id: "att-1", name: "plan-acces.pdf", type: "file" }],
+      },
+    ],
+  },
+  {
+    id: "user-msg-002",
+    title: "Service photo pour le séjour",
+    subtitle: "Photographie • Demande de service",
+    participantName: "Anav Krick",
+    participantRole: "Prestataire",
+    lastMessage: "Je peux passer samedi matin, avec une livraison des photos sous 24h.",
+    updatedAt: "Hier",
+    unreadCount: 0,
+    active: true,
+    status: "pending",
+    messages: [
+      {
+        id: "m1",
+        author: "Vous",
+        body: "Bonjour, je cherche un photographe pour quelques photos lifestyle pendant mon séjour.",
+        time: "18:02",
+        mine: true,
+      },
+      {
+        id: "m2",
+        author: "Anav Krick",
+        role: "Photographe",
+        body: "Je peux passer samedi matin, avec une livraison des photos sous 24h.",
+        time: "18:35",
+      },
+    ],
+  },
+  {
+    id: "user-msg-003",
+    title: "Groupe voyage Cotonou",
+    subtitle: "Conversation de groupe • 4 membres",
+    participantName: "Groupe Cotonou",
+    groupName: "Voyage Cotonou",
+    group: true,
+    lastMessage: "Le chauffeur confirme le départ à 08:30.",
+    updatedAt: "Lun.",
+    unreadCount: 0,
+    active: true,
+    status: "open",
+    messages: [
+      {
+        id: "m1",
+        author: "Support GuestConnect",
+        role: "Support",
+        body: "Bienvenue dans le groupe de coordination pour votre séjour.",
+        time: "08:20",
+      },
+      {
+        id: "m2",
+        author: "Marc Hounsou",
+        role: "Chauffeur",
+        body: "Le chauffeur confirme le départ à 08:30.",
+        time: "08:45",
+      },
+    ],
+  },
+];
 
 export default function MessagesPage() {
-  const selectedThread = messageThreads[0];
-
   return (
-    <div className="border-t border-zinc-200">
-      <Container className="">
-        <div className="overflow-auto rounded-sm border-l border-r border-zinc-200 bg-white">
-          <div className="grid h-dvh lg:grid-cols-[360px_1fr_320px]">
-            <ConversationSidebar
-              threads={messageThreads}
-              selectedId={selectedThread.id}
-            />
-
-            <ConversationView
-              thread={selectedThread}
-              messages={threadMessages[selectedThread.id]}
-            />
-
-            <aside className="hidden border-l border-zinc-200 p-6 lg:block">
-              <Image
-                src={selectedThread.coverImage}
-                alt=""
-                width={640}
-                height={416}
-                className="h-52 w-full rounded-2xl object-cover"
-              />
-
-              <h3 className="mt-5 font-semibold">
-                {selectedThread.listingTitle}
-              </h3>
-
-              <p className="mt-2 text-sm text-zinc-500">
-                Arrivée prévue • 14 Juin
-              </p>
-
-              <div className="mt-6 rounded-2xl bg-zinc-100 p-4">
-                <p className="font-medium">Conseils sécurité</p>
-
-                <p className="mt-2 text-sm text-zinc-600">
-                  Gardez vos échanges sur la plateforme.
-                </p>
-              </div>
-            </aside>
-          </div>
-        </div>
-      </Container>
+    <div className=" bg-white">
+      <MessagesInbox
+        title="Messages"
+        description="Conversations avec les hôtes, prestataires et groupes de séjour."
+        conversations={conversations}
+        mode="user"
+      />
     </div>
   );
 }

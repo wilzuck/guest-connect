@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 import { LocaleSwitcher } from "@/components/i18n/LocaleSwitcher";
 import { CurrencySwitcher } from "@/components/currency/CurrencySwitcher";
 import { DashboardFooter } from "@/components/dashboard/DashboardFooter";
+import { ThemeSwitcher } from "@/components/theme/ThemeSwitcher";
 import type { ReactNode } from "react";
 
 export function Footer() {
@@ -100,6 +101,7 @@ export function Footer() {
           <div className="flex items-center gap-3">
             <CurrencySwitcher />
             <LocaleSwitcher />
+            <ThemeSwitcher />
           </div>
         </div>
       </Container>

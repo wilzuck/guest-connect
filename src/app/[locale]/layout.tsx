@@ -23,7 +23,7 @@ export default async function LocaleLayout({
   const messages = await getMessages(safeLocale);
 
   return (
-    <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       <NextIntlClientProvider locale={safeLocale} messages={messages}>
         <CurrencyProvider>
           <div className="min-h-dvh overflow-x-hidden flex flex-col">

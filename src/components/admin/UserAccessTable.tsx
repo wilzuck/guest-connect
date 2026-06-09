@@ -1,9 +1,9 @@
 "use client";
 
-import { Pencil, Plus, Search, Trash2 } from "lucide-react";
+import { ChevronDown, Pencil, Plus, Search, Trash2 } from "lucide-react";
 import { useMemo, useState } from "react";
-import { ButtonLink } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
+import { ButtonLink } from "@/components/ui/Button";
 
 type AccessRow = {
   id: string;
@@ -29,17 +29,18 @@ export function UserAccessTable({
     const q = query.trim().toLowerCase();
     return rows.filter((row) => !q || Object.values(row).join(" ").toLowerCase().includes(q));
   }, [query, rows]);
+  const groupedRows = useMemo(() => groupAccessRows(filteredRows), [filteredRows]);
 
   return (
     <section className="grid gap-4">
-      <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
+      <div className="flex flex-col gap-3 px-4 lg:px-6 xl:flex-row xl:items-center xl:justify-between">
         <div>
           <h1 className="text-xl font-semibold tracking-tight text-[#202024]">{title}</h1>
           <p className="mt-1 text-sm text-[#8E8E93]">{description}</p>
         </div>
 
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
-          <label className="flex h-10 min-w-0 items-center gap-2 rounded-lg border border-[#E8E8EC] bg-white px-3 text-sm text-[#8E8E93] sm:w-72">
+          <label className="flex h-10 min-w-0 items-center gap-2 rounded-lg border border-[#E8E8EC] bg-white px-3 text-sm text-[#8E8E93] shadow-xs shadow-black/5 sm:w-80">
             <Search className="h-4 w-4" aria-hidden="true" />
             <input
               value={query}
@@ -55,47 +56,56 @@ export function UserAccessTable({
         </div>
       </div>
 
-      <div className="overflow-hidden rounded-xl border border-[#E8E8EC] bg-white">
-        <div className="hidden grid-cols-[1.3fr_1.2fr_1fr_1fr_120px] gap-3 border-b border-[#E8E8EC] bg-[#FAFAFB] px-4 py-3 text-xs font-medium text-[#8E8E93] lg:grid">
-          <div>Nom</div>
-          <div>Email / portée</div>
-          <div>Rôle</div>
-          <div>Statut</div>
-          <div className="text-right">Actions</div>
-        </div>
+      <div className="overflow-x-auto border-y border-[#E8E8EC] bg-white">
+        <div className="min-w-[820px]">
+          <div className="grid grid-cols-[1.4fr_1.3fr_1fr_120px_132px_104px] gap-3 border-b border-[#E8E8EC] bg-[#FAFAFB] px-4 py-3 text-xs font-medium text-[#8E8E93]">
+            <div>Nom</div>
+            <div>Email / portée</div>
+            <div>Rôle</div>
+            <div>Statut</div>
+            <div>Date</div>
+            <div className="text-right">Actions</div>
+          </div>
 
-        <div className="divide-y divide-[#EFEFF2]">
-          {filteredRows.map((row) => (
-            <div
-              key={row.id}
-              className="grid gap-3 px-4 py-4 lg:grid-cols-[1.3fr_1.2fr_1fr_1fr_120px] lg:items-center"
-            >
-              <div>
-                <p className="text-sm font-semibold text-[#202024]">{row.name}</p>
-                <p className="mt-1 text-xs text-[#8E8E93] lg:hidden">{row.email}</p>
+          {groupedRows.map((group) => (
+            <div key={group.title}>
+              <div className="flex items-center gap-2 border-b border-[#EFEFF2] bg-[#F7F7F8] px-4 py-2 text-xs font-semibold text-[#5D5D65]">
+                <ChevronDown className="h-3.5 w-3.5" aria-hidden="true" />
+                <span>{group.title}</span>
+                <span className="text-[#A4A4AA]">{group.rows.length}</span>
               </div>
-              <div className="hidden truncate text-sm text-[#73737A] lg:block">{row.email}</div>
-              <div className="text-sm text-[#73737A]">{row.role}</div>
-              <div>
-                <Badge className={statusClassName(row.status)}>
-                  {row.status}
-                </Badge>
-              </div>
-              <div className="flex justify-end gap-2">
-                <button
-                  type="button"
-                  className="grid h-9 w-9 place-items-center rounded-lg border border-[#E8E8EC] text-[#73737A]"
-                  aria-label="Modifier"
-                >
-                  <Pencil className="h-4 w-4" aria-hidden="true" />
-                </button>
-                <button
-                  type="button"
-                  className="grid h-9 w-9 place-items-center rounded-lg border border-[#E8E8EC] text-[#E04F5F]"
-                  aria-label="Supprimer"
-                >
-                  <Trash2 className="h-4 w-4" aria-hidden="true" />
-                </button>
+
+              <div className="divide-y divide-[#EFEFF2]">
+                {group.rows.map((row) => (
+                  <div
+                    key={row.id}
+                    className="grid grid-cols-[1.4fr_1.3fr_1fr_120px_132px_104px] gap-3 px-4 py-2.5 text-sm transition hover:bg-[#FAFAFB]"
+                  >
+                    <div className="truncate font-medium text-[#202024]">{row.name}</div>
+                    <div className="truncate text-[#73737A]">{row.email}</div>
+                    <div className="truncate text-[#73737A]">{row.role}</div>
+                    <div>
+                      <Badge className={statusClassName(row.status)}>{row.status}</Badge>
+                    </div>
+                    <div className="truncate text-[#73737A]">{"Aujourd'hui"}</div>
+                    <div className="flex justify-end gap-2">
+                      <button
+                        type="button"
+                        className="grid h-8 w-8 place-items-center rounded-lg border border-[#E8E8EC] text-[#73737A] transition hover:bg-[#F7F7F8] hover:text-[#202024]"
+                        aria-label="Modifier"
+                      >
+                        <Pencil className="h-4 w-4" aria-hidden="true" />
+                      </button>
+                      <button
+                        type="button"
+                        className="grid h-8 w-8 place-items-center rounded-lg border border-[#E8E8EC] text-[#E04F5F] transition hover:bg-[#FFF3F4]"
+                        aria-label="Supprimer"
+                      >
+                        <Trash2 className="h-4 w-4" aria-hidden="true" />
+                      </button>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           ))}
@@ -114,4 +124,19 @@ function statusClassName(status: string) {
     return "rounded-md border-emerald-100 bg-emerald-50 text-emerald-700 shadow-none";
   }
   return "rounded-md border-zinc-100 bg-zinc-50 text-zinc-700 shadow-none";
+}
+
+function groupAccessRows(rows: AccessRow[]) {
+  const pending = rows.filter((row) => {
+    const status = row.status.toLowerCase();
+    return status.includes("attente") || status.includes("valid") || status.includes("prioritaire");
+  });
+  const completed = rows.filter((row) => row.status.toLowerCase().includes("confirm") || row.status.toLowerCase().includes("actif"));
+  const active = rows.filter((row) => !pending.includes(row) && !completed.includes(row));
+
+  return [
+    { title: "À traiter", rows: pending },
+    { title: "Aujourd'hui", rows: active },
+    { title: "Complété", rows: completed },
+  ].filter((group) => group.rows.length > 0);
 }

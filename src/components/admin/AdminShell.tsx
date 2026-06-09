@@ -90,8 +90,8 @@ export function AdminShell({
 
   return (
     <div className="min-h-dvh w-full border-t border-[#E8E8EC] bg-white">
-      <div className="flex min-h-dvh w-full max-w-none ">
-        <aside className="hidden w-[256px] shrink-0 border-r border-[#E8E8EC] bg-[#F7F7F8] lg:flex lg:flex-col">
+      <div className="flex min-h-dvh w-full max-w-none">
+        <aside className="sticky top-0 hidden h-dvh w-[256px] shrink-0 overflow-hidden border-r border-[#E8E8EC] bg-[#F7F7F8] lg:flex lg:flex-col">
           {/* Brand 
           <div className="flex h-16 items-center justify-between px-4">
             <Link href={`/${locale}/dashboard/service-management`} className="flex items-center gap-2">
@@ -159,7 +159,7 @@ export function AdminShell({
             </div>
           </div>
 
-          <main className="min-w-0 flex-1 bg-white px-4 py-4 lg:px-6 lg:py-6">{children}</main>
+          <main className="min-w-0 flex-1 bg-white">{children}</main>
         </div>
       </div>
     </div>
