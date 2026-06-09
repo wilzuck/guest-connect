@@ -1,4 +1,5 @@
 import { MessagesInbox, type InboxConversation } from "@/components/messages/MessagesInbox";
+import { Container } from "@/components/ui";
 
 const conversations: InboxConversation[] = [
   {
@@ -107,13 +108,19 @@ const conversations: InboxConversation[] = [
 
 export default function MessagesPage() {
   return (
-    <div className=" bg-white">
-      <MessagesInbox
-        title="Messages"
-        description="Conversations avec les hôtes, prestataires et groupes de séjour."
-        conversations={conversations}
-        mode="user"
-      />
+    <div className=" border-t border-black/10">
+      <Container>
+        <MessagesInbox
+          title="Messages"
+          description="Conversations avec les hôtes, prestataires et groupes de séjour."
+          conversations={conversations}
+          mode="user"
+          withTopBorder={false}
+          withBottomBorder={false}
+          withLeftBorder={true}
+          withRightBorder={true}
+        />
+      </Container>
     </div>
   );
 }

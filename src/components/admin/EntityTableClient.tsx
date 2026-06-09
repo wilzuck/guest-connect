@@ -79,7 +79,7 @@ export function EntityTableClient({
         </div>
 
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-end">
-          <label className="flex h-10 min-w-0 items-center gap-2 rounded-lg border border-[#E8E8EC] bg-white px-3 text-sm text-[#8E8E93] shadow-xs shadow-black/5 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-400 dark:shadow-black/30 sm:w-80">
+          <label className="flex h-10 min-w-0 items-center gap-2 rounded-lg border border-black/5  dark:border-black/10 bg-white px-3 text-sm text-[#8E8E93] shadow-xs shadow-black/5 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-400 dark:shadow-black/30 sm:w-80">
             <Search className="h-4 w-4" aria-hidden="true" />
             <input
               value={query}
@@ -112,7 +112,7 @@ export function EntityTableClient({
       <div className="overflow-x-auto border-y border-black/10 bg-white dark:border-zinc-800 dark:bg-black">
         <div className="min-w-[760px]">
           <div
-            className="grid border-b border-[#E8E8EC] bg-[#FAFAFB] px-4 py-3 text-xs font-medium text-[#8E8E93] dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-400"
+            className="grid border-b border-black/5  dark:border-black/10 bg-[#FAFAFB] px-4 py-3 text-xs font-medium text-[#8E8E93] dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-400"
             style={{ gridTemplateColumns: gridTemplate, gap: "0.75rem" }}
           >
             <div />
@@ -186,7 +186,7 @@ export function EntityTableClient({
                         </button>
 
                         {openMenuId === id ? (
-                          <div className="absolute right-0 top-9 z-20 w-44 overflow-hidden rounded-xl border border-[#E8E8EC] bg-white p-1 shadow-lg shadow-black/10 dark:border-zinc-800 dark:bg-zinc-950 dark:shadow-black/40">
+                          <div className="absolute right-0 top-9 z-20 w-44 overflow-hidden rounded-xl border border-black/5  dark:border-black/10 bg-white p-1 shadow-lg shadow-black/10 dark:border-zinc-800 dark:bg-zinc-950 dark:shadow-black/40">
                             <button
                               type="button"
                               className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm text-[#202024] hover:bg-zinc-50 dark:text-white dark:hover:bg-zinc-900/70"
@@ -232,7 +232,7 @@ export function EntityTableClient({
       {previewRow ? (
         <div className="fixed inset-0 z-50 grid place-items-center bg-black/40 px-4 py-8 dark:bg-black/70" role="dialog" aria-modal="true">
           <div className="max-h-[min(720px,90dvh)] w-full max-w-2xl border border-black/10 dark:border-zinc-800 overflow-hidden rounded-2xl bg-white shadow-2xl shadow-black/20 dark:bg-zinc-950 dark:shadow-black/60">
-            <div className="flex items-center justify-between border-b border-[#E8E8EC] px-5 py-4 dark:border-zinc-800">
+            <div className="flex items-center justify-between border-b border-black/5  dark:border-black/10 px-5 py-4 dark:border-zinc-800">
               <div>
                 <p className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">{"Détail de l'élément"}</p>
                 <p className="mt-1 text-xs text-[#8E8E93]">{String(previewRow.id ?? "")}</p>

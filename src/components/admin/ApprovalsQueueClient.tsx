@@ -83,7 +83,7 @@ export function ApprovalsQueueClient({ initialItems }: { initialItems: ApprovalI
           </p>
         </div>
 
-        <label className="flex h-10 min-w-0 items-center gap-2 rounded-lg border border-[#E8E8EC] bg-white px-3 text-sm text-[#8E8E93] shadow-xs shadow-black/5 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-400 dark:shadow-black/30 sm:w-80">
+        <label className="flex h-10 min-w-0 items-center gap-2 rounded-lg border border-black/5  dark:border-black/10 bg-white px-3 text-sm text-[#8E8E93] shadow-xs shadow-black/5 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-400 dark:shadow-black/30 sm:w-80">
           <Search className="h-4 w-4" aria-hidden="true" />
           <input
             value={query}
@@ -96,7 +96,7 @@ export function ApprovalsQueueClient({ initialItems }: { initialItems: ApprovalI
 
       <div className="overflow-x-auto border-y border-black/10 bg-white dark:border-zinc-800 dark:bg-black">
         <div className="min-w-[980px]">
-          <div className="grid grid-cols-[1.55fr_132px_116px_116px_150px_132px_116px] gap-3 border-b border-[#E8E8EC] bg-[#FAFAFB] px-4 py-3 text-xs font-medium text-[#8E8E93] dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-400">
+          <div className="grid grid-cols-[1.55fr_132px_116px_116px_150px_132px_116px] gap-3 border-b border-black/5  dark:border-black/10 bg-[#FAFAFB] px-4 py-3 text-xs font-medium text-[#8E8E93] dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-400">
             <div>Contenu</div>
             <div>Type</div>
             <div>Statut</div>

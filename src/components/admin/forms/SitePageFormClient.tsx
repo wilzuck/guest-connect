@@ -41,7 +41,7 @@ export function SitePageFormClient({ backHref }: { backHref: string }) {
         <p className="mt-1 text-sm text-[#8E8E93]">Ajoutez une page éditoriale ou une page de contenu au site.</p>
       </div>
 
-      <div className="grid gap-4 rounded-xl border border-[#E8E8EC] bg-white p-5">
+      <div className="grid gap-4 rounded-xl border border-black/5  dark:border-black/10 bg-white p-5">
         <label className="grid gap-2">
           <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">Titre</span>
           <Input name="title" maxLength={250} placeholder="Guide voyageur" required />

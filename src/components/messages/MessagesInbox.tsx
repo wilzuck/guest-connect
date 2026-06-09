@@ -70,6 +70,8 @@ export function MessagesInbox({
   errorLabel = "Impossible de charger les conversations.",
   withTopBorder = true,
   withBottomBorder = true,
+  withLeftBorder = true,
+  withRightBorder = true,
 }: {
   title?: string;
   description?: string;
@@ -80,6 +82,8 @@ export function MessagesInbox({
   errorLabel?: string;
   withTopBorder?: boolean;
   withBottomBorder?: boolean;
+  withLeftBorder?: boolean;
+  withRightBorder?: boolean;
 }) {
   const [items, setItems] = useState(conversations);
   const [selectedId, setSelectedId] = useState(conversations[0]?.id ?? "");
@@ -108,13 +112,15 @@ export function MessagesInbox({
     return (
       <section
         className={cn(
-          "grid h-[calc(100dvh-4rem)] min-h-[680px] place-items-center border-b border-[#E8E8EC] bg-white dark:border-zinc-800 dark:bg-black",
-          withTopBorder && "border-t",
-          !withBottomBorder && "border-b-0",
+          "grid h-[calc(100dvh-4rem)] min-h-[680px] place-items-center border-b border-black/10 bg-white dark:border-zinc-800 dark:bg-black",
+          withTopBorder ? "border-t" : "border-t-0",
+          withBottomBorder ? "border-b" : "border-b-0",
+          withLeftBorder ? "border-l" : "border-l-0",
+          withRightBorder ? "border-r" : "border-r-0",
         )}
       >
         <div className="text-center">
-          <span className="mx-auto block h-10 w-10 animate-spin rounded-full border-2 border-[#E8E8EC] border-t-[#05A6D6]" />
+          <span className="mx-auto block h-10 w-10 animate-spin rounded-full border-2 border-black/5  dark:border-black/10 border-t-[#05A6D6]" />
           <p className="mt-4 text-sm font-semibold text-zinc-900 dark:text-zinc-100 dark:text-white">Chargement des conversations...</p>
         </div>
       </section>
@@ -125,9 +131,11 @@ export function MessagesInbox({
     return (
       <section
         className={cn(
-          "grid h-[calc(100dvh-4rem)] min-h-[680px] place-items-center border-b border-[#E8E8EC] bg-white dark:border-zinc-800 dark:bg-black",
-          withTopBorder && "border-t",
-          !withBottomBorder && "border-b-0",
+          "grid h-[calc(100dvh-4rem)] min-h-[680px] place-items-center border-black/10 bg-white dark:border-zinc-800 dark:bg-black",
+           withTopBorder ? "border-t" : "border-t-0",
+          withBottomBorder ? "border-b" : "border-b-0",
+          withLeftBorder ? "border-l" : "border-l-0",
+          withRightBorder ? "border-r" : "border-r-0",
         )}
       >
         <EmptyState label={errorLabel} />
@@ -205,14 +213,16 @@ export function MessagesInbox({
   return (
     <section
       className={cn(
-        "h-[calc(100dvh-4rem)] min-h-[680px] overflow-hidden border-b border-[#E8E8EC] bg-white dark:border-zinc-800 dark:bg-black",
-        withTopBorder && "border-t",
-        !withBottomBorder && "border-b-0",
+        "h-[calc(100dvh-4rem)] min-h-[680px] overflow-hidden border border-black/5  dark:border-black/10 bg-white dark:border-zinc-800 dark:bg-black",
+        withTopBorder ? "border-t" : "border-t-0",
+        withBottomBorder ? "border-b" : "border-b-0",
+        withLeftBorder ? "border-l" : "border-l-0",
+        withRightBorder ? "border-r" : "border-r-0",
       )}
     >
       <div className="grid h-full lg:grid-cols-[248px_360px_minmax(0,1fr)]">
-        <aside className="hidden border-r border-[#E8E8EC] bg-[#F7F7F8] dark:border-zinc-800 dark:bg-zinc-950 lg:flex lg:flex-col">
-          <div className="border-b border-[#E8E8EC] p-4 dark:border-zinc-800">
+        <aside className="hidden border-r border-black/5  dark:border-black/10 bg-[#F7F7F8] dark:border-zinc-800 dark:bg-zinc-950 lg:flex lg:flex-col">
+          <div className="border-b border-black/5  dark:border-black/10 p-4 dark:border-zinc-800">
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#8E8E93] dark:text-zinc-500">
               {mode === "admin" ? "Centre support" : "Espace"}
             </p>
@@ -227,8 +237,8 @@ export function MessagesInbox({
             <SidebarItem icon={Users} label="Groupes" count={items.filter((item) => item.group).length} />
           </nav>
 
-          <div className="mt-auto border-t border-[#E8E8EC] p-4 dark:border-zinc-800">
-            <div className="rounded-2xl border border-[#E8E8EC] bg-white p-3 dark:border-zinc-800 dark:bg-zinc-900">
+          <div className="mt-auto border-t border-black/5  dark:border-black/10 p-4 dark:border-zinc-800">
+            <div className="rounded-2xl border border-black/5  dark:border-black/10 bg-white p-3 dark:border-zinc-800 dark:bg-zinc-900">
               <p className="text-xs font-semibold text-[#202024] dark:text-white">
                 {mode === "admin" ? "Messages utilisateurs" : "Besoin d'aide ?"}
               </p>
@@ -243,12 +253,12 @@ export function MessagesInbox({
 
         <section
           className={cn(
-            "flex min-w-0 flex-col border-r border-[#E8E8EC] bg-white dark:border-zinc-800 dark:bg-black",
+            "flex min-w-0 flex-col border-r border-black/5  dark:border-black/10 bg-white dark:border-zinc-800 dark:bg-black",
             mobilePanel === "chat" && "hidden lg:flex",
           )}
         >
-          <div className="border-b border-[#E8E8EC] p-3 dark:border-zinc-800">
-            <label className="flex h-10 items-center gap-2 rounded-lg border border-[#E8E8EC] bg-white px-3 text-sm text-[#8E8E93] shadow-xs shadow-black/5 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-400 dark:shadow-black/30">
+          <div className="border-b border-black/5  dark:border-black/10 p-3 dark:border-zinc-800">
+            <label className="flex h-10 items-center gap-2 rounded-lg border border-black/5  dark:border-black/10 bg-white px-3 text-sm text-[#8E8E93] shadow-xs shadow-black/5 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-400 dark:shadow-black/30">
               <Search className="h-4 w-4" aria-hidden="true" />
               <input
                 value={query}
@@ -259,7 +269,7 @@ export function MessagesInbox({
             </label>
           </div>
 
-          <div className="flex items-center gap-2 border-b border-[#E8E8EC] px-3 py-2 text-xs font-medium text-[#73737A] dark:border-zinc-800 dark:text-zinc-400">
+          <div className="flex items-center gap-2 border-b border-black/5  dark:border-black/10 px-3 py-2 text-xs font-medium text-[#73737A] dark:border-zinc-800 dark:text-zinc-400">
             <button className="rounded-full bg-[#EAF8FF] px-3 py-1.5 text-[#0789C8] dark:bg-sky-950/50 dark:text-sky-300">Messages</button>
             <button className="rounded-full px-3 py-1.5 hover:bg-[#F7F7F8]">Brouillons</button>
             <button className="rounded-full px-3 py-1.5 hover:bg-[#F7F7F8]">Archivés</button>
@@ -310,10 +320,10 @@ export function MessagesInbox({
         >
           {selected ? (
             <>
-              <header className="flex h-16 items-center gap-3 border-b border-[#E8E8EC] px-4 dark:border-zinc-800">
+              <header className="flex h-16 items-center gap-3 border-b border-black/5  dark:border-black/10 px-4 dark:border-zinc-800">
                 <button
                   type="button"
-                  className="rounded-lg border border-[#E8E8EC] px-3 py-2 text-xs font-semibold text-[#73737A] dark:border-zinc-800 dark:text-zinc-300 lg:hidden"
+                  className="rounded-lg border border-black/5  dark:border-black/10 px-3 py-2 text-xs font-semibold text-[#73737A] dark:border-zinc-800 dark:text-zinc-300 lg:hidden"
                   onClick={() => setMobilePanel("list")}
                 >
                   Retour
@@ -328,9 +338,8 @@ export function MessagesInbox({
                 <ConversationStatus conversation={selected} />
               </header>
 
-              <div className="flex items-center gap-1 border-b border-[#E8E8EC] px-4 py-2 dark:border-zinc-800">
+              <div className="flex overflow-auto items-center gap-1 border-b border-black/5  dark:border-black/10 px-4 py-2 dark:border-zinc-800">
                 <ToolbarButton icon={Reply} label="Répondre" onClick={() => setReplyTo(visibleMessages.at(-1) ?? null)} />
-                <ToolbarButton icon={Paperclip} label="Fichier" onClick={() => fileInputRef.current?.click()} />
                 <ToolbarButton
                   icon={selected.archived ? Mail : Archive}
                   label={selected.archived ? "Désarchiver" : "Archiver"}
@@ -341,11 +350,7 @@ export function MessagesInbox({
                   label={selected.blocked ? "Débloquer" : "Bloquer"}
                   onClick={() => updateSelectedConversation((item) => ({ ...item, blocked: !item.blocked }))}
                 />
-                <ToolbarButton
-                  icon={selected.active === false ? ShieldCheck : XCircle}
-                  label={selected.active === false ? "Activer" : "Désactiver"}
-                  onClick={() => updateSelectedConversation((item) => ({ ...item, active: item.active === false }))}
-                />
+               
                 <ToolbarButton
                   icon={CheckCheck}
                   label={selected.unreadCount ? "Marquer lu" : "Non lu"}
@@ -357,11 +362,7 @@ export function MessagesInbox({
                   }
                 />
                 <ToolbarButton icon={Trash2} label="Supprimer" tone="danger" onClick={() => removeConversation(selected.id)} />
-                <div className="ml-auto hidden items-center gap-1 sm:flex">
-                  <ToolbarButton icon={Phone} label="Appel" />
-                  <ToolbarButton icon={Video} label="Visio" />
-                  <ToolbarButton icon={MoreHorizontal} label="Plus" />
-                </div>
+                
               </div>
 
               <div className="min-h-0 flex-1 overflow-y-auto bg-[#FAFAFB] px-4 py-5 dark:bg-zinc-950">
@@ -376,7 +377,7 @@ export function MessagesInbox({
                 </div>
               </div>
 
-              <footer className="border-t border-[#E8E8EC] bg-white px-3 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] dark:border-zinc-800 dark:bg-black">
+              <footer className="border-t border-black/5  dark:border-black/10 bg-white px-3 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] dark:border-zinc-800 dark:bg-black">
                 {replyTo ? (
                   <div className="mb-2 flex items-center gap-2 rounded-xl bg-[#F7F7F8] px-3 py-2 text-xs text-[#73737A] dark:bg-zinc-900 dark:text-zinc-300">
                     <Reply className="h-3.5 w-3.5" aria-hidden="true" />
@@ -401,7 +402,7 @@ export function MessagesInbox({
                   </div>
                 ) : null}
 
-                <div className="flex items-end gap-2 rounded-2xl border border-[#E8E8EC] bg-white p-2 shadow-xs shadow-black/5 dark:border-zinc-800 dark:bg-zinc-950 dark:shadow-black/30">
+                <div className="flex items-end gap-2 rounded-2xl border border-black/5  dark:border-black/10 bg-white p-2 shadow-xs shadow-black/5 dark:border-zinc-800 dark:bg-zinc-950 dark:shadow-black/30">
                   <input
                     ref={fileInputRef}
                     type="file"
@@ -496,7 +497,7 @@ function ToolbarButton({
       type="button"
       onClick={onClick}
       className={cn(
-        "inline-flex h-9 items-center gap-2 rounded-lg border border-transparent px-2.5 text-xs font-semibold transition hover:border-[#E8E8EC] hover:bg-[#F7F7F8] dark:hover:border-zinc-800 dark:hover:bg-zinc-900",
+        "inline-flex h-9 items-center gap-2 rounded-lg border border-transparent px-2.5 text-xs font-semibold transition hover:border-black/5  dark:border-black/10 hover:bg-[#F7F7F8] dark:hover:border-zinc-800 dark:hover:bg-zinc-900",
         tone === "danger" ? "text-[#E04F5F] dark:text-red-300" : "text-[#5F5F66] dark:text-zinc-300",
       )}
       title={label}

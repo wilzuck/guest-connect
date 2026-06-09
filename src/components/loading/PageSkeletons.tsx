@@ -77,7 +77,7 @@ export function DashboardLoadingSkeleton() {
 export function AdminLoadingSkeleton() {
   return (
     <div className="grid h-[calc(100dvh-4rem)] min-h-[680px] grid-cols-1 bg-white dark:bg-black lg:grid-cols-[256px_minmax(0,1fr)]">
-      <aside className="hidden border-r border-[#E8E8EC] bg-[#F7F7F8] p-3 dark:border-zinc-800 dark:bg-zinc-950 lg:block">
+      <aside className="hidden border-r border-black/5  dark:border-black/10 bg-[#F7F7F8] p-3 dark:border-zinc-800 dark:bg-zinc-950 lg:block">
         <SkeletonBlock className="h-10 rounded-lg bg-zinc-200" />
         <div className="mt-6 grid gap-2">
           {Array.from({ length: 10 }).map((_, index) => (
@@ -87,7 +87,7 @@ export function AdminLoadingSkeleton() {
       </aside>
 
       <section className="min-w-0">
-        <header className="flex h-16 items-center justify-between border-b border-[#E8E8EC] px-4 dark:border-zinc-800 lg:px-6">
+        <header className="flex h-16 items-center justify-between border-b border-black/5  dark:border-black/10 px-4 dark:border-zinc-800 lg:px-6">
           <SkeletonBlock className="h-6 w-32 rounded-full" />
           <SkeletonBlock className="h-10 w-28 rounded-lg" />
         </header>
@@ -99,7 +99,7 @@ export function AdminLoadingSkeleton() {
           <SkeletonBlock className="h-10 w-full max-w-80 rounded-lg xl:justify-self-center" />
           <SkeletonBlock className="hidden h-10 w-28 rounded-lg xl:block xl:justify-self-end" />
         </div>
-        <div className="mt-4 border-y border-[#E8E8EC] dark:border-zinc-800">
+        <div className="mt-4 border-y border-black/5  dark:border-black/10 dark:border-zinc-800">
           <SkeletonBlock className="h-11 rounded-none" />
           {Array.from({ length: 9 }).map((_, index) => (
             <div key={index} className="grid grid-cols-[1.5fr_1fr_1fr_120px] gap-3 border-t border-[#EFEFF2] px-4 py-3 dark:border-zinc-800">
@@ -126,7 +126,7 @@ export function AdminContentLoadingSkeleton() {
         <SkeletonBlock className="h-10 w-full max-w-80 rounded-lg xl:justify-self-center" />
         <SkeletonBlock className="hidden h-10 w-28 rounded-lg xl:block xl:justify-self-end" />
       </div>
-      <div className="mt-4 border-y border-[#E8E8EC] dark:border-zinc-800">
+      <div className="mt-4 border-y border-black/5  dark:border-black/10 dark:border-zinc-800">
         <SkeletonBlock className="h-11 rounded-none" />
         {Array.from({ length: 9 }).map((_, index) => (
           <div key={index} className="grid grid-cols-[1.5fr_1fr_1fr_120px] gap-3 border-t border-[#EFEFF2] px-4 py-3 dark:border-zinc-800">

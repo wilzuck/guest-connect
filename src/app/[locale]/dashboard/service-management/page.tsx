@@ -64,7 +64,7 @@ export default async function Page() {
         </div>
 
         <div className="grid min-w-0 gap-2 sm:grid-cols-[minmax(0,18rem)_auto] sm:items-center">
-          <label className="flex h-10 min-w-0 items-center gap-2 rounded-lg border border-[#E8E8EC] bg-white px-3 text-sm text-[#8E8E93] dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-400">
+          <label className="flex h-10 min-w-0 items-center gap-2 rounded-lg border border-black/5  dark:border-black/10 bg-white px-3 text-sm text-[#8E8E93] dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-400">
             <Search className="h-4 w-4" aria-hidden="true" />
             <input
               placeholder="Rechercher..."
@@ -85,7 +85,7 @@ export default async function Page() {
 
       <section className="grid min-w-0 gap-4 sm:grid-cols-2 2xl:grid-cols-4">
         {stats.map((stat) => (
-          <div key={stat.label} className="min-w-0 rounded-xl border border-[#E8E8EC] bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950">
+          <div key={stat.label} className="min-w-0 rounded-xl border border-black/5  dark:border-black/10 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950">
             <p className="text-sm font-medium text-[#5D5D65] dark:text-zinc-300">{stat.label}</p>
             <div className="mt-2 flex items-end justify-between gap-3">
               <p className="text-2xl font-semibold tracking-tight text-[#202024] dark:text-white">{stat.value}</p>
@@ -109,7 +109,7 @@ export default async function Page() {
           <h2 className="text-lg font-semibold tracking-tight text-[#202024] dark:text-white">Active views</h2>
           <Link
             href={`/${locale}/dashboard/service-management/listings`}
-            className="rounded-lg border border-[#E8E8EC] px-3 py-2 text-sm font-semibold text-zinc-900 transition hover:bg-zinc-50 dark:border-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-900"
+            className="rounded-lg border border-black/5  dark:border-black/10 px-3 py-2 text-sm font-semibold text-zinc-900 transition hover:bg-zinc-50 dark:border-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-900"
           >
             View All
           </Link>
@@ -120,7 +120,7 @@ export default async function Page() {
             const Icon = item.icon;
 
             return (
-              <article key={item.title} className="min-w-0 rounded-xl border border-[#E8E8EC] bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950">
+              <article key={item.title} className="min-w-0 rounded-xl border border-black/5  dark:border-black/10 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950">
                 <div className="flex min-w-0 items-start justify-between gap-4">
                   <div className="flex min-w-0 items-center gap-3">
                     <span className="grid h-10 w-10 place-items-center rounded-full bg-[#F7F7F8] text-[#202024] dark:bg-zinc-900 dark:text-white">
@@ -152,14 +152,14 @@ export default async function Page() {
                 <div className="mt-4 grid grid-cols-2 gap-2 sm:flex sm:justify-end">
                   <Link
                     href={item.createHref}
-                    className="grid h-9 place-items-center rounded-lg border border-[#E8E8EC] text-[#6D4AFF] transition hover:bg-zinc-50 dark:border-zinc-800 dark:hover:bg-zinc-900 sm:w-9"
+                    className="grid h-9 place-items-center rounded-lg border border-black/5  dark:border-black/10 text-[#6D4AFF] transition hover:bg-zinc-50 dark:border-zinc-800 dark:hover:bg-zinc-900 sm:w-9"
                     aria-label="Ajouter"
                   >
                     <Plus className="h-4 w-4" aria-hidden="true" />
                   </Link>
                   <Link
                     href={item.href}
-                    className="grid h-9 place-items-center rounded-lg border border-[#E8E8EC] text-[#73737A] transition hover:bg-zinc-50 dark:border-zinc-800 dark:text-zinc-400 dark:hover:bg-zinc-900 sm:w-9"
+                    className="grid h-9 place-items-center rounded-lg border border-black/5  dark:border-black/10 text-[#73737A] transition hover:bg-zinc-50 dark:border-zinc-800 dark:text-zinc-400 dark:hover:bg-zinc-900 sm:w-9"
                     aria-label="Modifier"
                   >
                     <Pencil className="h-4 w-4" aria-hidden="true" />

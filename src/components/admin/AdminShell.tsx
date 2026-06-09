@@ -90,9 +90,9 @@ export function AdminShell({
   const visibleMobileNav = [...visibleMainNav, ...visibleSettingsNav, ...visibleAccessNav, ...visibleDocsNav];
 
   return (
-    <div className="h-[calc(100dvh-4rem)] w-full overflow-hidden border-t border-[#E8E8EC] bg-white dark:border-zinc-800 dark:bg-black">
+    <div className="h-[calc(100dvh-4rem)] w-full overflow-hidden border-t border-black/5  dark:border-black/10 bg-white dark:border-zinc-800 dark:bg-black">
       <div className="flex h-full w-full max-w-none">
-        <aside className="hidden h-full w-[256px] shrink-0 overflow-hidden border-r border-[#E8E8EC] bg-[#F7F7F8] dark:border-zinc-800 dark:bg-zinc-950 lg:flex lg:flex-col">
+        <aside className="hidden h-full w-[256px] shrink-0 overflow-hidden border-r border-black/5  dark:border-black/10 bg-[#F7F7F8] dark:border-zinc-800 dark:bg-zinc-950 lg:flex lg:flex-col">
           {/* Brand 
           <div className="flex h-16 items-center justify-between px-4">
             <Link href={`/${locale}/dashboard/service-management`} className="flex items-center gap-2">
@@ -123,7 +123,7 @@ export function AdminShell({
             <NavGroup title="Support / Documentation" items={visibleDocsNav} pathname={pathname} />
           </nav>
 
-          <div className="m-3 rounded-xl border border-[#E8E8EC] bg-white p-3 dark:border-zinc-800 dark:bg-zinc-900">
+          <div className="m-3 rounded-xl border border-black/5  dark:border-black/10 bg-white p-3 dark:border-zinc-800 dark:bg-zinc-900">
             <p className="text-xs font-semibold text-[#202024] dark:text-white">Admin workspace</p>
             <p className="mt-1 text-xs leading-5 text-[#8E8E93] dark:text-zinc-400">
               {currentUser.name} - {ROLE_LABELS[currentUser.role]}
@@ -132,7 +132,7 @@ export function AdminShell({
         </aside>
 
         <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden">
-          <header className="sticky py-4 top-0 z-30 flex h-16 items-center justify-between border-b border-[#E8E8EC] bg-white/95 px-4 backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/95 lg:px-6">
+          <header className="sticky py-4 top-0 z-30 flex h-16 items-center justify-between border-b border-black/5  dark:border-black/10 bg-white/95 px-4 backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/95 lg:px-6">
             <p className="text-lg font-semibold tracking-tight text-[#202024] dark:text-white">Dashboard</p>
             <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center">
               <ButtonLink
@@ -146,7 +146,7 @@ export function AdminShell({
               </ButtonLink>
             </div>
           </header>
-          <div className="border-b border-[#E8E8EC] bg-[#F7F7F8] px-3 py-2 dark:border-zinc-800 dark:bg-zinc-950 lg:hidden">
+          <div className="border-b border-black/5  dark:border-black/10 bg-[#F7F7F8] px-3 py-2 dark:border-zinc-800 dark:bg-zinc-950 lg:hidden">
             <div className="flex gap-2 overflow-x-auto">
               {visibleMobileNav.map((item) => (
                 <Link
