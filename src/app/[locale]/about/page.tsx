@@ -98,7 +98,7 @@ function ValueCard({ title, desc }: { title: string; desc: string }) {
 
 function SideImage({ title, desc, src }: { title: string; desc: string; src: string }) {
   return (
-    <div className="grid gap-3 rounded-2xl border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950">
+    <div className="grid gap-3 rounded-2xl border border-black/5 bg-white p-4 dark:border-zinc-800 dark:bg-black/10">
       <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl">
         <Image src={src} alt={title} fill className="object-cover" sizes="(max-width: 1024px) 100vw, 32vw" />
       </div>

@@ -6,11 +6,16 @@
 // Composants de base
 export { Input } from "./Input";
 export { Textarea } from "./Textarea";
+export { ActionTile } from "./ActionTile";
 export { Button } from "./Button";
 export { Card } from "./Card";
 export { Container } from "./Container";
+export { ContentSectionCard } from "./ContentSectionCard";
 export { Badge } from "./Badge";
 export { Dialog } from "./Dialog";
+export { FieldLabel } from "./FieldLabel";
+export { InfoCard } from "./InfoCard";
+export { TextDivider } from "./TextDivider";
 
 // Composants formulaire
 export { FormField } from "./FormField";

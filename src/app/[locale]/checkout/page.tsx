@@ -115,7 +115,7 @@ export default async function CheckoutPage({
                       return (
                         <label
                           key={method.id}
-                          className="group flex cursor-pointer gap-3 rounded-2xl border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950 transition hover:border-black/25 hover:bg-zinc-50 has-[:checked]:border-black has-[:checked]:bg-zinc-50"
+                          className="group flex cursor-pointer gap-3 rounded-2xl border border-black/5 bg-white p-4 dark:border-zinc-800 dark:bg-black/10 transition hover:border-black/25 hover:bg-zinc-50 has-[:checked]:border-black has-[:checked]:bg-zinc-50"
                         >
                           <input
                             type="radio"

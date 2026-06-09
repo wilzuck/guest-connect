@@ -12,7 +12,7 @@ type Feature = {
 
 function Icon({ children }: { children: ReactNode }) {
   return (
-    <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-black/[0.06] text-black">
+    <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-black/[0.06] text-black dark:bg-white/10 dark:text-white">
       {children}
     </div>
   );
@@ -228,7 +228,7 @@ export async function FeaturesSection() {
   const locale = await getLocale();
   const features = getFeatures(locale);
   return (
-    <section id="features" className="bg-zinc-50">
+    <section id="features" className="bg-zinc-50 dark:bg-black">
       <Container className="py-16 sm:py-20">
         <SectionHeading
           eyebrow={locale === "en" ? "Features" : "Fonctionnalités"}
@@ -252,8 +252,8 @@ export async function FeaturesSection() {
               className="p-6 transition hover:-translate-y-0.5 hover:shadow-md hover:shadow-black/10"
             >
               {f.icon}
-              <h3 className="mt-4 text-lg font-semibold tracking-tight">{f.title}</h3>
-              <p className="mt-2 text-sm leading-6 text-zinc-600">{f.description}</p>
+              <h3 className="mt-4 text-lg font-semibold tracking-tight text-black dark:text-white">{f.title}</h3>
+              <p className="mt-2 text-sm leading-6 text-zinc-600 dark:text-zinc-400">{f.description}</p>
             </Card>
           ))}
         </div>

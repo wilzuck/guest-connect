@@ -10,7 +10,7 @@ const base =
 
 const variants: Record<ButtonVariant, string> = {
   primary:
-    "bg-black text-white shadow-sm shadow-black/10 hover:bg-black/90 dark:bg-white dark:text-black dark:hover:bg-zinc-200 dark:shadow-none",
+    "bg-white text-black border border-black/10 shadow-sm shadow-black/5 hover:bg-zinc-100 dark:border-white/10 dark:bg-white dark:text-black dark:hover:bg-zinc-200 dark:shadow-none",
   secondary:
     "border border-black/10 bg-white text-black shadow-sm shadow-black/5 hover:bg-zinc-50 dark:border-white/10 dark:bg-zinc-900 dark:text-white dark:hover:bg-zinc-800 dark:shadow-none",
   outline:
@@ -18,7 +18,6 @@ const variants: Record<ButtonVariant, string> = {
   ghost:
     "bg-transparent text-black hover:bg-black/[0.04] dark:text-white dark:hover:bg-white/10",
 };
-
 const sizes: Record<ButtonSize, string> = {
   sm: "min-h-9 px-3.5 text-xs sm:px-4 sm:text-sm",
   md: "min-h-10 px-4 text-sm sm:min-h-11 sm:px-5",

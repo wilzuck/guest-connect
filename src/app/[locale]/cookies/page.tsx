@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getLocale } from "next-intl/server";
 import { MarketingPageLayout } from "@/components/layout/MarketingPageLayout";
 import { Card } from "@/components/ui/Card";
+import { InfoCard } from "@/components/ui/InfoCard";
 
 export const metadata: Metadata = {
   title: "Cookies — GuestConnect",
@@ -25,15 +26,14 @@ export default async function Page() {
     >
       <div className="grid gap-4 sm:grid-cols-2">
         {cookies.map((cookie) => (
-          <Card key={cookie.title} className="p-6 shadow-none">
+          <InfoCard key={cookie.title} title={cookie.title}>
             <div className="flex items-start justify-between gap-4">
-              <p className="text-base font-semibold ">{cookie.title}</p>
-              <span className={cookie.required ? "rounded-full bg-black px-3 py-1 text-xs font-semibold text-white" : "rounded-full bg-zinc-100 px-3 py-1 text-xs font-semibold text-zinc-600"}>
+              <span className={cookie.required ? "rounded-full bg-black px-3 py-1 text-xs font-semibold text-white dark:bg-white dark:text-black" : "rounded-full bg-zinc-100 px-3 py-1 text-xs font-semibold text-zinc-600 dark:bg-zinc-900 dark:text-zinc-300"}>
                 {cookie.required ? (isEn ? "Required" : "Requis") : (isEn ? "Optional" : "Optionnel")}
               </span>
             </div>
-            <p className="mt-3 text-sm leading-7 text-zinc-600">{cookie.body}</p>
-          </Card>
+            <p className="mt-3 text-sm leading-7 text-zinc-600 dark:text-zinc-400">{cookie.body}</p>
+          </InfoCard>
         ))}
       </div>
       <Card className="mt-6 p-6 shadow-none">

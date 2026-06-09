@@ -604,7 +604,7 @@ export function PropertyFormMultiStep({ context = "public" }: { context?: "publi
                     </FormField>
                   </div>
 
-                  <div className="rounded-2xl border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950">
+                  <div className="rounded-2xl border border-black/5 bg-white p-4 dark:border-zinc-800 dark:bg-black/10">
                     <div className="flex items-start gap-3">
                       <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-zinc-100 text-zinc-900 dark:bg-zinc-800 dark:text-zinc-100">
                         <CalendarDays className="h-5 w-5" aria-hidden="true" />

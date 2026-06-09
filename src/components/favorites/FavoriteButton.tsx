@@ -60,11 +60,11 @@ export function FavoriteButton({
       aria-label={label}
       title={label}
       className={cn(
-        "grid h-10 w-10 place-items-center rounded-xl border border-black/10 bg-white shadow-sm shadow-black/10 transition hover:bg-zinc-50 active:scale-[0.98]",
+        "grid h-10 w-10 place-items-center rounded-xl border border-black/10 bg-white shadow-sm shadow-black/10 transition hover:bg-zinc-50 active:scale-[0.98] dark:border-zinc-800 dark:bg-zinc-950 dark:shadow-black/40 dark:hover:bg-zinc-900",
         className,
       )}
     >
-      <Heart className={cn("h-5 w-5", active ? "fill-black text-black" : "text-zinc-700")} />
+      <Heart className={cn("h-5 w-5", active ? "fill-black text-black dark:fill-white dark:text-white" : "text-zinc-700 dark:text-zinc-300")} />
       <span className="sr-only">{label}</span>
     </button>
   );

@@ -18,10 +18,10 @@ export function ConversationSidebar({
   selectedId: string | null;
 }) {
   return (
-    <aside className="border-r border-black/10">
+    <aside className="border-r border-black/10 bg-white dark:border-zinc-800 dark:bg-black">
       
-      <div className="border-b border-gray-200 p-4">
-        <div className="flex items-center rounded-2xl border border-gray-200 px-4 py-3">
+      <div className="border-b border-gray-200 p-4 dark:border-zinc-800">
+        <div className="flex items-center rounded-2xl border border-gray-200 px-4 py-3 text-zinc-600 dark:border-zinc-800 dark:text-zinc-400">
           <svg
             aria-hidden="true"
             viewBox="0 0 24 24"
@@ -38,7 +38,7 @@ export function ConversationSidebar({
 
           <input
             placeholder="Rechercher"
-            className="w-full bg-transparent outline-none"
+            className="w-full bg-transparent text-black outline-none placeholder:text-zinc-500 dark:text-white dark:placeholder:text-zinc-500"
           />
         </div>
       </div>
@@ -48,9 +48,9 @@ export function ConversationSidebar({
           <Link
             key={thread.id}
             href={`/messages/${thread.id}`}
-            className={`flex gap-4 p-4 transition hover:bg-zinc-50 ${
+            className={`flex gap-4 p-4 transition hover:bg-zinc-50 dark:hover:bg-zinc-900 ${
               selectedId === thread.id
-                ? "bg-zinc-100"
+                ? "bg-zinc-100 dark:bg-zinc-900"
                 : ""
             }`}
           >
@@ -72,7 +72,7 @@ export function ConversationSidebar({
 
             <div className="min-w-0 flex-1">
               <div className="flex justify-between">
-                <p className="truncate font-medium">
+                <p className="truncate font-medium text-black dark:text-white">
                   {thread.subject}
                 </p>
 
@@ -81,7 +81,7 @@ export function ConversationSidebar({
                 </span>
               </div>
 
-              <p className="truncate text-sm text-zinc-500">
+              <p className="truncate text-sm text-zinc-500 dark:text-zinc-400">
                 {thread.lastMessage}
               </p>
             </div>

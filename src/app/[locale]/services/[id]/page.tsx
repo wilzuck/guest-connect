@@ -109,7 +109,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 
 function Info({ label, value, compact = false }: { label: string; value: string; compact?: boolean }) {
   return (
-    <div className={compact ? "rounded-2xl bg-zinc-50 p-3 dark:bg-zinc-900" : "rounded-2xl border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950"}>
+    <div className={compact ? "rounded-2xl bg-zinc-50 p-3 dark:bg-zinc-900" : "rounded-2xl border border-black/5 bg-white p-4 dark:border-zinc-800 dark:bg-black/10"}>
       <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-400 dark:text-zinc-500">{label}</p>
       <p className="mt-1 text-sm font-semibold ">{value}</p>
     </div>

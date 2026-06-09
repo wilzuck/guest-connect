@@ -5,7 +5,7 @@ import { TestimonialsCarousel } from "@/components/testimonials/TestimonialsCaro
 
 export function TestimonialsSection() {
   return (
-    <section className="bg-zinc-50">
+    <section className="bg-zinc-50 dark:bg-black">
       <Container className="py-16 sm:py-20">
         <SectionHeading
           eyebrow="Avis"

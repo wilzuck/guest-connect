@@ -74,29 +74,29 @@ export function ApprovalsQueueClient({ initialItems }: { initialItems: ApprovalI
   }
 
   return (
-    <section className="grid gap-4">
+    <section className="grid gap-4 dark:text-white">
       <div className="flex flex-col gap-3 px-4 pt-3 lg:px-6 xl:flex-row xl:items-end xl:justify-between">
         <div>
-          <h1 className="text-xl font-semibold tracking-tight text-[#202024]">À valider</h1>
-          <p className="mt-1 text-sm text-[#8E8E93]">
+          <h1 className="text-xl font-semibold tracking-tight text-[#202024] dark:text-white">À valider</h1>
+          <p className="mt-1 text-sm text-[#8E8E93] dark:text-zinc-400">
             {pendingCount} élément(s) en attente sur {items.length} contenu(s) contrôlés.
           </p>
         </div>
 
-        <label className="flex h-10 min-w-0 items-center gap-2 rounded-lg border border-[#E8E8EC] bg-white px-3 text-sm text-[#8E8E93] shadow-xs shadow-black/5 sm:w-80">
+        <label className="flex h-10 min-w-0 items-center gap-2 rounded-lg border border-[#E8E8EC] bg-white px-3 text-sm text-[#8E8E93] shadow-xs shadow-black/5 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-400 dark:shadow-black/30 sm:w-80">
           <Search className="h-4 w-4" aria-hidden="true" />
           <input
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder="Rechercher un contenu..."
-            className="min-w-0 flex-1 bg-transparent outline-none placeholder:text-[#B1B1B7]"
+            className="min-w-0 flex-1 bg-transparent outline-none placeholder:text-[#B1B1B7] dark:placeholder:text-zinc-500"
           />
         </label>
       </div>
 
-      <div className="overflow-x-auto border-y border-[#E8E8EC] bg-white">
+      <div className="overflow-x-auto border-y border-[#E8E8EC] bg-white dark:border-zinc-800 dark:bg-black">
         <div className="min-w-[980px]">
-          <div className="grid grid-cols-[1.55fr_132px_116px_116px_150px_132px_116px] gap-3 border-b border-[#E8E8EC] bg-[#FAFAFB] px-4 py-3 text-xs font-medium text-[#8E8E93]">
+          <div className="grid grid-cols-[1.55fr_132px_116px_116px_150px_132px_116px] gap-3 border-b border-[#E8E8EC] bg-[#FAFAFB] px-4 py-3 text-xs font-medium text-[#8E8E93] dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-400">
             <div>Contenu</div>
             <div>Type</div>
             <div>Statut</div>
@@ -109,31 +109,31 @@ export function ApprovalsQueueClient({ initialItems }: { initialItems: ApprovalI
           {groups.length > 0 ? (
             groups.map((group) => (
               <section key={group.label}>
-                <div className="flex items-center gap-2 border-b border-[#EFEFF2] bg-[#F7F7F8] px-4 py-2 text-xs font-medium text-[#5F5F66]">
+                <div className="flex items-center gap-2 border-b border-[#EFEFF2] bg-[#F7F7F8] px-4 py-2 text-xs font-medium text-[#5F5F66] dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300">
                   <ChevronDown className="h-3.5 w-3.5" aria-hidden="true" />
                   <span>{group.label}</span>
-                  <span className="text-[#B1B1B7]">{group.items.length}</span>
+                  <span className="text-[#B1B1B7] dark:text-zinc-500">{group.items.length}</span>
                 </div>
 
-                <div className="divide-y divide-[#EFEFF2]">
+                <div className="divide-y divide-[#EFEFF2] dark:divide-zinc-800">
                   {group.items.map((item) => (
                     <article
                       key={`${item.entity}-${item.id}`}
-                      className="grid grid-cols-[1.55fr_132px_116px_116px_150px_132px_116px] items-center gap-3 px-4 py-3 text-sm transition hover:bg-[#FAFAFB]"
+                      className="grid grid-cols-[1.55fr_132px_116px_116px_150px_132px_116px] items-center gap-3 px-4 py-3 text-sm transition hover:bg-[#FAFAFB] dark:hover:bg-zinc-950"
                     >
                       <div className="min-w-0">
                         {item.href ? (
-                          <Link href={item.href} className="truncate font-medium text-[#202024] hover:underline">
+                          <Link href={item.href} className="truncate font-medium text-[#202024] hover:underline dark:text-white">
                             {item.title}
                           </Link>
                         ) : (
-                          <p className="truncate font-medium text-[#202024]">{item.title}</p>
+                          <p className="truncate font-medium text-[#202024] dark:text-white">{item.title}</p>
                         )}
-                        <p className="mt-1 truncate text-xs text-[#8E8E93]">{item.subtitle}</p>
+                        <p className="mt-1 truncate text-xs text-[#8E8E93] dark:text-zinc-400">{item.subtitle}</p>
                       </div>
 
                       <div>
-                        <Badge className="rounded-md bg-[#F7F7F8] text-[#5F5F66] shadow-none">
+                        <Badge className="rounded-md bg-[#F7F7F8] text-[#5F5F66] shadow-none dark:bg-zinc-900 dark:text-zinc-300">
                           {item.entityLabel}
                         </Badge>
                       </div>
@@ -141,8 +141,8 @@ export function ApprovalsQueueClient({ initialItems }: { initialItems: ApprovalI
                       <ApprovalStatusBadge status={item.status} />
                       <PriorityBadge status={item.status} />
 
-                      <p className="truncate text-sm font-medium text-[#5F5F66]">{item.submittedBy}</p>
-                      <p className="truncate text-sm text-[#73737A]">{item.submittedAt}</p>
+                      <p className="truncate text-sm font-medium text-[#5F5F66] dark:text-zinc-300">{item.submittedBy}</p>
+                      <p className="truncate text-sm text-[#73737A] dark:text-zinc-400">{item.submittedAt}</p>
 
                       <div className="flex justify-end gap-2">
                         <Button

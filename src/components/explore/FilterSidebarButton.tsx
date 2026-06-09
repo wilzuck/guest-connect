@@ -95,7 +95,7 @@ export function FilterSidebarButton({
 
           <div className="grid gap-4">
             {sections.map((section) => (
-              <section key={section.title} className="rounded-2xl border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950 dark:border-zinc-800 dark:bg-zinc-950">
+              <section key={section.title} className="rounded-2xl border border-black/5 bg-white p-4 dark:border-zinc-800 dark:bg-black/10 dark:border-zinc-800 dark:bg-zinc-950">
                 <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400 dark:text-zinc-400">
                   {section.title}
                 </p>
@@ -154,7 +154,7 @@ export function FilterSidebarButton({
 function FilterControlField({ control }: { control: FilterControl }) {
   if (control.type === "select") {
     return (
-      <section className="rounded-2xl border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950 dark:border-zinc-800 dark:bg-zinc-950">
+      <section className="rounded-2xl border border-black/5 bg-white p-4 dark:border-zinc-800 dark:bg-black/10 dark:border-zinc-800 dark:bg-zinc-950">
         <label className="grid gap-2">
           <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400 dark:text-zinc-400">{control.label}</span>
           <Select
@@ -172,7 +172,7 @@ function FilterControlField({ control }: { control: FilterControl }) {
     const maxValue = Number(control.maxValue ?? control.max);
 
     return (
-      <section className="rounded-2xl border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950 dark:border-zinc-800 dark:bg-zinc-950">
+      <section className="rounded-2xl border border-black/5 bg-white p-4 dark:border-zinc-800 dark:bg-black/10 dark:border-zinc-800 dark:bg-zinc-950">
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400 dark:text-zinc-400">{control.label}</p>
         <div className="mt-4 grid gap-4">
           <label className="grid gap-2">
@@ -213,7 +213,7 @@ function FilterControlField({ control }: { control: FilterControl }) {
   const selected = new Set((control.value ?? "").split(",").filter(Boolean));
 
   return (
-    <section className="rounded-2xl border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950 dark:border-zinc-800 dark:bg-zinc-950">
+    <section className="rounded-2xl border border-black/5 bg-white p-4 dark:border-zinc-800 dark:bg-black/10 dark:border-zinc-800 dark:bg-zinc-950">
       <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400 dark:text-zinc-400">{control.label}</p>
       <div className="mt-3 grid gap-2 sm:grid-cols-2">
         {control.options.map((option) => (

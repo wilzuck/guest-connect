@@ -7,6 +7,7 @@ import { googleLogin, login } from "@/lib/api/auth";
 import { ApiError } from "@/lib/api/api-client";
 import { useAuthToken } from "@/hooks/useAuthToken";
 import { Button } from "@/components/ui/Button";
+import { TextDivider } from "@/components/ui/TextDivider";
 import { AuthField } from "@/components/auth/AuthField";
 import { useLocale, useTranslations } from "next-intl";
 import { PhoneLoginDialogButton } from "@/components/auth/PhoneLoginDialogButton";
@@ -86,7 +87,7 @@ export function LoginForm() {
         rightElement={
           <button
             type="button"
-            className="rounded-xl px-3 py-2 text-xs font-semibold text-zinc-600 hover:text-black hover:bg-black/[0.04] transition"
+            className="rounded-xl px-3 py-2 text-xs font-semibold text-zinc-600 transition hover:bg-black/[0.04] hover:text-black dark:text-zinc-400 dark:hover:bg-white/10 dark:hover:text-white"
             onClick={() => setShowPassword((v) => !v)}
             aria-label={showPassword ? t("actions.hidePassword") : t("actions.showPassword")}
           >
@@ -96,22 +97,22 @@ export function LoginForm() {
       />
 
       <div className="flex items-center justify-between gap-3">
-        <label className="inline-flex items-center gap-2 text-sm text-zinc-600">
+        <label className="inline-flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400">
           <input
             type="checkbox"
             checked={remember}
             onChange={(e) => setRemember(e.target.checked)}
-            className="h-4 w-4 rounded border-black/20"
+            className="h-4 w-4 rounded border-black/20 dark:border-zinc-700 dark:bg-zinc-950"
           />
           {t("actions.rememberMe")}
         </label>
-        <Link href={`/${locale}/support`} className="text-sm font-semibold  hover:underline">
+        <Link href={`/${locale}/support`} className="text-sm font-semibold text-black hover:underline dark:text-white">
           {t("actions.forgotPassword")}
         </Link>
       </div>
 
       {error ? (
-        <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+        <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 dark:border-red-900/60 dark:bg-red-950/40 dark:text-red-200">
           {error}
         </div>
       ) : null}
@@ -120,13 +121,7 @@ export function LoginForm() {
         {isLoading ? t("actions.loggingIn") : t("actions.login")}
       </Button>
 
-      <div className="my-2 flex items-center gap-3">
-        <div className="h-px flex-1 bg-black/10" />
-        <p className="text-[11px] font-semibold tracking-[0.18em] text-zinc-500">
-          {t("orContinueWith")}
-        </p>
-        <div className="h-px flex-1 bg-black/10" />
-      </div>
+      <TextDivider>{t("orContinueWith")}</TextDivider>
 
       <div className="grid gap-3">
         <PhoneLoginDialogButton label={t("actions.continueWithPhone")} />
@@ -134,7 +129,7 @@ export function LoginForm() {
           type="button"
           variant="outline"
           size="lg"
-          className="rounded-2xl bg-white"
+          className="rounded-2xl bg-white dark:bg-zinc-950"
           onClick={onGoogleLogin}
           disabled={isLoading}
         >

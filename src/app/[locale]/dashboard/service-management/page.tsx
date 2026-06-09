@@ -54,21 +54,21 @@ export default async function Page() {
   ];
 
   return (
-    <div className="grid min-w-0 gap-6 px-4 py-4 lg:px-6">
+    <div className="grid min-w-0 gap-6 bg-white px-4 py-4 dark:bg-black lg:px-6">
       <div className="grid min-w-0 gap-3 xl:grid-cols-[1fr_auto] xl:items-center">
         <div>
-          <h1 className="text-xl font-semibold tracking-tight text-[#202024]">Overview</h1>
-          <p className="mt-1 text-sm text-[#8E8E93]">
+          <h1 className="text-xl font-semibold tracking-tight text-[#202024] dark:text-white">Overview</h1>
+          <p className="mt-1 text-sm text-[#8E8E93] dark:text-zinc-400">
             Gérez les contenus principaux de la marketplace GuestConnect.
           </p>
         </div>
 
         <div className="grid min-w-0 gap-2 sm:grid-cols-[minmax(0,18rem)_auto] sm:items-center">
-          <label className="flex h-10 min-w-0 items-center gap-2 rounded-lg border border-[#E8E8EC] bg-white px-3 text-sm text-[#8E8E93]">
+          <label className="flex h-10 min-w-0 items-center gap-2 rounded-lg border border-[#E8E8EC] bg-white px-3 text-sm text-[#8E8E93] dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-400">
             <Search className="h-4 w-4" aria-hidden="true" />
             <input
               placeholder="Rechercher..."
-              className="min-w-0 flex-1 bg-transparent outline-none placeholder:text-[#B1B1B7]"
+              className="min-w-0 flex-1 bg-transparent text-[#202024] outline-none placeholder:text-[#B1B1B7] dark:text-white dark:placeholder:text-zinc-500"
             />
           </label>
           <ButtonLink
@@ -85,10 +85,10 @@ export default async function Page() {
 
       <section className="grid min-w-0 gap-4 sm:grid-cols-2 2xl:grid-cols-4">
         {stats.map((stat) => (
-          <div key={stat.label} className="min-w-0 rounded-xl border border-[#E8E8EC] bg-white p-4">
-            <p className="text-sm font-medium text-[#5D5D65]">{stat.label}</p>
+          <div key={stat.label} className="min-w-0 rounded-xl border border-[#E8E8EC] bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950">
+            <p className="text-sm font-medium text-[#5D5D65] dark:text-zinc-300">{stat.label}</p>
             <div className="mt-2 flex items-end justify-between gap-3">
-              <p className="text-2xl font-semibold tracking-tight text-[#202024]">{stat.value}</p>
+              <p className="text-2xl font-semibold tracking-tight text-[#202024] dark:text-white">{stat.value}</p>
               <span
                 className={
                   stat.delta.startsWith("-")
@@ -99,17 +99,17 @@ export default async function Page() {
                 {stat.delta}
               </span>
             </div>
-            <p className="mt-4 text-xs text-[#8E8E93]">Than last month</p>
+            <p className="mt-4 text-xs text-[#8E8E93] dark:text-zinc-500">Than last month</p>
           </div>
         ))}
       </section>
 
       <section>
         <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <h2 className="text-lg font-semibold tracking-tight text-[#202024]">Active views</h2>
+          <h2 className="text-lg font-semibold tracking-tight text-[#202024] dark:text-white">Active views</h2>
           <Link
             href={`/${locale}/dashboard/service-management/listings`}
-            className="rounded-lg border border-[#E8E8EC] px-3 py-2 text-sm font-semibold text-zinc-900 dark:text-zinc-100"
+            className="rounded-lg border border-[#E8E8EC] px-3 py-2 text-sm font-semibold text-zinc-900 transition hover:bg-zinc-50 dark:border-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-900"
           >
             View All
           </Link>
@@ -120,30 +120,30 @@ export default async function Page() {
             const Icon = item.icon;
 
             return (
-              <article key={item.title} className="min-w-0 rounded-xl border border-[#E8E8EC] bg-white p-4">
+              <article key={item.title} className="min-w-0 rounded-xl border border-[#E8E8EC] bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950">
                 <div className="flex min-w-0 items-start justify-between gap-4">
                   <div className="flex min-w-0 items-center gap-3">
-                    <span className="grid h-10 w-10 place-items-center rounded-full bg-[#F7F7F8] text-[#202024]">
+                    <span className="grid h-10 w-10 place-items-center rounded-full bg-[#F7F7F8] text-[#202024] dark:bg-zinc-900 dark:text-white">
                       <Icon className="h-5 w-5" aria-hidden="true" />
                     </span>
                     <div className="min-w-0">
                       <h3 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">{item.title}</h3>
-                      <p className="mt-1 text-sm leading-5 text-[#8E8E93]">{item.description}</p>
+                      <p className="mt-1 text-sm leading-5 text-[#8E8E93] dark:text-zinc-400">{item.description}</p>
                     </div>
                   </div>
                   <MoreVertical className="h-5 w-5 text-[#8E8E93]" aria-hidden="true" />
                 </div>
 
-                <div className="mt-5 grid gap-3 rounded-lg bg-[#FAFAFB] p-3 text-sm">
+                <div className="mt-5 grid gap-3 rounded-lg bg-[#FAFAFB] p-3 text-sm dark:bg-zinc-900">
                   <div className="flex items-center justify-between">
-                    <span className="text-[#73737A]">Status</span>
+                    <span className="text-[#73737A] dark:text-zinc-400">Status</span>
                     <span className="rounded-md bg-[#DDF8F3] px-2 py-1 text-xs font-semibold text-[#21A99A]">
                       {item.status}
                     </span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-[#73737A]">Éléments</span>
-                    <span className="rounded-md bg-white px-2 py-1 text-xs font-medium text-[#73737A]">
+                    <span className="rounded-md bg-white px-2 py-1 text-xs font-medium text-[#73737A] dark:bg-zinc-950 dark:text-zinc-300">
                       {item.count}
                     </span>
                   </div>
@@ -152,14 +152,14 @@ export default async function Page() {
                 <div className="mt-4 grid grid-cols-2 gap-2 sm:flex sm:justify-end">
                   <Link
                     href={item.createHref}
-                    className="grid h-9 place-items-center rounded-lg border border-[#E8E8EC] text-[#6D4AFF] sm:w-9"
+                    className="grid h-9 place-items-center rounded-lg border border-[#E8E8EC] text-[#6D4AFF] transition hover:bg-zinc-50 dark:border-zinc-800 dark:hover:bg-zinc-900 sm:w-9"
                     aria-label="Ajouter"
                   >
                     <Plus className="h-4 w-4" aria-hidden="true" />
                   </Link>
                   <Link
                     href={item.href}
-                    className="grid h-9 place-items-center rounded-lg border border-[#E8E8EC] text-[#73737A] sm:w-9"
+                    className="grid h-9 place-items-center rounded-lg border border-[#E8E8EC] text-[#73737A] transition hover:bg-zinc-50 dark:border-zinc-800 dark:text-zinc-400 dark:hover:bg-zinc-900 sm:w-9"
                     aria-label="Modifier"
                   >
                     <Pencil className="h-4 w-4" aria-hidden="true" />

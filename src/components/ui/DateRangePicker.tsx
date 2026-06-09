@@ -108,8 +108,8 @@ export function DateRangePicker({
   <button
     type="button"
     className={cn(
-      "group w-full rounded-2xl bg-white text-left transition hover:bg-zinc-50 focus:outline-none focus:ring-4 focus:ring-black/5 dark:bg-zinc-900 dark:hover:bg-zinc-800 dark:focus:ring-white/10",
-      fieldVariant === "bordered" ? "border border-zinc-200 dark:border-zinc-800" : "",
+      "group w-full rounded-2xl bg-white text-left transition hover:bg-zinc-50 focus:outline-none focus:ring-4 focus:ring-black/5 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:bg-zinc-800 dark:focus:ring-white/10",
+      fieldVariant === "bordered" ? "border border-black/10 dark:border-zinc-800" : "",
       size === "sm" ? "h-12 px-3 py-2" : "h-14 p-[10px]",
     )}
     aria-label={startLabel}
@@ -137,8 +137,8 @@ export function DateRangePicker({
   <button
     type="button"
     className={cn(
-      "group w-full rounded-2xl bg-white text-left transition hover:bg-zinc-50 focus:outline-none focus:ring-4 focus:ring-black/5 dark:bg-zinc-900 dark:hover:bg-zinc-800 dark:focus:ring-white/10",
-      fieldVariant === "bordered" ? "border border-zinc-200 dark:border-zinc-800" : "",
+      "group w-full rounded-2xl bg-white text-left transition hover:bg-zinc-50 focus:outline-none focus:ring-4 focus:ring-black/5 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:bg-zinc-800 dark:focus:ring-white/10",
+      fieldVariant === "bordered" ? "border border-black/10 dark:border-zinc-800" : "",
       size === "sm" ? "h-12 px-3 py-2" : "h-14 p-[10px]",
     )}
     aria-label={endLabel}
@@ -180,9 +180,9 @@ export function DateRangePicker({
               months: "flex flex-row gap-6",
               nav: "absolute left-2 right-2 top-2 flex items-center justify-between pointer-events-none",
               button_previous:
-                "pointer-events-auto grid h-10 w-10 place-items-center rounded-full border border-zinc-200 bg-white text-zinc-700 shadow-sm shadow-black/5 transition hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-200 dark:shadow-none dark:hover:bg-zinc-800",
+                "pointer-events-auto grid h-10 w-10 place-items-center rounded-full border border-black/10 bg-white text-zinc-700 shadow-sm shadow-black/5 transition hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-200 dark:shadow-none dark:hover:bg-zinc-800",
               button_next:
-                "pointer-events-auto grid h-10 w-10 place-items-center rounded-full border border-zinc-200 bg-white text-zinc-700 shadow-sm shadow-black/5 transition hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-200 dark:shadow-none dark:hover:bg-zinc-800",
+                "pointer-events-auto grid h-10 w-10 place-items-center rounded-full border border-black/10 bg-white text-zinc-700 shadow-sm shadow-black/5 transition hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-200 dark:shadow-none dark:hover:bg-zinc-800",
               month_caption: "flex items-center justify-center px-2 pt-1",
             }
           : undefined

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getLocale } from "next-intl/server";
 import { MarketingPageLayout } from "@/components/layout/MarketingPageLayout";
 import { Card } from "@/components/ui/Card";
+import { InfoCard } from "@/components/ui/InfoCard";
 
 export const metadata: Metadata = {
   title: "Politique de confidentialité — GuestConnect",
@@ -25,10 +26,7 @@ export default async function Page() {
     >
       <div className="grid gap-4 lg:grid-cols-2">
         {items.map((item) => (
-          <Card key={item.title} className="p-6 shadow-none">
-            <p className="text-base font-semibold ">{item.title}</p>
-            <p className="mt-3 text-sm leading-7 text-zinc-600">{item.body}</p>
-          </Card>
+          <InfoCard key={item.title} title={item.title} description={item.body} />
         ))}
       </div>
       <Card className="mt-6 p-6 shadow-none">

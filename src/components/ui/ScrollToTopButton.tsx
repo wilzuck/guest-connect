@@ -36,8 +36,8 @@ export function ScrollToTopButton({ className }: { className?: string }) {
         // Position
         "fixed bottom-6 right-6 z-50",
         // Style
-        "h-11 w-11 place-items-center rounded-2xl border border-black/10 bg-white text-black shadow-sm shadow-black/10",
-        "transition hover:bg-zinc-50 active:scale-[0.98]",
+        "h-11 w-11 place-items-center rounded-2xl border border-black/10 bg-white text-black shadow-sm shadow-black/10 dark:border-zinc-800 dark:bg-zinc-950 dark:text-white dark:shadow-black/40",
+        "transition hover:bg-zinc-50 active:scale-[0.98] dark:hover:bg-zinc-900",
         className,
       )}
     >

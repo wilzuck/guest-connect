@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getLocale } from "next-intl/server";
 import { Card } from "@/components/ui/Card";
+import { InfoCard } from "@/components/ui/InfoCard";
 import { MarketingPageLayout } from "@/components/layout/MarketingPageLayout";
 import { Faq, type FaqItem } from "@/components/ui/Faq";
 
@@ -70,13 +71,7 @@ export default async function Page() {
     >
       <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {categories.map((c) => (
-          <Card key={c.t} className="p-6 shadow-none">
-            <div className="grid h-11 w-11 place-items-center rounded-2xl border border-black/10 bg-white">
-              {c.icon}
-            </div>
-            <p className="mt-4 text-sm font-semibold ">{c.t}</p>
-            <p className="mt-2 text-sm leading-6 text-zinc-600">{c.d}</p>
-          </Card>
+          <InfoCard key={c.t} title={c.t} description={c.d} icon={c.icon} interactive />
         ))}
       </div>
 

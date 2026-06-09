@@ -70,7 +70,7 @@ export function SearchBar({
           variant === "compact"
             ? "rounded-2xl border border-black/10 bg-white/80 p-4 backdrop-blur"
             : // Full width : pas de shadow, radius plus petit
-              "rounded-2xl border border-zinc-200 bg-white/80 p-2 backdrop-blur-sm dark:border-zinc-800 dark:bg-zinc-900/80",
+              "rounded-2xl border border-black/10 bg-white/80 p-2 backdrop-blur-sm dark:border-black/10 dark:bg-zinc-900/80",
         ].join(" ")}
       >
         {/* Desktop */}
@@ -281,7 +281,7 @@ function FieldShell({
   return (
     <div
       className={[
-        "group relative flex h-14 flex-1 items-center gap-2 rounded-2xl px-4 transition-all duration-200 hover:bg-zinc-50 focus-within:bg-zinc-50",
+        "group relative flex h-14 flex-1 items-center gap-2 rounded-2xl border border-zinc-200 px-4 transition-all duration-200 hover:bg-zinc-50 focus-within:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:bg-zinc-800 dark:focus-within:bg-zinc-800",
         className ?? "",
       ].join(" ")}
     >

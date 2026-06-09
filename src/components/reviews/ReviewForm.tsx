@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
+import { FieldLabel } from "@/components/ui/FieldLabel";
 
 export function ReviewForm() {
   const t = useTranslations("reviewForm");
@@ -18,19 +19,19 @@ export function ReviewForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="rounded-3xl border border-black/10 bg-white p-5 xl:p-8">
+    <form onSubmit={onSubmit} className="rounded-3xl border border-black/10 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-950 xl:p-8">
       <div className="flex flex-col gap-1">
-        <h3 className="text-lg font-semibold tracking-tight">{t("title")}</h3>
-        <p className="text-sm text-zinc-600">{t("subtitle")}</p>
+        <h3 className="text-lg font-semibold tracking-tight text-black dark:text-white">{t("title")}</h3>
+        <p className="text-sm text-zinc-600 dark:text-zinc-400">{t("subtitle")}</p>
       </div>
 
       <div className="mt-5 grid gap-4 sm:grid-cols-12 sm:items-start">
         <label className="sm:col-span-12">
-          <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">{t("rating")}</span>
+          <FieldLabel>{t("rating")}</FieldLabel>
           <select
             value={rating}
             onChange={(e) => setRating(e.target.value)}
-            className="mt-2 h-11 w-full rounded-2xl border max-w-sm border-black/10 bg-white px-3 text-sm font-semibold  shadow-sm shadow-black/5 focus:outline-none focus:ring-4 focus:ring-black/5"
+            className="mt-2 h-11 w-full max-w-sm rounded-2xl border border-black/10 bg-white px-3 text-sm font-semibold text-black shadow-sm shadow-black/5 focus:outline-none focus:ring-4 focus:ring-black/5 dark:border-zinc-800 dark:bg-zinc-950 dark:text-white dark:shadow-black/30 dark:focus:ring-white/10"
             aria-label={t("rating")}
           >
             <option value="5">5</option>
@@ -42,12 +43,12 @@ export function ReviewForm() {
         </label>
 
         <label className="sm:col-span-12">
-          <span className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">{t("comment")}</span>
+          <FieldLabel>{t("comment")}</FieldLabel>
           <textarea
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             placeholder={t("placeholder")}
-            className="mt-2 min-h-[110px] w-full resize-y rounded-2xl border border-black/10 bg-white px-3 py-3 text-sm text-black shadow-sm shadow-black/5 focus:outline-none focus:ring-4 focus:ring-black/5"
+            className="mt-2 min-h-[110px] w-full resize-y rounded-2xl border border-black/10 bg-white px-3 py-3 text-sm text-black shadow-sm shadow-black/5 focus:outline-none focus:ring-4 focus:ring-black/5 dark:border-zinc-800 dark:bg-zinc-950 dark:text-white dark:placeholder:text-zinc-500 dark:shadow-black/30 dark:focus:ring-white/10"
           />
         </label>
       </div>
@@ -63,7 +64,7 @@ export function ReviewForm() {
       </div>
 
       {submitted ? (
-        <p className="mt-3 text-sm font-semibold text-emerald-600">{t("success")}</p>
+        <p className="mt-3 text-sm font-semibold text-emerald-600 dark:text-emerald-400">{t("success")}</p>
       ) : null}
     </form>
   );

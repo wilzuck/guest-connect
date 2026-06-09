@@ -15,7 +15,7 @@ export function PhoneLoginDialogButton({ label }: { label: string }) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button type="button" variant="outline" size="lg" className="rounded-2xl bg-white">
+        <Button type="button" variant="outline" size="lg" className="rounded-2xl bg-white dark:bg-zinc-950">
           <PhoneIcon className="h-5 w-5" />
           {label}
         </Button>
@@ -23,11 +23,11 @@ export function PhoneLoginDialogButton({ label }: { label: string }) {
 
       <DialogContent className="p-6">
         <div className="flex items-center justify-between">
-          <p className="text-sm font-semibold ">{t("phoneDialog.title")}</p>
+          <p className="text-sm font-semibold text-black dark:text-white">{t("phoneDialog.title")}</p>
           <DialogClose asChild>
             <button
               type="button"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-black/10 bg-white hover:bg-zinc-50 transition"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-black/10 bg-white transition hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950 dark:text-white dark:hover:bg-zinc-900"
               aria-label={t("actions.close")}
             >
               ✕
@@ -35,13 +35,13 @@ export function PhoneLoginDialogButton({ label }: { label: string }) {
           </DialogClose>
         </div>
 
-        <p className="mt-2 text-sm text-zinc-600">
+        <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
           {t("placeholders.phoneLoginSoon")}
         </p>
 
         <div className="mt-5 grid gap-3">
           <label className="grid gap-2">
-            <span className="text-sm font-medium text-black">{t("fields.phone")}</span>
+            <span className="text-sm font-medium text-black dark:text-white">{t("fields.phone")}</span>
             <div className="flex gap-2">
               <Select
                 value={country}
@@ -65,7 +65,7 @@ export function PhoneLoginDialogButton({ label }: { label: string }) {
           </label>
 
           <label className="grid gap-2">
-            <span className="text-sm font-medium text-black">{t("phoneDialog.otp")}</span>
+            <span className="text-sm font-medium text-black dark:text-white">{t("phoneDialog.otp")}</span>
             <Input placeholder="123456" disabled />
           </label>
 

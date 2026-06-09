@@ -13,17 +13,17 @@ export function Logo({ className }: LogoProps) {
   const locale = useLocale();
   return (
     <Link href={`/${locale}`} className={cn("inline-flex items-center gap-2", className)}>
-      <span className="relative h-9 w-9 overflow-hidden rounded-xl bg-white">
+      <span className="relative h-9 w-9 shrink-0 overflow-hidden rounded-xl bg-white dark:bg-zinc-900 aspect-square">
         <Image
           src="/brand/guestconnect-mark.jpg"
           alt="GuestConnect"
           fill
-          className="object-cover"
+          className="object-cover object-center"
           sizes="36px"
           priority
         />
       </span>
-      <span className="md:hidden text-sm font-semibold tracking-tight">
+      <span className="hidden text-sm font-semibold tracking-tight lg:block">
         Guest-Connect
       </span>
     </Link>

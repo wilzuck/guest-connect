@@ -9,22 +9,22 @@ type SimplePageProps = {
 
 export function SimplePage({ title, description }: SimplePageProps) {
   return (
-    <div className="bg-zinc-50">
+    <div className="bg-zinc-50 dark:bg-black">
       <Container className="py-10 sm:py-12">
-        <div className="rounded-3xl border border-black/10 bg-white p-8 shadow-sm shadow-black/5">
+        <div className="rounded-3xl border border-black/10 bg-white p-8 shadow-sm shadow-black/5 dark:border-zinc-800 dark:bg-zinc-950 dark:shadow-black/40">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 dark:text-white/80">
             Page temporaire
           </p>
-          <h1 className="mt-4 text-3xl font-semibold tracking-tight">{title}</h1>
+          <h1 className="mt-4 text-3xl font-semibold tracking-tight text-black dark:text-white">{title}</h1>
           {description ? (
-            <p className="mt-3 max-w-2xl text-base leading-7 text-zinc-600">{description}</p>
+            <p className="mt-3 max-w-2xl text-base leading-7 text-zinc-600 dark:text-zinc-400">{description}</p>
           ) : null}
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <ButtonLink href="/" variant="primary" size="md">
               Retour à l’accueil
             </ButtonLink>
-            <Link href="/signup" className="text-sm font-medium text-zinc-600 hover:text-black">
+            <Link href="/signup" className="text-sm font-medium text-zinc-600 hover:text-black dark:text-zinc-400 dark:hover:text-white">
               Créer un compte
             </Link>
           </div>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getLocale } from "next-intl/server";
 import { MarketingPageLayout } from "@/components/layout/MarketingPageLayout";
 import { Card } from "@/components/ui/Card";
+import { ContentSectionCard } from "@/components/ui/ContentSectionCard";
 
 export const metadata: Metadata = {
   title: "Conditions d'utilisation — GuestConnect",
@@ -43,18 +44,11 @@ export default async function Page() {
 
         <div className="grid gap-4 lg:col-span-8">
           {sections.map((section) => (
-            <Card key={section.id} className="p-6 shadow-none">
-              <h2 id={section.id} className="text-lg font-semibold tracking-tight">
-                {section.title}
-              </h2>
-              <div className="mt-4 grid gap-3">
+            <ContentSectionCard key={section.id} id={section.id} title={section.title}>
                 {section.items.map((item) => (
-                  <p key={item} className="text-sm leading-7 text-zinc-600">
-                    {item}
-                  </p>
+                  <p key={item}>{item}</p>
                 ))}
-              </div>
-            </Card>
+            </ContentSectionCard>
           ))}
         </div>
       </div>

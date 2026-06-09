@@ -240,7 +240,7 @@ function buildSpecs(listing: { title: string; propertyType?: string; pricePerNig
 
 function InfoTile({ label, value, compact = false }: { label: string; value: string; compact?: boolean }) {
   return (
-    <div className={compact ? "rounded-2xl bg-zinc-50 p-3 dark:bg-zinc-900" : "rounded-2xl border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950"}>
+    <div className={compact ? "rounded-2xl bg-zinc-50 p-3 dark:bg-zinc-900" : "rounded-2xl border border-black/5 bg-white p-4 dark:border-zinc-800 dark:bg-black/10"}>
       <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-400 dark:text-zinc-500">{label}</p>
       <p className="mt-1 text-sm font-semibold ">{value}</p>
     </div>
@@ -249,7 +249,7 @@ function InfoTile({ label, value, compact = false }: { label: string; value: str
 
 function Amenity({ icon, title }: { icon: React.ReactNode; title: string }) {
   return (
-    <div className="flex items-center gap-3 rounded-2xl border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950 shadow-none">
+    <div className="flex items-center gap-3 rounded-2xl border border-black/5 bg-white p-4 dark:border-zinc-800 dark:bg-black/10 shadow-none">
       <div className="grid h-10 w-10 place-items-center rounded-2xl bg-zinc-50 text-black">{icon}</div>
       <p className="text-sm font-semibold ">{title}</p>
     </div>

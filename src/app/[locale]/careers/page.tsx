@@ -3,6 +3,7 @@ import { getLocale } from "next-intl/server";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { ButtonLink } from "@/components/ui/Button";
+import { InfoCard } from "@/components/ui/InfoCard";
 import { MarketingPageLayout } from "@/components/layout/MarketingPageLayout";
 
 export const metadata: Metadata = {
@@ -80,10 +81,7 @@ export default async function Page() {
             <p className="text-sm font-semibold ">{isEn ? "Open roles" : "Postes ouverts"}</p>
             <div className="mt-4 grid gap-3">
               {roles.map((r) => (
-                <div key={r.t} className="rounded-2xl border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950">
-                  <p className="text-sm font-semibold ">{r.t}</p>
-                  <p className="mt-1 text-sm text-zinc-600">{r.d}</p>
-                </div>
+                <InfoCard key={r.t} title={r.t} description={r.d} compact interactive />
               ))}
             </div>
             <div className="mt-5">

@@ -52,9 +52,9 @@ export async function HeroSection() {
           </div>
         </Container>
       </div>
-      <Container className="-mt-22 relative z-20">
+      <Container className="-mt-10 relative z-20">
         {/* Search */}
-        <div className="mt-10 rounded-3xl bg-white  shadow-lg">
+        <div className="rounded-3xl bg-white  shadow-lg">
           <SearchBar variant="auto" />
         </div>
       </Container>
