@@ -7,6 +7,8 @@
     "about": "À propos",
     "becomeHost": "Devenir hôte",
     "search": "Recherche",
+    "pricing": "Tarifs",
+    "messages": "Messages",
     "searchHint": "Destination · Dates · Voyageurs"
   },
   "userMenu": {
@@ -22,7 +24,8 @@
     "messages": "Messages",
     "notifications": "Notifications",
     "settings": "Paramètres",
-    "logout": "Déconnexion"
+    "logout": "Déconnexion",
+    "aria": "Menu utilisateur"
   },
   "hero": {
     "badge": "Séjours vérifiés · Hôtes de confiance · Paiements sécurisés",
@@ -166,6 +169,7 @@
   },
   "mobileMenu": {
     "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu",
     "account": "Compte",
     "login": "Connexion",
     "signup": "Inscription",

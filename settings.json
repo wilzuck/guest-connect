@@ -1,0 +1,8 @@
+{
+  "env": {
+    "ANTHROPIC_BASE_URL": "https://api.oneprovider.dev",
+    "ANTHROPIC_API_KEY": "sk-482786ea1317a591ba9775a131bec877a8d297b14c5261a151fa92fa863bf4e2",
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
+    "CLAUDE_CODE_ATTRIBUTION_HEADER": "0"
+  }
+}

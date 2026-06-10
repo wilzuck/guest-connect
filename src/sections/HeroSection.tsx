@@ -38,7 +38,7 @@ export async function HeroSection() {
 
         <Container className="relative z-10 pt-10 pb-12 lg:pt-16">
           <div className="max-w-3xl">
-            <Badge>
+            <Badge className="truncate">
               <ShieldCheck className="size-4 mr-0.5" /> {t("badge")}
             </Badge>
 
@@ -54,7 +54,7 @@ export async function HeroSection() {
       </div>
       <Container className="-mt-10 relative z-20">
         {/* Search */}
-        <div className="rounded-3xl bg-white  shadow-lg">
+        <div className="rounded-xl bg-white  shadow-lg">
           <SearchBar variant="auto" />
         </div>
       </Container>

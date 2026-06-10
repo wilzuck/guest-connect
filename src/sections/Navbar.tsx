@@ -83,12 +83,12 @@ export function Navbar() {
         </div>
 
         {/* Mobile : bouton recherche plein largeur (Airbnb-like) */}
-        <div className="flex flex-1 py-2 md:hidden">
+        <div className="flex flex-1 py-1 md:hidden">
           <ButtonLink
             href={`/${locale}/search`}
             variant="outline"
             size="md"
-            className="w-full justify-start gap-3 rounded-2xl border border-black/10 bg-white px-4 py-3 shadow-sm shadow-black/5 dark:bg-zinc-900 dark:shadow-black/30"
+            className="w-full justify-start gap-3 rounded-2xl border border-black/10 bg-white px-4 py-2 shadow-sm shadow-black/5 dark:bg-zinc-900 dark:shadow-black/30"
           >
             <SearchIcon className="h-4 w-4" />
             <div className="min-w-0 text-left">
@@ -110,16 +110,17 @@ export function Navbar() {
             <HostIcon className="h-4 w-4" />
             {t("becomeHost")}
           </ButtonLink>
-
-          <ButtonLink
+          <div className="my-2">
+            <ButtonLink
             href={`/${locale}/search`}
             variant="outline"
             size="sm"
-            className="rounded-full !hidden xl:!inline-flex"
+            className="rounded-full py-1 !hidden xl:!inline-flex"
           >
             <SearchIcon className="h-4 w-4" />
             {t("search")}
           </ButtonLink>
+          </div>
           <div className="hidden md:block">
             <UserMenu />
           </div>

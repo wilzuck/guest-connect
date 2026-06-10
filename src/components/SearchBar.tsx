@@ -68,9 +68,9 @@ export function SearchBar({
         className={[
           // Compact (hero) : transparent premium, pas de shadow
           variant === "compact"
-            ? "rounded-2xl border border-black/10 bg-white/80 p-4 backdrop-blur"
+            ? "rounded-xl border border-black/10 p-2"
             : // Full width : pas de shadow, radius plus petit
-              "rounded-2xl border border-black/10 bg-white/80 p-2 backdrop-blur-sm dark:border-black/10 dark:bg-zinc-900/80",
+              "rounded-xl border border-black/10 bg-white/80 p-4 lg:p-3 dark:border-black/10",
         ].join(" ")}
       >
         {/* Desktop */}

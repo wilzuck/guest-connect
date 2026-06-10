@@ -65,8 +65,8 @@ export default async function Page({ searchParams }: PageProps) {
   const resultPlace = destination || "GuestConnect";
 
   return (
-    <div className="bg-zinc-100 text-zinc-950 dark:bg-black dark:text-white">
-      <section className="border-b border-black/10 bg-zinc-50 dark:bg-zinc-950">
+    <div className="bg-zinc-100  text-zinc-950 dark:bg-black dark:text-white">
+      <section className="border-b border-black/10 bg-zinc-10__dark:bg-zinc-950">
         <Container className="py-8 sm:py-10">
           <div className="overflow-hidden rounded-[28px] border border-black/10 bg-white shadow-sm shadow-black/5 dark:bg-zinc-950 dark:shadow-black/30">
             <div className="grid grid-cols-2 border-b border-black/10 sm:flex sm:w-fit sm:border-r">

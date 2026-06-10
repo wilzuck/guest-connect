@@ -7,6 +7,8 @@
     "about": "About",
     "becomeHost": "Become a host",
     "search": "Search",
+    "pricing": "Pricing",
+    "messages": "Messages",
     "searchHint": "Destination · Dates · Guests"
   },
   "userMenu": {
@@ -22,7 +24,8 @@
     "messages": "Messages",
     "notifications": "Notifications",
     "settings": "Settings",
-    "logout": "Log out"
+    "logout": "Log out",
+    "aria": "User menu"
   },
   "hero": {
     "badge": "Verified stays · Trusted hosts · Secure payments",
@@ -166,6 +169,7 @@
   },
   "mobileMenu": {
     "openMenu": "Open menu",
+    "closeMenu": "Close menu",
     "account": "Account",
     "login": "Log in",
     "signup": "Sign up",
