@@ -60,38 +60,37 @@ export async function HeroSection() {
       </Container>
       <Container className="mt-8">
         {/* Trust indicators */}
-        {/* Trust indicators */}
-<div className="grid grid-cols-2 gap-4 rounded-2xl p-5 backdrop-blur-md lg:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] lg:items-center">
-  <TrustItem
-    icon={<ShieldCheck className="size-6" />}
-    title="Paiement sécurisé"
-    subtitle="Transactions protégées"
-  />
+        <div className="grid grid-cols-2 gap-4 rounded-2xl p-5 backdrop-blur-md lg:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] lg:items-center">
+          <TrustItem
+            icon={<ShieldCheck className="size-6" />}
+            title={t("trust.securePaymentTitle")}
+            subtitle={t("trust.securePaymentSubtitle")}
+          />
 
-  <Divider className="hidden lg:block" />
+          <Divider className="hidden lg:block" />
 
-  <TrustItem
-    icon={<RefreshCcw className="size-6" />}
-    title="Annulation flexible"
-    subtitle="Conditions claires"
-  />
+          <TrustItem
+            icon={<RefreshCcw className="size-6" />}
+            title={t("trust.flexibleTitle")}
+            subtitle={t("trust.flexibleSubtitle")}
+          />
 
-  <Divider className="hidden lg:block" />
+          <Divider className="hidden lg:block" />
 
-  <TrustItem
-    icon={<BadgeCheck className="size-6" />}
-    title="Hôtes vérifiés"
-    subtitle="Profils contrôlés"
-  />
+          <TrustItem
+            icon={<BadgeCheck className="size-6" />}
+            title={t("trust.verifiedTitle")}
+            subtitle={t("trust.verifiedSubtitle")}
+          />
 
-  <Divider className="hidden lg:block" />
+          <Divider className="hidden lg:block" />
 
-  <TrustItem
-    icon={<Star className="size-6" />}
-    title="Avis 5 étoiles"
-    subtitle="+1200 voyageurs"
-  />
-</div>
+          <TrustItem
+            icon={<Star className="size-6" />}
+            title={t("trust.ratingTitle")}
+            subtitle={t("trust.ratingSubtitle")}
+          />
+        </div>
       </Container>
       {/* Carousel */}
       <Container className=" pb-10 relative z-20">
@@ -120,8 +119,8 @@ function TrustItem({
       <div className="mt-1 shrink-0">{icon}</div>
 
       <div className="min-w-0">
-        <p className="text-sm font-medium leading-tight">{title}</p>
-        <p className="mt-1 text-xs leading-tight text-black/70">{subtitle}</p>
+        <p className="text-sm font-medium leading-tight text-black dark:text-white">{title}</p>
+        <p className="mt-1 text-xs leading-tight text-black/70 dark:text-white/70">{subtitle}</p>
       </div>
     </div>
   );

@@ -47,10 +47,14 @@ export function Navbar() {
   if (hide) return null;
 
   const links = [
+    { label: t("home"), href: `/${locale}` },
     { label: t("accommodations"), href: `/${locale}/stays` },
     { label: t("services"), href: `/${locale}/services` },
     { label: t("experiences"), href: `/${locale}/experiences` },
   ];
+
+  const isActive = (href: string) =>
+    href === `/${locale}` ? pathname === `/${locale}` : pathname.startsWith(href);
 
   return (
     <>
@@ -70,15 +74,24 @@ export function Navbar() {
         <div className="flex items-center gap-8">
           <Logo />
           <nav className="hidden items-center gap-6 md:flex">
-            {links.map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                className="text-sm font-medium text-zinc-600 transition-colors hover:text-black dark:text-zinc-300 dark:hover:text-white"
-              >
-                {l.label}
-              </Link>
-            ))}
+            {links.map((l) => {
+              const active = isActive(l.href);
+              return (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  aria-current={active ? "page" : undefined}
+                  className={[
+                    "text-sm font-medium transition-colors",
+                    active
+                      ? "text-black dark:text-white"
+                      : "text-zinc-600 hover:text-black dark:text-zinc-300 dark:hover:text-white",
+                  ].join(" ")}
+                >
+                  {l.label}
+                </Link>
+              );
+            })}
           </nav>
         </div>
 

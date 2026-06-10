@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/Dialog";
 import { Logo } from "@/components/Logo";
 import {
+  BedDouble,
   BriefcaseBusiness,
   CalendarDays,
   ChevronRight,
@@ -55,7 +56,8 @@ export function MobileMenu() {
   const labels = getMobileSpaceLabels(locale);
 
   const links = [
-    { label: t("accommodations"), href: `/${locale}/stays`, icon: Home },
+    { label: t("home"), href: `/${locale}`, icon: Home },
+    { label: t("accommodations"), href: `/${locale}/stays`, icon: BedDouble },
     { label: t("services"), href: `/${locale}/services`, icon: BriefcaseBusiness },
     { label: t("experiences"), href: `/${locale}/experiences`, icon: Sparkles },
     { label: t("pricing"), href: `/${locale}/pricing`, icon: CreditCard },

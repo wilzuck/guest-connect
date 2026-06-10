@@ -4,6 +4,8 @@ export * from "@/sections/SocialProofSection";
 export * from "@/sections/FeaturesSection";
 export * from "@/sections/CalendarToolsSection";
 export * from "@/sections/ListingsPreviewSection";
+export * from "@/sections/HomeListingsExplorer";
+export * from "@/sections/DestinationsSection";
 export * from "@/sections/HowItWorksSection";
 export * from "@/sections/BecomeHostSection";
 export * from "@/sections/TestimonialsSection";

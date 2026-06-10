@@ -1,21 +1,14 @@
 import { Container } from "@/components/ui/Container";
 import { partnerLogos } from "@/lib/mock/landing";
-import { getLocale } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 
 export async function SocialProofSection() {
-  const locale = await getLocale();
-  const stats =
-    locale === "en"
-      ? [
-          { value: "12k+", label: "Hosts" },
-          { value: "240k+", label: "Bookings" },
-          { value: "80+", label: "Countries" },
-        ]
-      : [
-          { value: "12k+", label: "Hôtes" },
-          { value: "240k+", label: "Réservations" },
-          { value: "80+", label: "Pays" },
-        ];
+  const t = await getTranslations("homeSocialProof");
+  const stats = [
+    { value: "12k+", label: t("hostsLabel") },
+    { value: "240k+", label: t("bookingsLabel") },
+    { value: "80+", label: t("countriesLabel") },
+  ];
 
   return (
     <section className="border-y border-black/5 bg-white dark:border-black/10 dark:bg-black">
@@ -23,9 +16,7 @@ export async function SocialProofSection() {
         <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
           <div className="lg:col-span-7">
             <p className="text-sm font-medium text-zinc-600 dark:text-zinc-300">
-              {locale === "en"
-                ? "The reliability travelers expect — and the tools hosts need."
-                : "La fiabilité attendue par les voyageurs — et les outils dont les hôtes ont besoin."}
+              {t("tagline")}
             </p>
             <div className="mt-5 flex flex-wrap items-center gap-3">
               {partnerLogos.map((name) => (

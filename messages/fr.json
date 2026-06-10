@@ -1,5 +1,6 @@
 {
   "nav": {
+    "home": "Accueil",
     "accommodations": "Hébergements",
     "services": "Services",
     "experiences": "Expériences",
@@ -39,6 +40,16 @@
       "subtitle": "Sélectionnées · Vérifiées · Fiables",
       "live": "Live",
       "alt": "Maison d’hôtes premium — GuestConnect"
+    },
+    "trust": {
+      "securePaymentTitle": "Paiement sécurisé",
+      "securePaymentSubtitle": "Transactions protégées",
+      "flexibleTitle": "Annulation flexible",
+      "flexibleSubtitle": "Conditions claires",
+      "verifiedTitle": "Hôtes vérifiés",
+      "verifiedSubtitle": "Profils contrôlés",
+      "ratingTitle": "Avis 5 étoiles",
+      "ratingSubtitle": "+1200 voyageurs"
     }
   },
   "footer": {
@@ -185,6 +196,76 @@
     "title": "Des maisons d’hôtes sélectionnées pour vous",
     "description": "Une sélection (aperçu) — prête à être alimentée par votre backend /api/listings.",
     "viewAll": "Voir toutes les annonces"
+  },
+  "homeCategories": {
+    "label": "Filtrer par catégorie",
+    "all": "Tout",
+    "beach": "Bord de mer",
+    "city": "Centre-ville",
+    "culture": "Patrimoine & culture",
+    "nature": "Nature",
+    "business": "Business",
+    "empty": "Aucun logement dans cette catégorie pour le moment."
+  },
+  "homeDestinations": {
+    "eyebrow": "Destinations",
+    "title": "Destinations populaires",
+    "description": "Explorez les villes les plus recherchées et lancez votre recherche en un clic.",
+    "viewAll": "Voir toutes les destinations",
+    "stays": "{count} logement(s)",
+    "exploreCity": "Explorer {city}"
+  },
+  "homeHowItWorks": {
+    "eyebrow": "Comment ça marche",
+    "title": "Un parcours simple, vraiment premium",
+    "description": "UX orientée conversion, structure claire et finition SaaS moderne — de bout en bout.",
+    "step1Title": "Rechercher",
+    "step1Desc": "Filtrez par destination, dates et voyageurs pour trouver rapidement le bon séjour.",
+    "step2Title": "Réserver",
+    "step2Desc": "Paiement sécurisé, conditions claires et confirmation instantanée.",
+    "step3Title": "Séjourner / Héberger",
+    "step3Desc": "Les voyageurs profitent — les hôtes disposent d’un dashboard premium et d’outils modernes."
+  },
+  "homeFeatures": {
+    "eyebrow": "Fonctionnalités",
+    "title": "Tout ce qu’il faut pour réserver — et pour héberger — avec élégance",
+    "description": "Une expérience premium, orientée conversion, inspirée des meilleurs marketplaces et des SaaS modernes.",
+    "easyBookingTitle": "Réservation simple",
+    "easyBookingDesc": "Un parcours fluide pensé pour convertir : rechercher, comparer, réserver — terminé.",
+    "verifiedTitle": "Maisons d’hôtes vérifiées",
+    "verifiedDesc": "Contrôles qualité et intégrité des avis pour réserver en toute confiance.",
+    "paymentsTitle": "Paiements sécurisés",
+    "paymentsDesc": "Des paiements sûrs, conformes et pensés pour l’international.",
+    "availabilityTitle": "Disponibilité mondiale",
+    "availabilityDesc": "Des maisons d’hôtes dans les meilleures destinations — sélectionnées et faciles à explorer.",
+    "dashboardTitle": "Dashboard hôte",
+    "dashboardDesc": "Gérez annonces, prix et disponibilité depuis un espace de contrôle élégant.",
+    "supportTitle": "Support 24/7",
+    "supportDesc": "Un support réactif et humain, pour voyageurs comme hôtes — à toute heure."
+  },
+  "homeBecomeHost": {
+    "eyebrow": "Devenir hôte",
+    "title": "Faites de votre établissement une annonce performante",
+    "description": "GuestConnect donne aux hôtes un dashboard moderne, des paiements sécurisés et une visibilité auprès de voyageurs qui recherchent des maisons d’hôtes — pas des locations génériques.",
+    "ctaPrimary": "Ajouter mon établissement",
+    "ctaSecondary": "Voir les tarifs",
+    "pricingTitle": "Tarification intelligente",
+    "pricingDesc": "Prix à la nuit, règles saisonnières et séjours minimum.",
+    "occupancyTitle": "Suivi d’occupation",
+    "occupancyDesc": "Performance et conversion en un coup d’œil.",
+    "messagingTitle": "Messagerie",
+    "messagingDesc": "Communiquez avec vos voyageurs depuis une boîte de réception unique."
+  },
+  "homeTestimonials": {
+    "eyebrow": "Avis",
+    "title": "Adoré par les voyageurs. Approuvé par les hôtes.",
+    "description": "Une expérience premium se construit avec des signaux de confiance et de vrais retours."
+  },
+  "homeSocialProof": {
+    "tagline": "La fiabilité attendue par les voyageurs — et les outils dont les hôtes ont besoin.",
+    "hostsLabel": "Hôtes",
+    "bookingsLabel": "Réservations",
+    "countriesLabel": "Pays"
   },
   "localeSwitcher": {
     "ariaFr": "Passer le site en français",

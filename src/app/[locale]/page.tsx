@@ -1,33 +1,41 @@
 import {
   BecomeHostSection,
   CalendarToolsSection,
+  DestinationsSection,
   FeaturesSection,
   HeroSection,
+  HomeListingsExplorer,
   HowItWorksSection,
-  ListingsPreviewSection,
   SocialProofSection,
   TestimonialsSection,
 } from "@/sections";
-import { listingPreviewMock } from "@/lib/mock/landing";
+import { africaListings } from "@/lib/mock/africa-listings";
 import { getListings } from "@/lib/api/listings";
-import type { Listing } from "@/types/listing";
+import type { HomeListing } from "@/sections/HomeListingsExplorer";
 
 export default async function Home() {
-  let listings: Listing[] = listingPreviewMock;
+  // Données enrichies (interests, city) pour le filtrage par catégorie côté client.
+  let listings: HomeListing[] = africaListings;
 
   try {
     const data = await getListings();
-    if (Array.isArray(data) && data.length > 0) listings = data.slice(0, 4);
+    if (Array.isArray(data) && data.length > 0) {
+      // L'API peut ne pas fournir "interests" : on conserve africaListings comme base
+      // si les données distantes n'ont pas la métadonnée nécessaire au filtrage.
+      const hasInterests = data.some((l) => Array.isArray((l as HomeListing).interests));
+      if (hasInterests) listings = data as HomeListing[];
+    }
   } catch {
-    // fallback: mock data
+    // fallback: données mock enrichies
   }
 
   return (
     <>
       <HeroSection />
       <SocialProofSection />
-      {/* Top logements recherchés */}
-      <ListingsPreviewSection listings={listings} />
+      {/* Logements filtrables par catégorie */}
+      <HomeListingsExplorer listings={listings} />
+      <DestinationsSection />
       <HowItWorksSection />
       <CalendarToolsSection />
       <FeaturesSection />

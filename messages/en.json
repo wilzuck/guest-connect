@@ -1,5 +1,6 @@
 {
   "nav": {
+    "home": "Home",
     "accommodations": "Stays",
     "services": "Services",
     "experiences": "Experiences",
@@ -39,6 +40,16 @@
       "subtitle": "Curated · Verified · Reliable",
       "live": "Live",
       "alt": "Premium guest house — GuestConnect"
+    },
+    "trust": {
+      "securePaymentTitle": "Secure payment",
+      "securePaymentSubtitle": "Protected transactions",
+      "flexibleTitle": "Flexible cancellation",
+      "flexibleSubtitle": "Clear policies",
+      "verifiedTitle": "Verified hosts",
+      "verifiedSubtitle": "Vetted profiles",
+      "ratingTitle": "5-star reviews",
+      "ratingSubtitle": "+1200 travelers"
     }
   },
   "footer": {
@@ -185,6 +196,76 @@
     "title": "Handpicked stays you'll love",
     "description": "A curated preview — ready to be powered by your /api/listings backend.",
     "viewAll": "View all listings"
+  },
+  "homeCategories": {
+    "label": "Filter by category",
+    "all": "All",
+    "beach": "Beachfront",
+    "city": "City center",
+    "culture": "Heritage & culture",
+    "nature": "Nature",
+    "business": "Business",
+    "empty": "No stays in this category yet."
+  },
+  "homeDestinations": {
+    "eyebrow": "Destinations",
+    "title": "Popular destinations",
+    "description": "Browse the most searched cities and start your search in one click.",
+    "viewAll": "View all destinations",
+    "stays": "{count} stay(s)",
+    "exploreCity": "Explore {city}"
+  },
+  "homeHowItWorks": {
+    "eyebrow": "How it works",
+    "title": "A simple flow that feels premium",
+    "description": "Conversion-focused UX, clear structure and modern SaaS polish — end to end.",
+    "step1Title": "Search",
+    "step1Desc": "Filter by destination, dates and guests to find the right stay fast.",
+    "step2Title": "Book",
+    "step2Desc": "Secure payment, clear policies, instant confirmation.",
+    "step3Title": "Stay / Host",
+    "step3Desc": "Travelers enjoy the stay — hosts get a premium dashboard and tools."
+  },
+  "homeFeatures": {
+    "eyebrow": "Features",
+    "title": "Everything you need to book — and to host — beautifully",
+    "description": "A premium experience inspired by the best travel marketplaces and modern SaaS design.",
+    "easyBookingTitle": "Easy booking",
+    "easyBookingDesc": "A frictionless flow: search, compare, book — done.",
+    "verifiedTitle": "Verified stays",
+    "verifiedDesc": "Quality checks and review integrity so you can book with confidence.",
+    "paymentsTitle": "Secure payments",
+    "paymentsDesc": "Safe, compliant payments designed for international travel.",
+    "availabilityTitle": "Global availability",
+    "availabilityDesc": "Handpicked stays across key destinations — easy to explore.",
+    "dashboardTitle": "Host dashboard",
+    "dashboardDesc": "Manage listings, pricing and availability with clarity.",
+    "supportTitle": "24/7 support",
+    "supportDesc": "Fast, human support for travelers and hosts — anytime."
+  },
+  "homeBecomeHost": {
+    "eyebrow": "Become a host",
+    "title": "Turn your place into a high-performing listing",
+    "description": "GuestConnect gives hosts a modern dashboard, secure payouts and visibility to travelers looking for curated stays.",
+    "ctaPrimary": "List my property",
+    "ctaSecondary": "See pricing",
+    "pricingTitle": "Smart pricing",
+    "pricingDesc": "Nightly rates, seasonal rules and minimum stays.",
+    "occupancyTitle": "Occupancy insights",
+    "occupancyDesc": "Performance and conversion at a glance.",
+    "messagingTitle": "Messaging",
+    "messagingDesc": "Communicate with guests from one clean inbox."
+  },
+  "homeTestimonials": {
+    "eyebrow": "Reviews",
+    "title": "Loved by travelers. Trusted by hosts.",
+    "description": "A premium experience is built on trust signals and real feedback."
+  },
+  "homeSocialProof": {
+    "tagline": "The reliability travelers expect — and the tools hosts need.",
+    "hostsLabel": "Hosts",
+    "bookingsLabel": "Bookings",
+    "countriesLabel": "Countries"
   },
   "localeSwitcher": {
     "ariaFr": "Switch site to French",
