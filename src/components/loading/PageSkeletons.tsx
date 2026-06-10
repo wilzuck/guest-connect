@@ -76,7 +76,7 @@ export function DashboardLoadingSkeleton() {
 
 export function AdminLoadingSkeleton() {
   return (
-    <div className="grid h-[calc(100dvh-4rem)] min-h-[680px] grid-cols-1 bg-white dark:bg-black lg:grid-cols-[256px_minmax(0,1fr)]">
+    <div className="grid min-[calc(100dvh-4rem)]  grid-cols-1 bg-white dark:bg-black lg:grid-cols-[256px_minmax(0,1fr)]">
       <aside className="hidden border-r border-black/5  dark:border-black/10 bg-[#F7F7F8] p-3 dark:border-zinc-800 dark:bg-zinc-950 lg:block">
         <SkeletonBlock className="h-10 rounded-lg bg-zinc-200" />
         <div className="mt-6 grid gap-2">

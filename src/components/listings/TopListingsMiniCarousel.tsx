@@ -6,6 +6,8 @@ import { useEffect, useRef, useState } from "react";
 import { Card } from "@/components/ui/Card";
 import type { Listing } from "@/types/listing";
 import { cn } from "@/lib/utils/cn";
+import { Button } from "@/components/ui/Button";
+import { ButtonLink } from "@/components/ui/Button";
 
 type TopListingsMiniCarouselProps = {
   locale: string;
@@ -51,13 +53,13 @@ export function TopListingsMiniCarousel({ locale, items, title }: TopListingsMin
   }
 
   return (
-    <div className="relative mt-6" style={{ contain: "layout paint" }}>
+    <div className="relative lg:pt-6 lg:pb-6 py-4" style={{ contain: "layout paint" }}>
       
       {/* Container indépendant (évite les reflows sur le hero) */}
-      <div className="relative -mx-[15px] px-[15px]">
+      <div className="relative  -mx-[15px] px-[15px]">
         
         {/* Arrows (comme la barre de filtres Explore) */}
-        <button
+        <Button
           type="button"
           onClick={() => scrollBy(-320)}
           className={cn(
@@ -68,8 +70,8 @@ export function TopListingsMiniCarousel({ locale, items, title }: TopListingsMin
           title="Défiler à gauche"
         >
           <ChevronLeft className="h-5 w-5 text-zinc-700 shadow-xl" />
-        </button>
-        <button
+        </Button>
+        <Button
           type="button"
           onClick={() => scrollBy(320)}
           className={cn(
@@ -82,18 +84,19 @@ export function TopListingsMiniCarousel({ locale, items, title }: TopListingsMin
           title="Défiler à droite"
         >
           <ChevronRight className="h-5 w-5 text-zinc-700 shadow-xl" />
-        </button>
+        </Button>
 
         <div className="flex items-center justify-between">
         <h2 className="text-md font-semibold">{title}</h2>
 
-        <Link
+        <ButtonLink
           href={`/${locale}/stays`}
+          variant="outline"
           className="flex items-center gap-2 text-sm font-medium text-zinc-700 transition hover:text-black"
         >
           Voir tout
           <ChevronRight className="h-4 w-4" />
-        </Link>
+        </ButtonLink>
       </div>
 
         <div
@@ -140,9 +143,9 @@ export function TopListingsMiniCarousel({ locale, items, title }: TopListingsMin
                   />
                 </div>
                 <div className="py-2">
-                  <p className="truncate text-xs font-semibold  dark:text-white">{l.title}</p>
+                  <p className="truncate text-sm font-semibold  dark:text-white">{l.title}</p>
                  <div className="flex items-center justify-between gap-2">
-                  <p className="truncate text-xs text-zinc-600 dark:text-zinc-400">{l.location}</p>
+                  <p className="truncate text-sm text-zinc-600 dark:text-zinc-400">{l.location}</p>
                   <div className="flex items-center">
                     <span className="text-sm font-bold text-black dark:text-white">{l.pricePerNight} {String(l.currency ?? "€")}</span>
                     <span className="text-xs text-zinc-600 dark:text-zinc-400">/nuit</span>

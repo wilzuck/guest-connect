@@ -112,7 +112,7 @@ export function MessagesInbox({
     return (
       <section
         className={cn(
-          "grid h-[calc(100dvh-4rem)] min-h-[680px] place-items-center border-b border-black/10 bg-white dark:border-zinc-800 dark:bg-black",
+          "grid min-[calc(100dvh-4rem)]  place-items-center border-b border-black/10 bg-white dark:border-zinc-800 dark:bg-black",
           withTopBorder ? "border-t" : "border-t-0",
           withBottomBorder ? "border-b" : "border-b-0",
           withLeftBorder ? "border-l" : "border-l-0",
@@ -131,7 +131,7 @@ export function MessagesInbox({
     return (
       <section
         className={cn(
-          "grid h-[calc(100dvh-4rem)] min-h-[680px] place-items-center border-black/10 bg-white dark:border-zinc-800 dark:bg-black",
+          "grid min-[calc(100dvh-4rem)]  place-items-center border-black/10 bg-white dark:border-zinc-800 dark:bg-black",
            withTopBorder ? "border-t" : "border-t-0",
           withBottomBorder ? "border-b" : "border-b-0",
           withLeftBorder ? "border-l" : "border-l-0",
@@ -213,7 +213,7 @@ export function MessagesInbox({
   return (
     <section
       className={cn(
-        "h-[calc(100dvh-4rem)] min-h-[680px] overflow-hidden border border-black/5  dark:border-black/10 bg-white dark:border-zinc-800 dark:bg-black",
+        "min-[calc(100dvh-4rem)]  overflow-hidden border border-black/5  dark:border-black/10 bg-white dark:border-zinc-800 dark:bg-black",
         withTopBorder ? "border-t" : "border-t-0",
         withBottomBorder ? "border-b" : "border-b-0",
         withLeftBorder ? "border-l" : "border-l-0",

@@ -72,8 +72,7 @@
     "tagline": "GuestConnect est une marketplace premium de maisons d’hôtes — pensée pour la confiance, la clarté et la conversion.",
     "copyright": "Tous droits réservés.",
     "madeFor": "Conçu pour les marketplaces de voyage modernes."
-  }
-  ,
+  },
   "pricingPage": {
     "eyebrow": "Tarifs",
     "title": "Des offres pensées pour évoluer",
@@ -141,8 +140,7 @@
       "passwordMismatch": "Les mots de passe ne correspondent pas.",
       "acceptTerms": "Merci d’accepter les conditions pour continuer."
     }
-  }
-  ,
+  },
   "listingCard": {
     "perNight": "par nuit",
     "perNightShort": "/nuit",
@@ -213,7 +211,9 @@
     "description": "Explorez les villes les plus recherchées et lancez votre recherche en un clic.",
     "viewAll": "Voir toutes les destinations",
     "stays": "{count} logement(s)",
-    "exploreCity": "Explorer {city}"
+    "exploreCity": "Explorer {city}",
+    "scrollLeft": "Défiler à gauche",
+    "scrollRight": "Défiler à droite"
   },
   "homeHowItWorks": {
     "eyebrow": "Comment ça marche",
@@ -296,8 +296,7 @@
       "subtitle": "Découvrez des maisons d’hôtes, hôtels et séjours uniques partout en Afrique",
       "alt": "Maison d’hôtes premium"
     }
-  }
-  ,
+  },
   "datePicker": {
     "clear": "Effacer",
     "done": "Terminer",

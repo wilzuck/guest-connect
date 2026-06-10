@@ -72,8 +72,7 @@
     "tagline": "GuestConnect is a premium marketplace for guest houses—built for trust, clarity, and conversion.",
     "copyright": "All rights reserved.",
     "madeFor": "Made for modern travel marketplaces."
-  }
-  ,
+  },
   "pricingPage": {
     "eyebrow": "Pricing",
     "title": "Plans that scale with you",
@@ -141,8 +140,7 @@
       "passwordMismatch": "Passwords do not match.",
       "acceptTerms": "Please accept the terms to continue."
     }
-  }
-  ,
+  },
   "listingCard": {
     "perNight": "per night",
     "perNightShort": "/night",
@@ -213,7 +211,9 @@
     "description": "Browse the most searched cities and start your search in one click.",
     "viewAll": "View all destinations",
     "stays": "{count} stay(s)",
-    "exploreCity": "Explore {city}"
+    "exploreCity": "Explore {city}",
+    "scrollLeft": "Scroll left",
+    "scrollRight": "Scroll right"
   },
   "homeHowItWorks": {
     "eyebrow": "How it works",
@@ -296,8 +296,7 @@
       "subtitle": "Discover guest houses, hotels and unique stays across Africa",
       "alt": "Premium guest house"
     }
-  }
-  ,
+  },
   "datePicker": {
     "clear": "Clear",
     "done": "Done",

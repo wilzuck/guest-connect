@@ -247,6 +247,29 @@ export const africaListings: ListingWithMeta[] = [
       "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=2000&q=80",
     ],
     interests: ["Centre-ville", "Nature"],
+  },
+  {
+    id: "tgo-lome-plage-11",
+    title: "Lomé — villa bord de plage",
+    location: "Lomé, Togo",
+    city: "Lomé",
+    country: "Togo",
+    pricePerNight: 58,
+    currency: "EUR",
+    rating: 4.81,
+    reviewCount: 167,
+    imageUrl:
+      "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1600&q=80",
+    images: [
+      "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=2000&q=80",
+      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=2000&q=80",
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=2000&q=80",
+      "https://images.unsplash.com/photo-1501183638710-841dd1904471?auto=format&fit=crop&w=2000&q=80",
+      "https://images.unsplash.com/photo-1554995207-c18c203602cb?auto=format&fit=crop&w=2000&q=80",
+      "https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=2000&q=80",
+      "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=2000&q=80",
+    ],
+    interests: ["Bord de mer", "Centre-ville"],
   }
 ];
 

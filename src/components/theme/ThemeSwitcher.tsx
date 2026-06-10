@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils/cn";
 
 const themes = [
   { value: "light", icon: Sun },
-  { value: "system", icon: Monitor },
+ // { value: "system", icon: Monitor },
   { value: "dark", icon: Moon },
 ] as const;
 
@@ -41,7 +41,7 @@ export function ThemeSwitcher({ className }: { className?: string }) {
             className={cn(
               "inline-flex h-7 items-center gap-1.5 rounded-full px-2.5 text-xs font-semibold transition",
               active
-                ? "bg-black text-white dark:bg-white dark:text-black"
+                ? "bg-black/90 border border-black/10 text-white dark:bg-white dark:text-black"
                 : "text-zinc-600 hover:text-black dark:text-zinc-400 dark:hover:text-white",
             )}
             aria-pressed={active}

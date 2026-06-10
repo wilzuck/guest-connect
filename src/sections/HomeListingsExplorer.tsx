@@ -2,7 +2,7 @@
 
 import { useMemo, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { Building2, Landmark, Leaf, Sparkles, Trees, Waves } from "lucide-react";
+import { Building2, ChevronRight, Landmark, Leaf, Sparkles, Trees, Waves } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
@@ -46,7 +46,7 @@ export function HomeListingsExplorer({ listings }: HomeListingsExplorerProps) {
   }, [active, listings]);
 
   return (
-    <section id="listings">
+    <section id="listings" className="border-t border-black/5 dark:border-white/10 dark:bg-zinc-950 dark:shadow-black/30 dark:focus-visible:ring-white dark:focus-visible:ring-offset-black">
       <Container className="py-16 sm:py-20">
         <div className="text-left">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 dark:text-white/80">
@@ -58,7 +58,7 @@ export function HomeListingsExplorer({ listings }: HomeListingsExplorerProps) {
             </h2>
             <div className="flex justify-center sm:justify-end">
               <ButtonLink href={`/${locale}/stays`} variant="outline" size="md">
-                {t("viewAll")}
+                {t("viewAll")} <ChevronRight className="h-4 w-4" />
               </ButtonLink>
             </div>
           </div>
