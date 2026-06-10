@@ -46,7 +46,7 @@ export function HomeListingsExplorer({ listings }: HomeListingsExplorerProps) {
   }, [active, listings]);
 
   return (
-    <section id="listings" className="border-t border-black/5 dark:border-white/10 dark:bg-zinc-950 dark:shadow-black/30 dark:focus-visible:ring-white dark:focus-visible:ring-offset-black">
+    <section id="listings" className=" dark:bg-zinc-950 dark:shadow-black/30 dark:focus-visible:ring-white dark:focus-visible:ring-offset-black">
       <Container className="py-16 sm:py-20">
         <div className="text-left">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 dark:text-white/80">

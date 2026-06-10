@@ -7,7 +7,7 @@ type DividerProps = {
 
 export default function Divider({
   className,
-  vertical = false,
+  vertical = true,
 }: DividerProps) {
   return (
     <div
@@ -18,6 +18,6 @@ export default function Divider({
           : "h-px w-full bg-zinc-200 dark:bg-zinc-800",
         className,
       )}
-    />
+    ></div>
   );
 }

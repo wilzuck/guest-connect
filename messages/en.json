@@ -518,6 +518,12 @@
     "goToCard": "Go to card {index}",
     "perNight": "/ night"
   },
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next",
+    "goToPage": "Go to page {page}",
+    "page": "Page {page}"
+  },
   "destinationsPage": {
     "eyebrow": "Services",
     "title": "Where are you going?",

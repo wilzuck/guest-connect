@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { ButtonLink } from "@/components/ui/Button";
+import { Pagination } from "@/components/ui/Pagination";
 import { africaListings } from "@/lib/mock/africa-listings";
 import { ListingCard } from "@/components/listings/ListingCard";
 import { FilterSidebarButton } from "@/components/explore/FilterSidebarButton";
@@ -46,11 +47,14 @@ export const metadata: Metadata = {
 type SearchPageParams = ListingFilterParams & {
   checkIn?: string;
   checkOut?: string;
+  page?: string;
 };
 
 type PageProps = {
   searchParams: Promise<SearchPageParams>;
 };
+
+const RESULTS_PER_PAGE = 12;
 
 export default async function Page({ searchParams }: PageProps) {
   const locale = await getLocale();
@@ -59,6 +63,15 @@ export default async function Page({ searchParams }: PageProps) {
   const destination = sp.destination?.trim() ?? "";
   const guests = sp.guests ? Number(sp.guests) : 2;
   const filtered = applyListingFilters(africaListings, sp);
+  const totalPages = Math.max(1, Math.ceil(filtered.length / RESULTS_PER_PAGE));
+  const currentPage = Math.min(
+    Math.max(1, Number(sp.page) || 1),
+    totalPages,
+  );
+  const paginated = filtered.slice(
+    (currentPage - 1) * RESULTS_PER_PAGE,
+    currentPage * RESULTS_PER_PAGE,
+  );
   const filterSections = buildListingFilterSections({ locale, path: "search", params: sp });
   const filterControls = buildListingFilterControls(sp);
   const filterChips = buildListingChips(locale, "search", sp);
@@ -153,7 +166,7 @@ export default async function Page({ searchParams }: PageProps) {
               {filtered.length > 0 ? (
                 <>
                   <div className="grid gap-x-5 gap-y-7 sm:grid-cols-2">
-                    {filtered.map((listing) => (
+                    {paginated.map((listing) => (
                       <ListingCard
                         key={listing.id}
                         locale={locale}
@@ -164,7 +177,14 @@ export default async function Page({ searchParams }: PageProps) {
                       />
                     ))}
                   </div>
-                  <PaginationBar locale={locale} params={sp} />
+                  <Pagination
+                    className="mt-8"
+                    page={currentPage}
+                    totalPages={totalPages}
+                    hrefForPage={(page) =>
+                      searchHref(locale, sp, { page: page > 1 ? String(page) : undefined })
+                    }
+                  />
                 </>
               ) : (
                 <CatalogEmptyState
@@ -451,33 +471,6 @@ function FilterNumberRow({
           </Link>
         ))}
       </div>
-    </div>
-  );
-}
-
-function PaginationBar({ locale, params }: { locale: string; params: SearchPageParams }) {
-  return (
-    <div className="mt-8 flex items-center justify-between text-sm text-zinc-700 dark:text-zinc-300">
-      <div className="flex items-center gap-2">
-        {[1, 2, 3].map((page) => (
-          <Link
-            key={page}
-            href={searchHref(locale, params, {})}
-            className={cn(
-              "grid h-9 w-9 place-items-center rounded-full font-semibold transition",
-              page === 2 ? "bg-zinc-100 text-black dark:bg-white/10 dark:text-white" : "hover:bg-zinc-50 dark:hover:bg-zinc-900",
-            )}
-          >
-            {page}
-          </Link>
-        ))}
-        <span>...</span>
-        <span>10</span>
-      </div>
-      <button type="button" className="inline-flex items-center gap-2 font-semibold">
-        Show: 9
-        <ChevronDown className="h-4 w-4" />
-      </button>
     </div>
   );
 }

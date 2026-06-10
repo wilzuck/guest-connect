@@ -5,12 +5,7 @@ import { Container } from "@/components/ui/Container";
 import { getLocale, getTranslations } from "next-intl/server";
 import { TopSearchCarousel } from "@/components/listings/TopSearchCarousel";
 import { africaListings } from "@/lib/mock/africa-listings";
-import {
-  ShieldCheck,
-  RefreshCcw,
-  BadgeCheck,
-  Star,
-} from "lucide-react";
+import { ShieldCheck, RefreshCcw, BadgeCheck, Star } from "lucide-react";
 import Divider from "@/components/ui/Divider";
 
 export async function HeroSection() {
@@ -54,53 +49,64 @@ export async function HeroSection() {
       </div>
       <Container className="-mt-10 relative z-20">
         {/* Search */}
-        <div className="rounded-xl bg-white  shadow-lg">
+        <div className="rounded-xl shadow-lg">
           <SearchBar variant="auto" />
         </div>
       </Container>
-      <Container className="mt-8">
-        {/* Trust indicators */}
-        <div className="grid grid-cols-2 gap-4 rounded-2xl p-5 backdrop-blur-md lg:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] lg:items-center">
-          <TrustItem
-            icon={<ShieldCheck className="size-6" />}
-            title={t("trust.securePaymentTitle")}
-            subtitle={t("trust.securePaymentSubtitle")}
-          />
-
-          <Divider className="hidden lg:block" />
-
-          <TrustItem
-            icon={<RefreshCcw className="size-6" />}
-            title={t("trust.flexibleTitle")}
-            subtitle={t("trust.flexibleSubtitle")}
-          />
-
-          <Divider className="hidden lg:block" />
-
-          <TrustItem
-            icon={<BadgeCheck className="size-6" />}
-            title={t("trust.verifiedTitle")}
-            subtitle={t("trust.verifiedSubtitle")}
-          />
-
-          <Divider className="hidden lg:block" />
-
-          <TrustItem
-            icon={<Star className="size-6" />}
-            title={t("trust.ratingTitle")}
-            subtitle={t("trust.ratingSubtitle")}
-          />
-        </div>
-      </Container>
+      
       {/* Carousel */}
-      <Container className=" pb-10 relative z-20">
+      <Container className=" relative">
         <div className="" style={{ contain: "layout paint" }}>
           <TopSearchCarousel
             locale={locale}
-            items={africaListings.slice(0, 4)}
+            items={africaListings.slice(0, 6)}
           />
         </div>
       </Container>
+      <div className="border-y border-black/5 dark:border-white/10">
+        <Container className="py-6 lg:py-8">
+          {/* Trust indicators */}
+          <div className="grid grid-cols-2 gap-4 rounded-2xl lg:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] lg:items-center">
+            <div className="lg:justify-self-center">
+              <TrustItem
+                icon={<ShieldCheck className="size-6" />}
+                title={t("trust.securePaymentTitle")}
+                subtitle={t("trust.securePaymentSubtitle")}
+              />
+            </div>
+
+            <Divider className="hidden lg:block" vertical />
+
+            <div className="lg:justify-self-center">
+              <TrustItem
+                icon={<RefreshCcw className="size-6" />}
+                title={t("trust.flexibleTitle")}
+                subtitle={t("trust.flexibleSubtitle")}
+              />
+            </div>
+
+            <Divider className="hidden lg:block" vertical />
+
+            <div className="lg:justify-self-center">
+              <TrustItem
+                icon={<BadgeCheck className="size-6" />}
+                title={t("trust.verifiedTitle")}
+                subtitle={t("trust.verifiedSubtitle")}
+              />
+            </div>
+
+            <Divider className="hidden lg:block" vertical />
+
+            <div className="lg:justify-self-center">
+              <TrustItem
+                icon={<Star className="size-6" />}
+                title={t("trust.ratingTitle")}
+                subtitle={t("trust.ratingSubtitle")}
+              />
+            </div>
+          </div>
+        </Container>
+      </div>
     </section>
   );
 }

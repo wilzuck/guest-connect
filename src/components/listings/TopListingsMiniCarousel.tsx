@@ -61,42 +61,35 @@ export function TopListingsMiniCarousel({ locale, items, title }: TopListingsMin
         {/* Arrows (comme la barre de filtres Explore) */}
         <Button
           type="button"
+          variant="secondary"
+          size="icon"
           onClick={() => scrollBy(-320)}
           className={cn(
-            "absolute left-2 top-1/2 -translate-y-1/2 z-10 grid h-10 w-10 place-items-center rounded-full bg-white shadow-sm transition",
+            "absolute left-2 top-1/2 -translate-y-1/2 z-10 grid h-10 w-10 place-items-center rounded-full shadow-sm transition",
             canLeft ? "opacity-100" : "opacity-0 pointer-events-none",
           )}
           aria-label="Défiler à gauche"
           title="Défiler à gauche"
         >
-          <ChevronLeft className="h-5 w-5 text-zinc-700 shadow-xl" />
+          <ChevronLeft className="h-5 w-5  shadow-xl" />
         </Button>
         <Button
           type="button"
+          variant="secondary"
+          size="icon"
           onClick={() => scrollBy(320)}
-          className={cn(
-            ` absolute right-2 top-1/2 -translate-y-1/2 z-10 grid h-10 w-10 place-items-center rounded-full bg-white shadow-sm transition
-            `,
-            canRight ? "opacity-100" : "opacity-0 pointer-events-none",
-          )}
-
           aria-label="Défiler à droite"
           title="Défiler à droite"
+          className={cn(
+            "absolute right-2 top-1/2 z-10 -translate-y-1/2 shadow-sm transition hover:shadow-md place-items-center rounded-full bg-white",
+            canRight ? "opacity-100" : "opacity-0 pointer-events-none",
+          )}
         >
-          <ChevronRight className="h-5 w-5 text-zinc-700 shadow-xl" />
+          <ChevronRight className="h-5 w-5" />
         </Button>
 
         <div className="flex items-center justify-between">
         <h2 className="text-md font-semibold">{title}</h2>
-
-        <ButtonLink
-          href={`/${locale}/stays`}
-          variant="outline"
-          className="flex items-center gap-2 text-sm font-medium text-zinc-700 transition hover:text-black"
-        >
-          Voir tout
-          <ChevronRight className="h-4 w-4" />
-        </ButtonLink>
       </div>
 
         <div

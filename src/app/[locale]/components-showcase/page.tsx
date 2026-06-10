@@ -5,6 +5,8 @@ import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
 import { Select } from "@/components/ui/Select";
 import { FormField } from "@/components/ui/FormField";
+import { Text, Heading, Eyebrow } from "@/components/ui/Text";
+import { Pagination } from "@/components/ui/Pagination";
 
 export default function ComponentsShowcasePage() {
   return (
@@ -161,6 +163,54 @@ export default function ComponentsShowcasePage() {
               </p>
             </Card>
           </div>
+        </div>
+        {/* Typography */}
+        <div>
+          <h2 className="mb-4 text-2xl font-semibold ">Typography (Text / Heading)</h2>
+          <Card className="space-y-4 p-6">
+            <Eyebrow>Composants réutilisables</Eyebrow>
+            <Heading level={2}>Titres et textes sans couleurs manuelles</Heading>
+            <Text tone="muted">
+              Choisissez un <code>tone</code> sémantique (default, muted, subtle…) —
+              la couleur claire/sombre est gérée par le composant, plus besoin
+              d&apos;écrire <code>text-zinc-900 dark:text-white</code> partout.
+            </Text>
+            <div className="space-y-1">
+              <Text tone="default" weight="semibold">Tone default</Text>
+              <Text tone="muted">Tone muted (texte secondaire)</Text>
+              <Text tone="subtle" size="sm">Tone subtle (légendes, hints)</Text>
+              <Text tone="brand" weight="semibold">Tone brand</Text>
+              <Text tone="danger">Tone danger</Text>
+              <Text tone="success">Tone success</Text>
+            </div>
+          </Card>
+        </div>
+
+        {/* Pagination */}
+        <div>
+          <h2 className="mb-4 text-2xl font-semibold ">Pagination</h2>
+          <Card className="space-y-6 p-6">
+            <div>
+              <Text tone="subtle" size="sm" className="mb-3">
+                Avec chevrons Précédent / Suivant et ellipses
+              </Text>
+              <Pagination
+                page={3}
+                totalPages={10}
+                hrefForPage={(page) => `?page=${page}`}
+              />
+            </div>
+            <div>
+              <Text tone="subtle" size="sm" className="mb-3">
+                Peu de pages (sans ellipse)
+              </Text>
+              <Pagination
+                page={1}
+                totalPages={4}
+                hrefForPage={(page) => `?page=${page}`}
+              />
+            </div>
+          </Card>
         </div>
       </div>
     </Container>

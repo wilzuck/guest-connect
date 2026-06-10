@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils/cn";
 import type { ButtonHTMLAttributes, ComponentProps } from "react";
 
 type ButtonVariant = "primary" | "secondary" | "ghost" | "outline";
-type ButtonSize = "sm" | "md" | "lg";
+type ButtonSize = "sm" | "md" | "lg" | "icon";
 
 const base =
   "inline-flex w-fit max-w-full shrink-0 items-center justify-center gap-2 rounded-full whitespace-nowrap text-center font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20 disabled:pointer-events-none disabled:opacity-50 dark:focus-visible:ring-white/25";
@@ -18,10 +18,12 @@ const variants: Record<ButtonVariant, string> = {
   ghost:
     "bg-transparent text-black hover:bg-black/[0.04] dark:text-white dark:hover:bg-zinc-900/70",
 };
+
 const sizes: Record<ButtonSize, string> = {
   sm: "min-h-9 px-3.5 text-xs sm:px-4 sm:text-sm",
   md: "min-h-10 px-4 text-sm sm:min-h-11 sm:px-5",
   lg: "min-h-11 px-5 text-sm sm:min-h-12 sm:px-6 sm:text-base",
+  icon: "h-10 w-10 min-h-0 min-w-10 p-0",
 };
 
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {

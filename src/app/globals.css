@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+/*
+ * Dark mode piloté par la classe `.dark` (next-themes, attribute="class").
+ * Sans ceci, Tailwind v4 mappe `dark:` sur `@media (prefers-color-scheme: dark)`,
+ * donc le toggle de thème n'a aucun effet quand l'OS est en clair.
+ */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* Typo globale (headings premium) */
 h1,
 h2,
@@ -121,6 +128,15 @@ body {
   }
 }
 
+@keyframes gc-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .gc-anim-slide-in-right {
   animation: gc-slide-in-right 160ms ease-out;
 }
@@ -129,4 +145,7 @@ body {
 }
 .gc-anim-fade-out {
   animation: gc-fade-out 120ms ease-out;
+}
+.gc-anim-fade-in {
+  animation: gc-fade-in 280ms ease-out;
 }

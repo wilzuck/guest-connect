@@ -16,6 +16,7 @@ export { Dialog } from "./Dialog";
 export { FieldLabel } from "./FieldLabel";
 export { InfoCard } from "./InfoCard";
 export { TextDivider } from "./TextDivider";
+export { Text, Heading, Eyebrow } from "./Text";
 
 // Composants formulaire
 export { FormField } from "./FormField";
@@ -28,6 +29,7 @@ export { Calendar } from "./Calendar";
 export { DatePicker } from "./DatePicker";
 export { DateRangePicker } from "./DateRangePicker";
 export { Popover } from "./Popover";
+export { Pagination } from "./Pagination";
 
 // Sections
 export { SectionHeading } from "./SectionHeading";

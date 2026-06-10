@@ -6,6 +6,7 @@ import { ButtonLink } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { africaListings } from "@/lib/mock/africa-listings";
+import { ShieldCheck } from "lucide-react";
 
 type PageProps = {
   params: Promise<{ id: string }>;
@@ -86,7 +87,7 @@ export default async function ListingPage({ params }: PageProps) {
           <div className="grid gap-8 lg:grid-cols-12 lg:items-start">
             <div className="lg:col-span-8">
               <h2 className="text-xl font-semibold tracking-tight">
-                À propos de cet hébergement
+                À propos 
               </h2>
               <p className="mt-3 text-sm leading-7 text-zinc-600">
                 Un séjour premium, sélectionné pour sa qualité d’accueil et sa clarté d’informations.
@@ -116,8 +117,8 @@ export default async function ListingPage({ params }: PageProps) {
                     Ajouter aux favoris
                   </ButtonLink>
                 </div>
-                <p className="mt-4 text-xs leading-5 text-zinc-500">
-                  Paiement sécurisé · Confirmation instantanée · Sans frais cachés
+                <p className="mt-4 text-xs flex gap-1.5 leading-5 text-zinc-500">
+                 <ShieldCheck  /> Paiement sécurisé · Confirmation instantanée · Sans frais cachés
                 </p>
               </Card>
             </div>
