@@ -1,5 +1,6 @@
 {
   "openMenu": "Ouvrir le menu",
+  "closeMenu": "Fermer le menu",
   "account": "Compte",
   "login": "Connexion",
   "signup": "Inscription",
@@ -8,5 +9,19 @@
   "servicesDesc": "Options utiles pour mieux voyager",
   "experiencesDesc": "Activités locales et moments uniques",
   "siteMapDesc": "Toutes les pages en un clin d'œil",
-  "tagline": "Maisons d’hôtes premium au Bénin et en Afrique."
+  "tagline": "Maisons d’hôtes premium au Bénin et en Afrique.",
+  "navSection": "Navigation",
+  "spaceSection": "Mon espace",
+  "preferencesSection": "Préférences",
+  "memberSince": "Membre depuis un mois",
+  "subscription": "Mon abonnement",
+  "helpCenter": "Centre d'aide",
+  "messages": "Messages",
+  "manageAccount": "Gérer mon compte",
+  "manageServices": "Gérer mes services",
+  "manageReservations": "Gérer mes réservations",
+  "logout": "Déconnexion",
+  "language": "Langue",
+  "theme": "Thème",
+  "currency": "Devise"
 }

@@ -1,5 +1,6 @@
 {
   "openMenu": "Open menu",
+  "closeMenu": "Close menu",
   "account": "Account",
   "login": "Log in",
   "signup": "Sign up",
@@ -8,5 +9,19 @@
   "servicesDesc": "Useful options for smoother travel",
   "experiencesDesc": "Local activities and unique moments",
   "siteMapDesc": "Every page in one quick view",
-  "tagline": "Premium guest houses across Benin & Africa."
+  "tagline": "Premium guest houses across Benin & Africa.",
+  "navSection": "Navigation",
+  "spaceSection": "My space",
+  "preferencesSection": "Preferences",
+  "memberSince": "Member since one month",
+  "subscription": "My subscription",
+  "helpCenter": "Help center",
+  "messages": "Messages",
+  "manageAccount": "Manage my account",
+  "manageServices": "Manage my services",
+  "manageReservations": "Manage my reservations",
+  "logout": "Log out",
+  "language": "Language",
+  "theme": "Theme",
+  "currency": "Currency"
 }

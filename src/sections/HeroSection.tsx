@@ -38,7 +38,7 @@ export async function HeroSection() {
 
         <Container className="relative z-10 pt-10 pb-12 lg:pt-16">
           <div className="max-w-3xl">
-            <Badge className="truncate">
+            <Badge>
               <ShieldCheck className="size-4 mr-0.5" /> {t("badge")}
             </Badge>
 
@@ -104,23 +104,40 @@ export async function HeroSection() {
     </section>
   );
 }
+import { cn } from "@/lib/utils/cn";
 
-function TrustItem({
-  icon,
-  title,
-  subtitle,
-}: {
+type TrustItemProps = {
   icon: React.ReactNode;
   title: string;
   subtitle: string;
-}) {
+  className?: string;
+};
+
+export function TrustItem({
+  icon,
+  title,
+  subtitle,
+  className,
+}: TrustItemProps) {
   return (
-    <div className="flex min-w-0 my-2 md:mt-0 items-start lg:justify-center justify-start gap-3">
-      <div className="mt-1 shrink-0">{icon}</div>
+    <div
+      className={cn(
+        "flex min-w-0 items-start gap-3 rounded-2xl px-1 py-2 transition-colors",
+        className,
+      )}
+    >
+      <div className="mt-0.5 shrink-0 text-zinc-700 dark:text-zinc-300">
+        {icon}
+      </div>
 
       <div className="min-w-0">
-        <p className="text-sm font-medium leading-tight text-black dark:text-white">{title}</p>
-        <p className="mt-1 text-xs leading-tight text-black/70 dark:text-white/70">{subtitle}</p>
+        <p className="truncate text-sm font-semibold tracking-tight text-zinc-900 dark:text-white">
+          {title}
+        </p>
+
+        <p className="mt-1 text-xs leading-relaxed text-zinc-600 dark:text-zinc-400">
+          {subtitle}
+        </p>
       </div>
     </div>
   );

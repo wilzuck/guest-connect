@@ -373,6 +373,51 @@
     "mapSubtitle": "Localisation approximative — adresse exacte après réservation",
     "reviewsTitle": "Avis",
     "loadMoreReviews": "Charger plus",
+    "backToListings": "Retour aux hébergements",
+    "specsTitle": "Ce que propose ce logement",
+    "specs": {
+      "type": "Type",
+      "bedrooms": "Chambres",
+      "bathrooms": "Salles de bain",
+      "guests": "Voyageurs",
+      "area": "Surface",
+      "minStay": "Séjour minimum"
+    },
+    "specValues": {
+      "villa": "Villa",
+      "studio": "Studio",
+      "apartment": "Appartement",
+      "bedrooms": "{count, plural, =1 {1 chambre} other {# chambres}}",
+      "bathrooms": "{count, plural, =1 {1 salle de bain} other {# salles de bain}}",
+      "guests": "{count, plural, =1 {1 voyageur} other {# voyageurs}}",
+      "area": "{count} m²",
+      "minStay": "{count, plural, =1 {1 nuit} other {# nuits}}"
+    },
+    "host": {
+      "hostedBy": "Hébergé par {name}",
+      "responds": "{role} · répond généralement en {time}",
+      "roles": {
+        "premium": "Hôte premium",
+        "localManager": "Gestionnaire local",
+        "superhost": "Super hôte"
+      },
+      "responseTimes": {
+        "1h": "1 heure",
+        "2h": "2 heures",
+        "30m": "30 min"
+      },
+      "ratingBadge": "{rating} ★ hôte",
+      "yearsBadge": "{count, plural, =1 {1 an sur GuestConnect} other {# ans sur GuestConnect}}",
+      "verified": "Identité vérifiée",
+      "contact": "Contacter l’hôte",
+      "availabilityLabel": "Disponibilité",
+      "open7": "7j/7",
+      "open5": "5 jours/semaine",
+      "checkInLabel": "Arrivée",
+      "checkInValue": "À partir de 15:00",
+      "validationLabel": "Validation",
+      "validationValue": "Annonce vérifiée"
+    },
     "reviewsSection": {
       "one": {
         "name": "Amina K.",
@@ -390,6 +435,14 @@
         "body": "Conforme à la description. Literie confortable et ambiance premium."
       }
     }
+  },
+  "reviewsBlock": {
+    "title": "Avis des voyageurs",
+    "showMore": "Lire la suite",
+    "showLess": "Réduire",
+    "showMoreReviews": "Voir {count, plural, =1 {1 avis de plus} other {# avis de plus}}",
+    "emptyTitle": "Aucun avis pour le moment",
+    "emptyDescription": "Soyez le premier à partager votre expérience après votre séjour."
   },
   "bookingCard": {
     "from": "À partir de",
@@ -412,7 +465,12 @@
     "placeholder": "Partagez votre expérience (propreté, emplacement, accueil, etc.)",
     "note": "Ce formulaire est une démo (sans envoi serveur).",
     "submit": "Publier",
-    "success": "Merci ! Votre avis a été enregistré localement."
+    "success": "Merci ! Votre avis a été enregistré localement.",
+    "trigger": "Laisser un commentaire",
+    "cancel": "Annuler",
+    "ratingValue": "{count, plural, =1 {1 étoile} other {# étoiles}}",
+    "starLabel": "Donner la note de {count, plural, =1 {1 étoile} other {# étoiles}}",
+    "ratingRequired": "Sélectionnez une note avant de publier."
   },
   "calendarTools": {
     "eyebrow": "Outils",
@@ -439,6 +497,9 @@
     "openPhoto": "Ouvrir la photo {index}",
     "openFloorPlan": "Ouvrir le plan {index}",
     "backToListing": "Retour à l'annonce",
+    "showAllPhotos": "Voir les {count} photos",
+    "viewerTitle": "Galerie photos",
+    "close": "Fermer",
     "photos": "Photos",
     "photo": "photo",
     "floorPlans": "Plans du bien",

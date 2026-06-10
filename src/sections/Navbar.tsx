@@ -100,8 +100,8 @@ export function Navbar() {
           <ButtonLink
             href={`/${locale}/search`}
             variant="outline"
-            size="md"
-            className="w-full justify-start gap-3 rounded-2xl border border-black/10 bg-white px-4 py-2 shadow-sm shadow-black/5 dark:bg-zinc-900 dark:shadow-black/30"
+            size="sm"
+            className="w-full justify-start py-1 gap-3 rounded-2xl border border-black/10 bg-white px-4 shadow-sm shadow-black/5 dark:bg-zinc-900 dark:shadow-black/30"
           >
             <SearchIcon className="h-4 w-4" />
             <div className="min-w-0 text-left">

@@ -38,7 +38,7 @@ export async function DestinationsSection() {
   const destinations = getDestinations();
 
   return (
-    <section id="destinations" className="border-t border-black/5 bg-linear-to-b from-slate-50 to-transparent dark:border-white/10 dark:bg-zinc-950">
+    <section id="destinations" className="border-t border-black/5 bg-black dark:border-white/10 dark:bg-zinc-950">
       <Container className="py-16 sm:py-20">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <SectionHeading

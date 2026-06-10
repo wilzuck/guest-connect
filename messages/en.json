@@ -373,6 +373,51 @@
     "mapSubtitle": "Approximate location — exact address shown after booking",
     "reviewsTitle": "Reviews",
     "loadMoreReviews": "Load more",
+    "backToListings": "Back to stays",
+    "specsTitle": "What this place offers",
+    "specs": {
+      "type": "Type",
+      "bedrooms": "Bedrooms",
+      "bathrooms": "Bathrooms",
+      "guests": "Guests",
+      "area": "Area",
+      "minStay": "Minimum stay"
+    },
+    "specValues": {
+      "villa": "Villa",
+      "studio": "Studio",
+      "apartment": "Apartment",
+      "bedrooms": "{count, plural, =1 {1 bedroom} other {# bedrooms}}",
+      "bathrooms": "{count, plural, =1 {1 bathroom} other {# bathrooms}}",
+      "guests": "{count, plural, =1 {1 guest} other {# guests}}",
+      "area": "{count} m²",
+      "minStay": "{count, plural, =1 {1 night} other {# nights}}"
+    },
+    "host": {
+      "hostedBy": "Hosted by {name}",
+      "responds": "{role} · usually responds in {time}",
+      "roles": {
+        "premium": "Premium host",
+        "localManager": "Local manager",
+        "superhost": "Superhost"
+      },
+      "responseTimes": {
+        "1h": "1 hour",
+        "2h": "2 hours",
+        "30m": "30 min"
+      },
+      "ratingBadge": "{rating} ★ host",
+      "yearsBadge": "{count, plural, =1 {1 year on GuestConnect} other {# years on GuestConnect}}",
+      "verified": "Identity verified",
+      "contact": "Contact host",
+      "availabilityLabel": "Availability",
+      "open7": "7 days a week",
+      "open5": "5 days a week",
+      "checkInLabel": "Check-in",
+      "checkInValue": "From 3:00 PM",
+      "validationLabel": "Validation",
+      "validationValue": "Verified listing"
+    },
     "reviewsSection": {
       "one": {
         "name": "Amina K.",
@@ -390,6 +435,14 @@
         "body": "Exactly as described. Comfortable bedding and a premium feel overall."
       }
     }
+  },
+  "reviewsBlock": {
+    "title": "Traveler reviews",
+    "showMore": "Read more",
+    "showLess": "Show less",
+    "showMoreReviews": "Show {count, plural, =1 {1 more review} other {# more reviews}}",
+    "emptyTitle": "No reviews yet",
+    "emptyDescription": "Be the first to share your experience after your stay."
   },
   "bookingCard": {
     "from": "From",
@@ -412,7 +465,12 @@
     "placeholder": "Share your experience (cleanliness, location, host, etc.)",
     "note": "Demo form (no server submission).",
     "submit": "Post",
-    "success": "Thanks! Your review was saved locally."
+    "success": "Thanks! Your review was saved locally.",
+    "trigger": "Leave a comment",
+    "cancel": "Cancel",
+    "ratingValue": "{count, plural, =1 {1 star} other {# stars}}",
+    "starLabel": "Rate {count, plural, =1 {1 star} other {# stars}}",
+    "ratingRequired": "Select a rating before posting."
   },
   "calendarTools": {
     "eyebrow": "Tools",
@@ -439,6 +497,9 @@
     "openPhoto": "Open photo {index}",
     "openFloorPlan": "Open floor plan {index}",
     "backToListing": "Back to listing",
+    "showAllPhotos": "Show all {count} photos",
+    "viewerTitle": "Photo gallery",
+    "close": "Close",
     "photos": "Photos",
     "photo": "photo",
     "floorPlans": "Floor plans",
