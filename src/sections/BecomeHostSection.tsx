@@ -38,7 +38,7 @@ export async function BecomeHostSection() {
               </div>
             </div>
 
-            <div className="lg:col-span-5">
+            <div className="lg:col-span-5 hidden lg:block">
               <div className="grid gap-3 rounded-2xl border border-white/10 bg-white/5 p-5">
                 <Item title={t("pricingTitle")} desc={t("pricingDesc")} />
                 <Item title={t("occupancyTitle")} desc={t("occupancyDesc")} />

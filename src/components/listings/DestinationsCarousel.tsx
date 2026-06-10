@@ -112,7 +112,7 @@ export function DestinationsCarousel({ locale, destinations }: DestinationsCarou
           {destinations.map((d) => (
             <li
               key={d.city}
-              className="min-w-[160px] sm:min-w-[200px]"
+              className="min-w-[280px] sm:min-w-[250px]"
               style={{ scrollSnapAlign: "start" }}
             >
               <DestinationCard

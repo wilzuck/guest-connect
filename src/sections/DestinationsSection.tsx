@@ -39,7 +39,7 @@ export async function DestinationsSection() {
 
   return (
     <section id="destinations" className="border-t border-black/5 dark:border-white/10">
-      <Container className="py-16 sm:py-20">
+      <Container className="py-8 sm:py-16">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <SectionHeading
             eyebrow={t("eyebrow")}

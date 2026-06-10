@@ -10,7 +10,13 @@ type PaginationProps = {
   page: number;
   /** Nombre total de pages. */
   totalPages: number;
-  /** Construit l'URL d'une page donnée (mode liens, SSR-friendly). */
+  /**
+   * Gabarit d'URL sérialisable contenant le jeton `{page}` (ex. `/search?page={page}`).
+   * À privilégier depuis un Server Component — `hrefForPage` ne peut pas franchir
+   * la frontière RSC (les fonctions ne sont pas sérialisables).
+   */
+  hrefTemplate?: string;
+  /** Construit l'URL d'une page donnée (mode liens, Client Component uniquement). */
   hrefForPage?: (page: number) => string;
   /** Callback de changement de page (mode bouton, client). */
   onPageChange?: (page: number) => void;
@@ -22,11 +28,13 @@ type PaginationProps = {
 /**
  * Pagination réutilisable avec chevrons Précédent/Suivant et numéros.
  * Couleurs et dark mode encapsulés — aucune classe de couleur à passer.
- * Fonctionne en mode liens (`hrefForPage`) ou en mode contrôlé (`onPageChange`).
+ * Modes : `hrefTemplate` (Server Component), `hrefForPage` (liens client) ou
+ * `onPageChange` (contrôlé).
  */
 export function Pagination({
   page,
   totalPages,
+  hrefTemplate,
   hrefForPage,
   onPageChange,
   siblingCount = 1,
@@ -35,6 +43,12 @@ export function Pagination({
   const t = useTranslations("pagination");
 
   if (totalPages <= 1) return null;
+
+  const resolveHref = (target: number): string | undefined => {
+    if (hrefTemplate) return hrefTemplate.replace("{page}", String(target));
+    if (hrefForPage) return hrefForPage(target);
+    return undefined;
+  };
 
   const items = buildPageItems(page, totalPages, siblingCount);
   const canPrev = page > 1;
@@ -50,7 +64,7 @@ export function Pagination({
         direction="prev"
         label={t("previous")}
         disabled={!canPrev}
-        href={hrefForPage && canPrev ? hrefForPage(page - 1) : undefined}
+        href={canPrev ? resolveHref(page - 1) : undefined}
         onClick={onPageChange && canPrev ? () => onPageChange(page - 1) : undefined}
       />
 
@@ -70,7 +84,7 @@ export function Pagination({
                 page={item}
                 active={item === page}
                 label={t("goToPage", { page: item })}
-                href={hrefForPage ? hrefForPage(item) : undefined}
+                href={resolveHref(item)}
                 onClick={onPageChange ? () => onPageChange(item) : undefined}
               />
             </li>
@@ -82,7 +96,7 @@ export function Pagination({
         direction="next"
         label={t("next")}
         disabled={!canNext}
-        href={hrefForPage && canNext ? hrefForPage(page + 1) : undefined}
+        href={canNext ? resolveHref(page + 1) : undefined}
         onClick={onPageChange && canNext ? () => onPageChange(page + 1) : undefined}
       />
     </nav>

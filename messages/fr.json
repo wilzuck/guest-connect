@@ -92,7 +92,11 @@
     "ariaDestination": "Destination",
     "ariaClearDestination": "Effacer la destination",
     "ariaRemoveGuest": "Retirer un voyageur",
-    "ariaAddGuest": "Ajouter un voyageur"
+    "ariaAddGuest": "Ajouter un voyageur",
+    "categoryStays": "Logements",
+    "categoryServices": "Services",
+    "categoryExperiences": "Expériences",
+    "ariaCategory": "Type de recherche"
   },
   "auth": {
     "fields": {
@@ -338,7 +342,16 @@
     "mapView": "Vue carte",
     "cardView": "Vue cartes",
     "emptyTitle": "Aucun résultat pour cette recherche",
-    "emptyDescription": "Essayez une autre destination ou retirez quelques filtres de capacité, budget ou équipements."
+    "emptyDescription": "Essayez une autre destination ou retirez quelques filtres de capacité, budget ou équipements.",
+    "tabStays": "Logements",
+    "tabServices": "Services",
+    "tabExperiences": "Expériences",
+    "resultsStays": "{count} logement(s)",
+    "resultsServices": "{count} service(s)",
+    "resultsExperiences": "{count} expérience(s)",
+    "filters": "Filtres",
+    "clearAll": "Tout effacer",
+    "sortLabel": "Trier"
   },
   "listingPage": {
     "reviews": "{count} avis",

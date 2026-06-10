@@ -197,7 +197,7 @@ export default function ComponentsShowcasePage() {
               <Pagination
                 page={3}
                 totalPages={10}
-                hrefForPage={(page) => `?page=${page}`}
+                hrefTemplate="?page={page}"
               />
             </div>
             <div>
@@ -207,7 +207,7 @@ export default function ComponentsShowcasePage() {
               <Pagination
                 page={1}
                 totalPages={4}
-                hrefForPage={(page) => `?page=${page}`}
+                hrefTemplate="?page={page}"
               />
             </div>
           </Card>

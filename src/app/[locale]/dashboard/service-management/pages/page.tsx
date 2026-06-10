@@ -1,6 +1,5 @@
 import { getLocale } from "next-intl/server";
 import { EntityTableClient } from "@/components/admin/EntityTableClient";
-import { Badge } from "@/components/ui/Badge";
 import { readDb } from "@/lib/server/db";
 
 const fallbackPages = [
@@ -35,13 +34,6 @@ export default async function Page() {
         { key: "owner", label: "Équipe" },
         { key: "status", label: "Statut", renderKey: "status" },
       ]}
-      renderers={{
-        status: (row) => (
-          <Badge className="rounded-md border-emerald-100 bg-emerald-50 text-emerald-700 shadow-none">
-            {String(row.status ?? "Publié")}
-          </Badge>
-        ),
-      }}
     />
   );
 }

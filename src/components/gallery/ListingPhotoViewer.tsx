@@ -142,7 +142,7 @@ export function ListingPhotoViewer({
 
       {hasMany ? (
         <div className="shrink-0 px-4 pb-5 pt-1 sm:px-12">
-          <div className="mx-auto flex max-w-4xl gap-2 overflow-x-auto py-2">
+          <div className="mx-auto flex max-w-4xl gap-2 overflow-x-auto p-2">
             {images.map((src, i) => (
               <button
                 key={`${src}-${i}`}

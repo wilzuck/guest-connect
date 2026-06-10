@@ -22,7 +22,7 @@ export function DestinationCard({
       aria-label={exploreLabel}
       className="group block overflow-hidden transition hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 dark:focus-visible:ring-white dark:focus-visible:ring-offset-black"
     >
-      <div className="relative aspect-square overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-900">
+      <div className="relative aspect-[16/9] overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-900">
         <Image
           src={imageUrl}
           alt={`${city}, ${country}`}

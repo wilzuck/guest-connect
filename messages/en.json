@@ -92,7 +92,11 @@
     "ariaDestination": "Destination",
     "ariaClearDestination": "Clear destination",
     "ariaRemoveGuest": "Remove one guest",
-    "ariaAddGuest": "Add one guest"
+    "ariaAddGuest": "Add one guest",
+    "categoryStays": "Stays",
+    "categoryServices": "Services",
+    "categoryExperiences": "Experiences",
+    "ariaCategory": "Search type"
   },
   "auth": {
     "fields": {
@@ -338,7 +342,16 @@
     "mapView": "Map View",
     "cardView": "Card View",
     "emptyTitle": "No results for this search",
-    "emptyDescription": "Try another destination or remove a few capacity, budget, or amenity filters."
+    "emptyDescription": "Try another destination or remove a few capacity, budget, or amenity filters.",
+    "tabStays": "Stays",
+    "tabServices": "Services",
+    "tabExperiences": "Experiences",
+    "resultsStays": "{count} stay(s)",
+    "resultsServices": "{count} service(s)",
+    "resultsExperiences": "{count} experience(s)",
+    "filters": "Filters",
+    "clearAll": "Clear all",
+    "sortLabel": "Sort"
   },
   "listingPage": {
     "reviews": "{count} reviews",

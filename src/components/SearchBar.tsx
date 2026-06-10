@@ -8,28 +8,40 @@ import type { SearchParams } from "@/types/search";
 import { useLocale } from "next-intl";
 import { useTranslations } from "next-intl";
 import { DateRangePicker } from "@/components/ui/DateRangePicker";
-import { Calendar1, Users } from "lucide-react";
+import { Calendar1, Users, Home, BriefcaseBusiness, Sparkles } from "lucide-react";
+import { cn } from "@/lib/utils/cn";
+
+export type SearchCategory = "stays" | "services" | "experiences";
 
 type SearchBarProps = {
   onSearch?: (params: SearchParams) => void | Promise<void>;
   defaultValues?: SearchParams;
   variant?: "auto" | "mobile" | "desktop" | "compact";
+  /** Catégorie active des onglets multifonction. Par défaut "stays". */
+  category?: SearchCategory;
+  /** Affiche les onglets de catégorie (Logements/Services/Expériences). */
+  showCategories?: boolean;
 };
 
 export function SearchBar({
   onSearch,
   defaultValues,
   variant = "auto",
+  category = "stays",
+  showCategories = true,
 }: SearchBarProps) {
   const router = useRouter();
   const locale = useLocale();
   const t = useTranslations("searchBar");
+  const [activeCategory, setActiveCategory] = useState<SearchCategory>(category);
   const [destination, setDestination] = useState(
     defaultValues?.destination ?? "",
   );
   const [checkIn, setCheckIn] = useState(defaultValues?.checkIn ?? "");
   const [checkOut, setCheckOut] = useState(defaultValues?.checkOut ?? "");
   const [guests, setGuests] = useState(defaultValues?.guests ?? 2);
+
+  const isStays = activeCategory === "stays";
 
   const params = useMemo<SearchParams>(
     () => ({
@@ -44,25 +56,65 @@ export function SearchBar({
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
 
-    if (onSearch) {
+    if (onSearch && isStays) {
       await onSearch(params);
       return;
     }
 
-    // Fallback: redirige vers la page /search (le template de recherche vit là-bas)
+    // Hub de recherche unifié : toutes les catégories vivent sur /search.
     const query = new URLSearchParams();
-    if (params.destination) query.set("destination", params.destination);
-    if (params.checkIn) query.set("checkIn", params.checkIn);
-    if (params.checkOut) query.set("checkOut", params.checkOut);
-    if (typeof params.guests === "number")
-      query.set("guests", String(params.guests));
+    if (activeCategory !== "stays") query.set("category", activeCategory);
+    if (isStays) {
+      if (params.destination) query.set("destination", params.destination);
+      if (params.checkIn) query.set("checkIn", params.checkIn);
+      if (params.checkOut) query.set("checkOut", params.checkOut);
+      if (typeof params.guests === "number") query.set("guests", String(params.guests));
+    } else if (params.destination) {
+      query.set("q", params.destination);
+    }
     router.push(
       `/${locale}/search${query.toString() ? `?${query.toString()}` : ""}`,
     );
   }
 
+  const categoryTabs: Array<{ key: SearchCategory; label: string; icon: typeof Home }> = [
+    { key: "stays", label: t("categoryStays"), icon: Home },
+    { key: "services", label: t("categoryServices"), icon: BriefcaseBusiness },
+    { key: "experiences", label: t("categoryExperiences"), icon: Sparkles },
+  ];
+
   return (
     <form onSubmit={handleSubmit} className="w-full">
+      {showCategories ? (
+        <div
+          className="mb-2 inline-flex items-center gap-1 rounded-full border border-black/10 bg-white p-1 dark:border-white/15 dark:bg-zinc-900"
+          role="tablist"
+          aria-label={t("ariaCategory")}
+        >
+          {categoryTabs.map((tab) => {
+            const Icon = tab.icon;
+            const active = tab.key === activeCategory;
+            return (
+              <button
+                key={tab.key}
+                type="button"
+                role="tab"
+                aria-selected={active}
+                onClick={() => setActiveCategory(tab.key)}
+                className={cn(
+                  "inline-flex h-9 items-center gap-2 rounded-full px-4 text-sm font-semibold transition",
+                  active
+                    ? "bg-zinc-900 text-white dark:bg-white dark:text-zinc-900"
+                    : "text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-white",
+                )}
+              >
+                <Icon className="h-4 w-4" aria-hidden="true" />
+                {tab.label}
+              </button>
+            );
+          })}
+        </div>
+      ) : null}
       {/* Desktop: une seule ligne fluide. Mobile: layout optimisé. Compact: version hero (petite). */}
       <div
         className={[
@@ -106,53 +158,57 @@ export function SearchBar({
             </button>
           </div>
 
-          <div className=" border border-black/10 my-2 md:my-0 rounded-xl  transition-all duration-200 flex-[1.8]">
-            <DateRangePicker
-              value={{
-                from: checkIn || undefined,
-                to: checkOut || undefined,
-              }}
-              onChange={(next) => {
-                setCheckIn(next.from ?? "");
-                setCheckOut(next.to ?? "");
-              }}
-              startLabel={t("arrival")}
-              endLabel={t("departure")}
-            />
-          </div>
-
-          <FieldShell className=" border border-black/10 rounded-xl px-2 transition-all duration-200 flex-[0.85]">
-            <div className="flex items-start gap-2">
-              <Users className="h-4 w-4 md:hidden lg:block text-zinc-400 shrink-0" />
-              <div className="grid">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-zinc-500">
-                  {t("guests")}
-                </p>
-                <span className="text-sm font-semibold ">
-                  {guests}
-                </span>
+          {isStays ? (
+            <>
+              <div className=" border border-black/10 my-2 md:my-0 rounded-xl  transition-all duration-200 flex-[1.8]">
+                <DateRangePicker
+                  value={{
+                    from: checkIn || undefined,
+                    to: checkOut || undefined,
+                  }}
+                  onChange={(next) => {
+                    setCheckIn(next.from ?? "");
+                    setCheckOut(next.to ?? "");
+                  }}
+                  startLabel={t("arrival")}
+                  endLabel={t("departure")}
+                />
               </div>
-            </div>
-            <div className="ml-auto flex items-center gap-2">
-              <button
-                type="button"
-                className="grid h-9 w-9 place-items-center rounded-full bg-black/[0.04] text-black transition hover:bg-black/[0.08] active:scale-[0.96]"
-                onClick={() => setGuests((g) => Math.max(1, g - 1))}
-                aria-label={t("ariaRemoveGuest")}
-              >
-                −
-              </button>
 
-              <button
-                type="button"
-                className="grid h-9 w-9 place-items-center rounded-full bg-black/[0.04] text-black transition hover:bg-black/[0.08] active:scale-[0.96]"
-                onClick={() => setGuests((g) => g + 1)}
-                aria-label={t("ariaAddGuest")}
-              >
-                +
-              </button>
-            </div>
-          </FieldShell>
+              <FieldShell className=" border border-black/10 rounded-xl px-2 transition-all duration-200 flex-[0.85]">
+                <div className="flex items-start gap-2">
+                  <Users className="h-4 w-4 md:hidden lg:block text-zinc-400 shrink-0" />
+                  <div className="grid">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-zinc-500">
+                      {t("guests")}
+                    </p>
+                    <span className="text-sm font-semibold ">
+                      {guests}
+                    </span>
+                  </div>
+                </div>
+                <div className="ml-auto flex items-center gap-2">
+                  <button
+                    type="button"
+                    className="grid h-9 w-9 place-items-center rounded-full bg-black/[0.04] text-black transition hover:bg-black/[0.08] active:scale-[0.96]"
+                    onClick={() => setGuests((g) => Math.max(1, g - 1))}
+                    aria-label={t("ariaRemoveGuest")}
+                  >
+                    −
+                  </button>
+
+                  <button
+                    type="button"
+                    className="grid h-9 w-9 place-items-center rounded-full bg-black/[0.04] text-black transition hover:bg-black/[0.08] active:scale-[0.96]"
+                    onClick={() => setGuests((g) => g + 1)}
+                    aria-label={t("ariaAddGuest")}
+                  >
+                    +
+                  </button>
+                </div>
+              </FieldShell>
+            </>
+          ) : null}
 
           <Button
             type="submit"
@@ -202,58 +258,62 @@ export function SearchBar({
             </button>
           </div>
 
-          <DateRangePicker
-            value={{
-              from: checkIn || undefined,
-              to: checkOut || undefined,
-            }}
-            onChange={(next) => {
-              setCheckIn(next.from ?? "");
-              setCheckOut(next.to ?? "");
-            }}
-            startLabel={t("arrival")}
-            endLabel={t("departure")}
-            size={variant === "compact" ? "sm" : "md"}
-          />
+          {isStays ? (
+            <>
+              <DateRangePicker
+                value={{
+                  from: checkIn || undefined,
+                  to: checkOut || undefined,
+                }}
+                onChange={(next) => {
+                  setCheckIn(next.from ?? "");
+                  setCheckOut(next.to ?? "");
+                }}
+                startLabel={t("arrival")}
+                endLabel={t("departure")}
+                size={variant === "compact" ? "sm" : "md"}
+              />
 
-          <FieldShell
-            className={
-              variant === "compact" ? "h-12 bg-white px-3" : "h-14 bg-white"
-            }
-          >
-            <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center">
-              <Calendar1 className="h-4 w-4 text-zinc-400 shrink-0" />
-
-              <div className="grid">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-zinc-500">
-                  {t("guests")}
-                </p>
-                <span className="text-sm font-semibold ">
-                  {guests}
-                </span>
-              </div>
-            </div>
-
-            <div className="ml-auto flex items-center gap-2">
-              <button
-                type="button"
-                className="grid h-9 w-9 place-items-center rounded-full bg-black/[0.04] text-black transition hover:bg-black/[0.08] active:scale-[0.96]"
-                onClick={() => setGuests((g) => Math.max(1, g - 1))}
-                aria-label={t("ariaRemoveGuest")}
+              <FieldShell
+                className={
+                  variant === "compact" ? "h-12 bg-white px-3" : "h-14 bg-white"
+                }
               >
-                −
-              </button>
+                <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center">
+                  <Calendar1 className="h-4 w-4 text-zinc-400 shrink-0" />
 
-              <button
-                type="button"
-                className="grid h-9 w-9 place-items-center rounded-full bg-black/[0.04] text-black transition hover:bg-black/[0.08] active:scale-[0.96]"
-                onClick={() => setGuests((g) => g + 1)}
-                aria-label={t("ariaAddGuest")}
-              >
-                +
-              </button>
-            </div>
-          </FieldShell>
+                  <div className="grid">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-zinc-500">
+                      {t("guests")}
+                    </p>
+                    <span className="text-sm font-semibold ">
+                      {guests}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="ml-auto flex items-center gap-2">
+                  <button
+                    type="button"
+                    className="grid h-9 w-9 place-items-center rounded-full bg-black/[0.04] text-black transition hover:bg-black/[0.08] active:scale-[0.96]"
+                    onClick={() => setGuests((g) => Math.max(1, g - 1))}
+                    aria-label={t("ariaRemoveGuest")}
+                  >
+                    −
+                  </button>
+
+                  <button
+                    type="button"
+                    className="grid h-9 w-9 place-items-center rounded-full bg-black/[0.04] text-black transition hover:bg-black/[0.08] active:scale-[0.96]"
+                    onClick={() => setGuests((g) => g + 1)}
+                    aria-label={t("ariaAddGuest")}
+                  >
+                    +
+                  </button>
+                </div>
+              </FieldShell>
+            </>
+          ) : null}
 
           <Button
             type="submit"
