@@ -64,22 +64,7 @@ export default async function Page() {
         </div>
 
         <div className="grid min-w-0 gap-2 sm:grid-cols-[minmax(0,18rem)_auto] sm:items-center">
-          <label className="flex h-10 min-w-0 items-center gap-2 rounded-lg border border-black/5  dark:border-black/10 bg-white px-3 text-sm text-[#8E8E93] dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-400">
-            <Search className="h-4 w-4" aria-hidden="true" />
-            <input
-              placeholder="Rechercher..."
-              className="min-w-0 flex-1 bg-transparent text-[#202024] outline-none placeholder:text-[#B1B1B7] dark:text-white dark:placeholder:text-zinc-500"
-            />
-          </label>
-          <ButtonLink
-            href={`/${locale}/dashboard/service-management/listings/new`}
-            variant="primary"
-            size="sm"
-            className="h-10 rounded-lg"
-          >
-            <Plus className="h-4 w-4" aria-hidden="true" />
-            Ajouter
-          </ButtonLink>
+          
         </div>
       </div>
 

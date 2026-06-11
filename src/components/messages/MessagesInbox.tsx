@@ -121,7 +121,7 @@ export function MessagesInbox({
       >
         <div className="text-center">
           <span className="mx-auto block h-10 w-10 animate-spin rounded-full border-2 border-black/5  dark:border-black/10 border-t-[#05A6D6]" />
-          <p className="mt-4 text-sm font-semibold text-zinc-900 dark:text-zinc-100 dark:text-white">Chargement des conversations...</p>
+          <p className="mt-4 text-sm font-semibold text-zinc-900 dark:text-white">Chargement des conversations...</p>
         </div>
       </section>
     );
@@ -213,7 +213,7 @@ export function MessagesInbox({
   return (
     <section
       className={cn(
-        "min-[calc(100dvh-4rem)]  overflow-hidden border border-black/5  dark:border-black/10 bg-white dark:border-zinc-800 dark:bg-black",
+        "h-[calc(100dvh-4rem)]  overflow-hidden border border-black/5 bg-white dark:border-zinc-800 dark:bg-black",
         withTopBorder ? "border-t" : "border-t-0",
         withBottomBorder ? "border-b" : "border-b-0",
         withLeftBorder ? "border-l" : "border-l-0",
@@ -221,8 +221,8 @@ export function MessagesInbox({
       )}
     >
       <div className="grid h-full lg:grid-cols-[248px_360px_minmax(0,1fr)]">
-        <aside className="hidden border-r border-black/5  dark:border-black/10 bg-[#F7F7F8] dark:border-zinc-800 dark:bg-zinc-950 lg:flex lg:flex-col">
-          <div className="border-b border-black/5  dark:border-black/10 p-4 dark:border-zinc-800">
+        <aside className="hidden border-r border-black/5  bg-[#F7F7F8] dark:border-zinc-800 dark:bg-zinc-950 lg:flex lg:flex-col">
+          <div className="border-b border-black/5 p-4 dark:border-zinc-800">
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#8E8E93] dark:text-zinc-500">
               {mode === "admin" ? "Centre support" : "Espace"}
             </p>

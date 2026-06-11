@@ -52,70 +52,209 @@ export function AdminShell({
   const currentUser = getCurrentUserAccess();
 
   const mainNav: NavItem[] = [
-    { href: `/${locale}/dashboard/service-management`, label: "Vue d'ensemble", icon: LayoutDashboard, permission: "admin.read" },
-    { href: `/${locale}/dashboard/service-management/approvals`, label: "À valider", icon: ClipboardCheck, permission: "admin.read" },
-    { href: `/${locale}/dashboard/service-management/listings`, label: "Logements", icon: Building2, permission: "listings.manage" },
-    { href: `/${locale}/dashboard/service-management/locations`, label: "Lieux", icon: MapPin, permission: "locations.manage" },
-    { href: `/${locale}/dashboard/service-management/services`, label: "Services", icon: BriefcaseBusiness, permission: "services.manage" },
-    { href: `/${locale}/dashboard/service-management/reservations`, label: "Réservations", icon: BookOpen, permission: "reservations.read" },
-    { href: `/${locale}/dashboard/service-management/messages`, label: "Messages", icon: MessageSquare, permission: "messages.read" },
-    { href: `/${locale}/dashboard/service-management/experiences`, label: "Expériences", icon: Sparkles, permission: "experiences.manage" },
+    {
+      href: `/${locale}/dashboard/service-management`,
+      label: "Vue d'ensemble",
+      icon: LayoutDashboard,
+      permission: "admin.read",
+    },
+    {
+      href: `/${locale}/dashboard/service-management/approvals`,
+      label: "À valider",
+      icon: ClipboardCheck,
+      permission: "admin.read",
+    },
+    {
+      href: `/${locale}/dashboard/service-management/listings`,
+      label: "Logements",
+      icon: Building2,
+      permission: "listings.manage",
+    },
+    {
+      href: `/${locale}/dashboard/service-management/locations`,
+      label: "Lieux",
+      icon: MapPin,
+      permission: "locations.manage",
+    },
+    {
+      href: `/${locale}/dashboard/service-management/services`,
+      label: "Services",
+      icon: BriefcaseBusiness,
+      permission: "services.manage",
+    },
+    {
+      href: `/${locale}/dashboard/service-management/reservations`,
+      label: "Réservations",
+      icon: BookOpen,
+      permission: "reservations.read",
+    },
+    {
+      href: `/${locale}/dashboard/service-management/experiences`,
+      label: "Expériences",
+      icon: Sparkles,
+      permission: "experiences.manage",
+    },
+    {
+      href: `/${locale}/dashboard/service-management/messages`,
+      label: "Messages",
+      icon: MessageSquare,
+      permission: "messages.read",
+    },
   ];
 
   const accessNav: NavItem[] = [
-    { href: `/${locale}/dashboard/service-management/users`, label: "Utilisateurs", icon: Users, permission: "users.manage" },
-    { href: `/${locale}/dashboard/service-management/roles`, label: "Rôles", icon: ShieldCheck, permission: "roles.manage" },
-    { href: `/${locale}/dashboard/service-management/permissions`, label: "Droits", icon: FileQuestion, permission: "permissions.manage" },
+    {
+      href: `/${locale}/dashboard/service-management/users`,
+      label: "Utilisateurs",
+      icon: Users,
+      permission: "users.manage",
+    },
+    {
+      href: `/${locale}/dashboard/service-management/roles`,
+      label: "Rôles",
+      icon: ShieldCheck,
+      permission: "roles.manage",
+    },
+    {
+      href: `/${locale}/dashboard/service-management/permissions`,
+      label: "Droits",
+      icon: FileQuestion,
+      permission: "permissions.manage",
+    },
   ];
 
   const settingsNav: NavItem[] = [
-    { href: `/${locale}/dashboard/service-management/property-types`, label: "Types de propriété", icon: Tags, permission: "categories.manage" },
-    { href: `/${locale}/dashboard/service-management/countries`, label: "Pays", icon: MapPin, permission: "locations.manage" },
-    { href: `/${locale}/dashboard/service-management/amenities`, label: "Équipements", icon: Wrench, permission: "services.manage" },
-    { href: `/${locale}/dashboard/service-management/currencies`, label: "Devises", icon: CircleDollarSign, permission: "admin.read" },
-    { href: `/${locale}/dashboard/service-management/pages`, label: "Pages du site", icon: PanelsTopLeft, permission: "admin.read" },
-    { href: `/${locale}/dashboard/service-management/translations`, label: "Traductions", icon: Languages, permission: "admin.read" },
+    {
+      href: `/${locale}/dashboard/service-management/property-types`,
+      label: "Types de propriété",
+      icon: Tags,
+      permission: "categories.manage",
+    },
+    {
+      href: `/${locale}/dashboard/service-management/countries`,
+      label: "Pays",
+      icon: MapPin,
+      permission: "locations.manage",
+    },
+    {
+      href: `/${locale}/dashboard/service-management/amenities`,
+      label: "Équipements",
+      icon: Wrench,
+      permission: "services.manage",
+    },
+    {
+      href: `/${locale}/dashboard/service-management/currencies`,
+      label: "Devises",
+      icon: CircleDollarSign,
+      permission: "admin.read",
+    },
+    {
+      href: `/${locale}/dashboard/service-management/pages`,
+      label: "Pages du site",
+      icon: PanelsTopLeft,
+      permission: "admin.read",
+    },
+    {
+      href: `/${locale}/dashboard/service-management/translations`,
+      label: "Traductions",
+      icon: Languages,
+      permission: "admin.read",
+    },
   ];
 
   const docsNav: NavItem[] = [
-    { href: `/${locale}/support`, label: "Support", icon: LifeBuoy, permission: "docs.read" },
-    { href: `/${locale}/dashboard/service-management/docs/usage`, label: "Documentation", icon: BookOpen, permission: "docs.read" },
-    { href: `/${locale}/dashboard/service-management/docs/best-practices`, label: "Bonnes pratiques", icon: Sparkles, permission: "docs.read" },
+    {
+      href: `/${locale}/support`,
+      label: "Support",
+      icon: LifeBuoy,
+      permission: "docs.read",
+    },
+    {
+      href: `/${locale}/dashboard/service-management/docs/usage`,
+      label: "Documentation",
+      icon: BookOpen,
+      permission: "docs.read",
+    },
+    {
+      href: `/${locale}/dashboard/service-management/docs/best-practices`,
+      label: "Bonnes pratiques",
+      icon: Sparkles,
+      permission: "docs.read",
+    },
   ];
 
   const visibleMainNav = filterByPermissions(mainNav, currentUser);
   const visibleSettingsNav = filterByPermissions(settingsNav, currentUser);
   const visibleAccessNav = filterByPermissions(accessNav, currentUser);
   const visibleDocsNav = filterByPermissions(docsNav, currentUser);
-  const visibleMobileNav = [...visibleMainNav, ...visibleSettingsNav, ...visibleAccessNav, ...visibleDocsNav];
+  const visibleMobileNav = [
+    ...visibleMainNav,
+    ...visibleSettingsNav,
+    ...visibleAccessNav,
+    ...visibleDocsNav,
+  ];
 
   return (
-    <div className="min-h-dvh w-full border-t border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-950">
-      <div className="flex min-h-dvh w-full max-w-none ">
-        <aside className="hidden w-[256px] shrink-0 border-r border-zinc-200 bg-zinc-50 lg:flex lg:flex-col dark:border-zinc-800 dark:bg-zinc-900">
-          <div className="px-3 py-4">
+    <div className="h-[calc(100dvh-4rem)] w-full overflow-hidden border-t border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-950">
+      <div className="flex h-full w-full max-w-none overflow-hidden">
+        <aside className="hidden h-full w-[256px] shrink-0 border-r border-zinc-200 bg-zinc-50 lg:flex lg:flex-col dark:border-zinc-800 dark:bg-zinc-900">
+          <div className="shrink-0 px-3 py-4">
             <label className="flex h-10 items-center gap-2 rounded-lg border border-transparent bg-white px-3 text-sm text-zinc-500 shadow-sm shadow-black/3 dark:border-zinc-700 dark:bg-zinc-950 dark:text-zinc-400 dark:shadow-none">
               <Search className="h-4 w-4" aria-hidden="true" />
+
               <input
                 maxLength={250}
                 className="min-w-0 flex-1 bg-transparent outline-none placeholder:text-zinc-500 dark:placeholder:text-zinc-500"
                 placeholder="Search"
               />
-              <span className="text-xs text-zinc-400 dark:text-zinc-500">Ctrl F</span>
+
+              <span className="text-xs text-zinc-400 dark:text-zinc-500">
+                Ctrl F
+              </span>
             </label>
           </div>
 
-          <nav className="flex-1 overflow-y-auto px-3">
-            <NavGroup title="Main menu" items={visibleMainNav} pathname={pathname} />
-            <NavGroup title="Paramétrage logements" items={visibleSettingsNav} pathname={pathname} />
-            <NavGroup title="Accès" items={visibleAccessNav} pathname={pathname} />
-            <NavGroup title="Support / Documentation" items={visibleDocsNav} pathname={pathname} />
+          <nav
+            className="
+              min-h-0 flex-1 overflow-y-auto px-3
+              scrollbar-thin
+              scrollbar-track-transparent
+              scrollbar-thumb-zinc-300
+              hover:scrollbar-thumb-zinc-400
+              dark:scrollbar-thumb-zinc-700
+              dark:hover:scrollbar-thumb-zinc-600
+            "
+          >
+            <NavGroup
+              title="Main menu"
+              items={visibleMainNav}
+              pathname={pathname}
+            />
+
+            <NavGroup
+              title="Paramétrage logements"
+              items={visibleSettingsNav}
+              pathname={pathname}
+            />
+
+            <NavGroup
+              title="Accès"
+              items={visibleAccessNav}
+              pathname={pathname}
+            />
+
+            <NavGroup
+              title="Support / Documentation"
+              items={visibleDocsNav}
+              pathname={pathname}
+            />
           </nav>
 
-          <div className="m-3 rounded-xl border border-zinc-200 bg-white p-3 dark:border-zinc-800 dark:bg-zinc-950">
+          <div className="shrink-0 m-3 rounded-xl border border-zinc-200 bg-white p-3 dark:border-zinc-800 dark:bg-zinc-950">
             <Text as="p" size="xs" weight="semibold">
               Admin workspace
             </Text>
+
             <Text as="p" tone="subtle" size="xs" className="mt-1 leading-5">
               {currentUser.name} - {ROLE_LABELS[currentUser.role]}
             </Text>
@@ -124,7 +263,7 @@ export function AdminShell({
 
         <div className="flex min-w-0 flex-1 flex-col">
           <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-zinc-200 bg-white/95 px-4 backdrop-blur lg:px-6 dark:border-zinc-800 dark:bg-zinc-950/95">
-            <Heading level={5} as="p" className="text-lg sm:text-lg">
+            <Heading level={5} as="p" className="text-lg py-4 sm:text-lg">
               Dashboard
             </Heading>
             <div className="flex items-center gap-2">
@@ -153,7 +292,9 @@ export function AdminShell({
             </div>
           </div>
 
-          <main className="min-w-0 flex-1 bg-white dark:bg-zinc-950">{children}</main>
+          <main className="min-w-0 overflow-hidden flex-1 bg-white dark:bg-zinc-950">
+            {children}
+          </main>
         </div>
       </div>
     </div>

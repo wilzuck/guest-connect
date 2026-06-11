@@ -120,17 +120,17 @@ export function ListingPhotoViewer({
       </header>
 
       <div className="relative flex flex-1 items-center justify-center px-4 pb-4 sm:px-12">
-        <div className="relative h-full w-full max-w-6xl">
-          <Image
-            key={images[index]}
-            src={images[index]}
-            alt={`${title} — ${t("photo")} ${index + 1}`}
-            fill
-            className="object-contain gc-anim-fade-in"
-            sizes="100vw"
-            priority
-          />
-        </div>
+      <div className="relative h-full w-full max-w-6xl overflow-hidden rounded-xl">
+        <Image
+          key={images[index]}
+          src={images[index]}
+          alt={`${title} — ${t("photo")} ${index + 1}`}
+          fill
+          className="object-cover"
+          sizes="100vw"
+          priority
+        />
+      </div>
 
         {hasMany ? (
           <>

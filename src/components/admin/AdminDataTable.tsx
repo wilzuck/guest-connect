@@ -184,7 +184,7 @@ export function AdminDataTable<Row extends object>({
       ) : null}
 
       <div className="overflow-x-auto border-y border-black/10 bg-white dark:border-zinc-800 dark:bg-black">
-        <div className="min-w-[760px]">
+        <div className="min-w-190">
           <div
             className="grid gap-3 border-b border-black/10 bg-[#FAFAFB] px-4 py-3 text-xs font-medium text-[#8E8E93] dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-400"
             style={{ gridTemplateColumns }}
@@ -206,7 +206,19 @@ export function AdminDataTable<Row extends object>({
                   </div>
                 ) : null}
 
-                <div className="divide-y divide-black/10 dark:divide-zinc-800">
+                <div
+                  className="
+                    max-h-[calc(100dvh-32rem)]
+                    overflow-y-auto
+                    divide-y divide-black/10 dark:divide-zinc-800
+                    scrollbar-thin
+                    scrollbar-track-transparent
+                    scrollbar-thumb-zinc-300
+                    hover:scrollbar-thumb-zinc-400
+                    dark:scrollbar-thumb-zinc-700
+                    dark:hover:scrollbar-thumb-zinc-600
+                  "
+                >
                   {group.rows.map((row) => (
                     <div
                       key={getRowId(row)}
@@ -236,7 +248,7 @@ export function AdminDataTable<Row extends object>({
         </div>
       </div>
 
-      <div className="flex flex-col gap-2 px-4 text-sm text-[#73737A] dark:text-zinc-400 lg:px-6 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col gap-2 px-4 text-sm pt-2 py-4 text-[#73737A] dark:text-zinc-400 lg:px-6 sm:flex-row sm:items-center sm:justify-between">
         <label className="flex items-center gap-2">
           <span>Elements par page</span>
           <select

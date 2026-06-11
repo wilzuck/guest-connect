@@ -6,6 +6,7 @@ import { Grid2x2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils/cn";
 import { ListingPhotoViewer } from "@/components/gallery/ListingPhotoViewer";
+import { ButtonLink } from "../ui/Button";
 
 type ListingImageGalleryProps = {
   title: string;
@@ -72,7 +73,7 @@ export function ListingImageGallery({ title, images }: ListingImageGalleryProps)
         <button
           type="button"
           onClick={() => openAt(0)}
-          className="absolute bottom-4 right-4 inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/95 px-4 py-2 text-sm font-semibold text-black shadow-sm backdrop-blur transition hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20 dark:border-white/15 dark:bg-zinc-900/90 dark:text-white dark:hover:bg-zinc-900 dark:focus-visible:ring-white/25"
+          className="absolute bottom-4 right-4 inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/95 px-4 py-2 text-sm font-semibold text-black shadow-sm backdrop-blur transition hover:bg-white/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20 dark:border-white/15 dark:bg-zinc-900/80 dark:text-white dark:hover:bg-zinc-900 dark:focus-visible:ring-white/25"
         >
           <Grid2x2 className="size-4" aria-hidden="true" />
           {t("showAllPhotos", { count: images.length })}
@@ -108,12 +109,13 @@ function GalleryTile({
   label: string;
 }) {
   return (
-    <button
+    <ButtonLink
+      href="#"
       type="button"
       onClick={onClick}
       aria-label={label}
       className={cn(
-        "group relative w-full overflow-hidden bg-zinc-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/30 dark:bg-zinc-900 dark:focus-visible:ring-white/30",
+        "group relative rounded-none w-full overflow-hidden border-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/30 dark:bg-zinc-900 dark:focus-visible:ring-white/30",
         className,
       )}
     >
@@ -125,6 +127,6 @@ function GalleryTile({
         sizes={sizes}
         className="object-cover transition duration-300 group-hover:scale-[1.02]"
       />
-    </button>
+    </ButtonLink>
   );
 }
