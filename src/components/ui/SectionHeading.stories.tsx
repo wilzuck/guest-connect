@@ -1,29 +1,46 @@
+import type { Meta, StoryObj } from "@storybook/react";
+
 import { SectionHeading } from "./SectionHeading";
 
-const meta = {
-  title: "Atoms/SectionHeading",
+const meta: Meta<typeof SectionHeading> = {
+  title: "UI/SectionHeading",
   component: SectionHeading,
+  tags: ["autodocs"],
+  args: {
+    eyebrow: "Guest Connect",
+    title: "Découvrez des expériences uniques",
+    description:
+      "Réservez des hébergements, voitures et expériences premium partout dans le monde.",
+    align: "left",
+  },
+  argTypes: {
+    align: {
+      control: "radio",
+      options: ["left", "center"],
+    },
+  },
 };
 
 export default meta;
 
-export function Default() {
-  return (
-    <SectionHeading
-      eyebrow="GuestConnect"
-      title="Des logements prêts à réserver"
-      description="Un titre de section réutilisable pour les pages marketing, les listes publiques et les espaces de gestion."
-    />
-  );
-}
+type Story = StoryObj<typeof SectionHeading>;
 
-export function Centered() {
-  return (
-    <SectionHeading
-      align="center"
-      eyebrow="Services"
-      title="Trouvez le bon prestataire"
-      description="Photographie, réparation, couture, lieux de loisirs et services utiles autour du séjour."
-    />
-  );
-}
+export const Default: Story = {};
+
+export const Centered: Story = {
+  args: {
+    align: "center",
+  },
+};
+
+export const WithoutDescription: Story = {
+  args: {
+    description: undefined,
+  },
+};
+
+export const WithoutEyebrow: Story = {
+  args: {
+    eyebrow: undefined,
+  },
+};

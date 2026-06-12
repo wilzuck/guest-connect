@@ -38,8 +38,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 name: Local Config
 version: 1.0.0
 schema: v1
-models:
-  - name: GPT-5.2
-    provider: openai
-    model: gpt-5.2
-    apiKey: con-35f3f8ca01042a1b264bbae7612e4ef28042a26ddefed61cfac3a031672bb2f8
+#067a80

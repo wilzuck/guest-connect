@@ -1,11 +1,21 @@
-const config = {
+import path from "path";
+
+export default {
   stories: ["../src/**/*.stories.@(js|jsx|ts|tsx)"],
-  addons: [],
+  addons: [
+    "@storybook/addon-essentials",
+    "@storybook/addon-interactions",
+  ],
   framework: {
     name: "@storybook/nextjs",
     options: {},
   },
-  staticDirs: ["../public"],
-};
+  webpackFinal: async (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      "@": path.resolve(__dirname, "../src"),
+    };
 
-module.exports = config;
+    return config;
+  },
+};
