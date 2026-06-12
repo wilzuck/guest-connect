@@ -2,7 +2,11 @@
   "permissions": {
     "allow": [
       "Bash(node -e ' *)",
-      "Bash(npx tsc *)"
+      "Bash(npx tsc *)",
+      "Read(//home/eteka/project/guestconnect/src/app/[locale]/dashboard/**)",
+      "Read(//home/eteka/project/guestconnect/src/app/[locale]/dashboard/admin/**)",
+      "Read(//home/eteka/project/guestconnect/src/app/[locale]/dashboard/host/**)",
+      "Read(//home/eteka/project/guestconnect/src/app/[locale]/dashboard/service-management/**)"
     ]
   }
 }

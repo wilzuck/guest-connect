@@ -37,12 +37,12 @@ export function Calendar({ className, classNames, showOutsideDays = true, ...pro
           "data-[selected=true]:rounded-xl",
 
         // Selected / range (shadcn-like)
-        [SelectionState.selected]: "bg-black/20 hover:bg-black/20 rounded-xl dark:bg-white/10 dark:hover:bg-white/10",
+        [SelectionState.selected]: "bg-black/20 hover:bg-black/20  dark:bg-white/10 dark:hover:bg-white/10",
         [SelectionState.range_start]: "bg-black/20 hover:bg-black/20 rounded-l-xl",
-        [SelectionState.range_end]: "bg-black/20  rounded-r-xl hover:bg-black/20",
-        [SelectionState.range_middle]: "bg-black/5",
+        [SelectionState.range_end]: "bg-black/20  rounded-r-xl hover:bg-black/20 ",
+        [SelectionState.range_middle]: "bg-black/5 rounded-none!",
 
-        [DayFlag.today]: "ring-2 ring-black/20",
+        [DayFlag.today]: "ring-1 ring-black/80 rounded-xl",
         [DayFlag.outside]: "text-zinc-300",
         [DayFlag.disabled]: "text-zinc-300",
         ...classNames,

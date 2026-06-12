@@ -85,36 +85,7 @@ export function SearchBar({
 
   return (
     <form onSubmit={handleSubmit} className="w-full">
-      {showCategories ? (
-        <div
-          className="mb-2 inline-flex items-center gap-1 rounded-full border border-black/10 bg-white p-1 dark:border-white/15 dark:bg-zinc-900"
-          role="tablist"
-          aria-label={t("ariaCategory")}
-        >
-          {categoryTabs.map((tab) => {
-            const Icon = tab.icon;
-            const active = tab.key === activeCategory;
-            return (
-              <button
-                key={tab.key}
-                type="button"
-                role="tab"
-                aria-selected={active}
-                onClick={() => setActiveCategory(tab.key)}
-                className={cn(
-                  "inline-flex h-9 items-center gap-2 rounded-full px-4 text-sm font-semibold transition",
-                  active
-                    ? "bg-zinc-900 text-white dark:bg-white dark:text-zinc-900"
-                    : "text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-white",
-                )}
-              >
-                <Icon className="h-4 w-4" aria-hidden="true" />
-                {tab.label}
-              </button>
-            );
-          })}
-        </div>
-      ) : null}
+     
       {/* Desktop: une seule ligne fluide. Mobile: layout optimisé. Compact: version hero (petite). */}
       <div
         className={[
@@ -122,7 +93,7 @@ export function SearchBar({
           variant === "compact"
             ? "rounded-xl border border-black/10 p-2"
             : // Full width : pas de shadow, radius plus petit
-              "bg-white dark:bg-black rounded-xl border border-black/10 dark:border-white/15 p-4 lg:p-3",
+              "bg-white dark:bg-black rounded-xl  shadow-xl border border-black/10 dark:border-white/15 p-4 lg:p-3",
         ].join(" ")}
       >
         {/* Desktop */}
@@ -190,7 +161,7 @@ export function SearchBar({
                 <div className="ml-auto flex items-center gap-2">
                   <button
                     type="button"
-                    className="grid h-9 w-9 place-items-center rounded-full bg-black/[0.04] text-black transition hover:bg-black/[0.08] active:scale-[0.96]"
+                    className="grid h-9 w-9 place-items-center rounded-full bg-black/4 text-black transition hover:bg-black/8 active:scale-[0.96]"
                     onClick={() => setGuests((g) => Math.max(1, g - 1))}
                     aria-label={t("ariaRemoveGuest")}
                   >
@@ -199,7 +170,7 @@ export function SearchBar({
 
                   <button
                     type="button"
-                    className="grid h-9 w-9 place-items-center rounded-full bg-black/[0.04] text-black transition hover:bg-black/[0.08] active:scale-[0.96]"
+                    className="grid h-9 w-9 place-items-center rounded-full bg-black/4 text-black transition hover:bg-black/8 active:scale-[0.96]"
                     onClick={() => setGuests((g) => g + 1)}
                     aria-label={t("ariaAddGuest")}
                   >
@@ -222,7 +193,7 @@ export function SearchBar({
         {/* Mobile */}
         <div
           className={[
-            "grid gap-2",
+            "grid gap-2 shadow-xl rounded-2xl",
             variant === "auto" ? "md:hidden" : "",
             variant === "mobile" || variant === "compact" ? "" : "hidden",
           ].join(" ")}
@@ -241,7 +212,7 @@ export function SearchBar({
               onChange={(e) => setDestination(e.target.value)}
               placeholder={t("placeholderDestination")}
               aria-label={t("ariaDestination")}
-              className="h-12 w-full min-w-0 flex-1 border-0 bg-transparent px-0 !shadow-none outline-none text-sm text-black placeholder:text-zinc-500 transition focus:border-transparent"
+              className="h-12 w-full min-w-0 flex-1 border-0 bg-transparent px-0 shadow-none! outline-none text-sm text-black placeholder:text-zinc-500 transition focus:border-transparent"
             />
             <button
               type="button"
@@ -295,7 +266,7 @@ export function SearchBar({
                 <div className="ml-auto flex items-center gap-2">
                   <button
                     type="button"
-                    className="grid h-9 w-9 place-items-center rounded-full bg-black/[0.04] text-black transition hover:bg-black/[0.08] active:scale-[0.96]"
+                    className="grid h-9 w-9 place-items-center rounded-full bg-black/4 text-black transition hover:bg-black/8 active:scale-[0.96]"
                     onClick={() => setGuests((g) => Math.max(1, g - 1))}
                     aria-label={t("ariaRemoveGuest")}
                   >
@@ -304,7 +275,7 @@ export function SearchBar({
 
                   <button
                     type="button"
-                    className="grid h-9 w-9 place-items-center rounded-full bg-black/[0.04] text-black transition hover:bg-black/[0.08] active:scale-[0.96]"
+                    className="grid h-9 w-9 place-items-center rounded-full bg-black/4 text-black transition hover:bg-black/8 active:scale-[0.96]"
                     onClick={() => setGuests((g) => g + 1)}
                     aria-label={t("ariaAddGuest")}
                   >
@@ -327,6 +298,41 @@ export function SearchBar({
           </Button>
         </div>
       </div>
+      {/* Category */}
+      {showCategories ? (
+        <div className="max-w-full overflow-auto">
+          <div
+            className="mb-2 inline-flex mt-4 items-center gap-1 rounded-full "
+            role="tablist"
+            aria-label={t("ariaCategory")}
+          >
+            {categoryTabs.map((tab) => {
+              const Icon = tab.icon;
+              const active = tab.key === activeCategory;
+              return (
+                <button
+                  key={tab.key}
+                  type="button"
+                  role="tab"
+                  aria-selected={active}
+                  onClick={() => setActiveCategory(tab.key)}
+                  className={cn(
+                    "inline-flex h-9 items-center gap-2 rounded-full px-4 text-sm font-semibold transition",
+                    active
+                      ? "bg-black/5 dark:bg-zinc-700 dark:text-zinc-100"
+                      : "text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-white",
+                  )}
+                >
+                  <Icon className="h-4 w-4" aria-hidden="true" />
+                  {tab.label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      ) : null
+      }
+      
     </form>
   );
 }

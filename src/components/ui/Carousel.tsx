@@ -5,7 +5,7 @@ export function Carousel({ children, className }: { children: ReactNode; classNa
   return (
     <div
       className={cn(
-        "flex snap-x gap-4 overflow-x-auto scroll-smooth pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&>*]:snap-start [&::-webkit-scrollbar]:hidden",
+        "flex snap-x gap-4 overflow-x-auto scroll-smooth pb-2 [-ms-overflow-style:none] scrollbar-none *:snap-start [&::-webkit-scrollbar]:hidden",
         className,
       )}
     >

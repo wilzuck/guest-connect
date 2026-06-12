@@ -56,7 +56,7 @@ export function HomeListingsExplorer({ listings }: HomeListingsExplorerProps) {
             <h2 className="text-balance text-3xl font-semibold tracking-tight text-black dark:text-white sm:text-4xl">
               {t("title")}
             </h2>
-            <div className="flex justify-center sm:justify-end">
+            <div className="flex justify-start sm:justify-end">
               <ButtonLink href={`/${locale}/stays`} variant="outline" size="md">
                 {t("viewAll")} <ChevronRight className="h-4 w-4" />
               </ButtonLink>

@@ -14,7 +14,7 @@ export async function HeroSection() {
 
   return (
     <section className="relative overflow-hidden">
-      <div className="relative min-h-80 lg:min-h-[350px]">
+      <div className="relative min-h-60 lg:min-h-90">
         {/* Background image */}
         <div className="absolute inset-0">
           <Image
@@ -49,7 +49,7 @@ export async function HeroSection() {
       </div>
       <Container className="-mt-10 relative z-20">
         {/* Search */}
-        <div className="rounded-xl shadow-lg">
+        <div className="flex justify-center">
           <SearchBar variant="auto" />
         </div>
       </Container>

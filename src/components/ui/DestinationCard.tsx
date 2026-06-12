@@ -22,7 +22,7 @@ export function DestinationCard({
       aria-label={exploreLabel}
       className="group block overflow-hidden transition hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 dark:focus-visible:ring-white dark:focus-visible:ring-offset-black"
     >
-      <div className="relative aspect-[16/9] overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-900">
+      <div className="relative aspect-video overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-900">
         <Image
           src={imageUrl}
           alt={`${city}, ${country}`}
@@ -31,7 +31,7 @@ export function DestinationCard({
           className="object-cover transition duration-700 group-hover:scale-[1.05]"
         />
 
-        <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/10 to-transparent" />
 
         <div className="absolute inset-x-0 bottom-0 p-3 text-white">
           <p className="truncate text-sm font-semibold tracking-tight" title={city}>

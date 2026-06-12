@@ -189,7 +189,7 @@ export function buildListingFilterControls(params: ListingFilterParams): FilterC
       step: 10,
       minValue: params.minPrice,
       maxValue: params.maxPrice,
-      suffix: "€",
+      suffix: "",
     },
     {
       type: "range",
