@@ -37,6 +37,7 @@ import {
   WEEKDAY_OPTIONS,
 } from "@/constants/listing-filters";
 import { cn } from "@/lib/utils/cn";
+import { SearchHomesBar } from "@/components/ui/SearchHomesBar";
 
 export const metadata: Metadata = {
   title: "Recherche - GuestConnect",
@@ -66,59 +67,13 @@ export default async function Page({ searchParams }: PageProps) {
 
   return (
     <div className="bg-zinc-100  text-zinc-950 dark:bg-black dark:text-white">
-      <section className="border-b border-black/10 bg-zinc-10__dark:bg-zinc-950">
-        <Container className="py-8 sm:py-10">
-          <div className="overflow-hidden rounded-[28px] border border-black/10 bg-white shadow-sm shadow-black/5 dark:bg-zinc-950 dark:shadow-black/30">
-            <div className="grid grid-cols-2 border-b border-black/10 sm:flex sm:w-fit sm:border-r">
-              <SearchTab href={`/${locale}/services`} icon={<Car className="h-4 w-4" />} label="Services" />
-              <SearchTab active href={`/${locale}/search`} icon={<Home className="h-4 w-4" />} label="Homes" />
-            </div>
-
-            <form action={`/${locale}/search`} method="get" className="grid lg:grid-cols-[1.4fr_0.9fr_0.9fr_0.8fr_auto]">
-              <SearchField label={t("where")} icon={<MapPin className="h-4 w-4" />}>
-                <input
-                  name="destination"
-                  defaultValue={destination}
-                  placeholder={t("destinationPlaceholder")}
-                  className="w-full bg-transparent text-sm font-semibold text-black outline-none placeholder:text-zinc-400 dark:text-white"
-                />
-              </SearchField>
-              <SearchField label={t("checkIn")} icon={<CalendarDays className="h-4 w-4" />}>
-                <input
-                  name="checkIn"
-                  type="date"
-                  defaultValue={sp.checkIn}
-                  className="w-full bg-transparent text-sm font-semibold text-black outline-none dark:text-white"
-                />
-              </SearchField>
-              <SearchField label={t("checkOut")} icon={<CalendarDays className="h-4 w-4" />}>
-                <input
-                  name="checkOut"
-                  type="date"
-                  defaultValue={sp.checkOut}
-                  className="w-full bg-transparent text-sm font-semibold text-black outline-none dark:text-white"
-                />
-              </SearchField>
-              <SearchField label={t("guests")} icon={<Users className="h-4 w-4" />}>
-                <input
-                  name="guests"
-                  type="number"
-                  min={1}
-                  defaultValue={Number.isFinite(guests) ? guests : 2}
-                  className="w-full bg-transparent text-sm font-semibold text-black outline-none dark:text-white"
-                />
-              </SearchField>
-              <button
-                type="submit"
-                className="m-2 inline-flex min-h-14 items-center justify-center gap-2 rounded-2xl bg-black px-6 text-sm font-semibold text-white transition hover:bg-zinc-900 dark:bg-white dark:text-black dark:hover:bg-zinc-200"
-              >
-                <Search className="h-4 w-4" aria-hidden="true" />
-                {t("updateSearch")}
-              </button>
-            </form>
-          </div>
-        </Container>
-      </section>
+      <SearchHomesBar
+        locale={locale}
+        destination={destination}
+        checkIn={sp.checkIn}
+        checkOut={sp.checkOut}
+        guests={Number.isFinite(guests) ? guests : 2}
+      />
 
       <section className="bg-white dark:bg-black">
         <Container className="py-8 sm:py-10">
@@ -148,11 +103,11 @@ export default async function Page({ searchParams }: PageProps) {
             chips={filterChips}
           />
 
-          <div className="mt-6 grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px] xl:grid-cols-[minmax(0,1fr)_360px]">
+          <div className="mt-6 grid gap-2 xl:grid-cols-[minmax(0,1fr)_360px] xl:items-start">
             <div className="min-w-0">
               {filtered.length > 0 ? (
                 <>
-                  <div className="grid gap-x-5 gap-y-7 sm:grid-cols-2">
+                  <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
                     {filtered.map((listing) => (
                       <ListingCard
                         key={listing.id}
@@ -160,10 +115,11 @@ export default async function Page({ searchParams }: PageProps) {
                         listing={listing}
                         variant="outlined"
                         badge={listing.rating >= 4.8 ? "4.8" : undefined}
-                        className="[&>div]:rounded-2xl [&>div]:p-3"
+                        className="[&>div]:rounded-2xl "
                       />
                     ))}
                   </div>
+
                   <PaginationBar locale={locale} params={sp} />
                 </>
               ) : (

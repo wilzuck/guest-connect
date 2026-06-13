@@ -24,7 +24,6 @@ export default async function ListingPage({ params }: PageProps) {
   return (
     <div >
       <Container className="py-10 sm:py-14">
-        mlkklkklkl
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
@@ -56,7 +55,7 @@ export default async function ListingPage({ params }: PageProps) {
 
           {/* Galerie */}
           <div className="grid gap-3 lg:grid-cols-12">
-            <div className="relative aspect-[16/10] overflow-hidden rounded-3xl border border-black/10 bg-zinc-100 shadow-sm shadow-black/5 lg:col-span-8">
+            <div className="relative aspect-16/10 overflow-hidden rounded-3xl border border-black/10 bg-zinc-100 shadow-sm shadow-black/5 lg:col-span-8">
               <Image
                 src={images[0]}
                 alt={`${listing.title} — photo principale`}
@@ -70,7 +69,7 @@ export default async function ListingPage({ params }: PageProps) {
               {images.slice(1, 3).map((src, idx) => (
                 <div
                   key={src}
-                  className="relative aspect-[16/10] overflow-hidden rounded-3xl border border-black/10 bg-zinc-100 shadow-sm shadow-black/5"
+                  className="relative aspect-16/10 overflow-hidden rounded-3xl border border-black/10 bg-zinc-100 shadow-sm shadow-black/5"
                 >
                   <Image
                     src={src}

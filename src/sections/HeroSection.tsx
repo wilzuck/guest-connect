@@ -7,6 +7,7 @@ import { TopSearchCarousel } from "@/components/listings/TopSearchCarousel";
 import { africaListings } from "@/lib/mock/africa-listings";
 import { ShieldCheck, RefreshCcw, BadgeCheck, Star } from "lucide-react";
 import Divider from "@/components/ui/Divider";
+import { cn } from "@/lib/utils/cn";
 
 export async function HeroSection() {
   const t = await getTranslations("hero");
@@ -28,7 +29,7 @@ export async function HeroSection() {
 
           <div className="absolute inset-0 bg-black/50" />
 
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/35 to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-r from-black/80 via-black/35 to-transparent" />
         </div>
 
         <Container className="relative z-10 pt-10 pb-12 lg:pt-16">
@@ -50,7 +51,7 @@ export async function HeroSection() {
       <Container className="-mt-10 relative z-20">
         {/* Search */}
         <div className="flex justify-center">
-          <SearchBar variant="auto" />
+          <SearchBar variant="auto" className="bg-red-200 shadow-md mb-4" showCategories={false} />
         </div>
       </Container>
       
@@ -63,7 +64,7 @@ export async function HeroSection() {
           />
         </div>
       </Container>
-      <div className="border-y border-black/5 dark:border-white/10">
+      <div className="border-y mt-4 sm:mt-6 border-black/5 dark:border-white/10">
         <Container className="py-6 lg:py-8">
           {/* Trust indicators */}
           <div className="grid grid-cols-2 gap-4 rounded-2xl lg:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] lg:items-center">
@@ -110,7 +111,6 @@ export async function HeroSection() {
     </section>
   );
 }
-import { cn } from "@/lib/utils/cn";
 
 type TrustItemProps = {
   icon: React.ReactNode;

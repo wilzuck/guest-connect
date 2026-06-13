@@ -12,7 +12,10 @@ export async function TestimonialsSection() {
         <SectionHeading eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
 
         <div className="mt-10">
-          <TestimonialsCarousel items={testimonials} />
+          <TestimonialsCarousel 
+            items={testimonials}
+            dotsPosition="end"
+          />
         </div>
       </Container>
     </section>

@@ -84,7 +84,7 @@ export function Navbar() {
                   className={[
                     "text-sm font-medium transition-colors",
                     active
-                      ? "text-black dark:text-white"
+                      ? "text-black font-bold dark:text-white"
                       : "text-zinc-600 hover:text-black dark:text-zinc-300 dark:hover:text-white",
                   ].join(" ")}
                 >
@@ -113,7 +113,7 @@ export function Navbar() {
           </ButtonLink>
         </div>
 
-        <div className="ml-auto flex items-center gap-2">
+        <div className="ml-auto flex items-center md:gap-2">
           <ButtonLink
             href={`/${locale}/host`}
             variant="primary"

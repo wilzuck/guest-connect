@@ -42,7 +42,7 @@ export function Calendar({ className, classNames, showOutsideDays = true, ...pro
         [SelectionState.range_end]: "bg-black/20  rounded-r-xl hover:bg-black/20 ",
         [SelectionState.range_middle]: "bg-black/5 rounded-none!",
 
-        [DayFlag.today]: "ring-1 ring-black/80 rounded-xl",
+        [DayFlag.today]: "ring-1 ring-black/10",
         [DayFlag.outside]: "text-zinc-300",
         [DayFlag.disabled]: "text-zinc-300",
         ...classNames,

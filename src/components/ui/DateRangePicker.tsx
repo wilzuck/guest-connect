@@ -22,7 +22,7 @@ type DateRangePickerProps = {
   endLabel: string;
   className?: string;
   size?: "md" | "sm";
-  fieldVariant?: "plain" | "bordered";
+  fieldVariant?: "plain" | "bordered" | "compact";
 };
 
 function toDate(value?: string) {
@@ -97,71 +97,103 @@ export function DateRangePicker({
   const startText = fmt(from);
   const endText = fmt(to);
 
-  const Trigger = (
-    <div
-  className={cn(
-    "grid grid-cols-1 gap-2 sm:grid-cols-2",
-    className,
-  )}
->
-  {/* START DATE */}
-  <button
-    type="button"
-    className={cn(
-      "group w-full rounded-2xl bg-white text-left transition hover:bg-zinc-50 focus:outline-none focus:ring-4 focus:ring-black/5 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:bg-zinc-800 dark:focus:ring-white/10",
-      fieldVariant === "bordered" ? "border border-black/10 dark:border-zinc-800" : "",
-      size === "sm" ? "h-12 px-3 py-2" : "h-14 p-[10px]",
-    )}
-    aria-label={startLabel}
-  >
-    <div className="flex items-start gap-3">
-      <Calendar1 className="h-4 w-4 md:hidden lg:block text-zinc-400 shrink-0" />
+  const isCompact = fieldVariant === "compact";
 
-      <div className="min-w-0">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-zinc-500">
-          {startLabel}
-        </p>
-        <p
-          className={cn(
-            "mt-1 truncate text-sm font-semibold",
-            from ? "text-zinc-950 dark:text-zinc-50" : "text-zinc-500 dark:text-zinc-400",
-          )}
-        >
-          {startText}
-        </p>
-      </div>
-    </div>
-  </button>
-
-  {/* END / USERS */}
-  <button
-    type="button"
+const Trigger = (
+  <div
     className={cn(
-      "group w-full rounded-2xl bg-white text-left transition hover:bg-zinc-50 focus:outline-none focus:ring-4 focus:ring-black/5 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:bg-zinc-800 dark:focus:ring-white/10",
-      fieldVariant === "bordered" ? "border border-black/10 dark:border-zinc-800" : "",
-      size === "sm" ? "h-12 px-3 py-2" : "h-14 p-[10px]",
+      "grid grid-cols-1 gap-3 sm:grid-cols-2",
+      isCompact && "gap-3",
+      className,
     )}
-    aria-label={endLabel}
   >
-    <div className="flex items-start gap-3">
-      <Calendar1 className="h-4 w-4 md:hidden lg:block text-zinc-400 shrink-0" />
-      <div className="min-w-0">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-zinc-500">
-          {endLabel}
-        </p>
-        <p
-          className={cn(
-            "mt-1 truncate text-sm font-semibold",
-            to ? "text-zinc-950 dark:text-zinc-50" : "text-zinc-500 dark:text-zinc-400",
-          )}
-        >
-          {endText}
-        </p>
+    <button
+      type="button"
+      className={cn(
+        "group w-full rounded-2xl bg-white text-left transition hover:bg-zinc-50 focus:outline-none focus:ring-4 focus:ring-black/5 dark:bg-zinc-900 dark:hover:bg-zinc-800 dark:focus:ring-white/10",
+        fieldVariant !== "plain" && "border border-zinc-200 dark:border-white/10",
+        isCompact
+          ? "min-h-16 px-4 py-3"
+          : size === "sm"
+            ? "h-12 px-3 py-2"
+            : "h-14 p-2.5",
+      )}
+      aria-label={startLabel}
+    >
+      <div className="flex h-full items-center gap-3">
+        <Calendar1 className="size-5 shrink-0 text-zinc-400 dark:text-zinc-500" />
+
+        <div className="min-w-0">
+          <p
+            className={cn(
+              "font-semibold uppercase text-zinc-500 dark:text-zinc-400",
+              isCompact
+                ? "text-[11px] tracking-[0.22em]"
+                : "text-[11px] tracking-[0.18em]",
+            )}
+          >
+            {startLabel}
+          </p>
+
+          <p
+            className={cn(
+              "mt-1 truncate font-semibold",
+              isCompact ? "text-sm" : "text-sm",
+              from
+                ? "text-zinc-950 dark:text-zinc-50"
+                : "text-zinc-500 dark:text-zinc-400",
+            )}
+          >
+            {startText}
+          </p>
+        </div>
       </div>
-    </div>
-  </button>
-</div>
-  );
+    </button>
+
+    <button
+      type="button"
+      className={cn(
+        "group w-full rounded-2xl bg-white text-left transition hover:bg-zinc-50 focus:outline-none focus:ring-4 focus:ring-black/5 dark:bg-zinc-900 dark:hover:bg-zinc-800 dark:focus:ring-white/10",
+        fieldVariant !== "plain" && "border border-zinc-200 dark:border-white/10",
+        isCompact
+          ? "min-h-16 px-4 py-3"
+          : size === "sm"
+            ? "h-12 px-3 py-2"
+            : "h-14 p-[10px]",
+      )}
+      aria-label={endLabel}
+    >
+      <div className="flex h-full items-center gap-3">
+        <Calendar1 className="size-5 shrink-0 text-zinc-400 dark:text-zinc-500" />
+
+        <div className="min-w-0">
+          <p
+            className={cn(
+              "font-semibold uppercase text-zinc-500 dark:text-zinc-400",
+              isCompact
+                ? "text-[11px] tracking-[0.22em]"
+                : "text-[11px] tracking-[0.18em]",
+            )}
+          >
+            {endLabel}
+          </p>
+
+          <p
+            className={cn(
+              "mt-1 truncate font-semibold",
+              isCompact ? "text-sm" : "text-sm",
+              to
+                ? "text-zinc-950 dark:text-zinc-50"
+                : "text-zinc-500 dark:text-zinc-400",
+            )}
+          >
+            {endText}
+          </p>
+        </div>
+      </div>
+    </button>
+  </div>
+);
 
   const calendar = (
     <Calendar

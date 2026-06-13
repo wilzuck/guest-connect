@@ -16,9 +16,13 @@ const display = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "GuestConnect — Maisons d’hôtes premium",
+  title: "GuestConnect — Maisons d'hôtes premium",
   description:
-    "Trouvez et réservez des maisons d’hôtes vérifiées partout dans le monde. Une expérience premium, simple et fiable.",
+    "Trouvez et réservez des maisons d'hôtes vérifiées partout dans le monde. Une expérience premium, simple et fiable.",
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-icon.png",
+  },
 };
 
 export default function RootLayout({

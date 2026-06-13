@@ -108,7 +108,7 @@ const conversations: InboxConversation[] = [
 
 export default function MessagesPage() {
   return (
-    <div className=" border-t border-black/10">
+    <div className=" border-t border-black/5">
       <Container>
         <MessagesInbox
           title="Messages"

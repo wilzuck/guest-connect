@@ -3,6 +3,7 @@ import Link from "next/link";
 import { getLocale } from "next-intl/server";
 import { Card } from "@/components/ui/Card";
 import { AccountShell } from "@/components/account/AccountShell";
+import { ProfileClient } from "@/components/account/ProfileClient";
 
 export const metadata: Metadata = {
   title: "Dashboard — GuestConnect",
@@ -12,6 +13,23 @@ export const metadata: Metadata = {
 export default async function Page() {
   const locale = await getLocale();
   const isEn = locale === "en";
+
+  // Démo: utilisateur “connecté”
+  const user = {
+    name: "Amina Kouyaté",
+    email: "amina@example.com",
+    phone: "+221 77 000 00 00",
+    location: isEn ? "Dakar, Senegal" : "Dakar, Sénégal",
+    bio: isEn
+      ? "I love curated stays, local food and design-led experiences."
+      : "J’aime les séjours sélectionnés, la cuisine locale et les expériences premium.",
+  };
+
+  const stats = [
+    { k: isEn ? "Reservations" : "Réservations", v: "2" },
+    { k: isEn ? "Favorites" : "Favoris", v: "6" },
+    { k: isEn ? "Reviews" : "Avis", v: "1" },
+  ];
 
   return (
     <AccountShell
@@ -41,20 +59,38 @@ export default async function Page() {
           <p className="mt-1 text-sm text-zinc-600">{isEn ? "help center" : "centre d’aide"}</p>
         </Card>
       </div>
+      
+      <div className="grid gap-6 lg:grid-cols-12">
+        <div className="lg:col-span-4">
+          <Card className="p-6 shadow-none">
+            <div className="flex items-center gap-4">
+              <div className="grid h-14 w-14 place-items-center rounded-2xl bg-black text-white">
+                <span className="text-lg font-semibold">{user.name.split(" ").map((s) => s[0]).slice(0, 2).join("")}</span>
+              </div>
+              <div className="min-w-0">
+                <p className="truncate text-base font-semibold ">{user.name}</p>
+                <p className="truncate text-sm text-zinc-600">{user.email}</p>
+                <p className="truncate text-xs text-zinc-500">{user.location}</p>
+              </div>
+            </div>
 
-      <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <QuickLink href={`/${locale}/profile`} title={isEn ? "Profile" : "Profil"} desc={isEn ? "Personal info and preferences" : "Infos personnelles et préférences"} />
-        <QuickLink href={`/${locale}/reservations`} title={isEn ? "Reservations" : "Réservations"} desc={isEn ? "Upcoming stays and history" : "Séjours à venir et historique"} />
-        <QuickLink href={`/${locale}/favorites`} title={isEn ? "Favorites" : "Favoris"} desc={isEn ? "Saved listings and notes" : "Annonces enregistrées"} />
-        <QuickLink href={`/${locale}/settings`} title={isEn ? "Settings" : "Paramètres"} desc={isEn ? "Notifications and security" : "Notifications et sécurité"} />
-      </div>
+            <div className="mt-6 grid grid-cols-3 gap-3">
+              {stats.map((s) => (
+                <div key={s.k} className="rounded-2xl bg-zinc-50 p-3 dark:bg-zinc-900 text-center">
+                  <p className="text-lg font-semibold tracking-tight">{s.v}</p>
+                  <p className="mt-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-zinc-500">{s.k}</p>
+                </div>
+              ))}
+            </div>
 
-      <div className="mt-10">
-        <p className="text-sm font-semibold ">{isEn ? "Management" : "Gestion"}</p>
-        <p className="mt-2 text-sm text-zinc-600">{isEn ? "Host and admin dashboards (demo)." : "Accès aux espaces Hôte et Admin (démo)."}</p>
-        <div className="mt-4 grid gap-4 sm:grid-cols-2">
-          <QuickLink href={`/${locale}/dashboard/host`} title={isEn ? "Host dashboard" : "Espace hôte"} desc={isEn ? "Create and manage your listings" : "Créer et gérer vos logements"} />
-          <QuickLink href={`/${locale}/dashboard/service-management`} title={isEn ? "Admin back-office" : "Back-office admin"} desc={isEn ? "Manage categories, locations, services…" : "Gérer catégories, lieux, services…"} />
+            <p className="mt-5 text-xs text-zinc-500">
+              {isEn ? "Demo page — connect to your auth/profile API later." : "Page démo — à brancher ensuite à votre API d’auth/profil."}
+            </p>
+          </Card>
+        </div>
+
+        <div className="lg:col-span-8">
+          <ProfileClient isEn={isEn} user={user} />
         </div>
       </div>
     </AccountShell>

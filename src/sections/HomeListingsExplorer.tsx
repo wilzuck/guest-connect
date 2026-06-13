@@ -47,7 +47,7 @@ export function HomeListingsExplorer({ listings }: HomeListingsExplorerProps) {
 
   return (
     <section id="listings" className=" dark:bg-zinc-950 dark:shadow-black/30 dark:focus-visible:ring-white dark:focus-visible:ring-offset-black">
-      <Container className="py-16 sm:py-20">
+      <Container className="py-10 sm:py-16">
         <div className="text-left">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 dark:text-white/80">
             {t("eyebrow")}
@@ -66,7 +66,6 @@ export function HomeListingsExplorer({ listings }: HomeListingsExplorerProps) {
             {t("description")}
           </p>
         </div>
-
         <CategoryBar
           active={active}
           onChange={setActive}
@@ -75,10 +74,10 @@ export function HomeListingsExplorer({ listings }: HomeListingsExplorerProps) {
         />
 
         {filtered.length > 0 ? (
-          <ListingGrid className="mt-8">
+          <ListingGrid className="mt-8 gap-y-4">
             {filtered.map((l) => (
               <div key={l.id} className="min-w-0">
-                <ListingCard locale={locale} listing={l} variant="plain" />
+                <ListingCard locale={locale} listing={l} variant="plain" className="mb-4"  />
               </div>
             ))}
           </ListingGrid>

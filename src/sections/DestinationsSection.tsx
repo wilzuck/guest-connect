@@ -5,6 +5,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { africaListings } from "@/lib/mock/africa-listings";
 import { ChevronRight } from "lucide-react";
 import { DestinationsCarousel } from "@/components/listings/DestinationsCarousel";
+import { BackButton } from "@/components/ui/BackButton";
 
 type Destination = {
   city: string;
@@ -38,22 +39,39 @@ export async function DestinationsSection() {
   const destinations = getDestinations();
 
   return (
-    <section id="destinations" className="border-t border-black/5 dark:border-white/10">
-      <Container className="py-8 sm:py-16">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <SectionHeading
-            eyebrow={t("eyebrow")}
-            title={t("title")}
-            description={t("description")}
-          />
-          <div className="shrink-0">
-            <ButtonLink href={`/${locale}/stays`} className="" variant="outline" size="md">
-              {t("viewAll")} <ChevronRight className="h-4 w-4" />
-            </ButtonLink>
+    <section
+      id="destinations"
+      className="border-t border-black/5 dark:border-white/10"
+    >
+      <Container className="py-4 sm:py-6">
+        <DestinationsCarousel
+          locale={locale}
+          destinations={destinations}
+          header={
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+              <SectionHeading
+                eyebrow={t("eyebrow")}
+                title={t("title")}
+                description={t("description")}
+              />
+            </div>
+          }
+        />
+
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <div>
+            {/* titre + description */}
+          </div>
+
+          <div className="my-2 flex w-full shrink-0 justify-start lg:w-auto lg:justify-end ">
+            <BackButton
+              href={`/${locale}/stays`}
+              className="-ml-3 lg:-mr-3"
+               label={t("viewAll")}
+               buttonPosition="end"
+               />
           </div>
         </div>
-
-        <DestinationsCarousel locale={locale} destinations={destinations} />
       </Container>
     </section>
   );

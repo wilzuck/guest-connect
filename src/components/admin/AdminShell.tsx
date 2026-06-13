@@ -219,9 +219,9 @@ export function AdminShell({
               min-h-0 flex-1 overflow-y-auto px-3
               scrollbar-thin
               scrollbar-track-transparent
-              scrollbar-thumb-zinc-300
+              scrollbar-thumb-transparent
               hover:scrollbar-thumb-zinc-400
-              dark:scrollbar-thumb-zinc-700
+              dark:scrollbar-thumb-transparent
               dark:hover:scrollbar-thumb-zinc-600
             "
           >

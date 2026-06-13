@@ -11,7 +11,7 @@ export async function SocialProofSection() {
   ];
 
   return (
-    <section className="border-y hidden border-black/5 bg-white dark:border-black/10 dark:bg-black">
+    <section className="border-y hidden border-black/5 dark:border-black/10">
       <Container className="py-10">
         <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
           <div className="lg:col-span-7">

@@ -2,30 +2,39 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { cn } from "@/lib/utils/cn";
 import { useLocale } from "next-intl";
+import { cn } from "@/lib/utils/cn";
 
 type LogoProps = {
   className?: string;
+  showWordmark?: boolean;
 };
 
-export function Logo({ className }: LogoProps) {
+export function Logo({ className, showWordmark = false }: LogoProps) {
   const locale = useLocale();
+
   return (
-    <Link href={`/${locale}`} className={cn("inline-flex items-center gap-2", className)}>
-      <span className="relative h-9 w-9 shrink-0 overflow-hidden rounded-xl bg-white dark:bg-zinc-900 aspect-square">
+    <Link
+      href={`/${locale}`}
+      aria-label="GuestConnect — Accueil"
+      className={cn("inline-flex shrink-0 items-center gap-2", className)}
+    >
+      <span className="relative size-9 shrink-0">
         <Image
-          src="/brand/guestconnect-mark.jpg"
-          alt="GuestConnect"
+          src="/brand/guestconnect-mark_symbol.png"
+          alt=""
           fill
-          className="object-cover object-center"
-          sizes="36px"
           priority
+          sizes="36px"
+          className="object-contain"
         />
       </span>
-      <span className="hidden text-sm font-semibold tracking-tight lg:block">
-        Guest-Connect
-      </span>
+
+      {showWordmark ? (
+        <span className="whitespace-nowrap text-sm font-semibold tracking-[-0.03em] text-zinc-950 dark:text-white">
+          GuestConnect
+        </span>
+      ) : null}
     </Link>
   );
 }

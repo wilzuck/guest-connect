@@ -463,8 +463,13 @@
     "checkIn": "Check-in",
     "checkOut": "Check-out",
     "cta": "Book",
-    "save": "Save",
-    "note": "Secure payment · Instant confirmation · No hidden fees"
+    "note": "Secure payment · Instant confirmation · No hidden fees",
+    "dateRequired": "Please select arrival and departure dates to book.",
+    "night": "night",
+    "nights": "nights",
+    "serviceFee": "Service fee ({rate}%)",
+    "vat": "VAT ({rate}%)",
+    "total": "Total"
   },
   "favorites": {
     "add": "Add to favorites",

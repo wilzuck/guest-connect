@@ -19,7 +19,6 @@ export function AccountShell({
 }) {
   const items = [
     { href: `/${locale}/dashboard`, label: "Tableau de bord" },
-    { href: `/${locale}/profile`, label: "Profil" },
     { href: `/${locale}/reservations`, label: "Mes réservations" },
     { href: `/${locale}/favorites`, label: "Favoris" },
     { href: `/${locale}/activities`, label: "Activités" },

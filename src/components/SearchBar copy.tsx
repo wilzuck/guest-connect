@@ -93,9 +93,9 @@ export function SearchBar({
         className={[
           // Compact (hero) : transparent premium, pas de shadow
           variant === "compact"
-            ? "rounded-xl border border-black/10 p-4"
+            ? "rounded-xl border border-black/10 p-2"
             : // Full width : pas de shadow, radius plus petit
-              "bg-white dark:bg-black rounded-xl border border-black/10 dark:border-white/15 p-4 lg:p-5",
+              "bg-white dark:bg-black rounded-xl border border-black/10 dark:border-white/15 p-4 lg:p-3",
           className,
         ].join(" ")}
       >

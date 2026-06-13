@@ -24,6 +24,8 @@ import {
   UserRoundCog,
   WalletCards,
   X,
+  Kanban,
+  CircleUser,
 } from "lucide-react";
 import {
   Dialog,
@@ -76,10 +78,10 @@ export function MobileMenu() {
       <DialogTrigger asChild>
         <button
           type="button"
-          className="inline-flex size-11 shrink-0 items-center justify-center rounded-full bg-white text-black transition-colors hover:bg-zinc-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20 dark:bg-zinc-950 dark:text-white dark:hover:bg-zinc-900 dark:focus-visible:ring-white/30 md:hidden"
+          className="inline-flex size-11 border_border-black/10_shadow-sm shrink-0 items-center justify-center rounded-full bg-white text-black transition-colors hover:bg-zinc-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20 dark:bg-zinc-950 dark:text-white dark:hover:bg-zinc-900 dark:focus-visible:ring-white/30 md:hidden"
           aria-label={tm("openMenu")}
         >
-          <Menu className="size-5" aria-hidden="true" />
+          <Kanban className="rotate-90 size-5" aria-hidden="true" />
         </button>
       </DialogTrigger>
 

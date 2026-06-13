@@ -333,8 +333,8 @@
     "browseByInterests": "Explorer par centres d’intérêt",
     "where": "Où",
     "destinationPlaceholder": "Toronto, Canada",
-    "checkIn": "Arrivée",
-    "checkOut": "Départ",
+    "checkIn": "",
+    "checkOut": "",
     "guests": "Voyageurs",
     "updateSearch": "Mettre à jour",
     "foundNear": "{count} résultat(s) près de {destination}",
@@ -458,13 +458,18 @@
     "emptyDescription": "Soyez le premier à partager votre expérience après votre séjour."
   },
   "bookingCard": {
-    "from": "À partir de",
+     "from": "À partir de",
     "perNight": "par nuit",
     "checkIn": "Arrivée",
     "checkOut": "Départ",
     "cta": "Réserver",
-    "save": "Enregistrer",
-    "note": "Paiement sécurisé · Confirmation instantanée · Sans frais cachés"
+    "note": "Paiement sécurisé · Confirmation instantanée · Sans frais cachés",
+    "dateRequired": "Choisissez les dates d’arrivée et de départ pour réserver.",
+    "night": "nuit",
+    "nights": "nuits",
+    "serviceFee": "Frais de service ({rate}%)",
+    "vat": "TVA ({rate}%)",
+    "total": "Total"
   },
   "favorites": {
     "add": "Ajouter aux favoris",
