@@ -66,7 +66,7 @@ export async function DestinationsSection() {
           <div className="my-2 flex w-full shrink-0 justify-start lg:w-auto lg:justify-end ">
             <BackButton
               href={`/${locale}/stays`}
-              className="-ml-3 lg:-mr-3"
+              className="lg:-mr-3"
                label={t("viewAll")}
                buttonPosition="end"
                />

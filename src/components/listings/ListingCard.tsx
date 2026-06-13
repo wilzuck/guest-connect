@@ -86,7 +86,7 @@ export function ListingCard({
           <FavoriteButton
             listingId={listing.id}
             locale={normalizedLocale}
-            className="aspect-square h-8 w-8 rounded-full"
+            className="aspect-square text-white p-0 h-8 w-8"
           />
         </div>
       </div>
